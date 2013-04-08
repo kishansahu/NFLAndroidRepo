@@ -1,6 +1,5 @@
 package com.example.fragments;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -10,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -20,18 +20,19 @@ public class MainMenuFragment extends Fragment {
 	String[] globalNavigationMenuItems = { "Content", "Content", "LiveClips",
 			"Content", "Content", "Content", "Content", "Content", "Content" };
 	ListView listView1;
-	
-	FragmentManager fm;
-	Fragment frag;
-	FragmentTransaction ft;
 
-	
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle saveInstantState) {
 		Log.d("Fragment 1", "onCreateView");
 		return inflater.inflate(R.layout.main_menu_fragment, container, false);
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		MenuItem menuItem = menu.add(0, 1, 1, "Menu");
+		menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 	}
 
 	@Override
@@ -64,13 +65,6 @@ public class MainMenuFragment extends Fragment {
 				android.R.layout.simple_list_item_1, globalNavigationMenuItems);
 
 		listView1.setAdapter(adapter);
-
-	
-		fm = getFragmentManager();
-		frag = fm.findFragmentById(R.id.fragment1);
-		ft = fm.beginTransaction();
-		ft.setCustomAnimations(android.R.animator.fade_in,
-                android.R.animator.fade_out);
 
 	}
 
@@ -110,5 +104,4 @@ public class MainMenuFragment extends Fragment {
 		Log.d("Fragment 1", "onDetach");
 	}
 
-	
 }

@@ -5,41 +5,58 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 public class AppContentActivity extends Activity {
 
-	FragmentManager fm;
-	Fragment frag;
+	FragmentManager fragmentManager;
+	Fragment maninMenuFragment;
 	FragmentTransaction ft;
-	View b;
 	ImageButton sliderButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		sliderButton = (ImageButton) findViewById(R.id.sliderButton);
-		sliderButton.setOnClickListener(globalNavigationListener);
-
-		b = findViewById(R.id.fragment1);
-		fm = getFragmentManager();
-		frag = fm.findFragmentById(R.id.fragment1);
+		fragmentManager = getFragmentManager();
+		maninMenuFragment = fragmentManager.findFragmentById(R.id.mainMenuFragment);
+		maninMenuFragment.setHasOptionsMenu(true);
 
 	}
 
-	private OnClickListener globalNavigationListener = new OnClickListener() {
-		public void onClick(View v) {
-			ft = fm.beginTransaction();
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main_menu, menu);
+		return true;
+	}
 
-			if (frag.isVisible()) {
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+		case R.id.sliderButton:
+			performSliderAction();
+			return true;
+		/*case R.id.help:
+			showHelp();
+			return true;*/
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
 
-				ft.hide(frag);
-				// ft.addToBackStack(null);
+	private void performSliderAction() {
+		
+			ft = fragmentManager.beginTransaction();
+
+			if (maninMenuFragment.isVisible()) {
+
+				ft.hide(maninMenuFragment);
+
 				/*
 				 * Toast.makeText(AppContentActivity.this,
 				 * "button clicked visible", Toast.LENGTH_SHORT) .show();
@@ -47,12 +64,14 @@ public class AppContentActivity extends Activity {
 
 			} else {
 
-				ft.show(frag);
+				ft.show(maninMenuFragment);
+
+				ft.addToBackStack(null);
 
 			}
 
 			ft.commit();
 
-		}
+		
 	};
 }
