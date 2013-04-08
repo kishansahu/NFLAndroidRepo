@@ -4,7 +4,76 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal" >
 
-   
+    <RelativeLayout android:layout_width="fill_parent"
+         android:layout_height="match_parent"
+         android:layout_marginTop="0dp"
+         >
+
+        <Spinner
+            android:id="@+id/patriot"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:entries="@array/item_arrays" 
+            android:layout_alignParentTop="true"
+            />
+
+        <ImageButton
+            android:id="@+id/sliderButton"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/patriot"
+            android:contentDescription="@string/globalNavigationButtonContentDescription"
+            android:src="@drawable/global_navigation_menu_button" 
+            android:layout_alignParentTop="true"
+            />
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" 
+            android:layout_alignParentTop="true"
+            >
+
+            <ImageView
+                android:id="@+id/game_schedule_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:src="@drawable/icon_schedule" />
+
+            <ImageView
+                android:id="@+id/game_drives_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/icon_drives" />
+
+            <ImageView
+                android:id="@+id/game_status_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/icon_status" />
+
+            <ImageView
+                android:id="@+id/game_players_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/icon_players" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/alerts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layoutDirection="rtl"
+            android:text="alert:low" />
+    </RelativeLayout>
+
     <!--
         <fragment
         android:id="@+id/fragment2"
@@ -14,13 +83,14 @@
         />
     -->
 
-    <RelativeLayout
+   <!--  <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/nfl_background"
-        android:alpha="1.00" >
+        android:alpha="1.00"
+        android:background="@drawable/nfl_background" > -->
 
-        <ImageButton
+        <!--
+             <ImageButton
             android:id="@+id/globalNavigationButtonOfPlayDetails"
             android:layout_width="55dp"
             android:layout_height="55dp"
@@ -29,15 +99,15 @@
             android:scaleType="center"
             android:contentDescription="@string/globalNavigationButtonContentDescription"
             android:src="@drawable/global_navigation_menu_button" />
-        
-    </RelativeLayout>
-    
-     <fragment
+        -->
+
+   <!--   </RelativeLayout>-->
+
+    <fragment
         android:id="@+id/fragment1"
-        android:name="com.example.fragments.Fragment1"
-        android:layout_width="400dp"
+        android:name="com.example.fragments.MainMenuFragment"
+        android:layout_width="300dp"
         android:layout_height="match_parent" />
-    
 
 </merge><!--
     <fragment

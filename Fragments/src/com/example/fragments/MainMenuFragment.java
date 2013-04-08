@@ -1,5 +1,6 @@
 package com.example.fragments;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -7,12 +8,14 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class Fragment1 extends Fragment {
+public class MainMenuFragment extends Fragment {
 
 	String[] globalNavigationMenuItems = { "Content", "Content", "LiveClips",
 			"Content", "Content", "Content", "Content", "Content", "Content" };
@@ -22,11 +25,13 @@ public class Fragment1 extends Fragment {
 	Fragment frag;
 	FragmentTransaction ft;
 
+	
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle saveInstantState) {
 		Log.d("Fragment 1", "onCreateView");
-		return inflater.inflate(R.layout.fragment1, container, false);
+		return inflater.inflate(R.layout.main_menu_fragment, container, false);
 	}
 
 	@Override
