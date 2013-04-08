@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/pic4"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/lblFragment1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/frag1"
+        android:textColor="#000000"
+        android:textSize="25sp" />
+
+    <ListView
+        android:id="@+id/globalNavigationListView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lblFragment1" />
+
+</RelativeLayout><!-- #00FF00 -->
