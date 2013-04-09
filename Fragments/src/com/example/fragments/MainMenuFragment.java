@@ -2,8 +2,7 @@ package com.example.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +11,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -21,7 +22,6 @@ public class MainMenuFragment extends Fragment {
 			"Content", "Content", "Content", "Content", "Content", "Content" };
 	ListView listView1;
 
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle saveInstantState) {
@@ -29,11 +29,11 @@ public class MainMenuFragment extends Fragment {
 		return inflater.inflate(R.layout.main_menu_fragment, container, false);
 	}
 
-	@Override
+	/*@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		MenuItem menuItem = menu.add(0, 1, 1, "Menu");
 		menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-	}
+	}*/
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -66,7 +66,20 @@ public class MainMenuFragment extends Fragment {
 
 		listView1.setAdapter(adapter);
 
+		listView1.setOnItemClickListener(listItemListener);
+
 	}
+
+	private OnItemClickListener listItemListener = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			startActivity(new Intent(getActivity(), GameActivity.class));
+			
+		}
+		
+	};
 
 	@Override
 	public void onResume() {

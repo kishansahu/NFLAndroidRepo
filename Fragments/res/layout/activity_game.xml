@@ -5,9 +5,8 @@
     android:orientation="horizontal" >
 
     <fragment
-        
-        android:id="@+id/mainMenuFragment"
-        android:name="com.example.fragments.MainMenuFragment"
+        android:id="@+id/topicMenuFragment"
+        android:name="com.example.fragments.TopicMenuFragment"
         android:layout_width="300dp"
         android:layout_height="match_parent" />
 

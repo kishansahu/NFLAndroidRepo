@@ -18,6 +18,7 @@
         android:menuCategory="system"
         android:orderInCategory="2"
         android:showAsAction="always"
+        android:visible="false"
         android:title="@string/globalNavigationButtonContentDescription">
     </item>
     <item

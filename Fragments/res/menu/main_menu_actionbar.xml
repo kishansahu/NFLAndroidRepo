@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+   
+    <item
+        android:id="@+id/sliderButton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:icon="@drawable/global_navigation_menu_button"
+        android:menuCategory="system"
+        android:orderInCategory="2"
+        android:showAsAction="always"
+        android:visible="false"
+        android:title="@string/globalNavigationButtonContentDescription">
+    </item>
+   
+</menu>
