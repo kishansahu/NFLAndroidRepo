@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class GameActivity extends Activity {
 
@@ -23,6 +25,11 @@ public class GameActivity extends Activity {
 	ImageButton closeButtonHeader;
 	TextView headerTextView;
 	boolean showSlider;
+
+	TextView allPlaysTextView;
+	TextView topPlaysTextView;
+	TextView topRatedTextView;
+	TextView watchAllTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,17 @@ public class GameActivity extends Activity {
 		closeButtonHeader = (ImageButton) findViewById(R.id.closeButtonHeader);
 		closeButtonHeader.setVisibility(View.VISIBLE);
 		closeButtonHeader.setOnClickListener(closeButtonListener);
+
+		allPlaysTextView = (TextView) findViewById(R.id.allPlaysId);
+		topPlaysTextView = (TextView) findViewById(R.id.topPlaysId);
+		topRatedTextView = (TextView) findViewById(R.id.topRatedId);
+		watchAllTextView = (TextView) findViewById(R.id.watchAllId);
+		
+		
+		allPlaysTextView.setOnClickListener(allPlaysClickListener);
+		topPlaysTextView.setOnClickListener(topPlaysCilckListener);
+		topRatedTextView.setOnClickListener(topRatedClickListener);
+		watchAllTextView.setOnClickListener(watchAllClickListener);
 
 	}
 
@@ -125,4 +143,72 @@ public class GameActivity extends Activity {
 		}
 		return super.onPrepareOptionsMenu(menu);
 	};
+
+	private OnClickListener allPlaysClickListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			// allPlaysTextView.setBackgroundColor(2);
+			allPlaysTextView.setBackgroundResource(R.color.white);
+			
+			topPlaysTextView.setBackgroundResource(R.color.orange);
+			topRatedTextView.setBackgroundResource(R.color.orange);
+			watchAllTextView.setBackgroundResource(R.color.orange);
+			
+			Toast.makeText(GameActivity.this, "all plays button clicked",
+					Toast.LENGTH_SHORT).show();
+		}
+	};
+	
+	private OnClickListener topPlaysCilckListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			
+			topPlaysTextView.setBackgroundResource(R.color.white);
+			
+			
+			allPlaysTextView.setBackgroundResource(R.color.orange);
+			topRatedTextView.setBackgroundResource(R.color.orange);
+			watchAllTextView.setBackgroundResource(R.color.orange);
+			
+			Toast.makeText(GameActivity.this, "top plays button clicked",
+					Toast.LENGTH_SHORT).show();
+		}
+	};
+	
+	private OnClickListener topRatedClickListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			
+			topRatedTextView.setBackgroundResource(R.color.white);
+			
+			
+			allPlaysTextView.setBackgroundResource(R.color.orange);
+			topPlaysTextView.setBackgroundResource(R.color.orange);
+			watchAllTextView.setBackgroundResource(R.color.orange);
+			
+			Toast.makeText(GameActivity.this, "top Rated button clicked",
+					Toast.LENGTH_SHORT).show();
+		}
+	};
+	
+	private OnClickListener watchAllClickListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			watchAllTextView.setBackgroundResource(R.color.white);
+			
+			allPlaysTextView.setBackgroundResource(R.color.orange);
+			topPlaysTextView.setBackgroundResource(R.color.orange);
+			topRatedTextView.setBackgroundResource(R.color.orange);
+			
+			Toast.makeText(GameActivity.this, "watch all button clicked",
+					Toast.LENGTH_SHORT).show();
+		}
+	};
+	
+	
 }
