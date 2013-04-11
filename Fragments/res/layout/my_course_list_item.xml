@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/label_course_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+ 
+        android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/progressbar_module_level"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/label_course_title"
+        android:gravity="center"
+        android:progress="78"
+         />
+
+    <TextView
+        android:id="@+id/label_progressbar_module_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/progressbar_module_level"
+        android:layout_below="@+id/label_course_title"
+       
+        android:textSize="15dp"
+        android:paddingLeft="5dp" />
+
+    <TextView
+        android:id="@+id/label_module_average"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progressbar_module_level"
+        
+        android:text="Module Average : " 
+        android:textStyle="bold"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/label_module_average_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progressbar_module_level"
+        android:layout_toRightOf="@+id/label_module_average"
+       
+        android:textStyle="bold"
+        android:textSize="15dp"  />
+
+    <TextView
+        android:id="@+id/label_plan_start_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_module_average"
+        
+        android:text="Plan Start Date : "
+        android:textStyle="bold"
+        android:textSize="15dp"  />
+
+    <TextView
+        android:id="@+id/label_plan_start_date_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_module_average"
+        android:layout_toRightOf="@+id/label_plan_start_date"
+        
+        android:textStyle="bold"
+        android:textSize="15dp"  />
+
+    <TextView
+        android:id="@+id/label_plan_end_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_plan_start_date"
+        
+        android:text="Plan End Date : "
+        android:textStyle="bold"
+        android:textSize="15dp"  />
+
+    <TextView
+        android:id="@+id/label_plan_end_date_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_plan_start_date"
+        android:layout_toRightOf="@+id/label_plan_end_date"
+        
+        android:textStyle="bold"
+        android:textSize="15dp" />
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="image"
+        android:src="@drawable/ic_launcher" />
+
+</RelativeLayout>
