@@ -5,6 +5,11 @@
     android:orientation="horizontal" >
 
     <RelativeLayout
+        android:id="@+id/gameRootView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" >
+    
+    <RelativeLayout
         android:id="@+id/matchScoreBoardBackground"
         android:layout_width="fill_parent"
         android:layout_height="160dp"
@@ -263,5 +268,7 @@
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:background="#FFFFFF" />
+    
+    </RelativeLayout>
 
 </merge>

@@ -33,7 +33,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 	TextView headerTextView;
 	boolean showSlider;
 	ListView listView;
-	List<MyCourseRowItem> rowItems;
+	List<ScheduleItem> rowItems;
 	CourseListViewAdapter adapter;
 	TextView allPlaysTextView;
 	TextView topPlaysTextView;
@@ -79,24 +79,38 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		case R.id.sliderButton:
 			performSliderAction();
 			return true;
-		case R.id.game_drives_menu:
-			RelativeLayout rootView = (RelativeLayout) findViewById(R.id.matchScoreBoardBackground);
+		case R.id.game_schedule_menu:
+			RelativeLayout rootView = (RelativeLayout) findViewById(R.id.gameRootView);
 
 			PopoverView popoverView = new PopoverView(this,
-					R.layout.popover_showed_view);
+					R.layout.popover_game_schedule_view);
 
-			popoverView.setContentSizeForViewInPopover(new Point(320, 600));
+			popoverView.setContentSizeForViewInPopover(new Point(320, 400));
 			popoverView.setDelegate(this);
-			View button = (View) findViewById(R.id.game_drives_menu);
+			View button = (View) findViewById(R.id.game_schedule_menu);
 			popoverView.showPopoverFromRectInViewGroup(rootView,
 					PopoverView.getFrameForView(button),
 					PopoverView.PopoverArrowDirectionUp, true);
+			return super.onOptionsItemSelected(item);
 			/*
 			 * case R.id.help: showHelp(); return true;
 			 */
-		default:
+		case R.id.game_drives_menu:
+			rootView = (RelativeLayout) findViewById(R.id.gameRootView);
+
+			popoverView = new PopoverView(this,
+					R.layout.popover_game_drives_view);
+
+			popoverView.setContentSizeForViewInPopover(new Point(320, 400));
+			popoverView.setDelegate(this);
+			button = (View) findViewById(R.id.game_drives_menu);
+			popoverView.showPopoverFromRectInViewGroup(rootView,
+					PopoverView.getFrameForView(button),
+					PopoverView.PopoverArrowDirectionUp, true);
 			return super.onOptionsItemSelected(item);
+
 		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
@@ -110,44 +124,67 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 
 	@Override
 	public void popoverViewDidShow(PopoverView view) {
-		// View list = null;
+		Log.d("layoutId", String.valueOf(view.getLayoutId()));
+		if (view.getLayoutId() == R.layout.popover_game_schedule_view) {
+			Log.d("id", String.valueOf(view.getId()));
+			rowItems = new ArrayList<ScheduleItem>();
+			String[] teamNames = { "Titans", "Cardinals", "Ravens", "Bills",
+					"Packers", "Seehawks", "Jets", "Rams" };
+			int[] teamLogo = { R.drawable.titans, R.drawable.cardinals,
+					R.drawable.ravens, R.drawable.bills, R.drawable.packers,
+					R.drawable.seahawks, R.drawable.jets, R.drawable.rams };
+			String[] weekText = { "WEEK 1", "WEEK 2", "WEEK 3", "WEEK 4",
+					"WEEK 5", "WEEK 6", "WEEK 7", "WEEK 8" };
+			String[] teamStatus = { "W 34-13", "L 20-18", "L 31-30", "W 52-28",
+					"Live 21-17", "10/14 4:05 PM", "10/21 4/25 PM",
+					"10/21 1:00 PM" };
+			String[] versusTexts = { "@", "vs", "@", "@", "vs", "@", "vs", "@" };
+			for (int i = 0; i < 8; i++) {
 
-		/*
-		 * ListView list = (ListView) findViewById(R.id.my_lesson_list);
-		 * ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-		 * android.R.layout.simple_list_item_1,FRUITS);
-		 * list.setAdapter(adapter);
-		 */
-		rowItems = new ArrayList<MyCourseRowItem>();
-		// Log.d("size of array", String.valueOf(courseTitles.length));
-		for (int i = 0; i < 2; i++) {
-			MyCourseRowItem item = new MyCourseRowItem("jgbnj", "ngbng",
-					"gngn", "gngn", "gngn", "ngng", "gngn", "");
-			rowItems.add(item);
+				ScheduleItem item = new ScheduleItem(teamNames[i], teamLogo[i],
+						teamStatus[i], weekText[i], versusTexts[i]);
 
+				rowItems.add(item);
+
+			}
+			listView = (ListView) findViewById(R.id.game_schedule_list);
+			adapter = new CourseListViewAdapter(this,
+					R.layout.my_course_list_item, rowItems);
+			listView.setAdapter(adapter);
+			
+			/*listView = (ListView) findViewById(R.id.game_schedule_list2);
+			adapter = new CourseListViewAdapter(this,
+					R.layout.my_course_list_item, rowItems);
+			listView.setAdapter(adapter);*/
+
+		} else if (view.getLayoutId() == R.layout.popover_game_drives_view) {
+			rowItems = new ArrayList<ScheduleItem>();
+			String[] teamNames = { "Titans", "Cardinals", "Ravens", "Bills",
+					"Packers", "Seehawks", "Jets", "Rams" };
+			int[] teamLogo = { R.drawable.patriots, R.drawable.packers,
+					R.drawable.patriots, R.drawable.packers,
+					R.drawable.patriots, R.drawable.packers,
+					R.drawable.patriots, R.drawable.packers };
+			String[] weekText = { "WEEK 1", "WEEK 2", "WEEK 3", "WEEK 4",
+					"WEEK 5", "WEEK 6", "WEEK 7", "WEEK 8" };
+			String[] teamStatus = { "W 34-13", "L 20-18", "L 31-30", "W 52-28",
+					"Live 21-17", "10/14 4:05 PM", "10/21 4/25 PM",
+					"10/21 1:00 PM" };
+			String[] versusTexts = { "@", "vs", "@", "@", "vs", "@", "vs", "@" };
+			for (int i = 0; i < 8; i++) {
+
+				ScheduleItem item = new ScheduleItem(teamNames[i], teamLogo[i],
+						teamStatus[i], weekText[i], versusTexts[i]);
+
+				rowItems.add(item);
+
+			}
+			listView = (ListView) findViewById(R.id.game_schedule_list);
+			adapter = new CourseListViewAdapter(this,
+					R.layout.my_course_list_item, rowItems);
+			listView.setAdapter(adapter);
 		}
-		listView = (ListView) findViewById(R.id.my_lesson_list);
-		adapter = new CourseListViewAdapter(this, R.layout.my_course_list_item,
-				rowItems);
-		listView.setAdapter(adapter);
 
-		/*
-		 * Log.i("POPOVER", "Did show : " + view.getChildCount()); for(int i=0;
-		 * i<view.getChildCount(); i++) { Log.i("POPOVER",
-		 * view.getChildAt(i).getClass().toString()); for(int j=0; j<
-		 * ((ViewGroup)view.getChildAt(0)).getChildCount(); j++) {
-		 * Log.i("Child",
-		 * ((ViewGroup)view.getChildAt(0)).getChildAt(j).getClass().toString());
-		 * 
-		 * for(int k=0; k<
-		 * ((ViewGroup)((ViewGroup)view.getChildAt(0)).getChildAt
-		 * (0)).getChildCount(); k++) { Log.i("Child",
-		 * ((ViewGroup)((ViewGroup)view
-		 * .getChildAt(0)).getChildAt(0)).getChildAt(k).getClass().toString());
-		 * }
-		 * 
-		 * } }
-		 */
 	}
 
 	@Override
