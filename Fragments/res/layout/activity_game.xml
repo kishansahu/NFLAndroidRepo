@@ -247,7 +247,7 @@
 
         <TextView
             android:id="@+id/watchAllId"
-            android:layout_width="423dp"
+            android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:layout_toRightOf="@id/topRatedId"
             android:background="@drawable/border"
@@ -256,6 +256,23 @@
             android:text="122 Plays \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 Watch All"
             android:textAlignment="viewEnd" />
     </RelativeLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollViewForVideosId"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/nfl_field" >
+
+        <LinearLayout
+            android:id="@+id/parentLayoutOfPlayCardsId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:scrollbarAlwaysDrawHorizontalTrack="true" >
+        </LinearLayout>
+    </HorizontalScrollView>
 
     <fragment
         android:id="@+id/topicMenuFragment"
