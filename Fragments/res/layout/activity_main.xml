@@ -7,7 +7,7 @@
     <fragment
         
         android:id="@+id/mainMenuFragment"
-        android:name="com.example.fragments.MainMenuFragment"
+        android:name="com.liveclips.nfl.fragment.MainMenuFragment"
         android:layout_width="300dp"
         android:layout_height="match_parent" />
 

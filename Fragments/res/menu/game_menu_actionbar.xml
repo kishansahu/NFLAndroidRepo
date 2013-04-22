@@ -54,7 +54,7 @@
         android:showAsAction="always">
     </item>
     <item
-        android:id="@+id/game_status_menu"
+        android:id="@+id/game_stats_menu"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_alignParentTop="true"

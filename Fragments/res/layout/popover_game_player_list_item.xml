@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:id="@+id/player_pic"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:contentDescription="Player Image"
+        android:src="@drawable/tom_brady"
+        android:gravity="center_vertical" >
+    </ImageView>
+
+    <TextView
+        android:id="@+id/player_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/player_pic"
+        android:text="Tom Brady"
+        android:textStyle="bold" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/player_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/player_name"
+        android:layout_toRightOf="@+id/player_pic" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/player_data1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/player_number"
+        android:layout_toRightOf="@+id/player_pic"
+        android:text="Tom Brady" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/player_data2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/player_number"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/player_data1"
+        android:text="Tom Brady" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/player_data3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/player_number"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/player_data2"
+        android:text="Tom Brady" >
+    </TextView>
+    
+    <TextView
+        android:id="@+id/player_data4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/player_number"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/player_data3"
+        android:text="Tom Brady" >
+    </TextView>
+    
+
+</RelativeLayout>

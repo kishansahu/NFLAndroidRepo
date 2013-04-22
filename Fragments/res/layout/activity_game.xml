@@ -281,7 +281,7 @@
 
     <fragment
         android:id="@+id/topicMenuFragment"
-        android:name="com.example.fragments.TopicMenuFragment"
+        android:name="com.liveclips.nfl.fragment.TopicMenuFragment"
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:background="#FFFFFF" />
