@@ -279,12 +279,11 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <fragment
-        android:id="@+id/topicMenuFragment"
-        android:name="com.liveclips.nfl.fragment.TopicMenuFragment"
+    <FrameLayout
+        android:id="@+id/menuFragment"
         android:layout_width="300dp"
         android:layout_height="match_parent"
-        android:background="#FFFFFF" />
+         />
     
     </RelativeLayout>
 

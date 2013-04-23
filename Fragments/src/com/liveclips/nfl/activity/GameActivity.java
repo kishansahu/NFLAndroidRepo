@@ -8,7 +8,9 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.net.Uri;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -36,6 +38,8 @@ import com.liveclips.nfl.adapter.PlayerListViewAdapter;
 import com.liveclips.nfl.adapter.ScheduleListViewAdapter;
 import com.liveclips.nfl.adapter.SeparatedListAdapter;
 import com.liveclips.nfl.adapter.StatsListViewAdapter;
+import com.liveclips.nfl.fragment.MainMenuFragment;
+import com.liveclips.nfl.fragment.TopicMenuFragment;
 import com.liveclips.nfl.model.DriveItem;
 import com.liveclips.nfl.model.PlayerItem;
 import com.liveclips.nfl.model.ScheduleItem;
@@ -63,6 +67,8 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 	RelativeLayout playCardLayout;
 	VideoView playCardVideoView;
 	ImageView playCardImageView;
+	TextView team1BtnPlayers;
+	TextView team2BtnPlayers;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,13 +76,19 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		setContentView(R.layout.activity_game);
 
 		fragmentManager = getFragmentManager();
-		mainMenuFragment = fragmentManager
-				.findFragmentById(R.id.topicMenuFragment);
-		headerTextView = (TextView) findViewById(R.id.menuHeader);
-		headerTextView.setText("LiveClips");
-		closeButtonHeader = (ImageButton) findViewById(R.id.closeButtonHeader);
-		closeButtonHeader.setVisibility(View.VISIBLE);
-		closeButtonHeader.setOnClickListener(closeButtonListener);
+		ft = fragmentManager.beginTransaction();
+		mainMenuFragment = new TopicMenuFragment();
+		ft.add(R.id.menuFragment, mainMenuFragment);
+
+		ft.commit();
+
+		/*
+		 * headerTextView = (TextView) findViewById(R.id.menuHeader);
+		 * headerTextView.setText("LiveClips"); closeButtonHeader =
+		 * (ImageButton) findViewById(R.id.closeButtonHeader);
+		 * closeButtonHeader.setVisibility(View.VISIBLE);
+		 * closeButtonHeader.setOnClickListener(closeButtonListener);
+		 */
 
 		allPlaysTextView = (TextView) findViewById(R.id.allPlaysId);
 		topPlaysTextView = (TextView) findViewById(R.id.topPlaysId);
@@ -90,6 +102,18 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 
 		playCards();
 
+	}
+
+	@Override
+	protected void onResume() {
+		
+	
+		headerTextView = (TextView) mainMenuFragment.getView().findViewById(R.id.menuHeader);
+		headerTextView.setText("LiveClips");
+		closeButtonHeader = (ImageButton) mainMenuFragment.getView().findViewById(R.id.closeButtonHeader);
+		closeButtonHeader.setVisibility(View.VISIBLE);
+		closeButtonHeader.setOnClickListener(closeButtonListener);
+		super.onStart();
 	}
 
 	@Override
@@ -186,6 +210,135 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		// ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 		// android.R.layout.simple_list_item_1,FRUITS);
 		// list.setAdapter(adapter);
+	}
+
+	public List<PlayerItem> getPlayers(String teamName, String teamType) {
+
+		List<PlayerItem> playerList = null;
+
+		if (teamName.equals("team1") && teamType.equals("offensive")) {
+			final List<PlayerItem> offensivePlayerList = new ArrayList<PlayerItem>();
+			String offensivePlayerNamesForTeam1[] = { "Tom Brady",
+					"Stevan Ridley", "Wes Welker", "Rob Gronkowski",
+					"Brandon Lloyd" };
+			String offensivePlayerNumbersForTeam1[] = { "#12 | QB", "#22 | RB",
+					"#83 | WR", "#87 | TE", "#43 | QB" };
+			String offensivePlayerData1ForTeam1[] = { "20/29", "11 CAR",
+					"9 REC", "8 REC", "7 REC" };
+			String offensivePlayerData2ForTeam1[] = { "329 YDS", "64 YDS",
+					"53 YDS", "89 YDS", "38 YDS" };
+			String offensivePlayerData3ForTeam1[] = { "2 TD", "1 TD", "0 TD",
+					"1 TD", "0 TD" };
+
+			int offensivPlayerImagesForTeam1[] = { R.drawable.tom_brady,
+					R.drawable.stevan_ridley, R.drawable.wes_welker,
+					R.drawable.rob_gronkowski, R.drawable.stevan_ridley };
+
+			PlayerItem item = new PlayerItem("Tom Brady", "#12/QB",
+					R.drawable.tom_brady, "20/29", "329 YDS", "2TD", "1 NT");
+			offensivePlayerList.add(item);
+
+			for (int i = 0; i < offensivePlayerNamesForTeam1.length; i++) {
+				item = new PlayerItem();
+				item.setPlayerdata1(offensivePlayerData1ForTeam1[i]);
+				item.setPlayerdata2(offensivePlayerData2ForTeam1[i]);
+				item.setPlayerdata3(offensivePlayerData3ForTeam1[i]);
+				item.setPlayerImage(offensivPlayerImagesForTeam1[i]);
+				item.setPlayerName(offensivePlayerNamesForTeam1[i]);
+				item.setPlayerNumber(offensivePlayerNumbersForTeam1[i]);
+				offensivePlayerList.add(item);
+			}
+
+			playerList = offensivePlayerList;
+		} else if (teamName.equals("team1") && teamType.equals("defensive")) {
+			final List<PlayerItem> defensivePlayerList = new ArrayList<PlayerItem>();
+			String defensivePlayerNamesForTeam1[] = { "Jake Bequette",
+					"Vince Wilfork", "Rob Ninkovich" };
+			String defensivePlayerNumbersForTeam1[] = { "#92 | DE", "#75 | DT",
+					"#50 | DL" };
+			String defensivePlayerData1ForTeam1[] = { "20/29", "11 CAR",
+					"9 REC" };
+			String defensivePlayerData2ForTeam1[] = { "329 YDS", "64 YDS",
+					"53 YDS" };
+			String defensivePlayerData3ForTeam1[] = { "2 TD", "1 TD", "0 TD" };
+
+			int defensivePlayerImages[] = { R.drawable.jake, R.drawable.vince,
+					R.drawable.brandonspikes };
+
+			PlayerItem item = new PlayerItem();
+
+			for (int i = 0; i < defensivePlayerNamesForTeam1.length; i++) {
+				item = new PlayerItem();
+				item.setPlayerdata1(defensivePlayerData1ForTeam1[i]);
+				item.setPlayerdata2(defensivePlayerData2ForTeam1[i]);
+				item.setPlayerdata3(defensivePlayerData3ForTeam1[i]);
+				item.setPlayerImage(defensivePlayerImages[i]);
+				item.setPlayerName(defensivePlayerNamesForTeam1[i]);
+				item.setPlayerNumber(defensivePlayerNumbersForTeam1[i]);
+				defensivePlayerList.add(item);
+			}
+			playerList = defensivePlayerList;
+		} else if (teamName.equals("team2") && teamType.equals("offensive")) {
+			final List<PlayerItem> offensivePlayerList = new ArrayList<PlayerItem>();
+			String offensivePlayerNamesForTeam1[] = { "Jordan Miller",
+					"Casey Hayward", "Brad Jones" };
+			String offensivePlayerNumbersForTeam1[] = { "#91 | DT", "#29 | CB",
+					"#59 | LB", "#87 | TE", "#43 | QB" };
+			String offensivePlayerData1ForTeam1[] = { "11 CAR", "9 REC",
+					"8 REC" };
+			String offensivePlayerData2ForTeam1[] = { "64 YDS", "53 YDS",
+					"89 YDS" };
+			String offensivePlayerData3ForTeam1[] = { "0 TD", "0 TD", "1 TD" };
+
+			int offensivPlayerImagesForTeam1[] = { R.drawable.jorden_miller,
+					R.drawable.casey_hayward, R.drawable.brad_jones };
+
+			PlayerItem item = new PlayerItem("Mike Daniels", "#76 | DE",
+					R.drawable.mike_daniel, "20/29", "329 YDS", "2TD", "1 NT");
+			offensivePlayerList.add(item);
+
+			for (int i = 0; i < offensivePlayerNamesForTeam1.length; i++) {
+				item = new PlayerItem();
+				item.setPlayerdata1(offensivePlayerData1ForTeam1[i]);
+				item.setPlayerdata2(offensivePlayerData2ForTeam1[i]);
+				item.setPlayerdata3(offensivePlayerData3ForTeam1[i]);
+				item.setPlayerImage(offensivPlayerImagesForTeam1[i]);
+				item.setPlayerName(offensivePlayerNamesForTeam1[i]);
+				item.setPlayerNumber(offensivePlayerNumbersForTeam1[i]);
+				offensivePlayerList.add(item);
+			}
+
+			playerList = offensivePlayerList;
+		} else if (teamName.equals("team2") && teamType.equals("defensive")) {
+			final List<PlayerItem> defensivePlayerList = new ArrayList<PlayerItem>();
+			String defensivePlayerNamesForTeam1[] = { "Jake Bequette",
+					"Vince Wilfork", "Rob Ninkovich" };
+			String defensivePlayerNumbersForTeam1[] = { "#92 | DE", "#75 | DT",
+					"#50 | DL" };
+			String defensivePlayerData1ForTeam1[] = { "20/29", "11 CAR",
+					"9 REC" };
+			String defensivePlayerData2ForTeam1[] = { "329 YDS", "64 YDS",
+					"53 YDS" };
+			String defensivePlayerData3ForTeam1[] = { "2 TD", "1 TD", "0 TD" };
+
+			int defensivePlayerImages[] = { R.drawable.jake, R.drawable.vince,
+					R.drawable.brandonspikes };
+
+			PlayerItem item = new PlayerItem();
+
+			for (int i = 0; i < defensivePlayerNamesForTeam1.length; i++) {
+				item = new PlayerItem();
+				item.setPlayerdata1(defensivePlayerData1ForTeam1[i]);
+				item.setPlayerdata2(defensivePlayerData2ForTeam1[i]);
+				item.setPlayerdata3(defensivePlayerData3ForTeam1[i]);
+				item.setPlayerImage(defensivePlayerImages[i]);
+				item.setPlayerName(defensivePlayerNamesForTeam1[i]);
+				item.setPlayerNumber(defensivePlayerNumbersForTeam1[i]);
+				defensivePlayerList.add(item);
+			}
+			playerList = defensivePlayerList;
+		}
+		return playerList;
 	}
 
 	@Override
@@ -394,46 +547,73 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 
 		else if (view.getLayoutId() == R.layout.popover_game_player_view) {
 
-			List<PlayerItem> offensivePlayerList = new ArrayList<PlayerItem>();
-			String playerNames[] = { "Tom Brady", "Stevan Ridley",
-					"Wes Welker", "Rob Gronkowski", "Brandon Lloyd" };
-			String playerNumbers[] = { "#12 | QB", "#22 | RB", "#83 | WR",
-					"#87 | TE", "#43 | QB" };
-			String playerData1[] = { "20/29", "11 CAR", "9 REC", "8 REC",
-					"7 REC" };
-			String playerData2[] = { "329 YDS", "64 YDS", "53 YDS", "89 YDS",
-					"38 YDS" };
-			String playerData3[] = { "2 TD", "1 TD", "0 TD", "1 TD", "0 TD" };
-			String playerData4[] = { "1 NT" };
+			// Offensive players for team1
 
-			int playerImages[] = { R.drawable.tom_brady,
-					R.drawable.stevan_ridley, R.drawable.wes_welker,
-					R.drawable.rob_gronkowski, R.drawable.stevan_ridley };
+			// Defensive playes for team1
 
-			PlayerItem item = new PlayerItem("Tom Brady", "#12/QB",
-					R.drawable.tom_brady, "20/29", "329 YDS", "2TD", "1 NT");
-			offensivePlayerList.add(item);
-
-			for (int i = 1; i < playerNames.length; i++) {
-				item = new PlayerItem();
-				item.setPlayerdata1(playerData1[i]);
-				item.setPlayerdata2(playerData2[i]);
-				item.setPlayerdata3(playerData3[i]);
-				item.setPlayerImage(playerImages[i]);
-				item.setPlayerName(playerNames[i]);
-				item.setPlayerNumber(playerNumbers[i]);
-				offensivePlayerList.add(item);
-			}
-
-			SeparatedListAdapter adapter = new SeparatedListAdapter(this);
-			adapter.addSection("OFFENSE",
+			final SeparatedListAdapter adapter = new SeparatedListAdapter(this);
+			adapter.addSection(
+					"OFFENSE",
 					new PlayerListViewAdapter(this,
-							R.layout.popover_game_player_list_item,
-							offensivePlayerList));
+							R.layout.popover_game_player_list_item, getPlayers(
+									"team1", "offensive")));
+			adapter.addSection("DEFENSE", new PlayerListViewAdapter(
+					GameActivity.this, R.layout.popover_game_player_list_item,
+					getPlayers("team1", "defensive")));
 
 			listView = (ListView) findViewById(R.id.game_player_list);
 
 			listView.setAdapter(adapter);
+
+			team1BtnPlayers = (TextView) findViewById(R.id.team1BtnPlayers);
+			team1BtnPlayers.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+
+					adapter.removeAllSections();
+					adapter.addSection("OFFENSE",
+							new PlayerListViewAdapter(GameActivity.this,
+									R.layout.popover_game_player_list_item,
+									getPlayers("team1", "offensive")));
+					adapter.addSection("DEFENSE",
+							new PlayerListViewAdapter(GameActivity.this,
+									R.layout.popover_game_player_list_item,
+									getPlayers("team1", "defensive")));
+					adapter.notifyDataSetChanged();
+					listView.setSelection(0);
+					team1BtnPlayers.setBackgroundColor(0xFFC0C0C0);
+					team1BtnPlayers.setTextColor(0xFF0000FF);
+					team2BtnPlayers.setBackgroundColor(0xFFFFFFFF);
+					team2BtnPlayers.setTextColor(Color.BLACK);
+					/* team1Btn.setText("PACKERS"); */
+				}
+			});
+
+			team2BtnPlayers = (TextView) findViewById(R.id.team2BtnPlayers);
+			team2BtnPlayers.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+
+					adapter.removeAllSections();
+					adapter.addSection("OFFENSE",
+							new PlayerListViewAdapter(GameActivity.this,
+									R.layout.popover_game_player_list_item,
+									getPlayers("team2", "offensive")));
+					adapter.addSection("DEFENSE",
+							new PlayerListViewAdapter(GameActivity.this,
+									R.layout.popover_game_player_list_item,
+									getPlayers("team2", "defensive")));
+					adapter.notifyDataSetChanged();
+					listView.setSelection(0);
+					team2BtnPlayers.setBackgroundColor(0xFFC0C0C0);
+					team2BtnPlayers.setTextColor(0xFF0000FF);
+					team1BtnPlayers.setBackgroundColor(0xFFFFFFFF);
+					team1BtnPlayers.setTextColor(Color.BLACK);
+					// team2Btn.setText("PATRIOTS");
+				}
+			});
 
 		}
 
@@ -450,6 +630,12 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 	}
 
 	private void performSliderAction() {
+		Log.d("slider", "clickee");
+		ft = fragmentManager.beginTransaction();
+		mainMenuFragment = new MainMenuFragment();
+
+		ft.replace(R.id.menuFragment, mainMenuFragment);
+		ft.commit();
 
 		/*
 		 * ft = fragmentManager.beginTransaction();
@@ -486,6 +672,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 
 				ft.hide(mainMenuFragment);
 				showSlider = true;
+
 				invalidateOptionsMenu();
 				/*
 				 * Toast.makeText(AppContentActivity.this,

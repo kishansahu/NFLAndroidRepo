@@ -78,7 +78,7 @@
         android:showAsAction="always">
     </item>
     <item
-        android:id="@+id/alerts"
+        android:id="@+id/game_players_alerts"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_alignParentTop="true"
