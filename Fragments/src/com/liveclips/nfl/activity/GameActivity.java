@@ -1,33 +1,38 @@
 package com.liveclips.nfl.activity;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.ListView;
+import android.widget.MediaController;
 import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -846,16 +851,24 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		// The parent LinearLayout for playCards
 		LinearLayout playCardParentLinearLayout = (LinearLayout) findViewById(R.id.parentLayoutOfPlayCardsId);
 
-		for (int index = 0; index < playCardTopDetail.size(); index++) {
+		for (int index = 0; index < 5; index++) {
 
+			/*if((index+1)%3==0){
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}*/
 			// Creating a new RelativeLayout
-			playCardLayout = new RelativeLayout(this);
+			RelativeLayout playCardLayout = new RelativeLayout(this);
 
 			// Defining the RelativeLayout layout parameters.
-			// In this case I want to fill its parent
 			RelativeLayout.LayoutParams playCardLayoutParameters = new RelativeLayout.LayoutParams(
-					RelativeLayout.LayoutParams.WRAP_CONTENT,
-					RelativeLayout.LayoutParams.WRAP_CONTENT);
+					300, 250);
+			playCardLayoutParameters.addRule(RelativeLayout.CENTER_IN_PARENT);
+			playCardLayoutParameters.setMargins(10, 10, 10, 10);
 
 			playCardLayout.setLayoutParams(playCardLayoutParameters);
 
@@ -867,7 +880,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 						R.color.green));
 			}
 
-			playCardLayout.setPadding(30, 30, 30, 30);
+			playCardLayout.setPadding(5, 5, 5, 5);
 
 			// Creating a new topTextView
 			TextView playCardTopTextView = new TextView(this);
@@ -887,133 +900,124 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 			// Adding the TextView to the RelativeLayout as a child
 			playCardLayout.addView(playCardTopTextView);
 
-			/*
-			 * //****************************************************************
-			 * ********* // Creating a webView For video WebView playCardWebView
-			 * = (WebView) findViewById(R.id.webViewId);
-			 * RelativeLayout.LayoutParams layoutParametersForPlayCardWebView =
-			 * new
-			 * RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT
-			 * ,RelativeLayout.LayoutParams.WRAP_CONTENT);
-			 * layoutParametersForPlayCardWebView
-			 * .addRule(RelativeLayout.CENTER_IN_PARENT);
-			 * playCardWebView.setLayoutParams
-			 * (layoutParametersForPlayCardWebView); playCardWebView.loadUrl(
-			 * "http://www.youtube.com/watch?feature=player_detailpage&v=C59w2wP6esc"
-			 * ); playCardWebView.getSettings().setJavaScriptEnabled(true);
-			 * playCardWebView.loadUrl(
-			 * "http://vimeo.com/couchmode/dreamcorepics/videos/sort:date/33110953"
-			 * ); playCardLayout.addView(playCardWebView);
-			 * //********************
-			 * ********************************************
-			 * ***********************
-			 */
 
+			
+			
+			
 			// Creating a new VideoView VideoView
+			final VideoView playCardVideoView = new VideoView(this);
 
-			playCardVideoView = new VideoView(this);
 			// Defining the layout parameters of the VideoView
-			RelativeLayout.LayoutParams layoutParametersForPlayCardVideoView = new RelativeLayout.LayoutParams(
-					RelativeLayout.LayoutParams.WRAP_CONTENT,
-					RelativeLayout.LayoutParams.WRAP_CONTENT);
-
+			RelativeLayout.LayoutParams layoutParametersForPlayCardVideoView = new RelativeLayout.LayoutParams(250, 150);
+			layoutParametersForPlayCardVideoView.addRule(RelativeLayout.CENTER_IN_PARENT);
+			//RelativeLayout.LayoutParams layoutParametersForPlayCardVideoView = new RelativeLayout.LayoutParams(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+			playCardVideoView.setId(index);
+			
 			MediaController mediaController = new MediaController(this);
-
 			mediaController.setAnchorView(playCardVideoView);
 			playCardVideoView.setMediaController(mediaController);
 
 			playCardVideoView
 					.setLayoutParams(layoutParametersForPlayCardVideoView);
-			playCardVideoView.setVideoURI(Uri
-					.parse("http://commonsware.com/misc/test2.3gp"));
-			layoutParametersForPlayCardVideoView
-					.addRule(RelativeLayout.CENTER_IN_PARENT);
-
+			
+			String path = "http://x.pio.lc/nfl/week05/20121009_001_20121011115406_027_3_241b_d02a361b.3gp";
+			playCardVideoView.setVideoURI(Uri.parse(path));
+			playCardVideoView.setZOrderOnTop(false);
 			playCardLayout.addView(playCardVideoView);
-
-			// **************************************************************************
-
-			/*
-			 * Bitmap bMap = ThumbnailUtils.createVideoThumbnail(
-			 * playCardVideoDetail.get(index),
-			 * MediaStore.Video.Thumbnails.MICRO_KIND);
-			 */
-
-			playCardImageView = new ImageView(this);
-			RelativeLayout.LayoutParams layoutParametersForPlayCardImageView = new RelativeLayout.LayoutParams(
-					RelativeLayout.LayoutParams.WRAP_CONTENT,
-					RelativeLayout.LayoutParams.WRAP_CONTENT);
-			layoutParametersForPlayCardImageView
-					.addRule(RelativeLayout.CENTER_IN_PARENT);
-			playCardImageView
-					.setLayoutParams(layoutParametersForPlayCardImageView);
-			playCardImageView.setImageResource(R.drawable.nflimageone);
+			
+			
+			
+			final ImageView playCardImageView = new ImageView(this);
+			RelativeLayout.LayoutParams layoutParameterForPlayCardImageView = new RelativeLayout.LayoutParams(250, 150);
+			layoutParameterForPlayCardImageView.addRule(RelativeLayout.CENTER_IN_PARENT);
+			//playCardImageView.setVisibility(View.VISIBLE);
+			playCardImageView.setLayoutParams(layoutParameterForPlayCardImageView);
+			
+			//playCardImageView.setImageResource(R.drawable.nflimagefour);
+			//playCardImageView.setImageURI(Uri.parse("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg"));
+			//playCardImageView.setImageBitmap(loadBitmap("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg"));
+			
+			
+			 /*
+             * NetworkOnMainThreadException is handled using these two lines for
+             * Android 3.0 and above.
+             */
+            // Start handling NetworkOnMainThreadException
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                            .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            // End Handling NetworkOnMainThreadException
+			new DownloadImageTask(playCardImageView).execute("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg");
+			
+			
+			
+			
+			
 			playCardLayout.addView(playCardImageView);
-			playCardImageView
-					.setOnClickListener(playCardImageViewClickListener);
+			
+			
+			playCardImageView.setOnTouchListener(new View.OnTouchListener()
+		    {
+				@Override
+				public boolean onTouch(View v, MotionEvent arg1) {
+					v.setVisibility(View.INVISIBLE);
+					playCardVideoView.start();
+					return false;
+				}
+		    });
+			
+			playCardVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 
-			// *******************************************************************************
+			    @Override
+			    public void onCompletion(MediaPlayer vmp) {
+			    	playCardImageView.setVisibility(View.VISIBLE); 
+			    }
+			});
 
+			
+
+			
 			// Creating a new bottomTextView
 			TextView playCardBottomTextView = new TextView(this);
 			playCardBottomTextView.setText(playCardBottomDetail.get(index));
-
 			// Defining the layout parameters of the TextView
 			RelativeLayout.LayoutParams layoutParametersForPlayCardBottomTextView = new RelativeLayout.LayoutParams(
 					RelativeLayout.LayoutParams.WRAP_CONTENT,
 					RelativeLayout.LayoutParams.WRAP_CONTENT);
 			layoutParametersForPlayCardBottomTextView
 					.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-
 			// Setting the parameters on the TextView
 			playCardBottomTextView
 					.setLayoutParams(layoutParametersForPlayCardBottomTextView);
-
 			// Adding the TextView to the RelativeLayout as a child
 			playCardLayout.addView(playCardBottomTextView);
-
 			playCardParentLinearLayout.addView(playCardLayout);
 		}
 
 	}
+	
+	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+	    ImageView bmImage;
 
-	private OnClickListener playCardImageViewClickListener = new OnClickListener() {
+	    public DownloadImageTask(ImageView bmImage) {
+	        this.bmImage = bmImage;
+	    }
 
-		@Override
-		public void onClick(View v) {
+	    protected Bitmap doInBackground(String... urls) {
+	        String urldisplay = urls[0];
+	        Bitmap mIcon11 = null;
+	        try {
+	            InputStream in = new java.net.URL(urldisplay).openStream();
+	            mIcon11 = BitmapFactory.decodeStream(in);
+	        } catch (Exception e) {
+	            Log.e("Error", e.getMessage());
+	            e.printStackTrace();
+	        }
+	        return mIcon11;
+	    }
 
-			// playCardImageView.setVisibility(View.GONE);
-			playCardLayout.removeView(playCardImageView);
-
-			// Creating a new VideoView
-			// playCardVideoView = new VideoView(Context);
-			playCardVideoView = new VideoView(getApplicationContext());
-
-			// Defining the layout parameters of the VideoView
-			RelativeLayout.LayoutParams layoutParametersForPlayCardVideoView = new RelativeLayout.LayoutParams(
-					RelativeLayout.LayoutParams.WRAP_CONTENT,
-					RelativeLayout.LayoutParams.WRAP_CONTENT);
-			playCardVideoView
-					.setLayoutParams(layoutParametersForPlayCardVideoView);
-
-			layoutParametersForPlayCardVideoView
-					.addRule(RelativeLayout.CENTER_IN_PARENT);
-
-			MediaController mediaController = new MediaController(
-					getApplicationContext());
-			mediaController.setAnchorView(playCardVideoView);
-			playCardVideoView.setMediaController(mediaController);
-			// playCardVideoView.setVideoPath(R.raw.nflvideoone);
-
-			playCardVideoView.setVideoURI(Uri.parse("android.Resource://"
-					+ getPackageName() + "/" + R.raw.nflvideoone));
-			playCardVideoView.start();
-
-			playCardLayout.addView(playCardVideoView);
-
-			Toast.makeText(GameActivity.this, "play card image clicked",
-					Toast.LENGTH_SHORT).show();
-		}
-	};
-
+	    protected void onPostExecute(Bitmap result) {
+	        bmImage.setImageBitmap(result);
+	    }
+	}
 }
