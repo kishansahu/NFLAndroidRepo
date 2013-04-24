@@ -19,12 +19,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
@@ -51,10 +53,11 @@ import com.liveclips.nfl.model.ScheduleItem;
 import com.liveclips.nfl.model.StatsItem;
 import com.liveclips.nfl.popover.PopoverView;
 import com.liveclips.nfl.popover.PopoverView.PopoverViewDelegate;
+import com.liveclips.nfl.utils.NflUtils;
 
 public class GameActivity extends Activity implements PopoverViewDelegate {
 
-	protected static final Context Context = null;
+	protected Context context = GameActivity.this;
 	FragmentManager fragmentManager;
 	Fragment mainMenuFragment;
 	FragmentTransaction ft;
@@ -74,6 +77,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 	ImageView playCardImageView;
 	TextView team1BtnPlayers;
 	TextView team2BtnPlayers;
+	LayoutInflater layoutInflater;
 	Context context;
 	int playCardVideoId = 0;
 	DownloadImageTask downloadImageTask;
@@ -113,11 +117,79 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		playCards();
 
 	}
+	public void shrinkScoreBanner(){
+			RelativeLayout  matchScoreBoardBackground= (RelativeLayout) findViewById(R.id.matchScoreBoardBackground);
+			matchScoreBoardBackground.getLayoutParams().width= NflUtils.convertDensityPixelToPixel(context, 450) ;
+
+			ImageView  firstTeamIconImage= (ImageView) findViewById(R.id.firstTeamLargeIcon);
+			firstTeamIconImage.setImageResource(R.drawable.packers);
+			firstTeamIconImage.getLayoutParams().width= 40;
+			firstTeamIconImage.getLayoutParams().width= 40;
+
+			ImageView  secondTeamIconImage= (ImageView) findViewById(R.id.secondTeamLargeIcon);
+			secondTeamIconImage.setImageResource(R.drawable.patriots);
+			secondTeamIconImage.getLayoutParams().width= 40;
+			secondTeamIconImage.getLayoutParams().width= 40;
+
+			TextView firstTeamScore= (TextView) findViewById(R.id.firstTeamScore);
+			firstTeamScore.setTextSize(25);
+
+			TextView secondTeamScore= (TextView) findViewById(R.id.secondTeamScore);
+			secondTeamScore.setTextSize(25);
+
+			TextView gameQuarterIndex= (TextView) findViewById(R.id.gameQuarterIndex);
+			gameQuarterIndex.setTextSize(15);
+
+			TextView gameQuarterTime= (TextView) findViewById(R.id.gameQuarterTime);
+			gameQuarterTime.setTextSize(22);
+
+			TextView gameScoreDescription= (TextView) findViewById(R.id.gameScoreDescription);
+			gameScoreDescription.setTextSize(15);
+
+			//LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		   // llp.topMargin = 40;
+
+			TextView firstTeamFirstName= (TextView) findViewById(R.id.firstTeamFirstName);
+			firstTeamFirstName.setTextSize(13);
+			//firstTeamFirstName.setLayoutParams(llp);
+
+			TextView firstTeamSecondName= (TextView) findViewById(R.id.firstTeamSecondName);
+			firstTeamSecondName.setTextSize(20);
+			//firstTeamSecondName.setLayoutParams(llp);
+
+			TextView secondTeamFirstName= (TextView) findViewById(R.id.secondTeamFirstName);
+			secondTeamFirstName.setTextSize(13);
+			//secondTeamFirstName.setLayoutParams(llp);
+
+			TextView secondTeamSecondName= (TextView) findViewById(R.id.secondTeamSecondName);
+			secondTeamSecondName.setTextSize(20);
+			//secondTeamSecondName.setLayoutParams(llp);
+
+			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+			params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+			params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, R.id.firstTeamLargeIcon);
+			params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, R.id.firstTeamLargeIcon);
+
+			LinearLayout  firstTeamDescriptionContainer= (LinearLayout) findViewById(R.id.firstTeamDescriptionContainer);
+			firstTeamDescriptionContainer.setLayoutParams(params);
+
+			RelativeLayout.LayoutParams relParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+			relParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+			relParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, R.id.secondTeamLargeIcon);
+			relParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, R.id.secondTeamLargeIcon);
+
+			LinearLayout  secondTeamDescriptionContainer= (LinearLayout) findViewById(R.id.secondTeamDescriptionContainer);
+			secondTeamDescriptionContainer.setLayoutParams(relParams);
+
+			ViewStub stub = (ViewStub) findViewById(R.id.playersPerformanceMatchScoreboardStub);
+			stub.inflate();
+
+	}
 
 	@Override
 	protected void onResume() {
-		
-	
+
+
 		headerTextView = (TextView) mainMenuFragment.getView().findViewById(R.id.menuHeader);
 		headerTextView.setText("LiveClips");
 		closeButtonHeader = (ImageButton) mainMenuFragment.getView().findViewById(R.id.closeButtonHeader);
@@ -649,24 +721,24 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 
 		/*
 		 * ft = fragmentManager.beginTransaction();
-		 * 
+		 *
 		 * if (maninMenuFragment.isVisible()) {
-		 * 
+		 *
 		 * ft.hide(maninMenuFragment);
-		 * 
-		 * 
+		 *
+		 *
 		 * Toast.makeText(AppContentActivity.this, "button clicked visible",
 		 * Toast.LENGTH_SHORT) .show();
-		 * 
-		 * 
+		 *
+		 *
 		 * } else {
-		 * 
+		 *
 		 * ft.show(maninMenuFragment);
-		 * 
+		 *
 		 * ft.addToBackStack(null);
-		 * 
+		 *
 		 * }
-		 * 
+		 *
 		 * ft.commit();
 		 */
 
@@ -905,19 +977,19 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 			// Adding the TextView to the RelativeLayout as a child
 			playCardLayout.addView(playCardTopTextView);
 
-		
-			
+
+
 			final ImageView playCardImageView = new ImageView(this);
 			RelativeLayout.LayoutParams layoutParameterForPlayCardImageView = new RelativeLayout.LayoutParams(250, 150);
 			layoutParameterForPlayCardImageView.addRule(RelativeLayout.CENTER_IN_PARENT);
 			//playCardImageView.setVisibility(View.VISIBLE);
 			playCardImageView.setLayoutParams(layoutParameterForPlayCardImageView);
-			
+
 			//playCardImageView.setImageResource(R.drawable.nflimagefour);
 			//playCardImageView.setImageURI(Uri.parse("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg"));
 			//playCardImageView.setImageBitmap(loadBitmap("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg"));
-			
-			
+
+
 			 /*
              * NetworkOnMainThreadException is handled using these two lines for
              * Android 3.0 and above.
@@ -928,20 +1000,20 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
             StrictMode.setThreadPolicy(policy);
             // End Handling NetworkOnMainThreadException
             downloadImageTask = new DownloadImageTask(playCardImageView);//.execute("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg");
-			
+
             downloadImageTask.execute("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg");
-			
-			
-			
+
+
+
 			playCardLayout.addView(playCardImageView);
-			
-			
+
+
 			playCardImageView.setOnTouchListener(new View.OnTouchListener()
 		    {
 				@Override
 				public boolean onTouch(final View v, MotionEvent arg1) {
 					// Creating a new VideoView VideoView
-					
+
 					if(playCardVideoView != null && playCardVideoView.isPlaying()){
 						playCardVideoView.stopPlayback();
 						playCardVideoView.setVisibility(View.INVISIBLE);
@@ -954,14 +1026,14 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 					layoutParametersForPlayCardVideoView.addRule(RelativeLayout.CENTER_IN_PARENT);
 					//RelativeLayout.LayoutParams layoutParametersForPlayCardVideoView = new RelativeLayout.LayoutParams(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 					playCardVideoView.setId(playCardVideoId++);
-					
+
 					MediaController mediaController = new MediaController(context);
 					mediaController.setAnchorView(playCardVideoView);
 					playCardVideoView.setMediaController(mediaController);
 
 					playCardVideoView
 							.setLayoutParams(layoutParametersForPlayCardVideoView);
-					
+
 					String path = "http://x.pio.lc/nfl/week05/20121009_001_20121011115406_027_3_241b_d02a361b.3gp";
 					//String path = "http://commonsware.com/misc/test2.3gp";
 					playCardVideoView.setVideoURI(Uri.parse(path));
@@ -974,22 +1046,22 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 					    	//playCardImageView.setVisibility(View.VISIBLE);
 					    	playCardVideoView.setVisibility(View.INVISIBLE);
 					    	v.setVisibility(View.VISIBLE);
-					    	
+
 					    }
 					});
-					
-					
+
+
 					playCardVideoView.start();
-					
+
 					return false;
 				}
 		    });
-			
-			
 
-			
 
-			
+
+
+
+
 			// Creating a new bottomTextView
 			TextView playCardBottomTextView = new TextView(this);
 			playCardBottomTextView.setText(playCardBottomDetail.get(index));
@@ -1009,7 +1081,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		}
 
 	}
-	
+
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 	    ImageView bmImage;
 
