@@ -1,6 +1,9 @@
 package com.liveclips.nfl.activity;
 
+import java.io.BufferedInputStream;
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +40,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import com.example.fragments.R;
+import com.liveclips.nfl.R;
 import com.liveclips.nfl.adapter.DriveListViewAdapter;
 import com.liveclips.nfl.adapter.PlayerListViewAdapter;
 import com.liveclips.nfl.adapter.ScheduleListViewAdapter;
@@ -71,7 +74,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 	TextView watchAllTextView;
 	RelativeLayout playCardLayout;
 	VideoView playCardVideoView;
-	ImageView playCardImageView;
+	//ImageView playCardImageView;
 	TextView team1BtnPlayers;
 	TextView team2BtnPlayers;
 
@@ -920,9 +923,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 			playCardVideoView
 					.setLayoutParams(layoutParametersForPlayCardVideoView);
 			
-			String path = "http://x.pio.lc/nfl/week05/20121009_001_20121011115406_027_3_241b_d02a361b.3gp";
-			playCardVideoView.setVideoURI(Uri.parse(path));
-			playCardVideoView.setZOrderOnTop(false);
+			
 			playCardLayout.addView(playCardVideoView);
 			
 			
@@ -960,7 +961,12 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		    {
 				@Override
 				public boolean onTouch(View v, MotionEvent arg1) {
+					
 					v.setVisibility(View.INVISIBLE);
+					String path = "http://x.pio.lc/nfl/week05/20121009_001_20121011115406_027_3_241b_d02a361b.3gp";
+					playCardVideoView.setVideoURI(Uri.parse(path));
+					playCardVideoView.setZOrderOnTop(false);
+					playCardImageView.requestFocus();
 					playCardVideoView.start();
 					return false;
 				}
@@ -1007,8 +1013,17 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 	        String urldisplay = urls[0];
 	        Bitmap mIcon11 = null;
 	        try {
-	            InputStream in = new java.net.URL(urldisplay).openStream();
-	            mIcon11 = BitmapFactory.decodeStream(in);
+	        	URL aURL = new URL(urldisplay);
+				URLConnection conn = aURL.openConnection();
+				conn.connect();
+				InputStream is = conn.getInputStream();
+	            BufferedInputStream bis = new BufferedInputStream(is);
+	            float sampleSizeF = (float) 100 / (float) 100;
+	            int sampleSize = Math.round(sampleSizeF);
+	            BitmapFactory.Options resample = new BitmapFactory.Options();
+	            resample.inSampleSize = sampleSize;
+	            mIcon11 = BitmapFactory.decodeStream(bis,null, resample);
+	          
 	        } catch (Exception e) {
 	            Log.e("Error", e.getMessage());
 	            e.printStackTrace();
