@@ -1,21 +1,16 @@
 package com.liveclips.nfl.activity;
 
-import com.example.fragments.R;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.liveclips.nfl.R;
 
 public class AppContentActivity extends Activity {
 

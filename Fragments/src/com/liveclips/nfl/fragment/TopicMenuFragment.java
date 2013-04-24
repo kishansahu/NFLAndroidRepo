@@ -1,26 +1,22 @@
 package com.liveclips.nfl.fragment;
 
-import com.example.fragments.R;
-
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
+
+import com.liveclips.nfl.R;
+import com.liveclips.nfl.activity.GameActivity;
+import com.liveclips.nfl.activity.PlayersActivity;
 
 public class TopicMenuFragment extends Fragment {
 
@@ -28,13 +24,12 @@ public class TopicMenuFragment extends Fragment {
 			"Divisions", "Teams", "Game Schedule" };
 
 	ListView listView1;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle saveInstantState) {
 		Log.d("Fragment 1", "onCreateView");
-	
-		
+
 		return inflater.inflate(R.layout.main_menu_fragment, container, false);
 
 	}
@@ -79,14 +74,18 @@ public class TopicMenuFragment extends Fragment {
 
 	}
 
-	
-	
 	private OnItemClickListener listItemListener = new OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
-			// startActivity(new Intent(getActivity(), GameActivity.class));
+			TextView textView = (TextView) arg1;
+			if (textView.getText().equals("New England Patriots")) {
+				startActivity(new Intent(getActivity(), GameActivity.class));
+			}
+			if (textView.getText().equals("My Players")) {
+				startActivity(new Intent(getActivity(), PlayersActivity.class));
+			}
 
 		}
 

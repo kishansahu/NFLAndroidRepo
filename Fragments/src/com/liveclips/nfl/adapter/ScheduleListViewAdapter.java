@@ -2,9 +2,6 @@ package com.liveclips.nfl.adapter;
 
 import java.util.List;
 
-import com.example.fragments.R;
-import com.liveclips.nfl.model.ScheduleItem;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,6 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.liveclips.nfl.R;
+import com.liveclips.nfl.model.ScheduleItem;
 
 public class ScheduleListViewAdapter extends ArrayAdapter<ScheduleItem> {
 

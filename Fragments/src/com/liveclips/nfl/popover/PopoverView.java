@@ -22,8 +22,6 @@ package com.liveclips.nfl.popover;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.fragments.R;
-
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -38,6 +36,8 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
+import com.liveclips.nfl.R;
 
 public class PopoverView extends RelativeLayout implements OnTouchListener{
 

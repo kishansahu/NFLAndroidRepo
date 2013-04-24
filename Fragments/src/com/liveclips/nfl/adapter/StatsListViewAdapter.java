@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.fragments.R;
+import com.liveclips.nfl.R;
 import com.liveclips.nfl.model.StatsItem;
 
 public class StatsListViewAdapter  extends ArrayAdapter<StatsItem> {

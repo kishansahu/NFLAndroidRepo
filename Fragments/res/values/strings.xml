@@ -7,26 +7,21 @@
     <string name="frag1">"Menu"</string>
     <string name="frag2">"This is fragment #2"</string>
     <string name="btnGetText">Get text in Fragment #1</string>
-	<string name="mainActivityMessage">This is Main activity</string>
-	<string name="globalNavigationButtonContentDescription">Global Navigation Button</string>
+    <string name="mainActivityMessage">This is Main activity</string>
+    <string name="globalNavigationButtonContentDescription">Global Navigation Button</string>
+    <string name="game_schedule_title">SCHEDULE</string>
+    <string name="game_drives_title">DRIVES</string>
+    <string name="game_status_title">STATUS</string>
+    <string name="game_players_title">PLAYERS</string>
+    <string name="actionbar_color">0xff9ACC00</string>
 
-<string name="game_schedule_title">SCHEDULE</string>
-	<string name="game_drives_title">DRIVES</string>
-	<string name="game_status_title">STATUS</string>
-	<string name="game_players_title">PLAYERS</string>
-	<string name="actionbar_color">0xff9ACC00</string>
-	
-	 <string-array name="item_arrays">
+    <string-array name="item_arrays">
         <item>Patriot</item>
-        <item>United States</item>
-        <item>Indonesia</item>
-        <item>France</item>
-        <item>Italy</item>
-        <item>Singapore</item>
-        <item>New Zealand</item>
-        <item>India</item>
+        <item>My Players</item>
+        <item>NFL Highlights</item>
+        <item>Divisons</item>
+        <item>Team</item>
+        <item>Game Schedule</item>
     </string-array>
-    
-	
-    
+
 </resources>

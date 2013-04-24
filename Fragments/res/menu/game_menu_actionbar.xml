@@ -12,7 +12,7 @@
         android:icon="@drawable/menuicon"/>
     
     <item
-        android:id="@+id/patriot"
+        android:id="@+id/spinnerMenuItem"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:actionLayout="@layout/spinner_layout"
@@ -20,7 +20,7 @@
         android:menuCategory="system"
         android:orderInCategory="3"
         android:showAsAction="always"
-        android:title="Patriot"/>
+        android:title="Patriot"/> 
     <item
         android:id="@+id/sliderButton"
         android:layout_width="35dp"

@@ -3,14 +3,14 @@ package com.liveclips.nfl.adapter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.example.fragments.R;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+
+import com.liveclips.nfl.R;
 
 public class SeparatedListAdapter extends BaseAdapter {
 
