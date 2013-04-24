@@ -19,12 +19,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
@@ -51,10 +53,11 @@ import com.liveclips.nfl.model.ScheduleItem;
 import com.liveclips.nfl.model.StatsItem;
 import com.liveclips.nfl.popover.PopoverView;
 import com.liveclips.nfl.popover.PopoverView.PopoverViewDelegate;
+import com.liveclips.nfl.utils.NflUtils;
 
 public class GameActivity extends Activity implements PopoverViewDelegate {
 
-	protected static final Context Context = null;
+	protected Context context = GameActivity.this;
 	FragmentManager fragmentManager;
 	Fragment mainMenuFragment;
 	FragmentTransaction ft;
@@ -74,6 +77,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 	//ImageView playCardImageView;
 	TextView team1BtnPlayers;
 	TextView team2BtnPlayers;
+	LayoutInflater layoutInflater;
 	Context context;
 	int playCardVideoId = 0;
 	DownloadImageTask downloadImageTask;
@@ -113,11 +117,79 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		playCards();
 
 	}
+	public void shrinkScoreBanner(){
+			RelativeLayout  matchScoreBoardBackground= (RelativeLayout) findViewById(R.id.matchScoreBoardBackground);
+			matchScoreBoardBackground.getLayoutParams().width= NflUtils.convertDensityPixelToPixel(context, 450) ;
+
+			ImageView  firstTeamIconImage= (ImageView) findViewById(R.id.firstTeamLargeIcon);
+			firstTeamIconImage.setImageResource(R.drawable.packers);
+			firstTeamIconImage.getLayoutParams().width= 40;
+			firstTeamIconImage.getLayoutParams().width= 40;
+
+			ImageView  secondTeamIconImage= (ImageView) findViewById(R.id.secondTeamLargeIcon);
+			secondTeamIconImage.setImageResource(R.drawable.patriots);
+			secondTeamIconImage.getLayoutParams().width= 40;
+			secondTeamIconImage.getLayoutParams().width= 40;
+
+			TextView firstTeamScore= (TextView) findViewById(R.id.firstTeamScore);
+			firstTeamScore.setTextSize(25);
+
+			TextView secondTeamScore= (TextView) findViewById(R.id.secondTeamScore);
+			secondTeamScore.setTextSize(25);
+
+			TextView gameQuarterIndex= (TextView) findViewById(R.id.gameQuarterIndex);
+			gameQuarterIndex.setTextSize(15);
+
+			TextView gameQuarterTime= (TextView) findViewById(R.id.gameQuarterTime);
+			gameQuarterTime.setTextSize(22);
+
+			TextView gameScoreDescription= (TextView) findViewById(R.id.gameScoreDescription);
+			gameScoreDescription.setTextSize(15);
+
+			//LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		   // llp.topMargin = 40;
+
+			TextView firstTeamFirstName= (TextView) findViewById(R.id.firstTeamFirstName);
+			firstTeamFirstName.setTextSize(13);
+			//firstTeamFirstName.setLayoutParams(llp);
+
+			TextView firstTeamSecondName= (TextView) findViewById(R.id.firstTeamSecondName);
+			firstTeamSecondName.setTextSize(20);
+			//firstTeamSecondName.setLayoutParams(llp);
+
+			TextView secondTeamFirstName= (TextView) findViewById(R.id.secondTeamFirstName);
+			secondTeamFirstName.setTextSize(13);
+			//secondTeamFirstName.setLayoutParams(llp);
+
+			TextView secondTeamSecondName= (TextView) findViewById(R.id.secondTeamSecondName);
+			secondTeamSecondName.setTextSize(20);
+			//secondTeamSecondName.setLayoutParams(llp);
+
+			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+			params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+			params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, R.id.firstTeamLargeIcon);
+			params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, R.id.firstTeamLargeIcon);
+
+			LinearLayout  firstTeamDescriptionContainer= (LinearLayout) findViewById(R.id.firstTeamDescriptionContainer);
+			firstTeamDescriptionContainer.setLayoutParams(params);
+
+			RelativeLayout.LayoutParams relParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+			relParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+			relParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, R.id.secondTeamLargeIcon);
+			relParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, R.id.secondTeamLargeIcon);
+
+			LinearLayout  secondTeamDescriptionContainer= (LinearLayout) findViewById(R.id.secondTeamDescriptionContainer);
+			secondTeamDescriptionContainer.setLayoutParams(relParams);
+
+			ViewStub stub = (ViewStub) findViewById(R.id.playersPerformanceMatchScoreboardStub);
+			stub.inflate();
+
+	}
 
 	@Override
 	protected void onResume() {
-		
-	
+
+
 		headerTextView = (TextView) mainMenuFragment.getView().findViewById(R.id.menuHeader);
 		headerTextView.setText("LiveClips");
 		closeButtonHeader = (ImageButton) mainMenuFragment.getView().findViewById(R.id.closeButtonHeader);
@@ -649,24 +721,24 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 
 		/*
 		 * ft = fragmentManager.beginTransaction();
-		 * 
+		 *
 		 * if (maninMenuFragment.isVisible()) {
-		 * 
+		 *
 		 * ft.hide(maninMenuFragment);
-		 * 
-		 * 
+		 *
+		 *
 		 * Toast.makeText(AppContentActivity.this, "button clicked visible",
 		 * Toast.LENGTH_SHORT) .show();
-		 * 
-		 * 
+		 *
+		 *
 		 * } else {
-		 * 
+		 *
 		 * ft.show(maninMenuFragment);
-		 * 
+		 *
 		 * ft.addToBackStack(null);
-		 * 
+		 *
 		 * }
-		 * 
+		 *
 		 * ft.commit();
 		 */
 

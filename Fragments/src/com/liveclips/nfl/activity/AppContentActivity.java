@@ -1,13 +1,16 @@
 package com.liveclips.nfl.activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageButton;
 
 import com.liveclips.nfl.R;
@@ -30,11 +33,26 @@ public class AppContentActivity extends Activity {
 
 	}
 
-	@Override
+	/*@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main_menu_actionbar, menu);
 		return true;
+	}*/
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		ActionBar actionBar = getActionBar();
+		View mActionBarView = getLayoutInflater().inflate(
+				R.layout.app_actionbar_layout, null);
+		actionBar.setCustomView(mActionBarView);
+		actionBar.setBackgroundDrawable(new ColorDrawable(0xFFFF8B1D));
+		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+
+		
+
 	}
 
 	@Override
