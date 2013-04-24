@@ -74,12 +74,17 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 	ImageView playCardImageView;
 	TextView team1BtnPlayers;
 	TextView team2BtnPlayers;
+	Context context;
+	int playCardVideoId = 0;
+	DownloadImageTask downloadImageTask;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 
+		//playCardVideoView = new VideoView(this);
+		context = this;
 		fragmentManager = getFragmentManager();
 		ft = fragmentManager.beginTransaction();
 		mainMenuFragment = new TopicMenuFragment();
@@ -851,7 +856,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		// The parent LinearLayout for playCards
 		LinearLayout playCardParentLinearLayout = (LinearLayout) findViewById(R.id.parentLayoutOfPlayCardsId);
 
-		for (int index = 0; index < 5; index++) {
+		for (int index = 0; index < 15; index++) {
 
 			/*if((index+1)%3==0){
 				try {
@@ -862,7 +867,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 				}
 			}*/
 			// Creating a new RelativeLayout
-			RelativeLayout playCardLayout = new RelativeLayout(this);
+			final RelativeLayout playCardLayout = new RelativeLayout(this);
 
 			// Defining the RelativeLayout layout parameters.
 			RelativeLayout.LayoutParams playCardLayoutParameters = new RelativeLayout.LayoutParams(
@@ -900,32 +905,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 			// Adding the TextView to the RelativeLayout as a child
 			playCardLayout.addView(playCardTopTextView);
 
-
-			
-			
-			
-			// Creating a new VideoView VideoView
-			final VideoView playCardVideoView = new VideoView(this);
-
-			// Defining the layout parameters of the VideoView
-			RelativeLayout.LayoutParams layoutParametersForPlayCardVideoView = new RelativeLayout.LayoutParams(250, 150);
-			layoutParametersForPlayCardVideoView.addRule(RelativeLayout.CENTER_IN_PARENT);
-			//RelativeLayout.LayoutParams layoutParametersForPlayCardVideoView = new RelativeLayout.LayoutParams(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-			playCardVideoView.setId(index);
-			
-			MediaController mediaController = new MediaController(this);
-			mediaController.setAnchorView(playCardVideoView);
-			playCardVideoView.setMediaController(mediaController);
-
-			playCardVideoView
-					.setLayoutParams(layoutParametersForPlayCardVideoView);
-			
-			String path = "http://x.pio.lc/nfl/week05/20121009_001_20121011115406_027_3_241b_d02a361b.3gp";
-			playCardVideoView.setVideoURI(Uri.parse(path));
-			playCardVideoView.setZOrderOnTop(false);
-			playCardLayout.addView(playCardVideoView);
-			
-			
+		
 			
 			final ImageView playCardImageView = new ImageView(this);
 			RelativeLayout.LayoutParams layoutParameterForPlayCardImageView = new RelativeLayout.LayoutParams(250, 150);
@@ -947,9 +927,9 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
                             .permitAll().build();
             StrictMode.setThreadPolicy(policy);
             // End Handling NetworkOnMainThreadException
-			new DownloadImageTask(playCardImageView).execute("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg");
+            downloadImageTask = new DownloadImageTask(playCardImageView);//.execute("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg");
 			
-			
+            downloadImageTask.execute("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg");
 			
 			
 			
@@ -959,20 +939,53 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 			playCardImageView.setOnTouchListener(new View.OnTouchListener()
 		    {
 				@Override
-				public boolean onTouch(View v, MotionEvent arg1) {
+				public boolean onTouch(final View v, MotionEvent arg1) {
+					// Creating a new VideoView VideoView
+					
+					if(playCardVideoView != null && playCardVideoView.isPlaying()){
+						playCardVideoView.stopPlayback();
+						playCardVideoView.setVisibility(View.INVISIBLE);
+				    	//v.setVisibility(View.VISIBLE);
+					}
+					playCardVideoView = new VideoView(context);
+					playCardLayout.addView(playCardVideoView);
+					// Defining the layout parameters of the VideoView
+					RelativeLayout.LayoutParams layoutParametersForPlayCardVideoView = new RelativeLayout.LayoutParams(250, 150);
+					layoutParametersForPlayCardVideoView.addRule(RelativeLayout.CENTER_IN_PARENT);
+					//RelativeLayout.LayoutParams layoutParametersForPlayCardVideoView = new RelativeLayout.LayoutParams(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+					playCardVideoView.setId(playCardVideoId++);
+					
+					MediaController mediaController = new MediaController(context);
+					mediaController.setAnchorView(playCardVideoView);
+					playCardVideoView.setMediaController(mediaController);
+
+					playCardVideoView
+							.setLayoutParams(layoutParametersForPlayCardVideoView);
+					
+					String path = "http://x.pio.lc/nfl/week05/20121009_001_20121011115406_027_3_241b_d02a361b.3gp";
+					//String path = "http://commonsware.com/misc/test2.3gp";
+					playCardVideoView.setVideoURI(Uri.parse(path));
+					playCardVideoView.setZOrderOnTop(false);
 					v.setVisibility(View.INVISIBLE);
+					playCardVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+
+					    @Override
+					    public void onCompletion(MediaPlayer vmp) {
+					    	//playCardImageView.setVisibility(View.VISIBLE);
+					    	playCardVideoView.setVisibility(View.INVISIBLE);
+					    	v.setVisibility(View.VISIBLE);
+					    	
+					    }
+					});
+					
+					
 					playCardVideoView.start();
+					
 					return false;
 				}
 		    });
 			
-			playCardVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-
-			    @Override
-			    public void onCompletion(MediaPlayer vmp) {
-			    	playCardImageView.setVisibility(View.VISIBLE); 
-			    }
-			});
+			
 
 			
 
@@ -992,6 +1005,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 			// Adding the TextView to the RelativeLayout as a child
 			playCardLayout.addView(playCardBottomTextView);
 			playCardParentLinearLayout.addView(playCardLayout);
+			downloadImageTask = null;
 		}
 
 	}
