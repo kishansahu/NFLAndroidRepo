@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.LiveFolders;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -70,10 +71,14 @@ public class MainMenuFragment extends Fragment {
 	private OnItemClickListener listItemListener = new OnItemClickListener() {
 
 		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-				long arg3) {
-			startActivity(new Intent(getActivity(), GameActivity.class));
+		public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt,
+				long mylng) {
 			
+			String selectedFromList =(String) (listView1.getItemAtPosition(myItemInt));
+			
+			if(selectedFromList=="LiveClips"){
+				startActivity(new Intent(getActivity(), GameActivity.class));			
+			}
 		}
 		
 	};
