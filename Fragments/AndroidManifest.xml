@@ -29,6 +29,10 @@
             android:name="com.liveclips.nfl.activity.GameActivity"
             android:label="@string/app_name" >
         </activity>
+         <activity
+            android:name="com.liveclips.nfl.activity.NFLHighlightsActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

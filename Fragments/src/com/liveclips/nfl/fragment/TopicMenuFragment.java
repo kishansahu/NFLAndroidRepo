@@ -1,26 +1,21 @@
 package com.liveclips.nfl.fragment;
 
-import com.example.fragments.R;
-
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.example.fragments.R;
+import com.liveclips.nfl.activity.NFLHighlightsActivity;
 
 public class TopicMenuFragment extends Fragment {
 
@@ -84,8 +79,37 @@ public class TopicMenuFragment extends Fragment {
 	private OnItemClickListener listItemListener = new OnItemClickListener() {
 
 		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+		public void onItemClick(AdapterView<?> adapterView, View view, int position,
 				long arg3) {
+			switch(position){
+			
+			case 0: 
+				Toast.makeText(getActivity().getApplicationContext(), topics[position], Toast.LENGTH_SHORT).show();
+				///startActivity(new Intent("com.liveclips.nfl.activity.GameActivity"));
+				break;
+			case 1 : 
+				Toast.makeText(getActivity().getApplicationContext(), topics[position], Toast.LENGTH_SHORT).show();
+				//startActivity(new Intent("com.liveclips.nfl.activity.GameActivity"));
+				break;
+			case 2 :
+				Toast.makeText(getActivity().getApplicationContext(), topics[position], Toast.LENGTH_SHORT).show();
+				startActivity(new Intent(getActivity(), NFLHighlightsActivity.class));
+				break;
+			case 3:
+				Toast.makeText(getActivity().getApplicationContext(), topics[position], Toast.LENGTH_SHORT).show();
+				//startActivity(new Intent("com.liveclips.nfl.activity.GameActivity"));
+				break;
+			case 4 : 
+				Toast.makeText(getActivity().getApplicationContext(), topics[position], Toast.LENGTH_SHORT).show();
+				//startActivity(new Intent("com.liveclips.nfl.activity.GameActivity"));
+				break;
+			case 5 : 
+				Toast.makeText(getActivity().getApplicationContext(), topics[position], Toast.LENGTH_SHORT).show();
+				//startActivity(new Intent("com.liveclips.nfl.activity.GameActivity"));
+				break;
+			}
+			
+			
 			// startActivity(new Intent(getActivity(), GameActivity.class));
 
 		}
