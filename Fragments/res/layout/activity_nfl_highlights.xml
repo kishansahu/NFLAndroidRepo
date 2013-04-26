@@ -15,7 +15,8 @@
             android:layout_height="160dp"
             android:background="@drawable/scorecard_background" >
 
-                    
+            
+            
 
             <LinearLayout
                 android:id="@+id/firstTeamDescriptionContainer"
@@ -131,7 +132,6 @@
                 android:layout_gravity="center_vertical"
                 android:orientation="horizontal"
                 android:scrollbarAlwaysDrawHorizontalTrack="true" >
-                <VideoView />
             </LinearLayout>
         </HorizontalScrollView>
 
