@@ -34,7 +34,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.MediaController;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -931,6 +933,24 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		
 		DownloadImagesThreadPool downloadImagesThreadPool = new DownloadImagesThreadPool();
 
+		RelativeLayout selectedCategory = new RelativeLayout(context);
+		RelativeLayout.LayoutParams selectedCategoryLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+		selectedCategoryLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+		selectedCategoryLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+		selectedCategoryLayoutParams.setMargins(10, 10, 0, 10);
+		selectedCategory.setBackgroundColor(getResources().getColor(R.color.green));
+		selectedCategory.setAlpha(0.5f);
+		selectedCategory.setLayoutParams(selectedCategoryLayoutParams);
+		playCardParentLinearLayout.addView(selectedCategory);
+		
+		TextView selectedCategoryTextView = new TextView(context);
+		RelativeLayout.LayoutParams selectedCategoryTextViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		selectedCategoryTextViewLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+		selectedCategoryTextView.setLayoutParams(selectedCategoryTextViewLayoutParams);
+		selectedCategoryTextView.setText("New England Patriots");
+		selectedCategory.addView(selectedCategoryTextView);
+		
+		
 		for (int index = 0; index < 15; index++) {
 
 			/*if((index+1)%3==0){
@@ -945,8 +965,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 			final RelativeLayout playCardLayout = new RelativeLayout(this);
 
 			// Defining the RelativeLayout layout parameters.
-			RelativeLayout.LayoutParams playCardLayoutParameters = new RelativeLayout.LayoutParams(
-					300, 250);
+			RelativeLayout.LayoutParams playCardLayoutParameters = new RelativeLayout.LayoutParams(500,400);
 			playCardLayoutParameters.addRule(RelativeLayout.CENTER_IN_PARENT);
 			playCardLayoutParameters.setMargins(10, 10, 10, 10);
 
@@ -962,6 +981,15 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 
 			playCardLayout.setPadding(5, 5, 5, 5);
 
+			//************************************* Adding top and bottom strip ****************************
+			
+			RelativeLayout playCardTopLayout = new RelativeLayout(context);
+			RelativeLayout.LayoutParams playCardTopLayoutParameter = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 50);
+			playCardTopLayout.setLayoutParams(playCardTopLayoutParameter);
+			//playCardTopLayout.setBackgroundColor(getResources().getColor(R.color.white));
+			playCardLayout.addView(playCardTopLayout);
+			
+			
 			// Creating a new topTextView
 			TextView playCardTopTextView = new TextView(this);
 			playCardTopTextView.setText(playCardTopDetail.get(index));
@@ -971,19 +999,30 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 					RelativeLayout.LayoutParams.WRAP_CONTENT,
 					RelativeLayout.LayoutParams.WRAP_CONTENT);
 			layoutParametersForPlayCardTopTextView
-					.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+					.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+			layoutParametersForPlayCardTopTextView.addRule(RelativeLayout.CENTER_VERTICAL);
 
 			// Setting the parameters on the TextView
 			playCardTopTextView
 					.setLayoutParams(layoutParametersForPlayCardTopTextView);
 
 			// Adding the TextView to the RelativeLayout as a child
-			playCardLayout.addView(playCardTopTextView);
+			playCardTopLayout.addView(playCardTopTextView);
 
+			RatingBar playCardRatingBar = new RatingBar(context);
+			RelativeLayout.LayoutParams ratingBarLayoutParameter = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+			ratingBarLayoutParameter.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+			ratingBarLayoutParameter.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+				
+			playCardRatingBar.setMax(5);
+			playCardRatingBar.setRating(3);
+			playCardRatingBar.setNumStars(5);
+			playCardRatingBar.setLayoutParams(ratingBarLayoutParameter);
+			playCardTopLayout.addView(playCardRatingBar);
 
 
 			final ImageView playCardImageView = new ImageView(this);
-			RelativeLayout.LayoutParams layoutParameterForPlayCardImageView = new RelativeLayout.LayoutParams(250, 150);
+			RelativeLayout.LayoutParams layoutParameterForPlayCardImageView = new RelativeLayout.LayoutParams(450, 250);
 			layoutParameterForPlayCardImageView.addRule(RelativeLayout.CENTER_IN_PARENT);
 			//playCardImageView.setVisibility(View.VISIBLE);
 			playCardImageView.setLayoutParams(layoutParameterForPlayCardImageView);
@@ -1026,7 +1065,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 					playCardVideoView = new VideoView(context);
 					playCardLayout.addView(playCardVideoView);
 					// Defining the layout parameters of the VideoView
-					RelativeLayout.LayoutParams layoutParametersForPlayCardVideoView = new RelativeLayout.LayoutParams(250, 150);
+					RelativeLayout.LayoutParams layoutParametersForPlayCardVideoView = new RelativeLayout.LayoutParams(450, 250);
 					layoutParametersForPlayCardVideoView.addRule(RelativeLayout.CENTER_IN_PARENT);
 					//RelativeLayout.LayoutParams layoutParametersForPlayCardVideoView = new RelativeLayout.LayoutParams(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 					playCardVideoView.setId(playCardVideoId++);
