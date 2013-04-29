@@ -55,6 +55,7 @@ import com.liveclips.nfl.model.ScheduleItem;
 import com.liveclips.nfl.model.StatsItem;
 import com.liveclips.nfl.popover.PopoverView;
 import com.liveclips.nfl.popover.PopoverView.PopoverViewDelegate;
+import com.liveclips.nfl.utils.DownloadImagesThreadPool;
 import com.liveclips.nfl.utils.NflUtils;
 
 public class GameActivity extends Activity implements PopoverViewDelegate {
@@ -932,6 +933,8 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		
 		// The parent LinearLayout for playCards
 		LinearLayout playCardParentLinearLayout = (LinearLayout) findViewById(R.id.parentLayoutOfPlayCardsId);
+		
+		DownloadImagesThreadPool downloadImagesThreadPool = new DownloadImagesThreadPool();
 
 		TextView selectedCategoryTextView = (TextView) findViewById(R.id.selectedCategoryTextViewId);
 		selectedCategoryTextView.setText("NEW ENGLAND PATRIOTS");
@@ -1045,10 +1048,11 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
                             .permitAll().build();
             StrictMode.setThreadPolicy(policy);
             // End Handling NetworkOnMainThreadException
-            downloadImageTask = new DownloadImageTask(playCardImageView);//.execute("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg");
+         //   downloadImageTask = new DownloadImageTask(playCardImageView);//.execute("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg");
 
-            downloadImageTask.execute("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg");
+            //downloadImageTask.execute("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg");
 
+            downloadImagesThreadPool.submit(playCardImageView, "http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg");
 
 
 			playCardLayout.addView(playCardImageView);
@@ -1128,7 +1132,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 
 	}
 
-	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+	public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 	    ImageView bmImage;
 
 	    public DownloadImageTask(ImageView bmImage) {
