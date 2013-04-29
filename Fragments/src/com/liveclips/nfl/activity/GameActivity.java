@@ -927,25 +927,32 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		playCardBottomDetail
 				.add("Shayne Graham kicks 63-yards from HOU 35 to ATL 2.Jacquizz Rodgers to ATL 20 for 18-yards (3:09 4th)");
 
+		
+		
+		
 		// The parent LinearLayout for playCards
 		LinearLayout playCardParentLinearLayout = (LinearLayout) findViewById(R.id.parentLayoutOfPlayCardsId);
 
-		RelativeLayout selectedCategory = new RelativeLayout(context);
+		TextView selectedCategoryTextView = (TextView) findViewById(R.id.selectedCategoryTextViewId);
+		selectedCategoryTextView.setText("NEW ENGLAND PATRIOTS");
+		
+		
+		/*RelativeLayout selectedCategoryLayout = new RelativeLayout(context);
 		RelativeLayout.LayoutParams selectedCategoryLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
 		selectedCategoryLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 		selectedCategoryLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 		selectedCategoryLayoutParams.setMargins(10, 10, 0, 10);
-		selectedCategory.setBackgroundColor(getResources().getColor(R.color.green));
-		selectedCategory.setAlpha(0.5f);
-		selectedCategory.setLayoutParams(selectedCategoryLayoutParams);
-		playCardParentLinearLayout.addView(selectedCategory);
+		selectedCategoryLayout.setBackgroundColor(getResources().getColor(R.color.green));
+		selectedCategoryLayout.setAlpha(0.5f);
+		selectedCategoryLayout.setLayoutParams(selectedCategoryLayoutParams);
+		playCardParentLinearLayout.addView(selectedCategoryLayout);
 		
 		TextView selectedCategoryTextView = new TextView(context);
 		RelativeLayout.LayoutParams selectedCategoryTextViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		selectedCategoryTextViewLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 		selectedCategoryTextView.setLayoutParams(selectedCategoryTextViewLayoutParams);
 		selectedCategoryTextView.setText("New England Patriots");
-		selectedCategory.addView(selectedCategoryTextView);
+		selectedCategoryLayout.addView(selectedCategoryTextView);*/
 		
 		
 		for (int index = 0; index < 15; index++) {
