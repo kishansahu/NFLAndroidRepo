@@ -7,21 +7,36 @@
     <string name="frag1">"Menu"</string>
     <string name="frag2">"This is fragment #2"</string>
     <string name="btnGetText">Get text in Fragment #1</string>
-    <string name="mainActivityMessage">This is Main activity</string>
-    <string name="globalNavigationButtonContentDescription">Global Navigation Button</string>
-    <string name="game_schedule_title">SCHEDULE</string>
-    <string name="game_drives_title">DRIVES</string>
-    <string name="game_status_title">STATUS</string>
-    <string name="game_players_title">PLAYERS</string>
-    <string name="actionbar_color">0xff9ACC00</string>
+	<string name="mainActivityMessage">This is Main activity</string>
+	<string name="globalNavigationButtonContentDescription">Global Navigation Button</string>
 
-    <string-array name="item_arrays">
+<string name="game_schedule_title">SCHEDULE</string>
+	<string name="game_drives_title">DRIVES</string>
+	<string name="game_status_title">STATUS</string>
+	<string name="game_players_title">PLAYERS</string>
+	<string name="actionbar_color">0xff9ACC00</string>
+	
+	 <string-array name="item_arrays">
         <item>Patriot</item>
-        <item>My Players</item>
-        <item>NFL Highlights</item>
-        <item>Divisons</item>
-        <item>Team</item>
-        <item>Game Schedule</item>
+        <item>United States</item>
+        <item>Indonesia</item>
+        <item>France</item>
+        <item>Italy</item>
+        <item>Singapore</item>
+        <item>New Zealand</item>
+        <item>India</item>
     </string-array>
-
+    
+	 <string-array name="nfl_highLights_items">
+        <item>2013 Best of J.J. Watt: Swats</item>
+        <item>2013 Best of J.J. Watt: Sacks</item>
+        <item>2013: Best of Reggie Bush</item>
+        <item>2013: Best of Matthew Stafford</item>
+        <item>2013: Best of Doug Martin</item>
+        <item>Niners fail on two-point conversion attempt</item>
+        <item>Super Bowl XLVII: Colin Kaepernick highlights</item>
+        <item>Super Bowl XLVII: Joe Flacco highlights</item>
+    </string-array>
+	
+    
 </resources>

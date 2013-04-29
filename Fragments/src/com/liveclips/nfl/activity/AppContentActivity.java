@@ -7,38 +7,39 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.liveclips.nfl.R;
+import com.liveclips.nfl.fragment.MainMenuFragment;
+import com.liveclips.nfl.fragment.TopicMenuFragment;
 
 public class AppContentActivity extends Activity {
 
 	FragmentManager fragmentManager;
-	Fragment maninMenuFragment;
+	public Fragment mainMenuFragment;
 	FragmentTransaction ft;
-	ImageButton sliderButton;
+	ImageView sliderBtnImageView;
+	ImageView closeBtnImageView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		fragmentManager = getFragmentManager();
-		maninMenuFragment = fragmentManager
-				.findFragmentById(R.id.mainMenuFragment);
-		// maninMenuFragment.setHasOptionsMenu(true);
+		ft = fragmentManager.beginTransaction();
+		mainMenuFragment = new MainMenuFragment();
+		ft.add(R.id.menuFragment, mainMenuFragment);
+		ft.commit();
 
 	}
-
-	/*@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.main_menu_actionbar, menu);
-		return true;
-	}*/
 
 	@Override
 	protected void onStart() {
@@ -51,48 +52,90 @@ public class AppContentActivity extends Activity {
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 
-		
-
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle item selection
-		switch (item.getItemId()) {
-		case R.id.sliderButton:
-			performSliderAction();
-			return true;
-			/*
-			 * case R.id.help: showHelp(); return true;
-			 */
-		default:
-			return super.onOptionsItemSelected(item);
-		}
+	protected void onResume() {
+		super.onResume();
+		closeBtnImageView = (ImageView) findViewById(R.id.closeButtonHeader);
+		closeBtnImageView.setOnClickListener(closeButtonListener);
+		sliderBtnImageView = (ImageView) findViewById(R.id.sliderView);
+		sliderBtnImageView.setOnClickListener(sliderButtonListener);
+		//TopicMenuFragment.selectedIndex = -1;
 	}
 
-	private void performSliderAction() {
+	private OnClickListener closeButtonListener = new OnClickListener() {
 
-		ft = fragmentManager.beginTransaction();
-
-		if (maninMenuFragment.isVisible()) {
-
-			ft.hide(maninMenuFragment);
-
+		@Override
+		public void onClick(View v) {
+			Log.d("closeclcik", "closeclickonamainmenu");
 			/*
-			 * Toast.makeText(AppContentActivity.this, "button clicked visible",
-			 * Toast.LENGTH_SHORT) .show();
+			 * Fragment mainMenuFragment = ((AppContentActivity)
+			 * getActivity()).mainMenuFragment; FragmentManager fragmentManager
+			 * = getFragmentManager(); FragmentTransaction ft =
+			 * fragmentManager.beginTransaction(); ft.hide(mainMenuFragment);
+			 * ft.commit();
 			 */
-
-		} else {
-
-			ft.show(maninMenuFragment);
-
-			ft.addToBackStack(null);
+			View view = findViewById(R.id.menuFragment);
+			view.setVisibility(View.INVISIBLE);
+			View menuHeader = findViewById(R.id.menuHeaderForAppStart);
+			menuHeader.setVisibility(View.GONE);
+			View sliderView = findViewById(R.id.sliderView);
+			sliderView.setVisibility(View.VISIBLE);
 
 		}
-
-		ft.commit();
 
 	};
 
+	private OnClickListener sliderButtonListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			Log.d("closeclcik", "closeclickonamainmenu");
+
+			View menuHeader = findViewById(R.id.menuHeaderForAppStart);
+			if (menuHeader.getVisibility() == View.VISIBLE) {
+				menuHeader.setVisibility(View.GONE);
+				View sliderView = findViewById(R.id.sliderView);
+				sliderView.setVisibility(View.VISIBLE);
+				View view = findViewById(R.id.menuFragment);
+				view.setVisibility(View.INVISIBLE);
+			} else {
+				FragmentManager fragmentManager = getFragmentManager();
+				FragmentTransaction ft = fragmentManager.beginTransaction();
+				Fragment mainMenuFragment = new MainMenuFragment();
+				ft.replace(R.id.menuFragment, mainMenuFragment);
+				ft.commit();
+				TextView menuTitle = (TextView) findViewById(R.id.menuTitle);
+				menuTitle.setText("Menu");
+				menuHeader.setVisibility(View.VISIBLE);
+				closeBtnImageView.setVisibility(View.INVISIBLE);
+				View view = findViewById(R.id.menuFragment);
+				view.setVisibility(View.VISIBLE);
+			}
+		}
+
+	};
+
+	/*
+	 * private void performSliderAction() {
+	 * 
+	 * ft = fragmentManager.beginTransaction();
+	 * 
+	 * if (maninMenuFragment.isVisible()) {
+	 * 
+	 * ft.hide(maninMenuFragment);
+	 * 
+	 * } else {
+	 * 
+	 * ft.show(maninMenuFragment);
+	 * 
+	 * ft.addToBackStack(null);
+	 * 
+	 * }
+	 * 
+	 * ft.commit();
+	 * 
+	 * };
+	 */
 }

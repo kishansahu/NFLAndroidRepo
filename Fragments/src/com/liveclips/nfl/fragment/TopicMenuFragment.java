@@ -12,10 +12,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.liveclips.nfl.R;
 import com.liveclips.nfl.activity.GameActivity;
+import com.liveclips.nfl.activity.NFLHighlightsActivity;
 import com.liveclips.nfl.activity.PlayersActivity;
 
 public class TopicMenuFragment extends Fragment {
@@ -77,14 +78,35 @@ public class TopicMenuFragment extends Fragment {
 	private OnItemClickListener listItemListener = new OnItemClickListener() {
 
 		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 				long arg3) {
-			TextView textView = (TextView) arg1;
-			if (textView.getText().equals("New England Patriots")) {
+			switch (position) {
+
+			case 0:
 				startActivity(new Intent(getActivity(), GameActivity.class));
-			}
-			if (textView.getText().equals("My Players")) {
+				break;
+			case 1:
 				startActivity(new Intent(getActivity(), PlayersActivity.class));
+				break;
+			case 2:
+				startActivity(new Intent(getActivity(),
+						NFLHighlightsActivity.class));
+				break;
+			case 3:
+
+				// startActivity(new
+				// Intent("com.liveclips.nfl.activity.GameActivity"));
+				break;
+			case 4:
+
+				// startActivity(new
+				// Intent("com.liveclips.nfl.activity.GameActivity"));
+				break;
+			case 5:
+
+				// startActivity(new
+				// Intent("com.liveclips.nfl.activity.GameActivity"));
+				break;
 			}
 
 		}

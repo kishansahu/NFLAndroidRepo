@@ -38,6 +38,8 @@
         android:id="@+id/globalNavigationListView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/menuHeader" />
+        android:layout_below="@+id/menuHeader"
+        android:focusable="true"
+         />
 
 </RelativeLayout> <!-- #00FF00 -->

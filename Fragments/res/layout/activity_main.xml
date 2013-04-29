@@ -1,13 +1,18 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal" >
 
-    <fragment
-        
-        android:id="@+id/mainMenuFragment"
-        android:name="com.liveclips.nfl.fragment.MainMenuFragment"
+    <ImageView
+        android:id="@+id/allteams"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/all_team" >
+    </ImageView>
+
+    <FrameLayout
+        android:id="@+id/menuFragment"
         android:layout_width="300dp"
         android:layout_height="match_parent" />
 

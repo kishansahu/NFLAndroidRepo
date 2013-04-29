@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -13,6 +14,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -20,20 +22,19 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.MediaController;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,13 +47,13 @@ import com.liveclips.nfl.adapter.ScheduleListViewAdapter;
 import com.liveclips.nfl.adapter.SeparatedListAdapter;
 import com.liveclips.nfl.adapter.StatsListViewAdapter;
 import com.liveclips.nfl.fragment.MainMenuFragment;
-import com.liveclips.nfl.fragment.TopicMenuFragment;
 import com.liveclips.nfl.model.DriveItem;
 import com.liveclips.nfl.model.PlayerItem;
 import com.liveclips.nfl.model.ScheduleItem;
 import com.liveclips.nfl.model.StatsItem;
 import com.liveclips.nfl.popover.PopoverView;
 import com.liveclips.nfl.popover.PopoverView.PopoverViewDelegate;
+import com.liveclips.nfl.utils.DownloadImagesThreadPool;
 import com.liveclips.nfl.utils.NflUtils;
 
 public class GameActivity extends Activity implements PopoverViewDelegate {
@@ -61,7 +62,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 	FragmentManager fragmentManager;
 	Fragment mainMenuFragment;
 	FragmentTransaction ft;
-	ImageButton sliderButton;
+	View sliderView ;
 	ImageButton closeButtonHeader;
 	TextView headerTextView;
 	boolean showSlider;
@@ -78,7 +79,8 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 	TextView team1BtnPlayers;
 	TextView team2BtnPlayers;
 	LayoutInflater layoutInflater;
-	Context context;
+	View menuHeaderView;
+	View patriotHeaderView;
 	int playCardVideoId = 0;
 	DownloadImageTask downloadImageTask;
 
@@ -90,11 +92,12 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		//playCardVideoView = new VideoView(this);
 		context = this;
 		fragmentManager = getFragmentManager();
-		ft = fragmentManager.beginTransaction();
-		mainMenuFragment = new TopicMenuFragment();
-		ft.add(R.id.menuFragment, mainMenuFragment);
-
-		ft.commit();
+		/*
+		 * ft = fragmentManager.beginTransaction(); mainMenuFragment = new
+		 * TopicMenuFragment(); ft.add(R.id.menuFragment, mainMenuFragment);
+		 * 
+		 * ft.commit();
+		 */
 
 		/*
 		 * headerTextView = (TextView) findViewById(R.id.menuHeader);
@@ -189,101 +192,212 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 	@Override
 	protected void onResume() {
 
+		/*
+		 * headerTextView = (TextView)
+		 * mainMenuFragment.getView().findViewById(R.id.menuHeader);
+		 * headerTextView.setText("LiveClips"); closeButtonHeader =
+		 * (ImageButton)
+		 * mainMenuFragment.getView().findViewById(R.id.closeButtonHeader);
+		 * closeButtonHeader.setVisibility(View.VISIBLE);
+		 * closeButtonHeader.setOnClickListener(closeButtonListener);
+		 */
+		super.onResume();
+	}
 
-		headerTextView = (TextView) mainMenuFragment.getView().findViewById(R.id.menuHeader);
-		headerTextView.setText("LiveClips");
-		closeButtonHeader = (ImageButton) mainMenuFragment.getView().findViewById(R.id.closeButtonHeader);
-		closeButtonHeader.setVisibility(View.VISIBLE);
-		closeButtonHeader.setOnClickListener(closeButtonListener);
+	/*
+	 * @Override public boolean onCreateOptionsMenu(Menu menu) { MenuInflater
+	 * inflater = getMenuInflater();
+	 * inflater.inflate(R.menu.game_menu_actionbar, menu); return true; }
+	 */
+
+	@Override
+	protected void onStart() {
 		super.onStart();
+		ActionBar actionBar = getActionBar();
+		View mActionBarView = getLayoutInflater().inflate(
+				R.layout.patriots_actionbar_layout, null);
+		actionBar.setCustomView(mActionBarView);
+		actionBar.setBackgroundDrawable(new ColorDrawable(0xFFFF8B1D));
+		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+		menuHeaderView = mActionBarView.findViewById(R.id.menuHeader);
+		patriotHeaderView = mActionBarView.findViewById(R.id.patriotHeader);
+		sliderView = mActionBarView.findViewById(R.id.sliderView);
+		sliderView.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				performSliderAction();
+
+			}
+		});
+
+		View closeButtonView = mActionBarView
+				.findViewById(R.id.closeButtonHeader);
+		closeButtonView.setOnClickListener(closeButtonListener);
+
+		View scheduleView = mActionBarView.findViewById(R.id.scheduleView);
+		scheduleView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				RelativeLayout rootView = (RelativeLayout) findViewById(R.id.gameRootView);
+				if (popoverView != null) {
+					popoverView.removeAllViews();
+				}
+				popoverView = new PopoverView(GameActivity.this,
+						R.layout.popover_game_schedule_view);
+
+				popoverView.setContentSizeForViewInPopover(new Point(320, 400));
+				popoverView.setDelegate(GameActivity.this);
+				View button = (View) findViewById(R.id.scheduleView);
+				popoverView.showPopoverFromRectInViewGroup(rootView,
+						PopoverView.getFrameForView(button),
+						PopoverView.PopoverArrowDirectionUp, true);
+
+			}
+		});
+
+		View statusView = mActionBarView.findViewById(R.id.statsView);
+		statusView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				RelativeLayout rootView = (RelativeLayout) findViewById(R.id.gameRootView);
+				if (popoverView != null) {
+					popoverView.removeAllViews();
+				}
+				popoverView = new PopoverView(GameActivity.this,
+						R.layout.popover_game_stats_view);
+
+				popoverView.setContentSizeForViewInPopover(new Point(320, 400));
+				popoverView.setDelegate(GameActivity.this);
+				View button = (View) findViewById(R.id.statsView);
+				popoverView.showPopoverFromRectInViewGroup(rootView,
+						PopoverView.getFrameForView(button),
+						PopoverView.PopoverArrowDirectionUp, true);
+
+			}
+		});
+
+		View drivesView = mActionBarView.findViewById(R.id.drivesView);
+		drivesView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				RelativeLayout rootView = (RelativeLayout) findViewById(R.id.gameRootView);
+				if (popoverView != null) {
+					popoverView.removeAllViews();
+				}
+				popoverView = new PopoverView(GameActivity.this,
+						R.layout.popover_game_drives_view);
+
+				popoverView.setContentSizeForViewInPopover(new Point(320, 400));
+				popoverView.setDelegate(GameActivity.this);
+				View button = (View) findViewById(R.id.drivesView);
+				popoverView.showPopoverFromRectInViewGroup(rootView,
+						PopoverView.getFrameForView(button),
+						PopoverView.PopoverArrowDirectionUp, true);
+
+			}
+		});
+
+		View playersView = mActionBarView.findViewById(R.id.playersView);
+		playersView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				RelativeLayout rootView = (RelativeLayout) findViewById(R.id.gameRootView);
+				if (popoverView != null) {
+					popoverView.removeAllViews();
+				}
+				popoverView = new PopoverView(GameActivity.this,
+						R.layout.popover_game_player_view);
+
+				popoverView.setContentSizeForViewInPopover(new Point(320, 400));
+				popoverView.setDelegate(GameActivity.this);
+				View button = (View) findViewById(R.id.playersView);
+				popoverView.showPopoverFromRectInViewGroup(rootView,
+						PopoverView.getFrameForView(button),
+						PopoverView.PopoverArrowDirectionUp, true);
+
+			}
+		});
+
+		Button alertButton = (Button) mActionBarView
+				.findViewById(R.id.alertButton);
+		alertButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Log.d("alert", "alert");
+
+			}
+		});
+
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.game_menu_actionbar, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle item selection
-		switch (item.getItemId()) {
-		case R.id.sliderButton:
-			performSliderAction();
-			return true;
-		case R.id.game_schedule_menu:
-			RelativeLayout rootView = (RelativeLayout) findViewById(R.id.gameRootView);
-			if (popoverView != null) {
-				popoverView.removeAllViews();
-			}
-			popoverView = new PopoverView(this,
-					R.layout.popover_game_schedule_view);
-
-			popoverView.setContentSizeForViewInPopover(new Point(320, 400));
-			popoverView.setDelegate(this);
-			View button = (View) findViewById(R.id.game_schedule_menu);
-			popoverView.showPopoverFromRectInViewGroup(rootView,
-					PopoverView.getFrameForView(button),
-					PopoverView.PopoverArrowDirectionUp, true);
-			return super.onOptionsItemSelected(item);
-			/*
-			 * case R.id.help: showHelp(); return true;
-			 */
-		case R.id.game_drives_menu:
-			rootView = (RelativeLayout) findViewById(R.id.gameRootView);
-			if (popoverView != null) {
-				popoverView.removeAllViews();
-			}
-			popoverView = new PopoverView(this,
-					R.layout.popover_game_drives_view);
-
-			popoverView.setContentSizeForViewInPopover(new Point(320, 400));
-			popoverView.setDelegate(this);
-			button = (View) findViewById(R.id.game_drives_menu);
-			popoverView.showPopoverFromRectInViewGroup(rootView,
-					PopoverView.getFrameForView(button),
-					PopoverView.PopoverArrowDirectionUp, true);
-
-			return super.onOptionsItemSelected(item);
-
-		case R.id.game_stats_menu:
-
-			rootView = (RelativeLayout) findViewById(R.id.gameRootView);
-			if (popoverView != null) {
-				popoverView.removeAllViews();
-			}
-			popoverView = new PopoverView(this,
-					R.layout.popover_game_stats_view);
-
-			popoverView.setContentSizeForViewInPopover(new Point(320, 400));
-			popoverView.setDelegate(this);
-			button = (View) findViewById(R.id.game_stats_menu);
-			popoverView.showPopoverFromRectInViewGroup(rootView,
-					PopoverView.getFrameForView(button),
-					PopoverView.PopoverArrowDirectionUp, true);
-			return super.onOptionsItemSelected(item);
-
-		case R.id.game_players_menu:
-			rootView = (RelativeLayout) findViewById(R.id.gameRootView);
-			if (popoverView != null) {
-				popoverView.removeAllViews();
-			}
-			popoverView = new PopoverView(this,
-					R.layout.popover_game_player_view);
-
-			popoverView.setContentSizeForViewInPopover(new Point(320, 400));
-			popoverView.setDelegate(this);
-			button = (View) findViewById(R.id.game_players_menu);
-			popoverView.showPopoverFromRectInViewGroup(rootView,
-					PopoverView.getFrameForView(button),
-					PopoverView.PopoverArrowDirectionUp, true);
-
-			return super.onOptionsItemSelected(item);
-
-		}
-		return super.onOptionsItemSelected(item);
-	}
+	/*
+	 * @Override public boolean onOptionsItemSelected(MenuItem item) { // Handle
+	 * item selection switch (item.getItemId()) { case R.id.sliderButton: //
+	 * performSliderAction(); shrinkScoreBanner(); return true; case
+	 * R.id.game_schedule_menu: RelativeLayout rootView = (RelativeLayout)
+	 * findViewById(R.id.gameRootView); if (popoverView != null) {
+	 * popoverView.removeAllViews(); } popoverView = new PopoverView(this,
+	 * R.layout.popover_game_schedule_view);
+	 * 
+	 * popoverView.setContentSizeForViewInPopover(new Point(320, 400));
+	 * popoverView.setDelegate(this); View button = (View)
+	 * findViewById(R.id.game_schedule_menu);
+	 * popoverView.showPopoverFromRectInViewGroup(rootView,
+	 * PopoverView.getFrameForView(button), PopoverView.PopoverArrowDirectionUp,
+	 * true); return super.onOptionsItemSelected(item);
+	 * 
+	 * case R.id.help: showHelp(); return true;
+	 * 
+	 * case R.id.game_drives_menu: rootView = (RelativeLayout)
+	 * findViewById(R.id.gameRootView); if (popoverView != null) {
+	 * popoverView.removeAllViews(); } popoverView = new PopoverView(this,
+	 * R.layout.popover_game_drives_view);
+	 * 
+	 * popoverView.setContentSizeForViewInPopover(new Point(320, 400));
+	 * popoverView.setDelegate(this); button = (View)
+	 * findViewById(R.id.game_drives_menu);
+	 * popoverView.showPopoverFromRectInViewGroup(rootView,
+	 * PopoverView.getFrameForView(button), PopoverView.PopoverArrowDirectionUp,
+	 * true);
+	 * 
+	 * return super.onOptionsItemSelected(item);
+	 * 
+	 * case R.id.game_stats_menu:
+	 * 
+	 * rootView = (RelativeLayout) findViewById(R.id.gameRootView); if
+	 * (popoverView != null) { popoverView.removeAllViews(); } popoverView = new
+	 * PopoverView(this, R.layout.popover_game_stats_view);
+	 * 
+	 * popoverView.setContentSizeForViewInPopover(new Point(320, 400));
+	 * popoverView.setDelegate(this); button = (View)
+	 * findViewById(R.id.game_stats_menu);
+	 * popoverView.showPopoverFromRectInViewGroup(rootView,
+	 * PopoverView.getFrameForView(button), PopoverView.PopoverArrowDirectionUp,
+	 * true); return super.onOptionsItemSelected(item);
+	 * 
+	 * case R.id.game_players_menu: rootView = (RelativeLayout)
+	 * findViewById(R.id.gameRootView); if (popoverView != null) {
+	 * popoverView.removeAllViews(); } popoverView = new PopoverView(this,
+	 * R.layout.popover_game_player_view);
+	 * 
+	 * popoverView.setContentSizeForViewInPopover(new Point(320, 400));
+	 * popoverView.setDelegate(this); button = (View)
+	 * findViewById(R.id.game_players_menu);
+	 * popoverView.showPopoverFromRectInViewGroup(rootView,
+	 * PopoverView.getFrameForView(button), PopoverView.PopoverArrowDirectionUp,
+	 * true);
+	 * 
+	 * return super.onOptionsItemSelected(item);
+	 * 
+	 * } return super.onOptionsItemSelected(item); }
+	 */
 
 	@Override
 	public void popoverViewWillShow(PopoverView view) {
@@ -718,7 +832,14 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 
 		ft.replace(R.id.menuFragment, mainMenuFragment);
 		ft.commit();
-
+		TextView menuTitle = (TextView) menuHeaderView
+				.findViewById(R.id.menuTitle);
+		menuTitle.setText("Menu");
+		ImageView closeBtnImage = (ImageView) menuHeaderView
+				.findViewById(R.id.closeButtonHeader);
+		closeBtnImage.setVisibility(View.INVISIBLE);
+		menuHeaderView.setVisibility(View.VISIBLE);
+		patriotHeaderView.setVisibility(View.INVISIBLE);
 		/*
 		 * ft = fragmentManager.beginTransaction();
 		 *
@@ -748,18 +869,17 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 
 		@Override
 		public void onClick(View v) {
+			Log.d("gameclose", "closeclick");
 			ft = fragmentManager.beginTransaction();
-
+			mainMenuFragment = getFragmentManager().findFragmentById(
+					R.id.menuFragment);
 			if (mainMenuFragment.isVisible()) {
 
 				ft.hide(mainMenuFragment);
 				showSlider = true;
-
-				invalidateOptionsMenu();
-				/*
-				 * Toast.makeText(AppContentActivity.this,
-				 * "button clicked visible", Toast.LENGTH_SHORT) .show();
-				 */
+				menuHeaderView.setVisibility(View.INVISIBLE);
+				sliderView.setVisibility(View.VISIBLE);
+				patriotHeaderView.setVisibility(View.VISIBLE);
 
 			} else {
 
@@ -775,13 +895,11 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 
 	};
 
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		if (showSlider) {
-			menu.getItem(0).setVisible(true);
-			showSlider = false;
-		}
-		return super.onPrepareOptionsMenu(menu);
-	};
+	/*
+	 * public boolean onPrepareOptionsMenu(Menu menu) { if (showSlider) {
+	 * menu.getItem(0).setVisible(true); showSlider = false; } return
+	 * super.onPrepareOptionsMenu(menu); };
+	 */
 
 	private OnClickListener allPlaysClickListener = new OnClickListener() {
 
@@ -925,9 +1043,36 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		playCardBottomDetail
 				.add("Shayne Graham kicks 63-yards from HOU 35 to ATL 2.Jacquizz Rodgers to ATL 20 for 18-yards (3:09 4th)");
 
+		
+		
+		
 		// The parent LinearLayout for playCards
 		LinearLayout playCardParentLinearLayout = (LinearLayout) findViewById(R.id.parentLayoutOfPlayCardsId);
+		
+		DownloadImagesThreadPool downloadImagesThreadPool = new DownloadImagesThreadPool();
 
+		TextView selectedCategoryTextView = (TextView) findViewById(R.id.selectedCategoryTextViewId);
+		selectedCategoryTextView.setText("NEW ENGLAND PATRIOTS");
+		
+		
+		/*RelativeLayout selectedCategoryLayout = new RelativeLayout(context);
+		RelativeLayout.LayoutParams selectedCategoryLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+		selectedCategoryLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+		selectedCategoryLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+		selectedCategoryLayoutParams.setMargins(10, 10, 0, 10);
+		selectedCategoryLayout.setBackgroundColor(getResources().getColor(R.color.green));
+		selectedCategoryLayout.setAlpha(0.5f);
+		selectedCategoryLayout.setLayoutParams(selectedCategoryLayoutParams);
+		playCardParentLinearLayout.addView(selectedCategoryLayout);
+		
+		TextView selectedCategoryTextView = new TextView(context);
+		RelativeLayout.LayoutParams selectedCategoryTextViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		selectedCategoryTextViewLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+		selectedCategoryTextView.setLayoutParams(selectedCategoryTextViewLayoutParams);
+		selectedCategoryTextView.setText("New England Patriots");
+		selectedCategoryLayout.addView(selectedCategoryTextView);*/
+		
+		
 		for (int index = 0; index < 15; index++) {
 
 			/*if((index+1)%3==0){
@@ -942,8 +1087,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 			final RelativeLayout playCardLayout = new RelativeLayout(this);
 
 			// Defining the RelativeLayout layout parameters.
-			RelativeLayout.LayoutParams playCardLayoutParameters = new RelativeLayout.LayoutParams(
-					300, 250);
+			RelativeLayout.LayoutParams playCardLayoutParameters = new RelativeLayout.LayoutParams(500,400);
 			playCardLayoutParameters.addRule(RelativeLayout.CENTER_IN_PARENT);
 			playCardLayoutParameters.setMargins(10, 10, 10, 10);
 
@@ -959,6 +1103,15 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 
 			playCardLayout.setPadding(5, 5, 5, 5);
 
+			//************************************* Adding top and bottom strip ****************************
+			
+			RelativeLayout playCardTopLayout = new RelativeLayout(context);
+			RelativeLayout.LayoutParams playCardTopLayoutParameter = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 50);
+			playCardTopLayout.setLayoutParams(playCardTopLayoutParameter);
+			//playCardTopLayout.setBackgroundColor(getResources().getColor(R.color.white));
+			playCardLayout.addView(playCardTopLayout);
+			
+			
 			// Creating a new topTextView
 			TextView playCardTopTextView = new TextView(this);
 			playCardTopTextView.setText(playCardTopDetail.get(index));
@@ -968,19 +1121,30 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 					RelativeLayout.LayoutParams.WRAP_CONTENT,
 					RelativeLayout.LayoutParams.WRAP_CONTENT);
 			layoutParametersForPlayCardTopTextView
-					.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+					.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+			layoutParametersForPlayCardTopTextView.addRule(RelativeLayout.CENTER_VERTICAL);
 
 			// Setting the parameters on the TextView
 			playCardTopTextView
 					.setLayoutParams(layoutParametersForPlayCardTopTextView);
 
 			// Adding the TextView to the RelativeLayout as a child
-			playCardLayout.addView(playCardTopTextView);
+			playCardTopLayout.addView(playCardTopTextView);
 
+			RatingBar playCardRatingBar = new RatingBar(context);
+			RelativeLayout.LayoutParams ratingBarLayoutParameter = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+			ratingBarLayoutParameter.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+			ratingBarLayoutParameter.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+				
+			playCardRatingBar.setMax(5);
+			playCardRatingBar.setRating(3);
+			playCardRatingBar.setNumStars(5);
+			playCardRatingBar.setLayoutParams(ratingBarLayoutParameter);
+			playCardTopLayout.addView(playCardRatingBar);
 
 
 			final ImageView playCardImageView = new ImageView(this);
-			RelativeLayout.LayoutParams layoutParameterForPlayCardImageView = new RelativeLayout.LayoutParams(250, 150);
+			RelativeLayout.LayoutParams layoutParameterForPlayCardImageView = new RelativeLayout.LayoutParams(450, 250);
 			layoutParameterForPlayCardImageView.addRule(RelativeLayout.CENTER_IN_PARENT);
 			//playCardImageView.setVisibility(View.VISIBLE);
 			playCardImageView.setLayoutParams(layoutParameterForPlayCardImageView);
@@ -999,10 +1163,11 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
                             .permitAll().build();
             StrictMode.setThreadPolicy(policy);
             // End Handling NetworkOnMainThreadException
-            downloadImageTask = new DownloadImageTask(playCardImageView);//.execute("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg");
+         //   downloadImageTask = new DownloadImageTask(playCardImageView);//.execute("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg");
 
-            downloadImageTask.execute("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg");
+            //downloadImageTask.execute("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg");
 
+            //downloadImagesThreadPool.submit(playCardImageView, "http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg");
 
 
 			playCardLayout.addView(playCardImageView);
@@ -1022,7 +1187,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 					playCardVideoView = new VideoView(context);
 					playCardLayout.addView(playCardVideoView);
 					// Defining the layout parameters of the VideoView
-					RelativeLayout.LayoutParams layoutParametersForPlayCardVideoView = new RelativeLayout.LayoutParams(250, 150);
+					RelativeLayout.LayoutParams layoutParametersForPlayCardVideoView = new RelativeLayout.LayoutParams(450, 250);
 					layoutParametersForPlayCardVideoView.addRule(RelativeLayout.CENTER_IN_PARENT);
 					//RelativeLayout.LayoutParams layoutParametersForPlayCardVideoView = new RelativeLayout.LayoutParams(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 					playCardVideoView.setId(playCardVideoId++);
@@ -1082,7 +1247,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 
 	}
 
-	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+	public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 	    ImageView bmImage;
 
 	    public DownloadImageTask(ImageView bmImage) {
