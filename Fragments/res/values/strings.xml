@@ -15,6 +15,8 @@
 	<string name="game_status_title">STATUS</string>
 	<string name="game_players_title">PLAYERS</string>
 	<string name="actionbar_color">0xff9ACC00</string>
+	<string name="emptyMyPlayersFirstLabelText">Watch all of the plays from your favorite players</string>
+	<string name="emptyMyPlayersSecondLabelText">To track your favorite players, tap here</string>
 	
 	 <string-array name="item_arrays">
         <item>Patriot</item>

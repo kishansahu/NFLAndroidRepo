@@ -1,23 +1,20 @@
 package com.liveclips.nfl.activity;
 
-import com.liveclips.nfl.R;
-import com.liveclips.nfl.fragment.MainMenuFragment;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Spinner;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.liveclips.nfl.R;
+import com.liveclips.nfl.fragment.MainMenuFragment;
 
 public class PlayersActivity extends Activity {
 
@@ -30,6 +27,7 @@ public class PlayersActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_players);
 		fragmentManager = getFragmentManager();
+
 	}
 
 	/*
@@ -54,6 +52,36 @@ public class PlayersActivity extends Activity {
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 
 		View sliderView = mActionBarView.findViewById(R.id.sliderView);
+		String[] playersName = { /*"Amit", "Kishan", "Ram", "Shankar", "Nitesh","mohit" */};
+
+		/**
+		 * include a xml multiple time in a parent xml
+		 */
+
+		LinearLayout wrapper = (LinearLayout) findViewById(R.id.myPlayersContainer);
+		LinearLayout inflatedView;
+
+		if (playersName.length != 0) {
+			int i;
+			for (i = 0; i < playersName.length; i++) {
+
+				inflatedView = (LinearLayout) View.inflate(this,
+						R.layout.players_detail, null);
+				((TextView) inflatedView
+						.findViewById(R.id.myindividualPlayerName))
+						.setText(playersName[i]);
+				wrapper.addView(inflatedView);
+
+			}
+		} else {
+			ImageView allMyPlayersIcon = (ImageView) findViewById(R.id.allmyplayersIcon);
+			allMyPlayersIcon.setVisibility(View.GONE);
+			inflatedView = (LinearLayout) View.inflate(this,
+					R.layout.empty_myplayers_banner, null);
+			wrapper.addView(inflatedView);
+
+		}
+
 		sliderView.setOnClickListener(new View.OnClickListener() {
 
 			@Override

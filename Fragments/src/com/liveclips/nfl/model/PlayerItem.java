@@ -10,12 +10,12 @@ public class PlayerItem {
 		this.playerName = playerName;
 	}
 
-	public String getPlayerNumber() {
-		return playerNumber;
+	public String getplayerDetails() {
+		return playerDetails;
 	}
 
-	public void setPlayerNumber(String playerNumber) {
-		this.playerNumber = playerNumber;
+	public void setplayerDetails(String playerDetails) {
+		this.playerDetails = playerDetails;
 	}
 
 	public int getPlayerImage() {
@@ -59,7 +59,7 @@ public class PlayerItem {
 	}
 
 	public String playerName;
-	public String playerNumber;
+	public String playerDetails;
 	public int playerImage;
 	public String playerdata1;
 	public String playerdata2;
@@ -70,12 +70,12 @@ public class PlayerItem {
 
 	}
 
-	public PlayerItem(String playerName, String playerNumber, int playerImage,
+	public PlayerItem(String playerName, String playerDetails, int playerImage,
 			String playerdata1, String playerdata2, String playerdata3,
 			String playerdata4) {
 		super();
 		this.playerName = playerName;
-		this.playerNumber = playerNumber;
+		this.playerDetails = playerDetails;
 		this.playerImage = playerImage;
 		this.playerdata1 = playerdata1;
 		this.playerdata2 = playerdata2;
