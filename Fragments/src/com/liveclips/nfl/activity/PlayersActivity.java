@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -47,15 +48,18 @@ public class PlayersActivity extends Activity {
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 
 		View sliderView = mActionBarView.findViewById(R.id.sliderView);
-		String[] playersName = { };
-
+		String[] playersName = { "Tom Brady", "Rob Gronkowski"};
+		String[] playersDetails = { "#12 | QB", "#87 | TE"};
+		String[] playerGameDetails = { "20 / 29, 268 YDS,2 TD, 1 INT", "5 REC, 56 YDS, 2 TD"};
+		int[] playerPic = {R.drawable.tom_brady, R.drawable.rob_gronkowski};
+		 
 		/**
 		 * include a xml multiple time in a parent xml
 		 */
 
 		LinearLayout wrapper = (LinearLayout) findViewById(R.id.myPlayersContainer);
 		LinearLayout inflatedView;
-
+		
 		if (playersName.length != 0) {
 			int i;
 			for (i = 0; i < playersName.length; i++) {
@@ -65,6 +69,15 @@ public class PlayersActivity extends Activity {
 				((TextView) inflatedView
 						.findViewById(R.id.myindividualPlayerName))
 						.setText(playersName[i]);
+				((TextView) inflatedView
+						.findViewById(R.id.myindividualPlayerDetails))
+						.setText(playersDetails[i]);
+				((TextView) inflatedView
+						.findViewById(R.id.myindividualPlayerGameDetails))
+						.setText(playerGameDetails[i]);
+				((ImageView) inflatedView
+						.findViewById(R.id.myindividualPlayerPic))
+						.setImageResource(playerPic[i]);
 				wrapper.addView(inflatedView);
 
 			}

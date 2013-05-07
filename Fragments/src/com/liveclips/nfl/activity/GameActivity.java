@@ -345,25 +345,23 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 
 		if (teamName.equals("team1") && teamType.equals("offensive")) {
 			final List<PlayerItem> offensivePlayerList = new ArrayList<PlayerItem>();
-			String offensivePlayerNamesForTeam1[] = { "Tom Brady",
-					"Stevan Ridley", "Wes Welker", "Rob Gronkowski",
-					"Brandon Lloyd" };
-			String offensivePlayerNumbersForTeam1[] = { "#12 | QB", "#22 | RB",
-					"#83 | WR", "#87 | TE", "#43 | QB" };
+			String offensivePlayerNamesForTeam1[] = { "Graham Harrell",
+					"Alex Green", "Randall Cobb", "Andrew Quarless"
+					 };
+			String offensivePlayerNumbersForTeam1[] = { "#6 | QB", "#20 | RB",
+					"#83 | WR", "#87 | TE" };
 			String offensivePlayerData1ForTeam1[] = { "20/29", "11 CAR",
-					"9 REC", "8 REC", "7 REC" };
+					"9 REC", "8 REC" };
 			String offensivePlayerData2ForTeam1[] = { "329 YDS", "64 YDS",
-					"53 YDS", "89 YDS", "38 YDS" };
+					"53 YDS", "89 YDS" };
 			String offensivePlayerData3ForTeam1[] = { "2 TD", "1 TD", "0 TD",
-					"1 TD", "0 TD" };
+					"1 TD"};
 
-			int offensivPlayerImagesForTeam1[] = { R.drawable.brandonspikes,
-					R.drawable.stevan_ridley, R.drawable.wes_welker,
-					R.drawable.rob_gronkowski, R.drawable.stevan_ridley };
+			int offensivPlayerImagesForTeam1[] = { R.drawable.graham_herrell,
+					R.drawable.alex_green, R.drawable.randall_cobb,
+					R.drawable.andrew_quarless };
 
-			PlayerItem item = new PlayerItem("Tom Brady", "#12/QB",
-					R.drawable.tom_brady, "20/29", "329 YDS", "2TD", "1 NT");
-			offensivePlayerList.add(item);
+			PlayerItem item ;
 
 			for (int i = 0; i < offensivePlayerNamesForTeam1.length; i++) {
 				item = new PlayerItem();
@@ -379,8 +377,8 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 			playerList = offensivePlayerList;
 		} else if (teamName.equals("team1") && teamType.equals("defensive")) {
 			final List<PlayerItem> defensivePlayerList = new ArrayList<PlayerItem>();
-			String defensivePlayerNamesForTeam1[] = { "Jake Bequette",
-					"Vince Wilfork", "Rob Ninkovich" };
+			String defensivePlayerNamesForTeam1[] = { "Mike Daniels",
+					"Josh Bell", "Johnny Jolly" };
 			String defensivePlayerNumbersForTeam1[] = { "#92 | DE", "#75 | DT",
 					"#50 | DL" };
 			String defensivePlayerData1ForTeam1[] = { "20/29", "11 CAR",
@@ -389,8 +387,8 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 					"53 YDS" };
 			String defensivePlayerData3ForTeam1[] = { "2 TD", "1 TD", "0 TD" };
 
-			int defensivePlayerImages[] = { R.drawable.jake, R.drawable.vince,
-					R.drawable.brandonspikes };
+			int defensivePlayerImages[] = { R.drawable.mike_daniel, R.drawable.bell_josh,
+					R.drawable.johnny_jolly };
 
 			PlayerItem item = new PlayerItem();
 
@@ -407,22 +405,20 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 			playerList = defensivePlayerList;
 		} else if (teamName.equals("team2") && teamType.equals("offensive")) {
 			final List<PlayerItem> offensivePlayerList = new ArrayList<PlayerItem>();
-			String offensivePlayerNamesForTeam1[] = { "Jordan Miller",
-					"Casey Hayward", "Brad Jones" };
-			String offensivePlayerNumbersForTeam1[] = { "#91 | DT", "#29 | CB",
-					"#59 | LB", "#87 | TE", "#43 | QB" };
-			String offensivePlayerData1ForTeam1[] = { "11 CAR", "9 REC",
+			String offensivePlayerNamesForTeam1[] = { "Tom Brady",
+					"Stevan Ridley", "Wes Welker" };
+			String offensivePlayerNumbersForTeam1[] = { "#91 | QB", "#22 | RB",
+					"#83 | WR", "#87 | TE", "#43 | QB" };
+			String offensivePlayerData1ForTeam1[] = { "20/29", "11 CAR",
 					"8 REC" };
 			String offensivePlayerData2ForTeam1[] = { "64 YDS", "53 YDS",
 					"89 YDS" };
 			String offensivePlayerData3ForTeam1[] = { "0 TD", "0 TD", "1 TD" };
 
-			int offensivPlayerImagesForTeam1[] = { R.drawable.jorden_miller,
-					R.drawable.casey_hayward, R.drawable.brad_jones };
+			int offensivPlayerImagesForTeam1[] = { R.drawable.tom_brady,
+					R.drawable.stevan_ridley, R.drawable.wes_welker };
 
-			PlayerItem item = new PlayerItem("Mike Daniels", "#76 | DE",
-					R.drawable.mike_daniel, "20/29", "329 YDS", "2TD", "1 NT");
-			offensivePlayerList.add(item);
+			PlayerItem item;
 
 			for (int i = 0; i < offensivePlayerNamesForTeam1.length; i++) {
 				item = new PlayerItem();
@@ -449,7 +445,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 			String defensivePlayerData3ForTeam1[] = { "2 TD", "1 TD", "0 TD" };
 
 			int defensivePlayerImages[] = { R.drawable.jake, R.drawable.vince,
-					R.drawable.brandonspikes };
+					R.drawable.rob_ninkovich };
 
 			PlayerItem item = new PlayerItem();
 
@@ -620,7 +616,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 					"Red Zone Efficiency", "Turnovers" };
 			String[] teamStatsScore1 = { "21", "232", "248", "3", "6/13",
 					"2/3", "2" };
-			String[] teamStatsScore2 = { "21", "232", "248", "3", "6/13",
+			String[] teamStatsScore2 = { "21", "22", "108", "3", "6/13",
 					"2/3", "2" };
 
 			String[] keyPlaysStatstype = { "Long Passes", "Long Rushes",
@@ -791,6 +787,12 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 					
 					TextView selectedPlayerGameDetailsIndexFour = (TextView) findViewById(R.id.selectedPlayerGameDetailsIndexFour);
 					selectedPlayerGameDetailsIndexFour.setText(popoverPlayerData4.getText());
+					
+					ImageView popover_player_pic= (ImageView)arg1.findViewById(R.id.popover_player_pic);
+					
+					ImageView selectedPlayerPic= (ImageView) findViewById(R.id.selectedPlayerPic);
+					selectedPlayerPic.setImageDrawable(popover_player_pic.getDrawable());
+					
 					popoverView.removeAllViews();
 				}
 			});

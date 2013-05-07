@@ -353,7 +353,7 @@
                     </TextView>
                 </LinearLayout>
 
-                <LinearLayout
+               <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -406,7 +406,7 @@
                         android:text="1 INT"
                         android:textSize="18dp" >
                     </TextView>
-                </LinearLayout>
+                </LinearLayout> 
             </RelativeLayout>
         </LinearLayout>
 
