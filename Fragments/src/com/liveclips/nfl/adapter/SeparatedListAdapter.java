@@ -23,6 +23,17 @@ public class SeparatedListAdapter extends BaseAdapter {
 				R.layout.popover_section_header);
 	}
 
+	public SeparatedListAdapter(Context context, boolean header) {
+		if (!header) {
+			headers = new ArrayAdapter<String>(context,
+					R.layout.popover_section_empty_header);
+		} else {
+			headers = new ArrayAdapter<String>(context,
+					R.layout.popover_section_header);
+		}
+
+	}
+
 	public void addSection(String section, Adapter adapter) {
 		this.headers.add(section);
 		this.sections.put(section, adapter);

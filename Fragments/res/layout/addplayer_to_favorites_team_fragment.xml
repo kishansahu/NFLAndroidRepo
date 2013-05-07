@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <View
+        android:id="@+id/lineView"
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="#000000" >
+    </View>
+
+    <RelativeLayout
+        android:id="@+id/playerAddToFavMenuHeader"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp" >
+
+        <Button
+            android:id="@+id/backToPlayerCategoryFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/blue"
+            android:text="&lt;&lt; Back"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/addPlayerDetailsMenuTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/backToPlayerCategoryFragment"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="3dp"
+            android:text="Patriots"
+            android:textSize="21sp"
+            android:textStyle="bold" >
+        </TextView>
+
+        <Button
+            android:id="@+id/playerAddToFavDoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/addPlayerDetailsMenuTitle"
+            android:background="@color/blue"
+            android:text="Done"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/playerMenuHeaderBottom"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/playerAddToFavMenuHeader"
+        android:layout_margin="2dp"
+        android:background="@color/grey" />
+
+    <RelativeLayout
+        android:id="@+id/playerDetailTabToAddInFavourite"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/playerMenuHeaderBottom" >
+
+        <TextView
+            android:id="@+id/playerFavinAddInFavouriteBanner"
+            android:layout_width="32dp"
+            android:layout_height="30dp"
+            android:background="@drawable/border"
+            android:gravity="center"
+            android:text="FAV" />
+
+        <RelativeLayout
+            android:id="@+id/playerNameinAddInFavouriteBanner"
+            android:layout_width="170dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/playerFavinAddInFavouriteBanner"
+            android:background="@drawable/border" >
+
+            <TextView
+                android:id="@+id/playerNameSubheaderinAddInFavouriteBanner"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="NAME" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/playerNameSubheaderinAddInFavouriteBanner"
+                android:src="@drawable/icon_popover_arrow_down" />
+        </RelativeLayout>
+
+       
+        <TextView
+            android:id="@+id/playerNuminAddInFavouriteBanner"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/playerNameinAddInFavouriteBanner"
+            android:background="@drawable/border"
+            android:gravity="center"
+            android:text="#" />
+
+        <TextView
+            android:id="@+id/playerPosinAddInFavouriteBanner"
+            android:layout_width="56dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/playerNuminAddInFavouriteBanner"
+            android:background="@drawable/border"
+            android:gravity="center"
+            android:text="POS" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/addPlayersToFavListView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/playerDetailTabToAddInFavourite"
+        android:focusable="true" />
+
+</RelativeLayout>

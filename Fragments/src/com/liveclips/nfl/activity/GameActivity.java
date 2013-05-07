@@ -355,7 +355,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 			String offensivePlayerData3ForTeam1[] = { "2 TD", "1 TD", "0 TD",
 					"1 TD", "0 TD" };
 
-			int offensivPlayerImagesForTeam1[] = { R.drawable.tom_brady,
+			int offensivPlayerImagesForTeam1[] = { R.drawable.brandonspikes,
 					R.drawable.stevan_ridley, R.drawable.wes_welker,
 					R.drawable.rob_gronkowski, R.drawable.stevan_ridley };
 
@@ -692,25 +692,27 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 					TextView secondTeamStatYardsScoreLabelInPopUp = (TextView) findViewById(R.id.secondTeamStatYardsScore);
 					secondTeamStatYardsScoreLabelInPopUp.setText(statScore2.getText() + " Yards");
 					
-					String highestScore= NflUtils.getHighestNumber(statScore1.getText().toString(), statScore2.getText().toString());
-					Integer firstTeamBarWidth= NflUtils.getYardsBarWidth(statScore1.getText().toString(), highestScore);
-					Integer secondTeamBarWidth= NflUtils.getYardsBarWidth(statScore2.getText().toString(), highestScore);
+				//	String highestScore= NflUtils.getHighestNumber(statScore1.getText().toString(), statScore2.getText().toString());
+				//	Integer firstTeamBarWidth= NflUtils.getYardsBarWidth(statScore1.getText().toString(), highestScore);
+				//	Integer secondTeamBarWidth= NflUtils.getYardsBarWidth(statScore2.getText().toString(), highestScore);
 					
 					TextView firstTeamStatYardsWidthLabel = (TextView) findViewById(R.id.firstTeamStatYardsWidth);
-					firstTeamStatYardsWidthLabel.setWidth(firstTeamBarWidth);
+					firstTeamStatYardsWidthLabel.setWidth(Integer.parseInt(statScore1.getText().toString()));
 					
 					TextView secondTeamStatYardsWidthLabel = (TextView) findViewById(R.id.secondTeamStatYardsWidth);
-					secondTeamStatYardsWidthLabel.setWidth(secondTeamBarWidth);
+					secondTeamStatYardsWidthLabel.setWidth(Integer.parseInt(statScore2.getText().toString()));
 					
 					
 					TextView statFirstTeamLabel = (TextView) findViewById(R.id.statFirstTeam);
 					TextView firstTeamNameStatYardsCategoryLabel = (TextView) findViewById(R.id.firstTeamNameStatYardsCategory);
-					firstTeamNameStatYardsCategoryLabel.setText(statFirstTeamLabel.getText());
+					//firstTeamNameStatYardsCategoryLabel.setText(statFirstTeamLabel.getText());
+					firstTeamNameStatYardsCategoryLabel.setText("GB");
 					
 					TextView statSecondTeamLabel = (TextView) findViewById(R.id.statSecondTeam);
 					TextView secondTeamNameStatYardsCategoryLabel = (TextView) findViewById(R.id.secondTeamNameStatYardsCategory);
-					secondTeamNameStatYardsCategoryLabel.setText(statSecondTeamLabel.getText());
-
+					//secondTeamNameStatYardsCategoryLabel.setText(statSecondTeamLabel.getText());
+					secondTeamNameStatYardsCategoryLabel.setText("NE");
+					popoverView.removeAllViews();
 				}
 			});
 			listView.setAdapter(adapter);
@@ -787,7 +789,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 					
 					TextView selectedPlayerGameDetailsIndexFour = (TextView) findViewById(R.id.selectedPlayerGameDetailsIndexFour);
 					selectedPlayerGameDetailsIndexFour.setText(popoverPlayerData4.getText());
-					
+					popoverView.removeAllViews();
 				}
 			});
 			

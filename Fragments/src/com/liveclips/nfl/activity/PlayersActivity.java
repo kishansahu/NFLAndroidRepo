@@ -8,18 +8,22 @@ import android.app.FragmentTransaction;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.liveclips.nfl.R;
+import com.liveclips.nfl.fragment.AddPlayersFragment;
 import com.liveclips.nfl.fragment.MainMenuFragment;
 
 public class PlayersActivity extends Activity {
 
 	FragmentManager fragmentManager;
 	Fragment mainMenuFragment;
+	Fragment addPlayersFragment;
 	FragmentTransaction ft;
 
 	@Override
@@ -30,16 +34,7 @@ public class PlayersActivity extends Activity {
 
 	}
 
-	/*
-	 * @Override public boolean onCreateOptionsMenu(Menu menu) { MenuInflater
-	 * inflater = getMenuInflater();
-	 * inflater.inflate(R.menu.players_menu_actionbar, menu); MenuItem menuItem
-	 * = menu.findItem(R.id.spinnerMenuItem); Spinner spinnerMenuItem =
-	 * (Spinner) menuItem.getActionView(); spinnerMenuItem.setSelection(1);
-	 * MenuItem sliderMenuItem = menu.findItem(R.id.sliderButton);
-	 * sliderMenuItem.setVisible(true); return true; }
-	 */
-
+	
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -52,7 +47,7 @@ public class PlayersActivity extends Activity {
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 
 		View sliderView = mActionBarView.findViewById(R.id.sliderView);
-		String[] playersName = { /*"Amit", "Kishan", "Ram", "Shankar", "Nitesh","mohit" */};
+		String[] playersName = { };
 
 		/**
 		 * include a xml multiple time in a parent xml
@@ -82,6 +77,16 @@ public class PlayersActivity extends Activity {
 
 		}
 
+		ImageButton addaplayerButton = (ImageButton) findViewById(R.id.addaplayerButton);
+		addaplayerButton.setOnTouchListener(new View.OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				showAddPlayersFragment();
+				return true;
+			}
+		});
+
 		sliderView.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -90,6 +95,15 @@ public class PlayersActivity extends Activity {
 
 			}
 		});
+
+	}
+
+	public void showAddPlayersFragment() {
+
+		ft = fragmentManager.beginTransaction();
+		addPlayersFragment = new AddPlayersFragment();
+		ft.replace(R.id.menuFragment, addPlayersFragment);
+		ft.commit();
 
 	}
 
