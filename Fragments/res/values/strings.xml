@@ -18,6 +18,7 @@
     <string name="emptyMyPlayersSecondLabelText">To track your favorite players, tap here</string>
     <string name="find_player_hint">Find a player</string>
      <string name="find_player_label">Find a player</string>
+<string name="contentDescription">Text For Content Description</string>
 
     <string-array name="item_arrays">
         <item>Patriot</item>
