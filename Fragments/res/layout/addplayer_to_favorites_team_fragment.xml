@@ -22,12 +22,11 @@
 
         <Button
             android:id="@+id/backToPlayerCategoryFragment"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:background="@color/blue"
-            android:text="&lt;&lt; Back"
+            android:background="@drawable/back_button"
             android:textColor="@color/white"
             android:textStyle="bold"
             />

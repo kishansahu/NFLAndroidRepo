@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -31,7 +32,6 @@ public class AddPlayersFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle saveInstantState) {
-		Log.d("Fragment 1", "onCreateView");
 
 		return inflater.inflate(R.layout.players_by_categories_menu_fragment, container, false);
 	}
@@ -42,6 +42,19 @@ public class AddPlayersFragment extends Fragment {
 		currentActivity = getActivity();
 		findPLayerByCategoryListView = (ListView) getActivity().findViewById(
 				R.id.findPLayerByCategoryListView);
+		
+		Button playerMenuDoneButton = (Button) getActivity().findViewById(R.id.playerMenuDone);
+		playerMenuDoneButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				FragmentManager fragmentManager = getActivity().getFragmentManager();
+				FragmentTransaction ft = fragmentManager.beginTransaction();
+				Fragment frg = fragmentManager.findFragmentById(R.id.menuFragment);
+				ft.hide(frg);
+				ft.commit();
+			}
+		});
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
 				android.R.layout.simple_list_item_1, playersCategoriesMenuItems);
