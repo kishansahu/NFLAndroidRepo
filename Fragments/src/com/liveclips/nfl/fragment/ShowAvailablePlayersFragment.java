@@ -5,11 +5,14 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.liveclips.nfl.R;
@@ -43,6 +46,20 @@ public class ShowAvailablePlayersFragment extends Fragment {
 		addPlayersToFavListView = (ListView) getActivity().findViewById(
 				R.id.addPlayersToFavListView);
 		addPlayersToFavListView.setAdapter(adapter);
+		
+		Button backToPlayerCategoryFragmentButton = (Button) getActivity().findViewById(R.id.backToPlayerCategoryFragment);
+		backToPlayerCategoryFragmentButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				FragmentManager fragmentManager = getFragmentManager();
+				FragmentTransaction ft = fragmentManager.beginTransaction();
+				Fragment addPlayerSelectedCategoryMenuFragment = new AddPlayerSelectedCategoryMenuFragment();
+				ft.replace(R.id.menuFragment, addPlayerSelectedCategoryMenuFragment);
+				ft.commit();
+				
+			}
+		});
 	}
 
 	public List<PlayerItem> getPlayersForAddition(String teamName) {

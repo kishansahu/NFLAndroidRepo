@@ -87,6 +87,7 @@ public class AddPlayerSelectedCategoryMenuFragment extends Fragment {
 		findPLayerByCategoryListView = (ListView) getActivity().findViewById(
 				R.id.findPLayerByCategoryListView);
 
+		/* On click of category specific player selection*/
 		findPLayerByCategoryListView
 				.setOnItemClickListener(new OnItemClickListener() {
 

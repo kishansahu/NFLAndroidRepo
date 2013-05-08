@@ -52,6 +52,10 @@ public class AddPlayersFragment extends Fragment {
 
 	}
 
+	/**
+	 * Category selected to choose player, to add player
+	 */
+	
 	private OnItemClickListener findPLayerByCategoryListViewItemListener = new OnItemClickListener() {
 
 		@Override
