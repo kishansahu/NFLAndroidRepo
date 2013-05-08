@@ -30,7 +30,7 @@ import android.widget.ImageView;
 		 * 
 		 */
 		public DownloadImagesThreadPool() {
-			this.executorService = Executors.newFixedThreadPool(2);
+			this.executorService = Executors.newFixedThreadPool(1);
 			this.completionQueue = new java.util.concurrent.LinkedBlockingQueue<Future<Boolean>>();
 			this.completionService = new ExecutorCompletionService<Boolean>(executorService, completionQueue);
 			

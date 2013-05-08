@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.liveclips.nfl.R;
 import com.liveclips.nfl.fragment.AddPlayersFragment;
 import com.liveclips.nfl.fragment.MainMenuFragment;
+import com.liveclips.nfl.utils.DownloadImagesThreadPool;
 import com.liveclips.nfl.utils.PlayCardView;
 
 public class PlayersActivity extends Activity {
@@ -231,17 +232,17 @@ public class PlayersActivity extends Activity {
 		// The parent LinearLayout for playCards
 		LinearLayout playCardParentLinearLayout = (LinearLayout) findViewById(R.id.parentLayoutOfPlayCardsId);
 
-		// DownloadImagesThreadPool downloadImagesThreadPool = new
-		// DownloadImagesThreadPool();
+		 DownloadImagesThreadPool downloadImagesThreadPool = new
+		 DownloadImagesThreadPool();
 
 		TextView selectedCategoryTextView = (TextView) findViewById(R.id.selectedCategoryTextViewId);
 		selectedCategoryTextView.setText("NEW ENGLAND PATRIOTS");
 
-		for (int index = 0; index < 15; index++) {
+		for (int index = 0; index < 6; index++) {
 
 			playCardParentLinearLayout.addView(getPlayCardView(context, index,
 					playCardTopDetail.get(index),
-					playCardBottomDetail.get(index), getResources()));
+					playCardBottomDetail.get(index), getResources(),downloadImagesThreadPool));
 			View marginView = new View(context);
 			marginView.setLayoutParams(new LayoutParams(20, 0));
 			playCardParentLinearLayout.addView(marginView);
@@ -251,9 +252,9 @@ public class PlayersActivity extends Activity {
 
 	private View getPlayCardView(Context context2, int index,
 			String playCardTopDetail, String playCardBottomDetail,
-			Resources resources) {
+			Resources resources,DownloadImagesThreadPool downloadImagesThreadPool) {
 
 		return new PlayCardView(context2, index, playCardTopDetail,
-				playCardBottomDetail, resources, this).getPlayCard();
+				playCardBottomDetail, resources, this).getPlayCard(downloadImagesThreadPool);
 	}
 }

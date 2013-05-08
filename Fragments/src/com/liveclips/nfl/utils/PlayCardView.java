@@ -61,7 +61,7 @@ public class PlayCardView {
 		this.playCardBottomDetail = playCardBottomDetail;
 	}
 
-	public RelativeLayout getPlayCard() {
+	public RelativeLayout getPlayCard(DownloadImagesThreadPool downloadImagesThreadPool ) {
 
 		// Creating a new RelativeLayout
 		final RelativeLayout playCardLayout = new RelativeLayout(context);
