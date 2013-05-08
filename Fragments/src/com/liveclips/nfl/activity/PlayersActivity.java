@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -241,6 +242,9 @@ public class PlayersActivity extends Activity {
 			playCardParentLinearLayout.addView(getPlayCardView(context, index,
 					playCardTopDetail.get(index),
 					playCardBottomDetail.get(index), getResources()));
+			View marginView = new View(context);
+			marginView.setLayoutParams(new LayoutParams(20, 0));
+			playCardParentLinearLayout.addView(marginView);
 		}
 
 	}
