@@ -17,9 +17,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
@@ -41,9 +43,9 @@ public class PlayCardView {
 	private int index;
 	Resources resources;
 	Activity activity;
-	
-	static RelativeLayout playCardFrontSidePlaySectionVideoViewLayout; 
-	
+
+	static RelativeLayout playCardFrontSidePlaySectionVideoViewLayout;
+
 	public PlayCardView() {
 
 	}
@@ -69,7 +71,8 @@ public class PlayCardView {
 				500, 400);
 		playCardLayoutParameters.addRule(RelativeLayout.CENTER_IN_PARENT);
 		playCardLayoutParameters.setMargins(20, 10, 20, 10);
-		playCardLayout.setId(index * 2 );
+	
+		playCardLayout.setId(index * 2);
 		playCardLayout.setLayoutParams(playCardLayoutParameters);
 
 		if (index % 2 == 0) {
@@ -90,8 +93,9 @@ public class PlayCardView {
 		final RelativeLayout playCardFrontSide = (RelativeLayout) inflator
 				.inflate(R.layout.play_card_front_side, null);
 
-		ImageView playCardFrontSideTopLayoutInfoButton = (ImageView) playCardFrontSide.findViewById(R.id.playCardFrontSideTopLayoutInfoButtonId);
-		
+		ImageView playCardFrontSideTopLayoutInfoButton = (ImageView) playCardFrontSide
+				.findViewById(R.id.playCardFrontSideTopLayoutInfoButtonId);
+
 		playCardFrontSideTopLayoutInfoButton.setId(index * 200);
 		TextView topDetail = (TextView) playCardFrontSide
 				.findViewById(R.id.playCardFrontSideTopLayoutTextViewId);
@@ -107,6 +111,9 @@ public class PlayCardView {
 				.inflate(
 						R.layout.play_card_front_side_play_section_image_with_play_button,
 						null);
+
+		ImageView playCardFrontSidePlaySectionPlayButton = (ImageView) playCardFrontSidePlaySectionImageWithPlayButtonLayout
+				.findViewById(R.id.playCardFrontSidePlaySectionImageWithPlayButtonPlayButtonId);
 
 		ImageView playCardFrontSidePlaySectionImage = (ImageView) playCardFrontSidePlaySectionImageWithPlayButtonLayout
 				.findViewById(R.id.playCardFrontSidePlaySectionImageWithPlayButtonImageViewId);
@@ -128,61 +135,105 @@ public class PlayCardView {
 
 		ImageView playCardBackSideDoneButton = (ImageView) playCardBackSide
 				.findViewById(R.id.playCardBackSideTopLayoutDoneButtonId);
-		
-		TextView playCardBackSideTopLayoutTextView = (TextView) playCardBackSide.findViewById(R.id.playCardBackSideTopLayoutTextViewId);
+
+		TextView playCardBackSideTopLayoutTextView = (TextView) playCardBackSide
+				.findViewById(R.id.playCardBackSideTopLayoutTextViewId);
 		playCardBackSideTopLayoutTextView.setText(playCardTopDetail);
-		
-		
-		TextView playCardBackSideStartAndEndLayoutStartText = (TextView) playCardBackSide.findViewById(R.id.playCardBackSideStartAndEndLayoutStartText);
-		playCardBackSideStartAndEndLayoutStartText.setText("START 2ND & 10,NE 45");
-		
-		TextView playCardBackSideStartAndEndLayoutEndText = (TextView) playCardBackSide.findViewById(R.id.playCardBackSideStartAndEndLayoutEndTextId);
-		playCardBackSideStartAndEndLayoutEndText.setText("END 1ST & GOAL,GB 10");
-		
-		TextView playCardBackSidePlayerCardsLayoutCurrentPlayTextView = (TextView) playCardBackSide.findViewById(R.id.playCardBackSidePlayerCardsLayoutCurrentPlayTextViewId);
-		playCardBackSidePlayerCardsLayoutCurrentPlayTextView.setText("IN THIS PLAY");
-		
-		
-		TextView playCardBackSidePlayerCardsLayoutMorePlayTextView = (TextView) playCardBackSide.findViewById(R.id.playCardBackSidePlayerCardsLayoutMorePlayTextViewId);
+
+		TextView playCardBackSideStartAndEndLayoutStartText = (TextView) playCardBackSide
+				.findViewById(R.id.playCardBackSideStartAndEndLayoutStartText);
+		playCardBackSideStartAndEndLayoutStartText
+				.setText("START 2ND & 10,NE 45");
+
+		TextView playCardBackSideStartAndEndLayoutEndText = (TextView) playCardBackSide
+				.findViewById(R.id.playCardBackSideStartAndEndLayoutEndTextId);
+		playCardBackSideStartAndEndLayoutEndText
+				.setText("END 1ST & GOAL,GB 10");
+
+		TextView playCardBackSidePlayerCardsLayoutCurrentPlayTextView = (TextView) playCardBackSide
+				.findViewById(R.id.playCardBackSidePlayerCardsLayoutCurrentPlayTextViewId);
+		playCardBackSidePlayerCardsLayoutCurrentPlayTextView
+				.setText("IN THIS PLAY");
+
+		TextView playCardBackSidePlayerCardsLayoutMorePlayTextView = (TextView) playCardBackSide
+				.findViewById(R.id.playCardBackSidePlayerCardsLayoutMorePlayTextViewId);
 		playCardBackSidePlayerCardsLayoutMorePlayTextView.setText("MORE PLAYS");
-		
-		TextView playCardBackSideMorePlaysThisDriveTextView = (TextView) playCardBackSide.findViewById(R.id.playCardBackSideMorePlaysThisDriveTextView);
+
+		TextView playCardBackSideMorePlaysThisDriveTextView = (TextView) playCardBackSide
+				.findViewById(R.id.playCardBackSideMorePlaysThisDriveTextView);
 		playCardBackSideMorePlaysThisDriveTextView.setText("THIS DRIVE");
-		
-		TextView playCardBackSideMorePlaysLongPassesTextView = (TextView) playCardBackSide.findViewById(R.id.playCardBackSideMorePlaysLongPassesTextViewId);
+
+		TextView playCardBackSideMorePlaysLongPassesTextView = (TextView) playCardBackSide
+				.findViewById(R.id.playCardBackSideMorePlaysLongPassesTextViewId);
 		playCardBackSideMorePlaysLongPassesTextView.setText("LONG PASSES");
-				
-		TextView playCardBackSideMorePlays1stDownTextView = (TextView) playCardBackSide.findViewById(R.id.playCardBackSideMorePlays1stDownTextViewId);
+
+		TextView playCardBackSideMorePlays1stDownTextView = (TextView) playCardBackSide
+				.findViewById(R.id.playCardBackSideMorePlays1stDownTextViewId);
 		playCardBackSideMorePlays1stDownTextView.setText("1ST DOWN");
+
+		LinearLayout playCardBackSidePlayerCardLayout = (LinearLayout) playCardBackSide
+				.findViewById(R.id.playCardBackSidePlayerCardsLayoutHorizontalScrollViewLinearLayoutId);
 		
-		LinearLayout playCardBackSidePlayerCardLayout = (LinearLayout) playCardBackSide.findViewById(R.id.playCardBackSidePlayerCardsLayoutHorizontalScrollViewLinearLayoutId);
-				
-		int playerPic[] = { R.drawable.tom_brady , R.drawable.stevan_ridley , R.drawable.wes_welker, R.drawable.rob_gronkowski , R.drawable.brad_jones};
-		String playerName[] = {"Tom Brady","Stevan Ridley","Wes Welker","Rob Gronkowski","Brad Jones"};
-		String playerPosition[] = {"#12 | QB","#22 | RB 7REC-","#83 | WR 7REC-","#87 | TR","#59 | LB"};
-		String playerDetail[] = {"YDS , 2TD , 1 INT","83 YDS 0 TD","YDS , 2TD , 1 INT","83 YDS 0 TD","YDS , 2TD , 1 INT"};
+		final HorizontalScrollView playCardsHorizontalScrollView = (HorizontalScrollView) activity.findViewById(R.id.horizontalScrollViewForVideosId);
+		final HorizontalScrollView playerCardsInsidePlayCardHorizontalScrollView = (HorizontalScrollView) playCardBackSide.findViewById(R.id.playCardBackSidePlayerCardsLayoutHorizontalScrollViewId);
 		
+		playCardsHorizontalScrollView.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.v("playCardView","PARENT TOUCH");
+                playerCardsInsidePlayCardHorizontalScrollView.requestDisallowInterceptTouchEvent(false);
+                return false;
+            }
+        });
+		playerCardsInsidePlayCardHorizontalScrollView.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                 Log.v("playCardView","CHILD TOUCH");
+                 //  Disallow the touch request for parent scroll on touch of child view
+                 playCardsHorizontalScrollView.requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
 		
-		for(int i=0;i<5;i++){
+
+		int playerPic[] = { R.drawable.tom_brady, R.drawable.stevan_ridley,
+				R.drawable.wes_welker, R.drawable.rob_gronkowski,
+				R.drawable.brad_jones };
+		String playerName[] = { "Tom Brady", "Stevan Ridley", "Wes Welker",
+				"Rob Gronkowski", "Brad Jones" };
+		String playerPosition[] = { "#12 | QB", "#22 | RB 7REC-",
+				"#83 | WR 7REC-", "#87 | TR", "#59 | LB" };
+		String playerDetail[] = { "YDS , 2TD , 1 INT", "83 YDS 0 TD",
+				"YDS , 2TD , 1 INT", "83 YDS 0 TD", "YDS , 2TD , 1 INT" };
+
+		for (int i = 0; i < 5; i++) {
 			RelativeLayout playCardBackSidePlayerCards = (RelativeLayout) inflator
 					.inflate(R.layout.play_card_back_side_player_card, null);
-			
-			ImageView playCardBackSidePlayerCardLayoutPlayerImageView = (ImageView) playCardBackSidePlayerCards.findViewById(R.id.playCardBackSidePlayerCardLayoutPlayerImageViewId);
-			playCardBackSidePlayerCardLayoutPlayerImageView.setImageResource(playerPic[i]);
-			
-			TextView playCardBackSidePlayerCardLayoutPlayerName = (TextView) playCardBackSidePlayerCards.findViewById(R.id.playCardBackSidePlayerCardLayoutPlayerNameId);
-			playCardBackSidePlayerCardLayoutPlayerName.setText( playerName[i]);
-			
-			TextView playCardBackSidePlayerCardLayoutPlayerInfo = (TextView) playCardBackSidePlayerCards.findViewById(R.id.playCardBackSidePlayerCardLayoutPlayerInfo);
-			playCardBackSidePlayerCardLayoutPlayerInfo.setText(playerPosition[i]);
-			
-			TextView playCardBackSidePlayerCardLayoutPlayerPlayDetail = (TextView) playCardBackSidePlayerCards.findViewById(R.id.playCardBackSidePlayerCardLayoutPlayerPlayDetail);
-			playCardBackSidePlayerCardLayoutPlayerPlayDetail.setText(playerDetail[i]);
-			
-			playCardBackSidePlayerCardLayout.addView(playCardBackSidePlayerCards);
+
+			ImageView playCardBackSidePlayerCardLayoutPlayerImageView = (ImageView) playCardBackSidePlayerCards
+					.findViewById(R.id.playCardBackSidePlayerCardLayoutPlayerImageViewId);
+			playCardBackSidePlayerCardLayoutPlayerImageView
+					.setImageResource(playerPic[i]);
+
+			TextView playCardBackSidePlayerCardLayoutPlayerName = (TextView) playCardBackSidePlayerCards
+					.findViewById(R.id.playCardBackSidePlayerCardLayoutPlayerNameId);
+			playCardBackSidePlayerCardLayoutPlayerName.setText(playerName[i]);
+
+			TextView playCardBackSidePlayerCardLayoutPlayerInfo = (TextView) playCardBackSidePlayerCards
+					.findViewById(R.id.playCardBackSidePlayerCardLayoutPlayerInfo);
+			playCardBackSidePlayerCardLayoutPlayerInfo
+					.setText(playerPosition[i]);
+
+			TextView playCardBackSidePlayerCardLayoutPlayerPlayDetail = (TextView) playCardBackSidePlayerCards
+					.findViewById(R.id.playCardBackSidePlayerCardLayoutPlayerPlayDetail);
+			playCardBackSidePlayerCardLayoutPlayerPlayDetail
+					.setText(playerDetail[i]);
+
+			playCardBackSidePlayerCardLayout
+					.addView(playCardBackSidePlayerCards);
 		}
-		
-		
+
 		playCardFrontSideTopLayoutInfoButton
 				.setOnTouchListener(new OnTouchListener() {
 
@@ -203,30 +254,35 @@ public class PlayCardView {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
+				Animation animation = AnimationUtils.loadAnimation(context,
+						R.anim.alpha);
 				playCardLayout.removeAllViews();
 				playCardLayout.addView(playCardFrontSide);
+				playCardLayout.startAnimation(animation);
+
 				return false;
 			}
 		});
+		
 
-		playCardFrontSidePlaySectionImage
-				.setOnTouchListener(new OnTouchListener() {
+		playCardFrontSidePlaySectionPlayButton.setOnClickListener(new OnClickListener() {
 
 					@Override
-					public boolean onTouch(View v, MotionEvent event) {
-						
+					public void onClick(View v) {
 						playCardFrontSidePlaySectionLayout
 								.removeView(playCardFrontSidePlaySectionImageWithPlayButtonLayout);
-						playCardFrontSidePlaySectionVideoViewLayout=getPlayCardFrontSidePlaySectionVideoLayout();
-						
-						playCardFrontSidePlaySectionLayout.addView(playCardFrontSidePlaySectionVideoViewLayout);
-						
-						return false;
+						playCardFrontSidePlaySectionVideoViewLayout = getPlayCardFrontSidePlaySectionVideoLayout();
+
+						playCardFrontSidePlaySectionLayout
+								.addView(playCardFrontSidePlaySectionVideoViewLayout);
+
 					}
 				});
 
 		return playCardLayout;
 	}
+	
+	
 
 	protected RelativeLayout getPlayCardFrontSidePlaySectionVideoLayout() {
 		final LayoutInflater inflator = (LayoutInflater) activity
@@ -244,6 +300,8 @@ public class PlayCardView {
 
 		playCardFrontSidePlaySectionVideoView.setVideoURI(Uri
 				.parse("http://commonsware.com/misc/test2.3gp"));
+
+		// playCardFrontSidePlaySectionVideoView.setVideoURI(Uri.parse("http://localhost:8080/nflvideo.3gp"));
 		playCardFrontSidePlaySectionVideoView.start();
 
 		return playCardFrontSidePlaySectionVideoLayout;

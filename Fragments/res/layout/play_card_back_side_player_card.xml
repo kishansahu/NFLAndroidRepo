@@ -14,20 +14,24 @@
         android:id="@+id/playCardBackSidePlayerCardLayoutPlayerNameId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/playCardBackSidePlayerCardLayoutPlayerImageViewId" />
+        android:layout_toRightOf="@id/playCardBackSidePlayerCardLayoutPlayerImageViewId" 
+        android:textSize="14sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/playCardBackSidePlayerCardLayoutPlayerInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/playCardBackSidePlayerCardLayoutPlayerNameId"
-        android:layout_toRightOf="@id/playCardBackSidePlayerCardLayoutPlayerImageViewId" />
+        android:layout_toRightOf="@id/playCardBackSidePlayerCardLayoutPlayerImageViewId"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/playCardBackSidePlayerCardLayoutPlayerPlayDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/playCardBackSidePlayerCardLayoutPlayerInfo"
-        android:layout_toRightOf="@id/playCardBackSidePlayerCardLayoutPlayerImageViewId" />
+        android:layout_toRightOf="@id/playCardBackSidePlayerCardLayoutPlayerImageViewId"
+        android:textStyle="bold" />
 
 </RelativeLayout>

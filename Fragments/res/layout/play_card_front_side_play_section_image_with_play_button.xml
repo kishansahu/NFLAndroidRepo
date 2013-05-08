@@ -17,6 +17,7 @@
         android:layout_centerInParent="true"
         android:alpha="0.50"
         android:contentDescription="@string/contentDescription"
-        android:src="@drawable/click_to_play_button" />
+        android:src="@drawable/click_to_play_button" 
+        android:clickable="true"/>
 
 </RelativeLayout>

@@ -26,6 +26,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -1099,6 +1100,9 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 			playCardParentLinearLayout.addView(getPlayCardView(context, index,
 					playCardTopDetail.get(index),
 					playCardBottomDetail.get(index), getResources()));
+			View marginView = new View(context);
+			marginView.setLayoutParams(new LayoutParams(20, 0));
+			playCardParentLinearLayout.addView(marginView);
 		}
 
 	}

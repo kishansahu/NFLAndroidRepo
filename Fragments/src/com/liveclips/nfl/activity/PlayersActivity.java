@@ -1,12 +1,15 @@
 package com.liveclips.nfl.activity;
 
+import java.util.ArrayList;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -19,9 +22,12 @@ import android.widget.TextView;
 import com.liveclips.nfl.R;
 import com.liveclips.nfl.fragment.AddPlayersFragment;
 import com.liveclips.nfl.fragment.MainMenuFragment;
+import com.liveclips.nfl.utils.PlayCardView;
 
 public class PlayersActivity extends Activity {
 
+	protected Context context = PlayersActivity.this;
+	
 	FragmentManager fragmentManager;
 	Fragment mainMenuFragment;
 	Fragment addPlayersFragment;
@@ -32,6 +38,7 @@ public class PlayersActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_players);
 		fragmentManager = getFragmentManager();
+		playCards();
 
 	}
 
@@ -137,5 +144,112 @@ public class PlayersActivity extends Activity {
 			return true;
 		}
 		return false;
+	}
+	
+	private void playCards() {
+
+		ArrayList<String> playCardTopDetail = new ArrayList<String>();
+		playCardTopDetail.add("45-Yard Pass, 1st Down");
+		playCardTopDetail.add("2-Yard Run");
+		playCardTopDetail.add("16-Yard, TouchDown");
+		playCardTopDetail.add("18-Yard, TouchDown");
+		playCardTopDetail.add("45-Yard Pass, 1st Down");
+		playCardTopDetail.add("2-Yard Run");
+		playCardTopDetail.add("16-Yard, TouchDown");
+		playCardTopDetail.add("18-Yard, TouchDown");
+		playCardTopDetail.add("45-Yard Pass, 1st Down");
+		playCardTopDetail.add("2-Yard Run");
+		playCardTopDetail.add("16-Yard, TouchDown");
+		playCardTopDetail.add("18-Yard, TouchDown");
+		playCardTopDetail.add("45-Yard Pass, 1st Down");
+		playCardTopDetail.add("2-Yard Run");
+		playCardTopDetail.add("16-Yard, TouchDown");
+		playCardTopDetail.add("18-Yard, TouchDown");
+		playCardTopDetail.add("45-Yard Pass, 1st Down");
+		playCardTopDetail.add("2-Yard Run");
+		playCardTopDetail.add("16-Yard, TouchDown");
+		playCardTopDetail.add("18-Yard, TouchDown");
+		playCardTopDetail.add("45-Yard Pass, 1st Down");
+		playCardTopDetail.add("2-Yard Run");
+		playCardTopDetail.add("16-Yard, TouchDown");
+		playCardTopDetail.add("18-Yard, TouchDown");
+
+		ArrayList<String> playCardBottomDetail = new ArrayList<String>();
+		playCardBottomDetail
+				.add("Tom Brady pass complete to Wes Welker for 45-yards to the GB 10 for a 1st down (6:38 4th)");
+		playCardBottomDetail
+				.add("Stevan Ridley rush for 2-yards to the NE 45 (6:42 4th)");
+		playCardBottomDetail
+				.add("Arian Foster rush for 16-yards for a TOUCHDOWN (3:17 4th)");
+		playCardBottomDetail
+				.add("Shayne Graham kicks 63-yards from HOU 35 to ATL 2.Jacquizz Rodgers to ATL 20 for 18-yards (3:09 4th)");
+		playCardBottomDetail
+				.add("Tom Brady pass complete to Wes Welker for 45-yards to the GB 10 for a 1st down (6:38 4th)");
+		playCardBottomDetail
+				.add("Stevan Ridley rush for 2-yards to the NE 45 (6:42 4th)");
+		playCardBottomDetail
+				.add("Arian Foster rush for 16-yards for a TOUCHDOWN (3:17 4th)");
+		playCardBottomDetail
+				.add("Shayne Graham kicks 63-yards from HOU 35 to ATL 2.Jacquizz Rodgers to ATL 20 for 18-yards (3:09 4th)");
+		playCardBottomDetail
+				.add("Tom Brady pass complete to Wes Welker for 45-yards to the GB 10 for a 1st down (6:38 4th)");
+		playCardBottomDetail
+				.add("Stevan Ridley rush for 2-yards to the NE 45 (6:42 4th)");
+		playCardBottomDetail
+				.add("Arian Foster rush for 16-yards for a TOUCHDOWN (3:17 4th)");
+		playCardBottomDetail
+				.add("Shayne Graham kicks 63-yards from HOU 35 to ATL 2.Jacquizz Rodgers to ATL 20 for 18-yards (3:09 4th)");
+		playCardBottomDetail
+				.add("Tom Brady pass complete to Wes Welker for 45-yards to the GB 10 for a 1st down (6:38 4th)");
+		playCardBottomDetail
+				.add("Stevan Ridley rush for 2-yards to the NE 45 (6:42 4th)");
+		playCardBottomDetail
+				.add("Arian Foster rush for 16-yards for a TOUCHDOWN (3:17 4th)");
+		playCardBottomDetail
+				.add("Shayne Graham kicks 63-yards from HOU 35 to ATL 2.Jacquizz Rodgers to ATL 20 for 18-yards (3:09 4th)");
+		playCardBottomDetail
+				.add("Tom Brady pass complete to Wes Welker for 45-yards to the GB 10 for a 1st down (6:38 4th)");
+		playCardBottomDetail
+				.add("Stevan Ridley rush for 2-yards to the NE 45 (6:42 4th)");
+		playCardBottomDetail
+				.add("Arian Foster rush for 16-yards for a TOUCHDOWN (3:17 4th)");
+		playCardBottomDetail
+				.add("Shayne Graham kicks 63-yards from HOU 35 to ATL 2.Jacquizz Rodgers to ATL 20 for 18-yards (3:09 4th)");
+		playCardBottomDetail
+				.add("Tom Brady pass complete to Wes Welker for 45-yards to the GB 10 for a 1st down (6:38 4th)");
+		playCardBottomDetail
+				.add("Stevan Ridley rush for 2-yards to the NE 45 (6:42 4th)");
+		playCardBottomDetail
+				.add("Arian Foster rush for 16-yards for a TOUCHDOWN (3:17 4th)");
+		playCardBottomDetail
+				.add("Shayne Graham kicks 63-yards from HOU 35 to ATL 2.Jacquizz Rodgers to ATL 20 for 18-yards (3:09 4th)");
+
+		
+		
+		
+		// The parent LinearLayout for playCards
+		LinearLayout playCardParentLinearLayout = (LinearLayout) findViewById(R.id.parentLayoutOfPlayCardsId);
+
+		// DownloadImagesThreadPool downloadImagesThreadPool = new
+		// DownloadImagesThreadPool();
+
+		TextView selectedCategoryTextView = (TextView) findViewById(R.id.selectedCategoryTextViewId);
+		selectedCategoryTextView.setText("NEW ENGLAND PATRIOTS");
+
+		for (int index = 0; index < 15; index++) {
+
+			playCardParentLinearLayout.addView(getPlayCardView(context, index,
+					playCardTopDetail.get(index),
+					playCardBottomDetail.get(index), getResources()));
+		}
+
+	}
+
+	private View getPlayCardView(Context context2, int index,
+			String playCardTopDetail, String playCardBottomDetail,
+			Resources resources) {
+
+		return new PlayCardView(context2, index, playCardTopDetail,
+				playCardBottomDetail, resources, this).getPlayCard();
 	}
 }

@@ -14,7 +14,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/playCardBackSideTopLayoutDoneButtonId"
@@ -57,14 +59,17 @@
     <RelativeLayout
         android:id="@+id/playCardBackSideStartAndEndLayoutId"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_marginTop="150dp" >
 
         <TextView
             android:id="@+id/playCardBackSideStartAndEndLayoutStartText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|left" />
+            android:gravity="center_vertical|left" 
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"/>
 
          <View
             android:id="@+id/playCardBackSideStartAndEndLayoutSaparatorId" 
@@ -77,7 +82,10 @@
             android:id="@+id/playCardBackSideStartAndEndLayoutEndTextId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@id/playCardBackSideStartAndEndLayoutSaparatorId"/>
+            android:layout_toRightOf="@id/playCardBackSideStartAndEndLayoutSaparatorId"
+            android:textSize="14sp"
+            android:textStyle="bold"
+             android:layout_centerVertical="true"/>
         
          <View
             android:layout_width="match_parent"
@@ -96,19 +104,23 @@
         <TextView
             android:id="@+id/playCardBackSidePlayerCardsLayoutCurrentPlayTextViewId"
             android:layout_width="wrap_content"
-            android:layout_height="50dp" 
-            android:layout_centerVertical="true"/>
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="1dp"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
 
         <HorizontalScrollView
             android:id="@+id/playCardBackSidePlayerCardsLayoutHorizontalScrollViewId"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_below="@id/playCardBackSidePlayerCardsLayoutId" >
+            android:layout_below="@id/playCardBackSidePlayerCardsLayoutId"
+            android:layout_marginTop="15dp">
 
             <LinearLayout
                 android:id="@+id/playCardBackSidePlayerCardsLayoutHorizontalScrollViewLinearLayoutId"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
         </HorizontalScrollView>
 
         <TextView
@@ -116,7 +128,9 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_centerVertical="true"
-            android:layout_below="@id/playCardBackSidePlayerCardsLayoutHorizontalScrollViewId" />
+            android:layout_below="@id/playCardBackSidePlayerCardsLayoutHorizontalScrollViewId"
+            android:textSize="14sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <TableLayout
@@ -134,19 +148,28 @@
                 android:id="@+id/playCardBackSideMorePlaysThisDriveTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical|left" />
+                android:layout_gravity="center_vertical|left"
+                 android:layout_marginLeft="10dp"
+                android:textSize="14sp"
+            android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/playCardBackSideMorePlaysLongPassesTextViewId"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical|center_horizontal" />
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="80dp"
+                android:textSize="14sp"
+            android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/playCardBackSideMorePlays1stDownTextViewId"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical|right" />
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="120dp" 
+                android:textSize="14sp"
+            android:textStyle="bold"/>
         </TableRow>
     </TableLayout>
 
