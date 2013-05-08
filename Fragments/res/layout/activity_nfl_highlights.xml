@@ -117,6 +117,33 @@
                 android:text="122 Plays \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 Watch All"
                 android:textAlignment="viewEnd" />
         </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/combinedLayoutForSelectedCategoryAndPlayCardsId"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="170dp"
+            android:background="@drawable/nfl_field" >
+
+            <RelativeLayout
+                android:id="@+id/selectedCategoryLayoutId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="10dp"
+                android:background="@color/green"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/selectedCategoryTextViewId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
+            </RelativeLayout>
 
         <HorizontalScrollView
             android:id="@+id/horizontalScrollViewForVideosId"
@@ -134,7 +161,7 @@
                 android:scrollbarAlwaysDrawHorizontalTrack="true" >
             </LinearLayout>
         </HorizontalScrollView>
-
+	</RelativeLayout>
         <FrameLayout
             android:id="@+id/menuFragment"
             android:layout_width="300dp"

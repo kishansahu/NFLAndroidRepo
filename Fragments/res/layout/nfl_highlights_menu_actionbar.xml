@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Week" />
+            android:text="WEEK" />
     </LinearLayout>
 
     <LinearLayout
@@ -87,9 +87,9 @@
         <ImageView
             android:id="@+id/leadersImages"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
+            android:layout_height="20dp" 
             android:layout_gravity="center"
-            android:src="@drawable/highlights"/>
+            android:src="@drawable/icon_drives"/>
         
 
         <TextView
@@ -97,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Leaders" />
+            android:text="LEADERS" />
     </LinearLayout>
 
     <LinearLayout
@@ -109,9 +109,9 @@
         <ImageView
             android:id="@+id/milestonesImage"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
+            android:layout_height="20dp" 
             android:layout_gravity="center"
-            android:src="@drawable/highlights"/>
+            android:src="@drawable/icon_schedule"/>
         
 
         <TextView
@@ -133,7 +133,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp" 
            android:layout_gravity="center"
-            android:src="@drawable/highlights"/>
+            android:src="@drawable/icon_status"/>
         
         <TextView
             android:id="@+id/standingText"

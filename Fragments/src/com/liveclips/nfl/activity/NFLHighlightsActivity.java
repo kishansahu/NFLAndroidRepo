@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
@@ -20,6 +21,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,6 +33,7 @@ import android.widget.VideoView;
 import com.liveclips.nfl.R;
 import com.liveclips.nfl.popover.PopoverView;
 import com.liveclips.nfl.utils.DownloadImagesThreadPool;
+import com.liveclips.nfl.utils.PlayCardView;
 
 /**
  * @author mohitkumar
@@ -226,9 +229,25 @@ public class NFLHighlightsActivity extends Activity {
 
 		playCardParentLinearLayout.removeAllViews();
 
-		for (int index = 0; index < 4; index++) {
+		DownloadImagesThreadPool downloadImagesThreadPool = new
+				 DownloadImagesThreadPool();
 
+				TextView selectedCategoryTextView = (TextView) findViewById(R.id.selectedCategoryTextViewId);
+				selectedCategoryTextView.setText("NFL Highlights");
+		for (int index = 0; index < 4; index++) {
 			playCardTopDetail.add("Video Text on Top " + index);
+
+			playCardBottomDetail.add("Video Text on Bottom " + index);
+			playCardParentLinearLayout.addView(getPlayCardView(context, index,
+					playCardTopDetail.get(index),
+					playCardBottomDetail.get(index), getResources(),downloadImagesThreadPool));
+			View marginView = new View(context);
+			marginView.setLayoutParams(new LayoutParams(20, 0));
+			playCardParentLinearLayout.addView(marginView);
+		}
+	}
+
+			/*playCardTopDetail.add("Video Text on Top " + index);
 
 			playCardBottomDetail.add("Video Text on Bottom " + index);
 
@@ -309,10 +328,18 @@ public class NFLHighlightsActivity extends Activity {
 			playCardParentLinearLayout.addView(playCardLayout);
 
 		}
+*/
+	
 
+	private View getPlayCardView(Context context2, int index,
+			String playCardTopDetail, String playCardBottomDetail,
+			Resources resources,DownloadImagesThreadPool downloadImagesThreadPool) {
+
+		return new PlayCardView(context2, index, playCardTopDetail,
+				playCardBottomDetail, resources, this).getPlayCard(downloadImagesThreadPool);
 	}
-
-	private ImageView getPlayCardImageView() {
+	
+	/*private ImageView getPlayCardImageView() {
 
 		ImageView playCardImageView = new ImageView(this);
 
@@ -328,9 +355,9 @@ public class NFLHighlightsActivity extends Activity {
 						"http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg");// .execute("http://x.pio.lc/nfl/week05/20121009_001_20121011114555_007_001_96ce5227.jpg");
 
 		return playCardImageView;
-	}
+	}*/
 
-	private RelativeLayout getPlayCardLayout(int index,
+	/*private RelativeLayout getPlayCardLayout(int index,
 			NFLHighlightsActivity nflHighlightsActivity) {
 		RelativeLayout playCardLayout = new RelativeLayout(this);
 
@@ -353,9 +380,9 @@ public class NFLHighlightsActivity extends Activity {
 		// Adding the TextView to the RelativeLayout as a child
 		playCardLayout.addView(getPlayCardTopTextView(index));
 		return playCardLayout;
-	}
+	}*/
 
-	private TextView getPlayCardTopTextView(int index) {
+	/*private TextView getPlayCardTopTextView(int index) {
 
 		TextView playCardTopTextView = new TextView(this);
 		playCardTopTextView.setText(playCardTopDetail.get(index));
@@ -371,5 +398,5 @@ public class NFLHighlightsActivity extends Activity {
 		playCardTopTextView
 				.setLayoutParams(layoutParametersForPlayCardTopTextView);
 		return playCardTopTextView;
-	}
+	}*/
 }
