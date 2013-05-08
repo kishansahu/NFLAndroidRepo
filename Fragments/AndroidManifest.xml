@@ -39,6 +39,11 @@
             android:name="com.liveclips.nfl.activity.PlayersActivity"
             android:label="@string/app_name" >
         </activity>
+        
+         <activity
+            android:name="com.liveclips.nfl.activity.DivisionHighlightsActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

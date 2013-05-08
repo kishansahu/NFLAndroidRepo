@@ -1,6 +1,8 @@
 package com.liveclips.nfl.fragment;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.liveclips.nfl.R;
 import com.liveclips.nfl.activity.GameActivity;
@@ -94,8 +95,13 @@ public class TopicMenuFragment extends Fragment {
 				break;
 			case 3:
 
-				// startActivity(new
-				// Intent("com.liveclips.nfl.activity.GameActivity"));
+				FragmentManager fragmentManager = getFragmentManager();
+				FragmentTransaction ft = fragmentManager.beginTransaction();
+				Fragment mainMenuFragment = new DivisionMenuFragment();
+				//mainMenuFragment.//new TopicMenuFragment();
+				ft.replace(R.id.menuFragment, mainMenuFragment);
+
+				ft.commit();
 				break;
 			case 4:
 
