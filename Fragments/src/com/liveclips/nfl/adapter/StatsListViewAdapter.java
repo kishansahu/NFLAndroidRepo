@@ -54,9 +54,9 @@ public class StatsListViewAdapter  extends ArrayAdapter<StatsItem> {
 			holder.statType = (TextView) convertView
 					.findViewById(R.id.stat_type);
 			holder.score1 = (TextView) convertView
-					.findViewById(R.id.score1);
+					.findViewById(R.id.statScore1);
 			holder.score2 = (TextView) convertView
-					.findViewById(R.id.score2);
+					.findViewById(R.id.statScore2);
 			holder.disclosureButton = (ImageView) convertView
 					.findViewById(R.id.disclosure_button);
 

@@ -38,7 +38,7 @@ public class PlayerListViewAdapter extends ArrayAdapter<PlayerItem> {
 		TextView playerData2;
 		TextView playerData3;
 		TextView playerData4;
-		TextView playerNumber;
+		TextView playerDetails;
 		TextView playerName;
 		ImageView playerImage;
 		// ImageView imageView;
@@ -56,19 +56,19 @@ public class PlayerListViewAdapter extends ArrayAdapter<PlayerItem> {
 					R.layout.popover_game_player_list_item, null);
 			holder = new PlayerViewHolder();
 			holder.playerImage = (ImageView) convertView
-					.findViewById(R.id.player_pic);
+					.findViewById(R.id.popover_player_pic);
 			holder.playerName = (TextView) convertView
-					.findViewById(R.id.player_name);
-			holder.playerNumber = (TextView) convertView
-					.findViewById(R.id.player_number);
+					.findViewById(R.id.popover_player_name);
+			holder.playerDetails = (TextView) convertView
+					.findViewById(R.id.popover_player_details);
 			holder.playerData1 = (TextView) convertView
-					.findViewById(R.id.player_data1);
+					.findViewById(R.id.popover_player_data1);
 			holder.playerData2 = (TextView) convertView
-					.findViewById(R.id.player_data2);
+					.findViewById(R.id.popover_player_data2);
 			holder.playerData3 = (TextView) convertView
-					.findViewById(R.id.player_data3);
+					.findViewById(R.id.popover_player_data3);
 			holder.playerData4 = (TextView) convertView
-					.findViewById(R.id.player_data4);
+					.findViewById(R.id.popover_player_data4);
 
 			convertView.setTag(holder);
 		} else
@@ -76,7 +76,7 @@ public class PlayerListViewAdapter extends ArrayAdapter<PlayerItem> {
 
 		holder.playerImage.setImageResource(rowItem.playerImage);
 		holder.playerName.setText(rowItem.playerName);
-		holder.playerNumber.setText(rowItem.playerNumber);
+		holder.playerDetails.setText(rowItem.playerDetails);
 		holder.playerData1.setText(rowItem.playerdata1);
 		holder.playerData2.setText(rowItem.playerdata2);
 		holder.playerData3.setText(rowItem.playerdata3);

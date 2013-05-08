@@ -8,283 +8,151 @@
         android:id="@+id/gameRootView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent" >
-    
-    <RelativeLayout
-        android:id="@+id/matchScoreBoardBackground"
-        android:layout_width="fill_parent"
-        android:layout_height="160dp"
-        android:background="@drawable/scorecard_background" >
 
-        <ImageView
-            android:id="@+id/firstTeamHelmetIcon"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/packers_helmet" >
-        </ImageView>
-
-        <ImageView
-            android:id="@+id/secondTeamHelmetIcon"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/patriots_helmet" >
-        </ImageView>
-
-        <LinearLayout
-            android:id="@+id/firstTeamDescriptionContainer"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_toRightOf="@id/firstTeamHelmetIcon"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/firstTeamFirstName"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:gravity="left"
-                android:text="GREEN BAY"
-                android:textSize="15sp" >
-            </TextView>
-
-            <TextView
-                android:id="@+id/firstTeamSecondName"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="left"
-                android:text="PACKERS"
-                android:textSize="32sp"
-                android:textStyle="bold" >
-            </TextView>
+        <HorizontalScrollView
+            android:id="@+id/myPlayersSwipper"
+            android:layout_width="fill_parent"
+            android:layout_height="160dp"
+            android:background="@drawable/scorecard_background"
+            android:fillViewport="true" >
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
                 android:orientation="horizontal" >
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:src="@drawable/white_circle" />
+                    android:id="@+id/allmyplayersIcon"
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:alpha=".6"
+                    android:background="@color/green"
+                    android:src="@drawable/allmyplayers" >
+                </ImageView>
 
-                <ImageView
+                <LinearLayout
+                    android:id="@+id/myPlayersContainer"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:src="@drawable/black_circle" />
+                    android:layout_height="fill_parent"
+                    android:orientation="horizontal" >
+                </LinearLayout>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:src="@drawable/black_circle" />
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="fill_parent"
+                    android:background="@color/black" />
+
+                <ImageButton
+                    android:id="@+id/addaplayerButton"
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:alpha=".6"
+                    android:background="@color/green"
+                    android:src="@drawable/addaplayer" >
+                </ImageButton>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="fill_parent"
+                    android:background="@color/black" />
             </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/secondTeamDescriptionContainer"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="25dp"
-            android:layout_toLeftOf="@+id/secondTeamHelmetIcon"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/secondTeamFirstName"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:gravity="left"
-                android:text="NEW ENGLAND"
-                android:textSize="15sp" >
-            </TextView>
-
-            <TextView
-                android:id="@+id/secondTeamSecondName"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="left"
-                android:text="PATRIOTS"
-                android:textSize="32sp"
-                android:textStyle="bold" >
-            </TextView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:src="@drawable/black_circle" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:src="@drawable/black_circle" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:src="@drawable/black_circle" />
-            </LinearLayout>
-        </LinearLayout>
+        </HorizontalScrollView>
 
         <RelativeLayout
-            android:id="@+id/matchScoreContainer"
-            android:layout_width="250dp"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true" >
-
-            <TextView
-                android:id="@+id/firstTeamScore"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="36dp"
-                android:text="21"
-                android:textSize="45sp"
-                android:textStyle="bold" >
-            </TextView>
-
-            <LinearLayout
-                android:id="@+id/matchScoreCardCentralContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/gameQuarterIndex"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:gravity="center"
-                    android:text="4TH"
-                    android:textSize="18sp"
-                    android:textStyle="bold" >
-                </TextView>
-
-                <TextView
-                    android:id="@+id/gameQuarterTime"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="6:45"
-                    android:textSize="32sp"
-                    android:textStyle="bold" >
-                </TextView>
-
-                <TextView
-                    android:id="@+id/gameScoreDescription"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:gravity="center"
-                    android:text="1st &amp; Goal at GB 10"
-                    android:textSize="18sp"
-                    android:textStyle="bold" >
-                </TextView>
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/secondTeamScore"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="36dp"
-                android:text="17"
-                android:textSize="45sp"
-                android:textStyle="bold" >
-            </TextView>
-        </RelativeLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/filterBoardBackground"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="160dp" >
-
-        <TextView
-            android:id="@+id/allPlaysId"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:background="@drawable/border"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="All Plays" />
-
-        <TextView
-            android:id="@+id/topPlaysId"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:layout_toRightOf="@id/allPlaysId"
-            android:background="@drawable/border"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="Top Plays" />
-
-        <TextView
-            android:id="@+id/topRatedId"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:layout_toRightOf="@id/topPlaysId"
-            android:background="@drawable/border"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="Top Rated" />
-
-        <TextView
-            android:id="@+id/watchAllId"
+            android:id="@+id/filterBoardBackground"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
-            android:layout_toRightOf="@id/topRatedId"
-            android:background="@drawable/border"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="122 Plays \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 Watch All"
-            android:textAlignment="viewEnd" />
-    </RelativeLayout>
+            android:layout_marginTop="160dp" >
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollViewForVideosId"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="200dp"
-        android:background="@drawable/nfl_field" >
+            <TextView
+                android:id="@+id/allPlaysId"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:background="@drawable/border"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="All Plays" />
 
-        <LinearLayout
-            android:id="@+id/parentLayoutOfPlayCardsId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal"
-            android:scrollbarAlwaysDrawHorizontalTrack="true" >
-        </LinearLayout>
-    </HorizontalScrollView>
+            <TextView
+                android:id="@+id/topPlaysId"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_toRightOf="@id/allPlaysId"
+                android:background="@drawable/border"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="Top Plays" />
 
-    <FrameLayout
-        android:id="@+id/menuFragment"
-        android:layout_width="300dp"
-        android:layout_height="match_parent"
-         />
-    
+            <TextView
+                android:id="@+id/topRatedId"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_toRightOf="@id/topPlaysId"
+                android:background="@drawable/border"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="Top Rated" />
+
+            <TextView
+                android:id="@+id/watchAllId"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_toRightOf="@id/topRatedId"
+                android:background="@drawable/border"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="122 Plays \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 Watch All"
+                android:textAlignment="viewEnd" />
+        </RelativeLayout>
+
+      <RelativeLayout
+            android:id="@+id/combinedLayoutForSelectedCategoryAndPlayCardsId"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="200dp"
+            android:background="@drawable/nfl_field" >
+
+            <RelativeLayout
+                android:id="@+id/selectedCategoryLayoutId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="10dp"
+                android:background="@color/green"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/selectedCategoryTextViewId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
+            </RelativeLayout>
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollViewForVideosId"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_below="@id/selectedCategoryLayoutId" >
+
+                <LinearLayout
+                    android:id="@+id/parentLayoutOfPlayCardsId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:scrollbarAlwaysDrawHorizontalTrack="true" >
+                </LinearLayout>
+            </HorizontalScrollView>
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/menuFragment"
+            android:layout_width="300dp"
+            android:layout_height="match_parent" />
     </RelativeLayout>
 
 </merge>
