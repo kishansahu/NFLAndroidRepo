@@ -42,12 +42,7 @@ public class PlayersActivity extends Activity {
 		fragmentManager = getFragmentManager();
 		playCards();
 
-	}
-
-	
-	@Override
-	protected void onStart() {
-		super.onStart();
+		
 		ActionBar actionBar = getActionBar();
 		View mActionBarView = getLayoutInflater().inflate(
 				R.layout.players_actionbar_layout, null);
@@ -118,6 +113,15 @@ public class PlayersActivity extends Activity {
 			}
 		});
 
+	
+
+	}
+
+	
+	@Override
+	protected void onStart() {
+		
+		super.onStart();
 	}
 
 	public void showAddPlayersFragment() {

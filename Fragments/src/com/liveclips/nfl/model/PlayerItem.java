@@ -13,7 +13,16 @@ public class PlayerItem {
 	public String playerNumber;
 	public String playerPosition;
 	public int playerFavourite;
+	public boolean isPLayerFavouriteActive;
 		
+
+	public boolean isPLayerFavouriteActive() {
+		return isPLayerFavouriteActive;
+	}
+
+	public void setPLayerFavouriteActive(boolean isPLayerFavouriteActive) {
+		this.isPLayerFavouriteActive = isPLayerFavouriteActive;
+	}
 
 	public String getPlayerNumber() {
 		return playerNumber;
@@ -137,12 +146,13 @@ public class PlayerItem {
 	}
 	
 	public PlayerItem(int playerFavourite,String playerName,
-			String playerNumber, String playerPosition) {
+			String playerNumber, String playerPosition, boolean isPlayerFavouriteActive) {
 		super();
 		this.playerFavourite = playerFavourite;
 		this.playerPosition = playerPosition;
 		this.playerName = playerName;
 		this.playerNumber = playerNumber;
+		this.isPLayerFavouriteActive= isPlayerFavouriteActive;
 	}
 
 	public  PlayerItem(String teamName, int teamLogo) {
