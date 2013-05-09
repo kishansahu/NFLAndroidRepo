@@ -117,9 +117,10 @@ public class PlayCardView {
 
 		ImageView playCardFrontSidePlaySectionImage = (ImageView) playCardFrontSidePlaySectionImageWithPlayButtonLayout
 				.findViewById(R.id.playCardFrontSidePlaySectionImageWithPlayButtonImageViewId);
-		new DownloadImageTask(playCardFrontSidePlaySectionImage)
+		/*new DownloadImageTask(playCardFrontSidePlaySectionImage)
 				.execute("http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg");
-
+*/
+		downloadImagesThreadPool.submit(playCardFrontSidePlaySectionImage, "http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg");
 		playCardFrontSidePlaySectionImage.setId(index * 90000);
 		final RelativeLayout playCardFrontSidePlaySectionLayout = (RelativeLayout) playCardFrontSide
 				.findViewById(R.id.playCardFrontSidePlaySectionlayoutId);
