@@ -95,14 +95,14 @@ public class PlayersActivity extends Activity {
 		}
 
 		ImageButton addaplayerButton = (ImageButton) findViewById(R.id.addaplayerButton);
-		addaplayerButton.setOnTouchListener(new View.OnTouchListener() {
-
+		addaplayerButton.setOnClickListener((new View.OnClickListener() {
+			
 			@Override
-			public boolean onTouch(View v, MotionEvent event) {
+			public void onClick(View v) {
 				showAddPlayersFragment();
-				return true;
+				
 			}
-		});
+		}));
 
 		sliderView.setOnClickListener(new View.OnClickListener() {
 

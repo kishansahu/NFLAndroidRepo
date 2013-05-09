@@ -115,8 +115,12 @@ public class TopicMenuFragment extends Fragment {
 				break;
 			case 5:
 
-				// startActivity(new
-				// Intent("com.liveclips.nfl.activity.GameActivity"));
+				fragmentManager = getFragmentManager();
+				ft = fragmentManager.beginTransaction();
+				Fragment gameScheduleFragment = new GameScheduleFragment();
+				ft.replace(R.id.menuFragment, gameScheduleFragment);
+
+				ft.commit();
 				break;
 			}
 

@@ -259,7 +259,7 @@ public class DivisionMenuFragment extends Fragment{
 			TextView team_Name2 = (TextView) view.findViewById(R.id.team_2_name);
 			TeamItem teamItem2 = new TeamItem();
 			//teamItem2.setDrawable(team_2.getDrawable());
-			teamItem2.setTeamLogo(team_2.getImageAlpha());
+			//teamItem2.setTeamLogo(team_2.getImageAlpha());
 			teamItem2.setTeamName((String) team_Name2.getText());
 			conferenceItem.setTeam_2(teamItem2);
 			
