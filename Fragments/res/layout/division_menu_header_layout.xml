@@ -23,11 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="2dp"
             android:paddingLeft="8dp" />
-        
-        
-        
-
-        
+       
     </TableRow>
 
 </TableLayout>

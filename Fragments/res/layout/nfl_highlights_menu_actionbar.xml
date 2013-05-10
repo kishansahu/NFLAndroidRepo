@@ -57,6 +57,7 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/weekLayout"
         android:layout_width="100dp"
         android:layout_height="fill_parent"
         android:layout_marginLeft="305dp"
@@ -79,6 +80,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/leadersLayout"
         android:layout_width="100dp"
         android:layout_height="fill_parent"
         android:layout_marginLeft="405dp"
@@ -101,6 +103,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/milestonesLayout"
         android:layout_width="100dp"
         android:layout_height="fill_parent"
         android:layout_marginLeft="505dp"
@@ -123,6 +126,7 @@
     </LinearLayout>
     
     <LinearLayout
+        android:id="@+id/standingLayout"
         android:layout_width="100dp"
         android:layout_height="fill_parent"
         android:layout_marginLeft="605dp"
@@ -151,5 +155,7 @@
         android:layout_centerVertical="true"
         android:text="Alerts:Off" >
     </Button>
+    
+    
 
 </RelativeLayout>

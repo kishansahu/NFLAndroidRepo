@@ -115,12 +115,12 @@ public class TopicMenuFragment extends Fragment {
 				break;
 			case 5:
 
-				fragmentManager = getFragmentManager();
+				/*fragmentManager = getFragmentManager();
 				ft = fragmentManager.beginTransaction();
 				Fragment gameScheduleFragment = new GameScheduleFragment();
 				ft.replace(R.id.menuFragment, gameScheduleFragment);
 
-				ft.commit();
+				ft.commit();*/
 				break;
 			}
 
