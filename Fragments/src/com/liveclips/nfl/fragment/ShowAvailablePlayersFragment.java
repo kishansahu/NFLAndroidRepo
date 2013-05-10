@@ -32,7 +32,6 @@ public class ShowAvailablePlayersFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle saveInstantState) {
-		Log.d("Fragment 1", "onCreateView");
 
 		return inflater.inflate(R.layout.addplayer_to_favorites_team_fragment,
 				container, false);
@@ -98,15 +97,11 @@ public class ShowAvailablePlayersFragment extends Fragment {
 		String playerPosition[] = { "LS", "DB", "CB", "TE", "SS", "DE", "RB",
 				"DT" };
 
-		/*int playerImages[] = { R.drawable.star_low, R.drawable.star_low,
-				R.drawable.star_low, R.drawable.star_low, R.drawable.star_low,
-				R.drawable.star_low, R.drawable.star_low, R.drawable.star_low };*/
 		boolean isPlayerFavouriteActive[] = {false,false,true,false,false,true,false,false}; 
 		PlayerItem item;
 
 		for (int i = 0; i < playerNames.length; i++) {
 			item = new PlayerItem();
-		//	item.setPlayerFavourite(playerImages[i]);
 			item.setPlayerName(playerNames[i]);
 			item.setPlayerPosition(playerPosition[i]);
 			item.setPlayerNumber(playerNumber[i]);

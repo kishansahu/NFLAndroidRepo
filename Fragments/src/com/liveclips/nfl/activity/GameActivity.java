@@ -16,18 +16,13 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -35,8 +30,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.MediaController;
-import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -92,24 +85,8 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 
-		// playCardVideoView = new VideoView(this);
 		context = this;
 		fragmentManager = getFragmentManager();
-		/*
-		 * ft = fragmentManager.beginTransaction(); mainMenuFragment = new
-		 * TopicMenuFragment(); ft.add(R.id.menuFragment, mainMenuFragment);
-		 * 
-		 * ft.commit();
-		 */
-
-		/*
-		 * headerTextView = (TextView) findViewById(R.id.menuHeader);
-		 * headerTextView.setText("LiveClips"); closeButtonHeader =
-		 * (ImageButton) findViewById(R.id.closeButtonHeader);
-		 * closeButtonHeader.setVisibility(View.VISIBLE);
-		 * closeButtonHeader.setOnClickListener(closeButtonListener);
-		 */
-
 		allPlaysTextView = (TextView) findViewById(R.id.allPlaysId);
 		topPlaysTextView = (TextView) findViewById(R.id.topPlaysId);
 		topRatedTextView = (TextView) findViewById(R.id.topRatedId);
@@ -119,68 +96,187 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		topPlaysTextView.setOnClickListener(topPlaysCilckListener);
 		topRatedTextView.setOnClickListener(topRatedClickListener);
 		watchAllTextView.setOnClickListener(watchAllClickListener);
-
+		RelativeLayout matchScoreBoardBackground = (RelativeLayout) findViewById(R.id.matchScoreBoardBackground);
+		matchScoreBoardBackground
+				.setOnClickListener(matchScoreBoardBackgroundClickListener);
 		playCards();
 
 	}
-	public void shrinkScoreBanner(){
-			RelativeLayout  matchScoreBoardBackground= (RelativeLayout) findViewById(R.id.matchScoreBoardBackground);
-			matchScoreBoardBackground.getLayoutParams().width= NflUtils.convertDensityPixelToPixel(context, 470) ;
 
-			ImageView  firstTeamIconImage= (ImageView) findViewById(R.id.firstTeamLargeIcon);
-			firstTeamIconImage.setImageResource(R.drawable.packers);
-			firstTeamIconImage.getLayoutParams().width= NflUtils.convertPixelToDensityPixel(context, 65);
-			firstTeamIconImage.getLayoutParams().height= NflUtils.convertPixelToDensityPixel(context, 65);
+	OnClickListener matchScoreBoardBackgroundClickListener = new OnClickListener() {
 
-			ImageView  secondTeamIconImage= (ImageView) findViewById(R.id.secondTeamLargeIcon);
-			secondTeamIconImage.setImageResource(R.drawable.patriots);
-			secondTeamIconImage.getLayoutParams().width= NflUtils.convertPixelToDensityPixel(context, 65);
-			secondTeamIconImage.getLayoutParams().height= NflUtils.convertPixelToDensityPixel(context, 65);
+		@Override
+		public void onClick(View v) {
 
-			TextView firstTeamScore= (TextView) findViewById(R.id.firstTeamScore);
-			firstTeamScore.setTextSize(NflUtils.convertPixelToDensityPixel(context, 25));
+			Toast.makeText(GameActivity.this, "Background clicked",
+					Toast.LENGTH_SHORT).show();
+			if (NflUtils.isScoreBannerShrinked()) {
+				makeTabInvisibleForEnlargingScoreBoard();
+				enlargeScoreBanner();
+			}
+		}
+	};
 
-			TextView secondTeamScore= (TextView) findViewById(R.id.secondTeamScore);
-			secondTeamScore.setTextSize(NflUtils.convertPixelToDensityPixel(context, 25));
+	public void enlargeScoreBanner() {
+		RelativeLayout matchScoreBoardBackground = (RelativeLayout) findViewById(R.id.matchScoreBoardBackground);
+		matchScoreBoardBackground
+				.setLayoutParams(new RelativeLayout.LayoutParams(
+						LayoutParams.FILL_PARENT, NflUtils
+								.convertPixelToDensityPixel(context, 160)));
 
-			TextView gameQuarterIndex= (TextView) findViewById(R.id.gameQuarterIndex);
-			gameQuarterIndex.setTextSize(NflUtils.convertPixelToDensityPixel(context, 15));
+		ImageView firstTeamIconImage = (ImageView) findViewById(R.id.firstTeamLargeIcon);
+		firstTeamIconImage.setImageResource(R.drawable.packers_helmet);
 
-			TextView gameQuarterTime= (TextView) findViewById(R.id.gameQuarterTime);
-			gameQuarterTime.setTextSize(NflUtils.convertPixelToDensityPixel(context, 22));
+		firstTeamIconImage.setLayoutParams(new LinearLayout.LayoutParams(
+				NflUtils.convertPixelToDensityPixel(context, 130),
+				LayoutParams.WRAP_CONTENT));
 
-			TextView gameScoreDescription= (TextView) findViewById(R.id.gameScoreDescription);
-			gameScoreDescription.setTextSize(NflUtils.convertPixelToDensityPixel(context, 15));
+		ImageView secondTeamIconImage = (ImageView) findViewById(R.id.secondTeamLargeIcon);
+		secondTeamIconImage.setImageResource(R.drawable.patriots_helmet);
+		secondTeamIconImage.setLayoutParams(new LinearLayout.LayoutParams(
+				NflUtils.convertPixelToDensityPixel(context, 130),
+				LayoutParams.WRAP_CONTENT));
 
-			TextView firstTeamFirstName= (TextView) findViewById(R.id.firstTeamFirstName);
-			firstTeamFirstName.setTextSize(NflUtils.convertPixelToDensityPixel(context, 13));
+		TextView firstTeamScore = (TextView) findViewById(R.id.firstTeamScore);
+		firstTeamScore.setTextSize(NflUtils.convertPixelToDensityPixel(context,
+				45));
 
-			TextView firstTeamSecondName= (TextView) findViewById(R.id.firstTeamSecondName);
-			firstTeamSecondName.setTextSize(NflUtils.convertPixelToDensityPixel(context, 20));
+		TextView secondTeamScore = (TextView) findViewById(R.id.secondTeamScore);
+		secondTeamScore.setTextSize(NflUtils.convertPixelToDensityPixel(
+				context, 45));
 
-			TextView secondTeamFirstName= (TextView) findViewById(R.id.secondTeamFirstName);
-			secondTeamFirstName.setTextSize(NflUtils.convertPixelToDensityPixel(context, 13));
+		TextView gameQuarterIndex = (TextView) findViewById(R.id.gameQuarterIndex);
+		gameQuarterIndex.setTextSize(NflUtils.convertPixelToDensityPixel(
+				context, 18));
 
-			TextView secondTeamSecondName= (TextView) findViewById(R.id.secondTeamSecondName);
-			secondTeamSecondName.setTextSize(NflUtils.convertPixelToDensityPixel(context, 20));
+		TextView gameQuarterTime = (TextView) findViewById(R.id.gameQuarterTime);
+		gameQuarterTime.setTextSize(NflUtils.convertPixelToDensityPixel(
+				context, 22));
 
-			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-			params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, R.id.firstTeamLargeIconContainer);
-			params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, R.id.firstTeamLargeIconContainer);
-			params.bottomMargin = (NflUtils.convertPixelToDensityPixel(context, 15));
-			params.leftMargin=(NflUtils.convertPixelToDensityPixel(context, 5));
-			
-			LinearLayout  firstTeamDescriptionContainer= (LinearLayout) findViewById(R.id.firstTeamDescriptionContainer);
-			firstTeamDescriptionContainer.setLayoutParams(params);
+		TextView gameScoreDescription = (TextView) findViewById(R.id.gameScoreDescription);
+		gameScoreDescription.setTextSize(NflUtils.convertPixelToDensityPixel(
+				context, 18));
 
-			RelativeLayout.LayoutParams relParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-			relParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, R.id.secondTeamLargeIconContainer);
-			relParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, R.id.secondTeamLargeIconContainer);
-			relParams.bottomMargin = (NflUtils.convertPixelToDensityPixel(context, 15));
-			params.rightMargin=(NflUtils.convertPixelToDensityPixel(context, 10));
-			LinearLayout  secondTeamDescriptionContainer= (LinearLayout) findViewById(R.id.secondTeamDescriptionContainer);
-			secondTeamDescriptionContainer.setLayoutParams(relParams);
-			NflUtils.setScoreBannerShrinked(true);
+		TextView firstTeamFirstName = (TextView) findViewById(R.id.firstTeamFirstName);
+		firstTeamFirstName.setTextSize(NflUtils.convertPixelToDensityPixel(
+				context, 15));
+
+		TextView firstTeamSecondName = (TextView) findViewById(R.id.firstTeamSecondName);
+		firstTeamSecondName.setTextSize(NflUtils.convertPixelToDensityPixel(
+				context, 26));
+
+		TextView secondTeamFirstName = (TextView) findViewById(R.id.secondTeamFirstName);
+		secondTeamFirstName.setTextSize(NflUtils.convertPixelToDensityPixel(
+				context, 15));
+
+		TextView secondTeamSecondName = (TextView) findViewById(R.id.secondTeamSecondName);
+		secondTeamSecondName.setTextSize(NflUtils.convertPixelToDensityPixel(
+				context, 26));
+		//
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
+		params.addRule(RelativeLayout.RIGHT_OF,
+				R.id.firstTeamLargeIconContainer);
+		params.topMargin = (NflUtils.convertPixelToDensityPixel(context, 55));
+		params.leftMargin = (NflUtils.convertPixelToDensityPixel(context, 25));
+		LinearLayout firstTeamDescriptionContainer = (LinearLayout) findViewById(R.id.firstTeamDescriptionContainer);
+		firstTeamDescriptionContainer.setLayoutParams(params);
+
+		RelativeLayout.LayoutParams relParams = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
+		relParams.addRule(RelativeLayout.LEFT_OF,
+				R.id.secondTeamLargeIconContainer);
+		relParams.topMargin = (NflUtils.convertPixelToDensityPixel(context, 55));
+		relParams.rightMargin = (NflUtils.convertPixelToDensityPixel(context, 25));
+		LinearLayout secondTeamDescriptionContainer = (LinearLayout) findViewById(R.id.secondTeamDescriptionContainer);
+		secondTeamDescriptionContainer.setLayoutParams(relParams);
+		NflUtils.setScoreBannerShrinked(false);
+		NflUtils.stubActivatedName = "";
+	}
+
+	public void shrinkScoreBanner() {
+		RelativeLayout matchScoreBoardBackground = (RelativeLayout) findViewById(R.id.matchScoreBoardBackground);
+		matchScoreBoardBackground.getLayoutParams().width = NflUtils
+				.convertDensityPixelToPixel(context, 470);
+
+		ImageView firstTeamIconImage = (ImageView) findViewById(R.id.firstTeamLargeIcon);
+		firstTeamIconImage.setImageResource(R.drawable.packers);
+		firstTeamIconImage.getLayoutParams().width = NflUtils
+				.convertPixelToDensityPixel(context, 65);
+		firstTeamIconImage.getLayoutParams().height = NflUtils
+				.convertPixelToDensityPixel(context, 65);
+
+		ImageView secondTeamIconImage = (ImageView) findViewById(R.id.secondTeamLargeIcon);
+		secondTeamIconImage.setImageResource(R.drawable.patriots);
+		secondTeamIconImage.getLayoutParams().width = NflUtils
+				.convertPixelToDensityPixel(context, 65);
+		secondTeamIconImage.getLayoutParams().height = NflUtils
+				.convertPixelToDensityPixel(context, 65);
+
+		TextView firstTeamScore = (TextView) findViewById(R.id.firstTeamScore);
+		firstTeamScore.setTextSize(NflUtils.convertPixelToDensityPixel(context,
+				25));
+
+		TextView secondTeamScore = (TextView) findViewById(R.id.secondTeamScore);
+		secondTeamScore.setTextSize(NflUtils.convertPixelToDensityPixel(
+				context, 25));
+
+		TextView gameQuarterIndex = (TextView) findViewById(R.id.gameQuarterIndex);
+		gameQuarterIndex.setTextSize(NflUtils.convertPixelToDensityPixel(
+				context, 15));
+
+		TextView gameQuarterTime = (TextView) findViewById(R.id.gameQuarterTime);
+		gameQuarterTime.setTextSize(NflUtils.convertPixelToDensityPixel(
+				context, 22));
+
+		TextView gameScoreDescription = (TextView) findViewById(R.id.gameScoreDescription);
+		gameScoreDescription.setTextSize(NflUtils.convertPixelToDensityPixel(
+				context, 15));
+
+		TextView firstTeamFirstName = (TextView) findViewById(R.id.firstTeamFirstName);
+		firstTeamFirstName.setTextSize(NflUtils.convertPixelToDensityPixel(
+				context, 13));
+
+		TextView firstTeamSecondName = (TextView) findViewById(R.id.firstTeamSecondName);
+		firstTeamSecondName.setTextSize(NflUtils.convertPixelToDensityPixel(
+				context, 20));
+
+		TextView secondTeamFirstName = (TextView) findViewById(R.id.secondTeamFirstName);
+		secondTeamFirstName.setTextSize(NflUtils.convertPixelToDensityPixel(
+				context, 13));
+
+		TextView secondTeamSecondName = (TextView) findViewById(R.id.secondTeamSecondName);
+		secondTeamSecondName.setTextSize(NflUtils.convertPixelToDensityPixel(
+				context, 20));
+
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
+		params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM,
+				R.id.firstTeamLargeIconContainer);
+		params.addRule(RelativeLayout.ALIGN_PARENT_LEFT,
+				R.id.firstTeamLargeIconContainer);
+		params.bottomMargin = (NflUtils.convertPixelToDensityPixel(context, 15));
+		params.leftMargin = (NflUtils.convertPixelToDensityPixel(context, 5));
+
+		LinearLayout firstTeamDescriptionContainer = (LinearLayout) findViewById(R.id.firstTeamDescriptionContainer);
+		firstTeamDescriptionContainer.setLayoutParams(params);
+
+		RelativeLayout.LayoutParams relParams = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
+		relParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM,
+				R.id.secondTeamLargeIconContainer);
+		relParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,
+				R.id.secondTeamLargeIconContainer);
+		relParams.bottomMargin = (NflUtils.convertPixelToDensityPixel(context,
+				15));
+		params.rightMargin = (NflUtils.convertPixelToDensityPixel(context, 10));
+		LinearLayout secondTeamDescriptionContainer = (LinearLayout) findViewById(R.id.secondTeamDescriptionContainer);
+		secondTeamDescriptionContainer.setLayoutParams(relParams);
+		NflUtils.setScoreBannerShrinked(true);
 	}
 
 	@Override
@@ -347,8 +443,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		if (teamName.equals("team1") && teamType.equals("offensive")) {
 			final List<PlayerItem> offensivePlayerList = new ArrayList<PlayerItem>();
 			String offensivePlayerNamesForTeam1[] = { "Graham Harrell",
-					"Alex Green", "Randall Cobb", "Andrew Quarless"
-					 };
+					"Alex Green", "Randall Cobb", "Andrew Quarless" };
 			String offensivePlayerNumbersForTeam1[] = { "#6 | QB", "#20 | RB",
 					"#83 | WR", "#87 | TE" };
 			String offensivePlayerData1ForTeam1[] = { "20/29", "11 CAR",
@@ -356,13 +451,13 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 			String offensivePlayerData2ForTeam1[] = { "329 YDS", "64 YDS",
 					"53 YDS", "89 YDS" };
 			String offensivePlayerData3ForTeam1[] = { "2 TD", "1 TD", "0 TD",
-					"1 TD"};
+					"1 TD" };
 
 			int offensivPlayerImagesForTeam1[] = { R.drawable.graham_herrell,
 					R.drawable.alex_green, R.drawable.randall_cobb,
 					R.drawable.andrew_quarless };
 
-			PlayerItem item ;
+			PlayerItem item;
 
 			for (int i = 0; i < offensivePlayerNamesForTeam1.length; i++) {
 				item = new PlayerItem();
@@ -388,8 +483,8 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 					"53 YDS" };
 			String defensivePlayerData3ForTeam1[] = { "2 TD", "1 TD", "0 TD" };
 
-			int defensivePlayerImages[] = { R.drawable.mike_daniel, R.drawable.bell_josh,
-					R.drawable.johnny_jolly };
+			int defensivePlayerImages[] = { R.drawable.mike_daniel,
+					R.drawable.bell_josh, R.drawable.johnny_jolly };
 
 			PlayerItem item = new PlayerItem();
 
@@ -567,12 +662,6 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 
 				rowItemsForQ4.add(item);
 			}
-			/*
-			 * listView = (ListView) findViewById(R.id.game_schedule_list);
-			 * adapter = new CourseListViewAdapter(this,
-			 * R.layout.my_course_list_item, rowItems);
-			 * listView.setAdapter(adapter);
-			 */
 
 			SeparatedListAdapter adapter = new SeparatedListAdapter(this);
 			adapter.addSection("4TH QUARTER", new DriveListViewAdapter(this,
@@ -605,7 +694,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		else if (view.getLayoutId() == R.layout.popover_game_stats_view) {
 			TextView statFirstTeamLabel = (TextView) findViewById(R.id.statFirstTeam);
 			statFirstTeamLabel.setText("Packers");
-			
+
 			TextView statSecondTeamLabel = (TextView) findViewById(R.id.statSecondTeam);
 			statSecondTeamLabel.setText("Patriots");
 
@@ -617,8 +706,8 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 					"Red Zone Efficiency", "Turnovers" };
 			String[] teamStatsScore1 = { "21", "232", "248", "3", "6/13",
 					"2/3", "2" };
-			String[] teamStatsScore2 = { "21", "22", "108", "3", "6/13",
-					"2/3", "2" };
+			String[] teamStatsScore2 = { "21", "22", "108", "3", "6/13", "2/3",
+					"2" };
 
 			String[] keyPlaysStatstype = { "Long Passes", "Long Rushes",
 					"Defensive Plays" };
@@ -661,55 +750,66 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 						int arg2, long arg3) {
 					// Toast.makeText(this, "text", Toast.LENGTH_LONG).show();
 					Log.d("lineno", String.valueOf(arg2));
-					
-					if(!NflUtils.isScoreBannerShrinked()){
-					shrinkScoreBanner();
+
+					if (!NflUtils.isScoreBannerShrinked()) {
+						shrinkScoreBanner();
 					}
-					if(!NflUtils.stubActivatedName.equalsIgnoreCase("statTab") && (NflUtils.stubActivatedName !=null)){			
+					if (!NflUtils.stubActivatedName.equalsIgnoreCase("statTab")
+							&& (NflUtils.stubActivatedName != null)) {
 						LinearLayout statTab = (LinearLayout) findViewById(R.id.statTab);
 						statTab.setVisibility(View.VISIBLE);
 						NflUtils.stubActivatedName = "statTab";
-						
+
 						LinearLayout otherTab = (LinearLayout) findViewById(R.id.playerTab);
 						otherTab.setVisibility(View.INVISIBLE);
 					}
-					//NflUtils.stubActivatedName = "teamstatsyardsMatchScoreboardStub";
+					// NflUtils.stubActivatedName =
+					// "teamstatsyardsMatchScoreboardStub";
 					TextView statType = (TextView) (arg1
 							.findViewById(R.id.stat_type));
-					
+
 					TextView statScore1 = (TextView) (arg1
 							.findViewById(R.id.statScore1));
 					TextView statScore2 = (TextView) (arg1
 							.findViewById(R.id.statScore2));
-					
+
 					TextView statCategoryTeamLabelInPopUp = (TextView) findViewById(R.id.statCategory);
 					statCategoryTeamLabelInPopUp.setText(statType.getText());
-					
+
 					TextView firstTeamStatYardsScoreLabelInPopUp = (TextView) findViewById(R.id.firstTeamStatYardsScore);
-					firstTeamStatYardsScoreLabelInPopUp.setText(statScore1.getText() + " Yards");
-					
+					firstTeamStatYardsScoreLabelInPopUp.setText(statScore1
+							.getText() + " Yards");
+
 					TextView secondTeamStatYardsScoreLabelInPopUp = (TextView) findViewById(R.id.secondTeamStatYardsScore);
-					secondTeamStatYardsScoreLabelInPopUp.setText(statScore2.getText() + " Yards");
-					
-				//	String highestScore= NflUtils.getHighestNumber(statScore1.getText().toString(), statScore2.getText().toString());
-				//	Integer firstTeamBarWidth= NflUtils.getYardsBarWidth(statScore1.getText().toString(), highestScore);
-				//	Integer secondTeamBarWidth= NflUtils.getYardsBarWidth(statScore2.getText().toString(), highestScore);
-					
+					secondTeamStatYardsScoreLabelInPopUp.setText(statScore2
+							.getText() + " Yards");
+
+					// String highestScore=
+					// NflUtils.getHighestNumber(statScore1.getText().toString(),
+					// statScore2.getText().toString());
+					// Integer firstTeamBarWidth=
+					// NflUtils.getYardsBarWidth(statScore1.getText().toString(),
+					// highestScore);
+					// Integer secondTeamBarWidth=
+					// NflUtils.getYardsBarWidth(statScore2.getText().toString(),
+					// highestScore);
+
 					TextView firstTeamStatYardsWidthLabel = (TextView) findViewById(R.id.firstTeamStatYardsWidth);
-					firstTeamStatYardsWidthLabel.setWidth(Integer.parseInt(statScore1.getText().toString()));
-					
+					firstTeamStatYardsWidthLabel.setWidth(Integer
+							.parseInt(statScore1.getText().toString()));
+
 					TextView secondTeamStatYardsWidthLabel = (TextView) findViewById(R.id.secondTeamStatYardsWidth);
-					secondTeamStatYardsWidthLabel.setWidth(Integer.parseInt(statScore2.getText().toString()));
-					
-					
+					secondTeamStatYardsWidthLabel.setWidth(Integer
+							.parseInt(statScore2.getText().toString()));
+
 					TextView statFirstTeamLabel = (TextView) findViewById(R.id.statFirstTeam);
 					TextView firstTeamNameStatYardsCategoryLabel = (TextView) findViewById(R.id.firstTeamNameStatYardsCategory);
-					//firstTeamNameStatYardsCategoryLabel.setText(statFirstTeamLabel.getText());
+					// firstTeamNameStatYardsCategoryLabel.setText(statFirstTeamLabel.getText());
 					firstTeamNameStatYardsCategoryLabel.setText("GB");
-					
+
 					TextView statSecondTeamLabel = (TextView) findViewById(R.id.statSecondTeam);
 					TextView secondTeamNameStatYardsCategoryLabel = (TextView) findViewById(R.id.secondTeamNameStatYardsCategory);
-					//secondTeamNameStatYardsCategoryLabel.setText(statSecondTeamLabel.getText());
+					// secondTeamNameStatYardsCategoryLabel.setText(statSecondTeamLabel.getText());
 					secondTeamNameStatYardsCategoryLabel.setText("NE");
 					popoverView.removeAllViews();
 				}
@@ -735,70 +835,78 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 					getPlayers("team1", "defensive")));
 
 			listView = (ListView) findViewById(R.id.game_player_list);
-			
+
 			listView.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
-					
-					if(!NflUtils.isScoreBannerShrinked()){
-					shrinkScoreBanner();
+
+					if (!NflUtils.isScoreBannerShrinked()) {
+						shrinkScoreBanner();
 					}
-					if(!NflUtils.stubActivatedName.equalsIgnoreCase("playerTab") && (NflUtils.stubActivatedName !=null)){			
+					if (!NflUtils.stubActivatedName
+							.equalsIgnoreCase("playerTab")
+							&& (NflUtils.stubActivatedName != null)) {
 						LinearLayout playerTab = (LinearLayout) findViewById(R.id.playerTab);
 						playerTab.setVisibility(View.VISIBLE);
 						NflUtils.stubActivatedName = "playerTab";
 						LinearLayout otherTab = (LinearLayout) findViewById(R.id.statTab);
 						otherTab.setVisibility(View.INVISIBLE);
 					}
-					
+
 					TextView popoverPlayerName = (TextView) (arg1
 							.findViewById(R.id.popover_player_name));
-					
+
 					TextView selectedPlayerName = (TextView) findViewById(R.id.selectedPlayerName);
 					selectedPlayerName.setText(popoverPlayerName.getText());
-					
+
 					TextView popoverPlayerDetails = (TextView) (arg1
 							.findViewById(R.id.popover_player_details));
-					
+
 					TextView firstTeamStatYardsScoreLabelInPopUp = (TextView) findViewById(R.id.selectedPlayerDetails);
-					firstTeamStatYardsScoreLabelInPopUp.setText(popoverPlayerDetails.getText());
-					
+					firstTeamStatYardsScoreLabelInPopUp
+							.setText(popoverPlayerDetails.getText());
+
 					TextView popoverPlayerData1 = (TextView) (arg1
 							.findViewById(R.id.popover_player_data1));
-					
+
 					TextView selectedPlayerGameDetailsIndexFirst = (TextView) findViewById(R.id.selectedPlayerGameDetailsIndexFirst);
-					selectedPlayerGameDetailsIndexFirst.setText(popoverPlayerData1.getText());
-					
+					selectedPlayerGameDetailsIndexFirst
+							.setText(popoverPlayerData1.getText());
+
 					TextView popoverPlayerData2 = (TextView) (arg1
 							.findViewById(R.id.popover_player_data2));
-					
+
 					TextView selectedPlayerGameDetailsIndexTwo = (TextView) findViewById(R.id.selectedPlayerGameDetailsIndexSecond);
-					selectedPlayerGameDetailsIndexTwo.setText(popoverPlayerData2.getText());
-					
+					selectedPlayerGameDetailsIndexTwo
+							.setText(popoverPlayerData2.getText());
+
 					TextView popoverPlayerData3 = (TextView) (arg1
 							.findViewById(R.id.popover_player_data3));
-					
+
 					TextView selectedPlayerGameDetailsIndexThree = (TextView) findViewById(R.id.selectedPlayerGameDetailsIndexThird);
-					selectedPlayerGameDetailsIndexThree.setText(popoverPlayerData3.getText());
-					
+					selectedPlayerGameDetailsIndexThree
+							.setText(popoverPlayerData3.getText());
+
 					TextView popoverPlayerData4 = (TextView) (arg1
 							.findViewById(R.id.popover_player_data4));
-					
+
 					TextView selectedPlayerGameDetailsIndexFour = (TextView) findViewById(R.id.selectedPlayerGameDetailsIndexFour);
-					selectedPlayerGameDetailsIndexFour.setText(popoverPlayerData4.getText());
-					
-					ImageView popover_player_pic= (ImageView)arg1.findViewById(R.id.popover_player_pic);
-					
-					ImageView selectedPlayerPic= (ImageView) findViewById(R.id.selectedPlayerPic);
-					selectedPlayerPic.setImageDrawable(popover_player_pic.getDrawable());
-					
+					selectedPlayerGameDetailsIndexFour
+							.setText(popoverPlayerData4.getText());
+
+					ImageView popover_player_pic = (ImageView) arg1
+							.findViewById(R.id.popover_player_pic);
+
+					ImageView selectedPlayerPic = (ImageView) findViewById(R.id.selectedPlayerPic);
+					selectedPlayerPic.setImageDrawable(popover_player_pic
+							.getDrawable());
+
 					popoverView.removeAllViews();
 				}
 			});
-			
-			
+
 			listView.setAdapter(adapter);
 
 			team1BtnPlayers = (TextView) findViewById(R.id.team1BtnPlayers);
@@ -882,24 +990,24 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		patriotHeaderView.setVisibility(View.INVISIBLE);
 		/*
 		 * ft = fragmentManager.beginTransaction();
-		 *
+		 * 
 		 * if (maninMenuFragment.isVisible()) {
-		 *
+		 * 
 		 * ft.hide(maninMenuFragment);
-		 *
-		 *
+		 * 
+		 * 
 		 * Toast.makeText(AppContentActivity.this, "button clicked visible",
 		 * Toast.LENGTH_SHORT) .show();
-		 *
-		 *
+		 * 
+		 * 
 		 * } else {
-		 *
+		 * 
 		 * ft.show(maninMenuFragment);
-		 *
+		 * 
 		 * ft.addToBackStack(null);
-		 *
+		 * 
 		 * }
-		 *
+		 * 
 		 * ft.commit();
 		 */
 
@@ -1083,14 +1191,10 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		playCardBottomDetail
 				.add("Shayne Graham kicks 63-yards from HOU 35 to ATL 2.Jacquizz Rodgers to ATL 20 for 18-yards (3:09 4th)");
 
-		
-		
-		
 		// The parent LinearLayout for playCards
 		LinearLayout playCardParentLinearLayout = (LinearLayout) findViewById(R.id.parentLayoutOfPlayCardsId);
 
-		 DownloadImagesThreadPool downloadImagesThreadPool = new
-		 DownloadImagesThreadPool();
+		DownloadImagesThreadPool downloadImagesThreadPool = new DownloadImagesThreadPool();
 
 		TextView selectedCategoryTextView = (TextView) findViewById(R.id.selectedCategoryTextViewId);
 		selectedCategoryTextView.setText("NEW ENGLAND PATRIOTS");
@@ -1099,7 +1203,8 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 
 			playCardParentLinearLayout.addView(getPlayCardView(context, index,
 					playCardTopDetail.get(index),
-					playCardBottomDetail.get(index), getResources(),downloadImagesThreadPool));
+					playCardBottomDetail.get(index), getResources(),
+					downloadImagesThreadPool));
 			View marginView = new View(context);
 			marginView.setLayoutParams(new LayoutParams(20, 0));
 			playCardParentLinearLayout.addView(marginView);
@@ -1109,10 +1214,12 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 
 	private View getPlayCardView(Context context2, int index,
 			String playCardTopDetail, String playCardBottomDetail,
-			Resources resources,DownloadImagesThreadPool downloadImagesThreadPool) {
+			Resources resources,
+			DownloadImagesThreadPool downloadImagesThreadPool) {
 
 		return new PlayCardView(context2, index, playCardTopDetail,
-				playCardBottomDetail, resources, this).getPlayCard(downloadImagesThreadPool);
+				playCardBottomDetail, resources, this)
+				.getPlayCard(downloadImagesThreadPool);
 	}
 
 	public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
@@ -1139,4 +1246,15 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 			bmImage.setImageBitmap(result);
 		}
 	}
+
+	public void makeTabInvisibleForEnlargingScoreBoard() {
+		LinearLayout playerDetailsTab = (LinearLayout) findViewById(R.id.playerTab);
+		LinearLayout statisticsDetailsTab = (LinearLayout) findViewById(R.id.statTab);
+		if (playerDetailsTab.getVisibility() == View.VISIBLE) {
+			playerDetailsTab.setVisibility(View.INVISIBLE);
+		} else if (statisticsDetailsTab.getVisibility() == View.VISIBLE) {
+			statisticsDetailsTab.setVisibility(View.INVISIBLE);
+		}
+	}
+
 }
