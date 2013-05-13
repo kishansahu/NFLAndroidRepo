@@ -1,6 +1,9 @@
 package com.liveclips.nfl.model;
+import java.util.Comparator;
 
-public class PlayerItem {
+import android.R.integer;
+
+public class PlayerItem implements Comparable<PlayerItem>{
 	public String playerdata1;
 	public String playerdata2;
 	public String playerdata3;
@@ -161,5 +164,63 @@ public class PlayerItem {
 		this.teamLogo = teamLogo;
 
 	}
+
+	/*
+     * Comparator implementation to Player Item object based on playerName
+     */
+    public static class playerNameInAscendingOrder implements Comparator<PlayerItem> {
+
+        @Override
+        public int compare(PlayerItem o1, PlayerItem o2) {
+        	return o1.playerName.compareTo(o2.playerName);
+        }
+    }
+    
+    /*
+     * Comparator implementation to Player Item object based on playerName
+     */
+    public static class playerNameInDescendingOrder implements Comparator<PlayerItem> {
+
+        @Override
+        public int compare(PlayerItem o1, PlayerItem o2) {
+        	return o2.playerName.compareTo(o1.playerName);
+        }
+    }
+    
+    /*
+     * Comparator implementation to Player Item object based on playerNum
+     */
+    public static class playerNumInAscendingOrder implements Comparator<PlayerItem> {
+
+        @Override
+        public int compare(PlayerItem o1, PlayerItem o2) {
+        	int num1 = (Integer.parseInt(o1.playerNumber));
+        	int num2 = (Integer.parseInt(o2.playerNumber));
+        	
+        	return num1 > num2 ? 1 : (num1 < num2 ? -1 : 0);
+        }
+    }
+    
+    /*
+     * Comparator implementation to Player Item object based on playerNum
+     */
+    public static class playerNumInDescendingOrder implements Comparator<PlayerItem> {
+    	
+        @Override
+        public int compare(PlayerItem o1, PlayerItem o2) {
+        	int num1 = (Integer.parseInt(o1.playerNumber));
+        	int num2 = (Integer.parseInt(o2.playerNumber));
+        	
+        	return num2 > num1 ? 1 : (num2 < num1 ? -1 : 0);
+        }
+    }
+
+	@Override
+	public int compareTo(PlayerItem another) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
 
 }
