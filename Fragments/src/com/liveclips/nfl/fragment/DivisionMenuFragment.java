@@ -267,7 +267,7 @@ public class DivisionMenuFragment extends Fragment{
 			TextView team_Name3 = (TextView) view.findViewById(R.id.team_3_name);
 			TeamItem teamItem3 = new TeamItem();
 			//teamItem3.setDrawable(team_3.getDrawable());
-			teamItem3.setTeamLogo(team_3.getImageAlpha());
+			//teamItem3.setTeamLogo(team_3.getImageAlpha());
 			teamItem3.setTeamName((String) team_Name3.getText());
 			conferenceItem.setTeam_3(teamItem3);
 			
@@ -275,7 +275,7 @@ public class DivisionMenuFragment extends Fragment{
 			TextView team_Name4 = (TextView) view.findViewById(R.id.team_4_name);
 			TeamItem teamItem4 = new TeamItem();
 			//teamItem4.setDrawable(team_4.getDrawable());
-			teamItem4.setTeamLogo(team_4.getImageAlpha());
+			//teamItem4.setTeamLogo(team_4.getImageAlpha());
 			teamItem4.setTeamName((String) team_Name4.getText());
 			conferenceItem.setTeam_4(teamItem4);
 			//ConferenceHolder ConferenceHolder = (ConferenceHolder)arg1;

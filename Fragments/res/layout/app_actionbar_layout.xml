@@ -7,7 +7,7 @@
     
 
         <RelativeLayout
-            android:id="@+id/menuHeaderForAppStart"
+            android:id="@+id/fragmentMenuHeaderForAppStart"
             android:layout_width="300dp"
             android:layout_height="fill_parent"
             android:visibility="visible" >
@@ -40,7 +40,7 @@
         android:id="@+id/sliderView"
         android:layout_width="40dp"
         android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/menuHeaderForAppStart"
+        android:layout_toRightOf="@+id/fragmentMenuHeaderForAppStart"
         android:layout_centerVertical="true"
         android:src="@drawable/menuicon"
         android:visibility="invisible" >

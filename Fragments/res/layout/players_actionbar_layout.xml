@@ -5,7 +5,7 @@
     android:orientation="horizontal" >
 
     <RelativeLayout
-        android:id="@+id/menuHeader"
+        android:id="@+id/fragmentMenuHeader"
         android:layout_width="300dp"
         android:layout_height="fill_parent" 
         android:visibility="invisible">
@@ -43,7 +43,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/patriotHeader"
+        android:id="@+id/activityMenuHeader"
         android:layout_width="300dp"
         android:layout_height="fill_parent"
          >

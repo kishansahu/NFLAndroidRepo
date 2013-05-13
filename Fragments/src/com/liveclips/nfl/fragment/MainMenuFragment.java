@@ -73,7 +73,7 @@ public class MainMenuFragment extends Fragment {
 				TextView menuTitle = (TextView) getActivity().findViewById(
 						R.id.menuTitle);
 				menuTitle.setText(selectedtextView.getText());
-				ImageView closeBtnImageView = (ImageView) getActivity()
+				ImageView closeBtnImageView = (ImageView) getActivity().getActionBar().getCustomView()
 						.findViewById(R.id.closeButtonHeader);
 				closeBtnImageView.setVisibility(View.VISIBLE);
 				View sliderView = getActivity().findViewById(R.id.sliderView);

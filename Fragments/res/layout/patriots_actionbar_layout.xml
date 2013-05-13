@@ -5,10 +5,10 @@
     android:orientation="horizontal" >
 
     <RelativeLayout
-        android:id="@+id/menuHeader"
+        android:id="@+id/fragmentMenuHeader"
         android:layout_width="300dp"
-        android:layout_height="fill_parent" 
-        android:visibility="invisible">
+        android:layout_height="fill_parent"
+        android:visibility="invisible" >
 
         <TextView
             android:id="@+id/menuTitle"
@@ -17,8 +17,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="7dp"
             android:text="LiveClips"
-            android:textSize="21sp" 
-            android:textStyle="bold">
+            android:textSize="21sp"
+            android:textStyle="bold" >
         </TextView>
 
         <ImageView
@@ -43,10 +43,9 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/patriotHeader"
+        android:id="@+id/activityMenuHeader"
         android:layout_width="300dp"
-        android:layout_height="fill_parent"
-         >
+        android:layout_height="fill_parent" >
 
         <ImageView
             android:id="@+id/sliderView"

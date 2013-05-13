@@ -3,9 +3,7 @@ package com.liveclips.nfl.activity;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -26,7 +24,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -34,14 +31,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
-
 import com.liveclips.nfl.R;
 import com.liveclips.nfl.adapter.DriveListViewAdapter;
 import com.liveclips.nfl.adapter.PlayerListViewAdapter;
 import com.liveclips.nfl.adapter.ScheduleListViewAdapter;
 import com.liveclips.nfl.adapter.SeparatedListAdapter;
 import com.liveclips.nfl.adapter.StatsListViewAdapter;
-import com.liveclips.nfl.fragment.MainMenuFragment;
 import com.liveclips.nfl.model.DriveItem;
 import com.liveclips.nfl.model.PlayerItem;
 import com.liveclips.nfl.model.ScheduleItem;
@@ -52,15 +47,12 @@ import com.liveclips.nfl.utils.DownloadImagesThreadPool;
 import com.liveclips.nfl.utils.NflUtils;
 import com.liveclips.nfl.utils.PlayCardView;
 
-public class GameActivity extends Activity implements PopoverViewDelegate {
+public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 
 	protected Context context = GameActivity.this;
 	FragmentManager fragmentManager;
 	Fragment mainMenuFragment;
 	FragmentTransaction ft;
-	View sliderView;
-	ImageButton closeButtonHeader;
-	TextView headerTextView;
 	boolean showSlider;
 	ListView listView;
 	PopoverView popoverView;
@@ -71,14 +63,12 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 	TextView watchAllTextView;
 	RelativeLayout playCardLayout;
 	VideoView playCardVideoView;
-	// ImageView playCardImageView;
 	TextView team1BtnPlayers;
 	TextView team2BtnPlayers;
 	LayoutInflater layoutInflater;
-	View menuHeaderView;
-	View patriotHeaderView;
+	View fragmentMenuHeaderView;
+	View activityMenuHeaderView;
 	int playCardVideoId = 0;
-	DownloadImageTask downloadImageTask;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +76,7 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		setContentView(R.layout.activity_game);
 
 		context = this;
-		fragmentManager = getFragmentManager();
+
 		allPlaysTextView = (TextView) findViewById(R.id.allPlaysId);
 		topPlaysTextView = (TextView) findViewById(R.id.topPlaysId);
 		topRatedTextView = (TextView) findViewById(R.id.topRatedId);
@@ -99,7 +89,125 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		RelativeLayout matchScoreBoardBackground = (RelativeLayout) findViewById(R.id.matchScoreBoardBackground);
 		matchScoreBoardBackground
 				.setOnClickListener(matchScoreBoardBackgroundClickListener);
+
+		createCustomActionBar();
+
 		playCards();
+
+	}
+
+	protected void createCustomActionBar() {
+
+		ActionBar actionBar = getActionBar();
+		View mActionBarView = getLayoutInflater().inflate(
+				R.layout.patriots_actionbar_layout, null);
+		actionBar.setCustomView(mActionBarView);
+		actionBar.setBackgroundDrawable(new ColorDrawable(0xFFFF8B1D));
+		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+
+		View scheduleView = mActionBarView.findViewById(R.id.scheduleView);
+
+		scheduleView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				RelativeLayout rootView = (RelativeLayout) findViewById(R.id.gameRootView);
+				if (popoverView != null) {
+					popoverView.removeAllViews();
+				}
+				popoverView = new PopoverView(GameActivity.this,
+						R.layout.popover_game_schedule_view);
+
+				popoverView.setContentSizeForViewInPopover(new Point(320, 400));
+				popoverView.setDelegate(GameActivity.this);
+				View button = (View) findViewById(R.id.scheduleView);
+				popoverView.showPopoverFromRectInViewGroup(rootView,
+						PopoverView.getFrameForView(button),
+						PopoverView.PopoverArrowDirectionUp, true);
+
+			}
+		});
+
+		View statusView = mActionBarView.findViewById(R.id.statsView);
+
+		statusView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				RelativeLayout rootView = (RelativeLayout) findViewById(R.id.gameRootView);
+				if (popoverView != null) {
+					popoverView.removeAllViews();
+				}
+				popoverView = new PopoverView(GameActivity.this,
+						R.layout.popover_game_stats_view);
+
+				popoverView.setContentSizeForViewInPopover(new Point(320, 400));
+				popoverView.setDelegate(GameActivity.this);
+				View button = (View) findViewById(R.id.statsView);
+				popoverView.showPopoverFromRectInViewGroup(rootView,
+						PopoverView.getFrameForView(button),
+						PopoverView.PopoverArrowDirectionUp, true);
+
+			}
+		});
+
+		View drivesView = mActionBarView.findViewById(R.id.drivesView);
+
+		drivesView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				RelativeLayout rootView = (RelativeLayout) findViewById(R.id.gameRootView);
+				if (popoverView != null) {
+					popoverView.removeAllViews();
+				}
+				popoverView = new PopoverView(GameActivity.this,
+						R.layout.popover_game_drives_view);
+
+				popoverView.setContentSizeForViewInPopover(new Point(320, 400));
+				popoverView.setDelegate(GameActivity.this);
+				View button = (View) findViewById(R.id.drivesView);
+				popoverView.showPopoverFromRectInViewGroup(rootView,
+						PopoverView.getFrameForView(button),
+						PopoverView.PopoverArrowDirectionUp, true);
+
+			}
+		});
+
+		View playersView = mActionBarView.findViewById(R.id.playersView);
+
+		playersView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				RelativeLayout rootView = (RelativeLayout) findViewById(R.id.gameRootView);
+				if (popoverView != null) {
+					popoverView.removeAllViews();
+				}
+				popoverView = new PopoverView(GameActivity.this,
+						R.layout.popover_game_player_view);
+
+				popoverView.setContentSizeForViewInPopover(new Point(320, 400));
+				popoverView.setDelegate(GameActivity.this);
+				View button = (View) findViewById(R.id.playersView);
+				popoverView.showPopoverFromRectInViewGroup(rootView,
+						PopoverView.getFrameForView(button),
+						PopoverView.PopoverArrowDirectionUp, true);
+
+			}
+		});
+
+		Button alertButton = (Button) mActionBarView
+				.findViewById(R.id.alertButton);
+		alertButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Log.d("alert", "alert");
+
+			}
+		});
 
 	}
 
@@ -189,7 +297,8 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 		relParams.addRule(RelativeLayout.LEFT_OF,
 				R.id.secondTeamLargeIconContainer);
 		relParams.topMargin = (NflUtils.convertPixelToDensityPixel(context, 55));
-		relParams.rightMargin = (NflUtils.convertPixelToDensityPixel(context, 25));
+		relParams.rightMargin = (NflUtils.convertPixelToDensityPixel(context,
+				25));
 		LinearLayout secondTeamDescriptionContainer = (LinearLayout) findViewById(R.id.secondTeamDescriptionContainer);
 		secondTeamDescriptionContainer.setLayoutParams(relParams);
 		NflUtils.setScoreBannerShrinked(false);
@@ -280,160 +389,8 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 	}
 
 	@Override
-	protected void onResume() {
-
-		/*
-		 * headerTextView = (TextView)
-		 * mainMenuFragment.getView().findViewById(R.id.menuHeader);
-		 * headerTextView.setText("LiveClips"); closeButtonHeader =
-		 * (ImageButton)
-		 * mainMenuFragment.getView().findViewById(R.id.closeButtonHeader);
-		 * closeButtonHeader.setVisibility(View.VISIBLE);
-		 * closeButtonHeader.setOnClickListener(closeButtonListener);
-		 */
-		super.onResume();
-	}
-
-	/*
-	 * @Override public boolean onCreateOptionsMenu(Menu menu) { MenuInflater
-	 * inflater = getMenuInflater();
-	 * inflater.inflate(R.menu.game_menu_actionbar, menu); return true; }
-	 */
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-		ActionBar actionBar = getActionBar();
-		View mActionBarView = getLayoutInflater().inflate(
-				R.layout.patriots_actionbar_layout, null);
-		actionBar.setCustomView(mActionBarView);
-		actionBar.setBackgroundDrawable(new ColorDrawable(0xFFFF8B1D));
-		actionBar.setDisplayShowHomeEnabled(false);
-		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-		menuHeaderView = mActionBarView.findViewById(R.id.menuHeader);
-		patriotHeaderView = mActionBarView.findViewById(R.id.patriotHeader);
-		sliderView = mActionBarView.findViewById(R.id.sliderView);
-		sliderView.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				performSliderAction();
-
-			}
-		});
-
-		View closeButtonView = mActionBarView
-				.findViewById(R.id.closeButtonHeader);
-		closeButtonView.setOnClickListener(closeButtonListener);
-
-		View scheduleView = mActionBarView.findViewById(R.id.scheduleView);
-		scheduleView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				RelativeLayout rootView = (RelativeLayout) findViewById(R.id.gameRootView);
-				if (popoverView != null) {
-					popoverView.removeAllViews();
-				}
-				popoverView = new PopoverView(GameActivity.this,
-						R.layout.popover_game_schedule_view);
-
-				popoverView.setContentSizeForViewInPopover(new Point(320, 400));
-				popoverView.setDelegate(GameActivity.this);
-				View button = (View) findViewById(R.id.scheduleView);
-				popoverView.showPopoverFromRectInViewGroup(rootView,
-						PopoverView.getFrameForView(button),
-						PopoverView.PopoverArrowDirectionUp, true);
-
-			}
-		});
-
-		View statusView = mActionBarView.findViewById(R.id.statsView);
-		statusView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				RelativeLayout rootView = (RelativeLayout) findViewById(R.id.gameRootView);
-				if (popoverView != null) {
-					popoverView.removeAllViews();
-				}
-				popoverView = new PopoverView(GameActivity.this,
-						R.layout.popover_game_stats_view);
-
-				popoverView.setContentSizeForViewInPopover(new Point(320, 400));
-				popoverView.setDelegate(GameActivity.this);
-				View button = (View) findViewById(R.id.statsView);
-				popoverView.showPopoverFromRectInViewGroup(rootView,
-						PopoverView.getFrameForView(button),
-						PopoverView.PopoverArrowDirectionUp, true);
-
-			}
-		});
-
-		View drivesView = mActionBarView.findViewById(R.id.drivesView);
-		drivesView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				RelativeLayout rootView = (RelativeLayout) findViewById(R.id.gameRootView);
-				if (popoverView != null) {
-					popoverView.removeAllViews();
-				}
-				popoverView = new PopoverView(GameActivity.this,
-						R.layout.popover_game_drives_view);
-
-				popoverView.setContentSizeForViewInPopover(new Point(320, 400));
-				popoverView.setDelegate(GameActivity.this);
-				View button = (View) findViewById(R.id.drivesView);
-				popoverView.showPopoverFromRectInViewGroup(rootView,
-						PopoverView.getFrameForView(button),
-						PopoverView.PopoverArrowDirectionUp, true);
-
-			}
-		});
-
-		View playersView = mActionBarView.findViewById(R.id.playersView);
-		playersView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				RelativeLayout rootView = (RelativeLayout) findViewById(R.id.gameRootView);
-				if (popoverView != null) {
-					popoverView.removeAllViews();
-				}
-				popoverView = new PopoverView(GameActivity.this,
-						R.layout.popover_game_player_view);
-
-				popoverView.setContentSizeForViewInPopover(new Point(320, 400));
-				popoverView.setDelegate(GameActivity.this);
-				View button = (View) findViewById(R.id.playersView);
-				popoverView.showPopoverFromRectInViewGroup(rootView,
-						PopoverView.getFrameForView(button),
-						PopoverView.PopoverArrowDirectionUp, true);
-
-			}
-		});
-
-		Button alertButton = (Button) mActionBarView
-				.findViewById(R.id.alertButton);
-		alertButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Log.d("alert", "alert");
-
-			}
-		});
-
-	}
-
-	@Override
 	public void popoverViewWillShow(PopoverView view) {
 		Log.i("POPOVER", "Will show : " + view.getChildCount());
-		// ListView list = (ListView) view.getChildCount();
-		// ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-		// android.R.layout.simple_list_item_1,FRUITS);
-		// list.setAdapter(adapter);
 	}
 
 	public List<PlayerItem> getPlayers(String teamName, String teamType) {
@@ -972,82 +929,6 @@ public class GameActivity extends Activity implements PopoverViewDelegate {
 	public void popoverViewDidDismiss(PopoverView view) {
 		Log.i("POPOVER", "Did dismiss");
 	}
-
-	private void performSliderAction() {
-		Log.d("slider", "clickee");
-		ft = fragmentManager.beginTransaction();
-		mainMenuFragment = new MainMenuFragment();
-
-		ft.replace(R.id.menuFragment, mainMenuFragment);
-		ft.commit();
-		TextView menuTitle = (TextView) menuHeaderView
-				.findViewById(R.id.menuTitle);
-		menuTitle.setText("Menu");
-		ImageView closeBtnImage = (ImageView) menuHeaderView
-				.findViewById(R.id.closeButtonHeader);
-		closeBtnImage.setVisibility(View.INVISIBLE);
-		menuHeaderView.setVisibility(View.VISIBLE);
-		patriotHeaderView.setVisibility(View.INVISIBLE);
-		/*
-		 * ft = fragmentManager.beginTransaction();
-		 * 
-		 * if (maninMenuFragment.isVisible()) {
-		 * 
-		 * ft.hide(maninMenuFragment);
-		 * 
-		 * 
-		 * Toast.makeText(AppContentActivity.this, "button clicked visible",
-		 * Toast.LENGTH_SHORT) .show();
-		 * 
-		 * 
-		 * } else {
-		 * 
-		 * ft.show(maninMenuFragment);
-		 * 
-		 * ft.addToBackStack(null);
-		 * 
-		 * }
-		 * 
-		 * ft.commit();
-		 */
-
-	};
-
-	private OnClickListener closeButtonListener = new OnClickListener() {
-
-		@Override
-		public void onClick(View v) {
-			Log.d("gameclose", "closeclick");
-			ft = fragmentManager.beginTransaction();
-			mainMenuFragment = getFragmentManager().findFragmentById(
-					R.id.menuFragment);
-			if (mainMenuFragment.isVisible()) {
-
-				ft.hide(mainMenuFragment);
-				showSlider = true;
-				menuHeaderView.setVisibility(View.INVISIBLE);
-				sliderView.setVisibility(View.VISIBLE);
-				patriotHeaderView.setVisibility(View.VISIBLE);
-
-			} else {
-
-				ft.show(mainMenuFragment);
-
-				ft.addToBackStack(null);
-
-			}
-
-			ft.commit();
-
-		}
-
-	};
-
-	/*
-	 * public boolean onPrepareOptionsMenu(Menu menu) { if (showSlider) {
-	 * menu.getItem(0).setVisible(true); showSlider = false; } return
-	 * super.onPrepareOptionsMenu(menu); };
-	 */
 
 	private OnClickListener allPlaysClickListener = new OnClickListener() {
 

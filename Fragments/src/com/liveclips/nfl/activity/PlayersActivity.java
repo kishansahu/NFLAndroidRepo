@@ -1,9 +1,7 @@
 package com.liveclips.nfl.activity;
 
 import java.util.ArrayList;
-
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -11,25 +9,21 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.liveclips.nfl.R;
 import com.liveclips.nfl.fragment.AddPlayersFragment;
-import com.liveclips.nfl.fragment.MainMenuFragment;
 import com.liveclips.nfl.utils.DownloadImagesThreadPool;
 import com.liveclips.nfl.utils.PlayCardView;
 
-public class PlayersActivity extends Activity {
+public class PlayersActivity extends BaseActivity {
 
 	protected Context context = PlayersActivity.this;
-	
+
 	FragmentManager fragmentManager;
 	Fragment mainMenuFragment;
 	Fragment addPlayersFragment;
@@ -42,28 +36,19 @@ public class PlayersActivity extends Activity {
 		fragmentManager = getFragmentManager();
 		playCards();
 
-		
-		ActionBar actionBar = getActionBar();
-		View mActionBarView = getLayoutInflater().inflate(
-				R.layout.players_actionbar_layout, null);
-		actionBar.setCustomView(mActionBarView);
-		actionBar.setBackgroundDrawable(new ColorDrawable(0xFFFF8B1D));
-		actionBar.setDisplayShowHomeEnabled(false);
-		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+		String[] playersName = { "Tom Brady", "Rob Gronkowski" };
+		String[] playersDetails = { "#12 | QB", "#87 | TE" };
+		String[] playerGameDetails = { "20 / 29, 268 YDS,2 TD, 1 INT",
+				"5 REC, 56 YDS, 2 TD" };
+		int[] playerPic = { R.drawable.tom_brady, R.drawable.rob_gronkowski };
 
-		View sliderView = mActionBarView.findViewById(R.id.sliderView);
-		String[] playersName = { "Tom Brady", "Rob Gronkowski"};
-		String[] playersDetails = { "#12 | QB", "#87 | TE"};
-		String[] playerGameDetails = { "20 / 29, 268 YDS,2 TD, 1 INT", "5 REC, 56 YDS, 2 TD"};
-		int[] playerPic = {R.drawable.tom_brady, R.drawable.rob_gronkowski};
-		 
 		/**
 		 * include a xml multiple time in a parent xml
 		 */
 
 		LinearLayout wrapper = (LinearLayout) findViewById(R.id.myPlayersContainer);
 		LinearLayout inflatedView;
-		
+
 		if (playersName.length != 0) {
 			int i;
 			for (i = 0; i < playersName.length; i++) {
@@ -96,32 +81,28 @@ public class PlayersActivity extends Activity {
 
 		ImageButton addaplayerButton = (ImageButton) findViewById(R.id.addaplayerButton);
 		addaplayerButton.setOnClickListener((new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				showAddPlayersFragment();
-				
+
 			}
 		}));
 
-		sliderView.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				performSliderAction();
-
-			}
-		});
-
-	
+		createCustomActionBar();
 
 	}
 
-	
-	@Override
-	protected void onStart() {
+	protected void createCustomActionBar() {
 		
-		super.onStart();
+		ActionBar actionBar = getActionBar();
+		View mActionBarView = getLayoutInflater().inflate(
+				R.layout.players_actionbar_layout, null);
+		actionBar.setCustomView(mActionBarView);
+		actionBar.setBackgroundDrawable(new ColorDrawable(0xFFFF8B1D));
+		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+
 	}
 
 	public void showAddPlayersFragment() {
@@ -133,25 +114,6 @@ public class PlayersActivity extends Activity {
 
 	}
 
-	private void performSliderAction() {
-
-		ft = fragmentManager.beginTransaction();
-		mainMenuFragment = new MainMenuFragment();
-		ft.replace(R.id.menuFragment, mainMenuFragment);
-		ft.commit();
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle item selection
-		switch (item.getItemId()) {
-		case R.id.sliderButton:
-			performSliderAction();
-			return true;
-		}
-		return false;
-	}
-	
 	private void playCards() {
 
 		ArrayList<String> playCardTopDetail = new ArrayList<String>();
@@ -230,14 +192,10 @@ public class PlayersActivity extends Activity {
 		playCardBottomDetail
 				.add("Shayne Graham kicks 63-yards from HOU 35 to ATL 2.Jacquizz Rodgers to ATL 20 for 18-yards (3:09 4th)");
 
-		
-		
-		
 		// The parent LinearLayout for playCards
 		LinearLayout playCardParentLinearLayout = (LinearLayout) findViewById(R.id.parentLayoutOfPlayCardsId);
 
-		 DownloadImagesThreadPool downloadImagesThreadPool = new
-		 DownloadImagesThreadPool();
+		DownloadImagesThreadPool downloadImagesThreadPool = new DownloadImagesThreadPool();
 
 		TextView selectedCategoryTextView = (TextView) findViewById(R.id.selectedCategoryTextViewId);
 		selectedCategoryTextView.setText("NEW ENGLAND PATRIOTS");
@@ -246,7 +204,8 @@ public class PlayersActivity extends Activity {
 
 			playCardParentLinearLayout.addView(getPlayCardView(context, index,
 					playCardTopDetail.get(index),
-					playCardBottomDetail.get(index), getResources(),downloadImagesThreadPool));
+					playCardBottomDetail.get(index), getResources(),
+					downloadImagesThreadPool));
 			View marginView = new View(context);
 			marginView.setLayoutParams(new LayoutParams(20, 0));
 			playCardParentLinearLayout.addView(marginView);
@@ -256,9 +215,11 @@ public class PlayersActivity extends Activity {
 
 	private View getPlayCardView(Context context2, int index,
 			String playCardTopDetail, String playCardBottomDetail,
-			Resources resources,DownloadImagesThreadPool downloadImagesThreadPool) {
+			Resources resources,
+			DownloadImagesThreadPool downloadImagesThreadPool) {
 
 		return new PlayCardView(context2, index, playCardTopDetail,
-				playCardBottomDetail, resources, this).getPlayCard(downloadImagesThreadPool);
+				playCardBottomDetail, resources, this)
+				.getPlayCard(downloadImagesThreadPool);
 	}
 }

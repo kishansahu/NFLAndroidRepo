@@ -42,7 +42,7 @@ import com.liveclips.nfl.utils.PlayCardView;
  * @author mohitkumar
  * 
  */
-public class NFLHighlightsActivity extends Activity implements
+public class NFLHighlightsActivity extends BaseActivity implements
 		PopoverViewDelegate {
 
 	private ArrayList<String> playCardTopDetail = new ArrayList<String>();
@@ -67,14 +67,14 @@ public class NFLHighlightsActivity extends Activity implements
 
 		downloadImagesThreadPool = new DownloadImagesThreadPool();
 
+		createCustomActionBar();
+
 		prepareVideoView();
 
 	}
 
-	@Override
-	protected void onStart() {
+	protected void createCustomActionBar() {
 
-		super.onStart();
 		ActionBar actionBar = getActionBar();
 		View mActionBarView = getLayoutInflater().inflate(
 				R.layout.nfl_highlights_menu_actionbar, null);
@@ -86,15 +86,15 @@ public class NFLHighlightsActivity extends Activity implements
 		LinearLayout weekLinearLayout = (LinearLayout) mActionBarView
 				.findViewById(R.id.weekLayout);
 		weekLinearLayout.setOnClickListener(weekOnClickListener);
-		
+
 		LinearLayout leaderLinearLayout = (LinearLayout) mActionBarView
 				.findViewById(R.id.leadersLayout);
 		leaderLinearLayout.setOnClickListener(leaderOnClickListener);
-		
+
 		LinearLayout milestonesLinearLayout = (LinearLayout) mActionBarView
 				.findViewById(R.id.milestonesLayout);
 		milestonesLinearLayout.setOnClickListener(milestonesOnClickListener);
-		
+
 		LinearLayout standingLinearLayout = (LinearLayout) mActionBarView
 				.findViewById(R.id.standingLayout);
 		standingLinearLayout.setOnClickListener(standingOnClickListener);
@@ -123,7 +123,7 @@ public class NFLHighlightsActivity extends Activity implements
 
 		}
 	};
-	
+
 	private OnClickListener leaderOnClickListener = new OnClickListener() {
 
 		@Override
@@ -144,7 +144,7 @@ public class NFLHighlightsActivity extends Activity implements
 
 		}
 	};
-	
+
 	private OnClickListener milestonesOnClickListener = new OnClickListener() {
 
 		@Override
@@ -165,7 +165,7 @@ public class NFLHighlightsActivity extends Activity implements
 
 		}
 	};
-	
+
 	private OnClickListener standingOnClickListener = new OnClickListener() {
 
 		@Override
@@ -246,78 +246,90 @@ public class NFLHighlightsActivity extends Activity implements
 
 			listView.setAdapter(weekListAdapter);
 
-		}
-		else if(view.getLayoutId() == R.layout.popover_nfl_leaders_item){
-			
-			SeparatedListAdapter separatedListAdapter = new SeparatedListAdapter(context);
+		} else if (view.getLayoutId() == R.layout.popover_nfl_leaders_item) {
+
+			SeparatedListAdapter separatedListAdapter = new SeparatedListAdapter(
+					context);
 			List<LeadersTypeItem> offenceLeadersTypeItems = new ArrayList<LeadersTypeItem>();
-			
+
 			LeadersTypeItem item1 = new LeadersTypeItem();
 			item1.setLeadersTypeName("Passing Yards");
 			offenceLeadersTypeItems.add(item1);
-			
-			LeadersTypeItem item2= new LeadersTypeItem();
+
+			LeadersTypeItem item2 = new LeadersTypeItem();
 			item2.setLeadersTypeName("Rushing Yards");
 			offenceLeadersTypeItems.add(item2);
-			
+
 			LeadersTypeItem item3 = new LeadersTypeItem();
 			item3.setLeadersTypeName("Receiving Yards");
 			offenceLeadersTypeItems.add(item3);
-			
+
 			LeadersTypeItem item4 = new LeadersTypeItem();
 			item4.setLeadersTypeName("Touchdown");
 			offenceLeadersTypeItems.add(item4);
-			
+
 			LeadersTypeItem item5 = new LeadersTypeItem();
 			item5.setLeadersTypeName("Scoring");
 			offenceLeadersTypeItems.add(item5);
-			
-			separatedListAdapter.addSection("Offense", new NFLHighlightsLeadersListAdapter(context, R.layout.nfl_highlights_leader_menu_item, offenceLeadersTypeItems));
-			
+
+			separatedListAdapter.addSection("Offense",
+					new NFLHighlightsLeadersListAdapter(context,
+							R.layout.nfl_highlights_leader_menu_item,
+							offenceLeadersTypeItems));
+
 			List<LeadersTypeItem> defenceLeadersTypeItems = new ArrayList<LeadersTypeItem>();
-			
+
 			LeadersTypeItem item6 = new LeadersTypeItem();
 			item6.setLeadersTypeName("Sacks");
 			defenceLeadersTypeItems.add(item6);
-			
+
 			LeadersTypeItem item7 = new LeadersTypeItem();
 			item7.setLeadersTypeName("Interceptions");
 			defenceLeadersTypeItems.add(item7);
-			
+
 			LeadersTypeItem item8 = new LeadersTypeItem();
 			item8.setLeadersTypeName("Tackels");
 			defenceLeadersTypeItems.add(item8);
-			
-			separatedListAdapter.addSection("Defense", new NFLHighlightsLeadersListAdapter(context, R.layout.nfl_highlights_leader_menu_item, defenceLeadersTypeItems));
-			
+
+			separatedListAdapter.addSection("Defense",
+					new NFLHighlightsLeadersListAdapter(context,
+							R.layout.nfl_highlights_leader_menu_item,
+							defenceLeadersTypeItems));
+
 			List<LeadersTypeItem> specialTeamLeadersTypeItems = new ArrayList<LeadersTypeItem>();
-			
+
 			LeadersTypeItem item9 = new LeadersTypeItem();
 			item9.setLeadersTypeName("Punts");
 			specialTeamLeadersTypeItems.add(item9);
-			
+
 			LeadersTypeItem item10 = new LeadersTypeItem();
 			item10.setLeadersTypeName("Punts Returns");
 			specialTeamLeadersTypeItems.add(item10);
-			
+
 			LeadersTypeItem item11 = new LeadersTypeItem();
 			item11.setLeadersTypeName("Kick Returns");
 			specialTeamLeadersTypeItems.add(item11);
-			
+
 			LeadersTypeItem item12 = new LeadersTypeItem();
 			item12.setLeadersTypeName("Filed Goals");
 			specialTeamLeadersTypeItems.add(item12);
-			
-			separatedListAdapter.addSection("Special Teams", new NFLHighlightsLeadersListAdapter(context, R.layout.nfl_highlights_leader_menu_item, specialTeamLeadersTypeItems));
-			//NFLHighlightsLeadersListAdapter adapter = new NFLHighlightsLeadersListAdapter(context, R.layout.nfl_highlights_leader_menu_item, specialTeamLeadersTypeItems);
+
+			separatedListAdapter.addSection("Special Teams",
+					new NFLHighlightsLeadersListAdapter(context,
+							R.layout.nfl_highlights_leader_menu_item,
+							specialTeamLeadersTypeItems));
+			// NFLHighlightsLeadersListAdapter adapter = new
+			// NFLHighlightsLeadersListAdapter(context,
+			// R.layout.nfl_highlights_leader_menu_item,
+			// specialTeamLeadersTypeItems);
 			listView = (ListView) findViewById(R.id.leaders_list);
-			
+
 			listView.setAdapter(separatedListAdapter);
 			listView.setOnItemClickListener(leadersItemClickListener);
-			
-		}else if(view.getLayoutId() == R.layout.popover_nfl_passing_leaders_item){
+
+		} else if (view.getLayoutId() == R.layout.popover_nfl_passing_leaders_item) {
 			List<PassingLeaderItem> items = new ArrayList<PassingLeaderItem>();
-			
+
 			PassingLeaderItem leaderItem1 = new PassingLeaderItem();
 			leaderItem1.setLeaderName("Loe Flacco");
 			leaderItem1.setYards(221);
@@ -325,7 +337,7 @@ public class NFLHighlightsActivity extends Activity implements
 			leaderTeam1.setTeamName("BAL");
 			leaderItem1.setLeaderTeam(leaderTeam1);
 			items.add(leaderItem1);
-			
+
 			PassingLeaderItem leaderItem2 = new PassingLeaderItem();
 			leaderItem2.setLeaderName("Tom Brady");
 			leaderItem2.setYards(201);
@@ -333,7 +345,7 @@ public class NFLHighlightsActivity extends Activity implements
 			leaderTeam2.setTeamName("NE");
 			leaderItem2.setLeaderTeam(leaderTeam2);
 			items.add(leaderItem2);
-			
+
 			PassingLeaderItem leaderItem3 = new PassingLeaderItem();
 			leaderItem3.setLeaderName("Mat Rayana");
 			leaderItem3.setYards(181);
@@ -341,15 +353,16 @@ public class NFLHighlightsActivity extends Activity implements
 			leaderTeam3.setTeamName("EAI");
 			leaderItem3.setLeaderTeam(leaderTeam3);
 			items.add(leaderItem3);
-					
+
 			listView = (ListView) findViewById(R.id.passing_leaders_list);
-			PassingLeaderListViewAdapter adapter = new PassingLeaderListViewAdapter(context, R.layout.passing_leader_menu_row_layout, items);
+			PassingLeaderListViewAdapter adapter = new PassingLeaderListViewAdapter(
+					context, R.layout.passing_leader_menu_row_layout, items);
 			listView.setAdapter(adapter);
-			//for()
+			// for()
 		}
 
 	}
-	
+
 	private OnItemClickListener leadersItemClickListener = new OnItemClickListener() {
 
 		@Override
@@ -369,14 +382,12 @@ public class NFLHighlightsActivity extends Activity implements
 					PopoverView.getFrameForView(button),
 					PopoverView.PopoverArrowDirectionUp, true);
 
-			
 		}
-	
+
 	};
 
 	@Override
 	public void popoverViewWillDismiss(PopoverView view) {
-		
 
 	}
 
@@ -386,5 +397,4 @@ public class NFLHighlightsActivity extends Activity implements
 
 	}
 
-	
 }

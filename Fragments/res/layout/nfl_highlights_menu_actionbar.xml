@@ -5,7 +5,7 @@
     android:orientation="horizontal" >
 
     <RelativeLayout
-        android:id="@+id/menuHeader"
+        android:id="@+id/fragmentMenuHeader"
         android:layout_width="300dp"
         android:layout_height="fill_parent"
         android:visibility="invisible" >
@@ -33,7 +33,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/highlightsHeader"
+        android:id="@+id/activityMenuHeader"
         android:layout_width="300dp"
         android:layout_height="fill_parent" >
 
@@ -63,7 +63,6 @@
         android:layout_marginLeft="305dp"
         android:orientation="vertical" >
 
-        
         <TextView
             android:id="@+id/weekNumber"
             android:layout_width="wrap_content"
@@ -89,10 +88,9 @@
         <ImageView
             android:id="@+id/leadersImages"
             android:layout_width="wrap_content"
-            android:layout_height="20dp" 
+            android:layout_height="20dp"
             android:layout_gravity="center"
-            android:src="@drawable/icon_drives"/>
-        
+            android:src="@drawable/icon_drives" />
 
         <TextView
             android:id="@+id/leadersText"
@@ -112,10 +110,9 @@
         <ImageView
             android:id="@+id/milestonesImage"
             android:layout_width="wrap_content"
-            android:layout_height="20dp" 
+            android:layout_height="20dp"
             android:layout_gravity="center"
-            android:src="@drawable/icon_schedule"/>
-        
+            android:src="@drawable/icon_schedule" />
 
         <TextView
             android:id="@+id/milestoneText"
@@ -124,7 +121,7 @@
             android:layout_gravity="center"
             android:text="MILESTONES" />
     </LinearLayout>
-    
+
     <LinearLayout
         android:id="@+id/standingLayout"
         android:layout_width="100dp"
@@ -135,10 +132,10 @@
         <ImageView
             android:id="@+id/standingImage"
             android:layout_width="wrap_content"
-            android:layout_height="20dp" 
-           android:layout_gravity="center"
-            android:src="@drawable/icon_status"/>
-        
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/icon_status" />
+
         <TextView
             android:id="@+id/standingText"
             android:layout_width="wrap_content"
@@ -155,7 +152,5 @@
         android:layout_centerVertical="true"
         android:text="Alerts:Off" >
     </Button>
-    
-    
 
 </RelativeLayout>

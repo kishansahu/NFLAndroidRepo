@@ -78,8 +78,8 @@ public class AppContentActivity extends Activity {
 			 */
 			View view = findViewById(R.id.menuFragment);
 			view.setVisibility(View.INVISIBLE);
-			View menuHeader = findViewById(R.id.menuHeaderForAppStart);
-			menuHeader.setVisibility(View.GONE);
+			View fragmentMenuHeader = findViewById(R.id.fragmentMenuHeaderForAppStart);
+			fragmentMenuHeader.setVisibility(View.GONE);
 			View sliderView = findViewById(R.id.sliderView);
 			sliderView.setVisibility(View.VISIBLE);
 
@@ -93,9 +93,9 @@ public class AppContentActivity extends Activity {
 		public void onClick(View v) {
 			Log.d("closeclcik", "closeclickonamainmenu");
 
-			View menuHeader = findViewById(R.id.menuHeaderForAppStart);
-			if (menuHeader.getVisibility() == View.VISIBLE) {
-				menuHeader.setVisibility(View.GONE);
+			View fragmentMenuHeader = findViewById(R.id.fragmentMenuHeaderForAppStart);
+			if (fragmentMenuHeader.getVisibility() == View.VISIBLE) {
+				fragmentMenuHeader.setVisibility(View.GONE);
 				View sliderView = findViewById(R.id.sliderView);
 				sliderView.setVisibility(View.VISIBLE);
 				View view = findViewById(R.id.menuFragment);
@@ -108,7 +108,7 @@ public class AppContentActivity extends Activity {
 				ft.commit();
 				TextView menuTitle = (TextView) findViewById(R.id.menuTitle);
 				menuTitle.setText("Menu");
-				menuHeader.setVisibility(View.VISIBLE);
+				fragmentMenuHeader.setVisibility(View.VISIBLE);
 				closeBtnImageView.setVisibility(View.INVISIBLE);
 				View view = findViewById(R.id.menuFragment);
 				view.setVisibility(View.VISIBLE);

@@ -26,7 +26,7 @@ import com.liveclips.nfl.utils.PlayCardView;
  * @author mohitkumar
  *
  */
-public class DivisionHighlightsActivity extends Activity{
+public class DivisionHighlightsActivity extends BaseActivity{
 	
 	private ArrayList<String> playCardTopDetail = new ArrayList<String>();
 
@@ -45,15 +45,15 @@ public class DivisionHighlightsActivity extends Activity{
 
 		context = this;
 
+		createCustomActionBar();
+		
 		prepareVideoView();
 
 		
 	}
 	
-	@Override
-	protected void onStart() {
+	protected void createCustomActionBar() {
 
-		super.onStart();
 		ActionBar actionBar = getActionBar();
 		View mActionBarView = getLayoutInflater().inflate(
 				R.layout.nfl_highlights_menu_actionbar, null);
@@ -62,8 +62,6 @@ public class DivisionHighlightsActivity extends Activity{
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 		
-		//TextView textView = (TextView) findViewById(R.id.conference_name);
-		//textView.setText(conferenceItem.getConferenceName());
 	}
 	
 	@Override

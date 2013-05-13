@@ -1,17 +1,24 @@
 package com.liveclips.nfl.fragment;
 
+import org.w3c.dom.ls.LSInput;
+
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -74,7 +81,9 @@ public class TopicMenuFragment extends Fragment {
 
 		listView1.setOnItemClickListener(listItemListener);
 
+
 	}
+
 
 	private OnItemClickListener listItemListener = new OnItemClickListener() {
 
@@ -84,6 +93,7 @@ public class TopicMenuFragment extends Fragment {
 			switch (position) {
 
 			case 0:
+				//arg1.setBackgroundDrawable(new ColorDrawable(Color.CYAN));
 				startActivity(new Intent(getActivity(), GameActivity.class));
 				break;
 			case 1:
@@ -98,7 +108,7 @@ public class TopicMenuFragment extends Fragment {
 				FragmentManager fragmentManager = getFragmentManager();
 				FragmentTransaction ft = fragmentManager.beginTransaction();
 				Fragment mainMenuFragment = new DivisionMenuFragment();
-				//mainMenuFragment.//new TopicMenuFragment();
+				// mainMenuFragment.//new TopicMenuFragment();
 				ft.replace(R.id.menuFragment, mainMenuFragment);
 
 				ft.commit();
@@ -115,12 +125,14 @@ public class TopicMenuFragment extends Fragment {
 				break;
 			case 5:
 
-				/*fragmentManager = getFragmentManager();
-				ft = fragmentManager.beginTransaction();
-				Fragment gameScheduleFragment = new GameScheduleFragment();
-				ft.replace(R.id.menuFragment, gameScheduleFragment);
-
-				ft.commit();*/
+				/*
+				 * fragmentManager = getFragmentManager(); ft =
+				 * fragmentManager.beginTransaction(); Fragment
+				 * gameScheduleFragment = new GameScheduleFragment();
+				 * ft.replace(R.id.menuFragment, gameScheduleFragment);
+				 * 
+				 * ft.commit();
+				 */
 				break;
 			}
 
