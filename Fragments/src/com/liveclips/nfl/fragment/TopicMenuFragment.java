@@ -81,9 +81,7 @@ public class TopicMenuFragment extends Fragment {
 
 		listView1.setOnItemClickListener(listItemListener);
 
-
 	}
-
 
 	private OnItemClickListener listItemListener = new OnItemClickListener() {
 
@@ -93,7 +91,7 @@ public class TopicMenuFragment extends Fragment {
 			switch (position) {
 
 			case 0:
-				//arg1.setBackgroundDrawable(new ColorDrawable(Color.CYAN));
+				// arg1.setBackgroundDrawable(new ColorDrawable(Color.CYAN));
 				startActivity(new Intent(getActivity(), GameActivity.class));
 				break;
 			case 1:
@@ -125,14 +123,13 @@ public class TopicMenuFragment extends Fragment {
 				break;
 			case 5:
 
-				/*
-				 * fragmentManager = getFragmentManager(); ft =
-				 * fragmentManager.beginTransaction(); Fragment
-				 * gameScheduleFragment = new GameScheduleFragment();
-				 * ft.replace(R.id.menuFragment, gameScheduleFragment);
-				 * 
-				 * ft.commit();
-				 */
+				fragmentManager = getFragmentManager();
+				ft = fragmentManager.beginTransaction();
+				Fragment gameScheduleFragment = new GameScheduleFragment();
+				ft.replace(R.id.menuFragment, gameScheduleFragment);
+
+				ft.commit();
+
 				break;
 			}
 

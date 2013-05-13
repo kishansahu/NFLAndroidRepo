@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical" >
+
+        <ImageView
+            android:id="@+id/first_team_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:src="@drawable/seahawks"
+            />
+
+        <TextView
+            android:id="@+id/first_team_shortname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:textColor="@color/blue"
+            android:text="SD"
+            />
+
+        <TextView
+            android:id="@+id/first_team_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:layout_marginLeft="2dp"
+            android:textColor="@color/blue"
+            />
+
+        
+        <TextView
+            android:id="@+id/first_team_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AT"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/blue"
+            />
+        
+        <ImageView
+            android:id="@+id/second_team_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/gore_team_logo"
+            />
+
+        <TextView
+            android:id="@+id/second_team_shortname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:text="14"
+            android:textColor="@color/blue"
+            />
+
+        <TextView
+            android:id="@+id/second_team_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4TH 6:38"
+            android:textColor="@color/blue"
+            />
+        
+        
+        <TextView
+            android:id="@+id/timeLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/blue"
+             />
+    </TableRow>
+
+</TableLayout>
