@@ -15,30 +15,37 @@ import com.liveclips.nfl.R;
 public class SeparatedListAdapter extends BaseAdapter {
 
 	public Map<String, Adapter> sections = new LinkedHashMap<String, Adapter>();
-	public ArrayAdapter<String> headers;
+	public ArrayAdapter<Object> headers;
 	public final static int TYPE_SECTION_HEADER = 0;
 
 	public SeparatedListAdapter(Context context) {
-		headers = new ArrayAdapter<String>(context,
+		headers = new ArrayAdapter<Object>(context,
 				R.layout.popover_section_header);
 	}
 	
 	
 	public SeparatedListAdapter(Context context, boolean header) {
 		if (!header) {
-			headers = new ArrayAdapter<String>(context,
+			headers = new ArrayAdapter<Object>(context,
 					R.layout.popover_section_empty_header);
 		} else {
-			headers = new ArrayAdapter<String>(context,
+			headers = new ArrayAdapter<Object>(context,
 					R.layout.popover_section_header);
 		}
 
 	}
 
+	public SeparatedListAdapter(Context context, String standingHeaders) {
+		headers = new ArrayAdapter<Object>(context,
+				R.layout.popover_nfl_standing_header);
+	}
+	
 	public void addSection(String section, Adapter adapter) {
 		this.headers.add(section);
 		this.sections.put(section, adapter);
 	}
+	
+	
 	
 	public void addSection(int section , Adapter adapter) {
 		this.sections.put("" + section, adapter);
@@ -117,8 +124,14 @@ public class SeparatedListAdapter extends BaseAdapter {
 			int size = adapter.getCount() + 1;
 
 			// check if position inside this section
-			if (position == 0)
+			if (position == 0){
+				/*if(NFLBaseAdapter.class.isInstance(headers)){
+					NFLBaseAdapter baseAdapter = (NFLBaseAdapter) headers;
+					return baseAdapter.getView(sectionnum, convertView, parent);
+				}*/
 				return headers.getView(sectionnum, convertView, parent);
+			}
+				
 			if (position < size)
 				return adapter.getView(position - 1, convertView, parent);
 

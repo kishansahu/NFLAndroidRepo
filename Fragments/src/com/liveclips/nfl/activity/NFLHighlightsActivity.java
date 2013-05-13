@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
@@ -23,14 +22,19 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.liveclips.nfl.R;
+import com.liveclips.nfl.adapter.EmptyHeaderSeparatedListAdapter;
 import com.liveclips.nfl.adapter.NFLHighlightsLeadersListAdapter;
 import com.liveclips.nfl.adapter.NFLHighlightsWeekListAdapter;
 import com.liveclips.nfl.adapter.PassingLeaderListViewAdapter;
 import com.liveclips.nfl.adapter.SeparatedListAdapter;
+import com.liveclips.nfl.adapter.SeparatedSectionHeaderListAdapter;
+import com.liveclips.nfl.adapter.StandingTeamListViewAdapter;
 import com.liveclips.nfl.model.LeadersTypeItem;
 import com.liveclips.nfl.model.PassingLeaderItem;
+import com.liveclips.nfl.model.SectionHeaderItem;
 import com.liveclips.nfl.model.TeamItem;
 import com.liveclips.nfl.model.WeekItem;
 import com.liveclips.nfl.popover.PopoverView;
@@ -66,13 +70,13 @@ public class NFLHighlightsActivity extends BaseActivity implements
 		context = this;
 
 		downloadImagesThreadPool = new DownloadImagesThreadPool();
-
+		
 		createCustomActionBar();
-
+		
 		prepareVideoView();
 
 	}
-
+	
 	protected void createCustomActionBar() {
 
 		ActionBar actionBar = getActionBar();
@@ -100,6 +104,8 @@ public class NFLHighlightsActivity extends BaseActivity implements
 		standingLinearLayout.setOnClickListener(standingOnClickListener);
 	}
 
+	
+
 	/**
 	 * Week listener
 	 */
@@ -123,7 +129,10 @@ public class NFLHighlightsActivity extends BaseActivity implements
 
 		}
 	};
-
+	
+	/**
+	 *  leaders listener
+	 */
 	private OnClickListener leaderOnClickListener = new OnClickListener() {
 
 		@Override
@@ -144,12 +153,13 @@ public class NFLHighlightsActivity extends BaseActivity implements
 
 		}
 	};
-
+	
 	private OnClickListener milestonesOnClickListener = new OnClickListener() {
 
 		@Override
 		public void onClick(View v) {
-			RelativeLayout rootView = (RelativeLayout) findViewById(R.id.highlightsRootView);
+			Toast.makeText(context, "Milestone Handler", Toast.LENGTH_SHORT);
+			/*RelativeLayout rootView = (RelativeLayout) findViewById(R.id.highlightsRootView);
 			if (popoverView != null) {
 				popoverView.removeAllViews();
 			}
@@ -161,11 +171,14 @@ public class NFLHighlightsActivity extends BaseActivity implements
 			View button = (View) findViewById(R.id.weekLayout);
 			popoverView.showPopoverFromRectInViewGroup(rootView,
 					PopoverView.getFrameForView(button),
-					PopoverView.PopoverArrowDirectionUp, true);
+					PopoverView.PopoverArrowDirectionUp, true);*/
 
 		}
 	};
-
+	
+	/**
+	 * standing listener
+	 */
 	private OnClickListener standingOnClickListener = new OnClickListener() {
 
 		@Override
@@ -175,11 +188,11 @@ public class NFLHighlightsActivity extends BaseActivity implements
 				popoverView.removeAllViews();
 			}
 			popoverView = new PopoverView(NFLHighlightsActivity.this,
-					R.layout.popover_nfl_week_item);
+					R.layout.popover_nfl_standing_view);
 
 			popoverView.setContentSizeForViewInPopover(new Point(320, 400));
 			popoverView.setDelegate(NFLHighlightsActivity.this);
-			View button = (View) findViewById(R.id.weekLayout);
+			View button = (View) findViewById(R.id.standingLayout);
 			popoverView.showPopoverFromRectInViewGroup(rootView,
 					PopoverView.getFrameForView(button),
 					PopoverView.PopoverArrowDirectionUp, true);
@@ -233,103 +246,100 @@ public class NFLHighlightsActivity extends BaseActivity implements
 		if (view.getLayoutId() == R.layout.popover_nfl_week_item) {
 			Log.d("id", String.valueOf(view.getId()));
 			List<WeekItem> weekItems = new ArrayList<WeekItem>();
-			WeekItem item;
-			for (int index = 1; index <= 10; index++) {
-				item = new WeekItem();
-				item.setWeekName("Week " + index);
-				weekItems.add(item);
-
-			}
+			WeekItem item1 = new WeekItem();
+			item1.setWeekName("Week 1");
+			weekItems.add(item1);
+			
+			WeekItem item2 = new WeekItem();
+			item2.setWeekName("Week 2");
+			weekItems.add(item2);
+			
+			WeekItem item3 = new WeekItem();
+			item3.setWeekName("Week 3");
+			weekItems.add(item3);
+			
+			WeekItem item4 = new WeekItem();
+			item4.setWeekName("Week 4");
+			weekItems.add(item4);
+			
 			listView = (ListView) findViewById(R.id.week_list);
 			NFLHighlightsWeekListAdapter weekListAdapter = new NFLHighlightsWeekListAdapter(
 					context, R.layout.nfl_highlights_week_menu, weekItems);
 
 			listView.setAdapter(weekListAdapter);
 
-		} else if (view.getLayoutId() == R.layout.popover_nfl_leaders_item) {
-
-			SeparatedListAdapter separatedListAdapter = new SeparatedListAdapter(
-					context);
+		}
+		else if(view.getLayoutId() == R.layout.popover_nfl_leaders_item){
+			
+			SeparatedListAdapter separatedListAdapter = new SeparatedListAdapter(context);
 			List<LeadersTypeItem> offenceLeadersTypeItems = new ArrayList<LeadersTypeItem>();
-
+			
 			LeadersTypeItem item1 = new LeadersTypeItem();
 			item1.setLeadersTypeName("Passing Yards");
 			offenceLeadersTypeItems.add(item1);
-
-			LeadersTypeItem item2 = new LeadersTypeItem();
+			
+			LeadersTypeItem item2= new LeadersTypeItem();
 			item2.setLeadersTypeName("Rushing Yards");
 			offenceLeadersTypeItems.add(item2);
-
+			
 			LeadersTypeItem item3 = new LeadersTypeItem();
 			item3.setLeadersTypeName("Receiving Yards");
 			offenceLeadersTypeItems.add(item3);
-
+			
 			LeadersTypeItem item4 = new LeadersTypeItem();
 			item4.setLeadersTypeName("Touchdown");
 			offenceLeadersTypeItems.add(item4);
-
+			
 			LeadersTypeItem item5 = new LeadersTypeItem();
 			item5.setLeadersTypeName("Scoring");
 			offenceLeadersTypeItems.add(item5);
-
-			separatedListAdapter.addSection("Offense",
-					new NFLHighlightsLeadersListAdapter(context,
-							R.layout.nfl_highlights_leader_menu_item,
-							offenceLeadersTypeItems));
-
+			
+			separatedListAdapter.addSection("Offense", new NFLHighlightsLeadersListAdapter(context, R.layout.nfl_highlights_leader_menu_item, offenceLeadersTypeItems));
+			
 			List<LeadersTypeItem> defenceLeadersTypeItems = new ArrayList<LeadersTypeItem>();
-
+			
 			LeadersTypeItem item6 = new LeadersTypeItem();
 			item6.setLeadersTypeName("Sacks");
 			defenceLeadersTypeItems.add(item6);
-
+			
 			LeadersTypeItem item7 = new LeadersTypeItem();
 			item7.setLeadersTypeName("Interceptions");
 			defenceLeadersTypeItems.add(item7);
-
+			
 			LeadersTypeItem item8 = new LeadersTypeItem();
 			item8.setLeadersTypeName("Tackels");
 			defenceLeadersTypeItems.add(item8);
-
-			separatedListAdapter.addSection("Defense",
-					new NFLHighlightsLeadersListAdapter(context,
-							R.layout.nfl_highlights_leader_menu_item,
-							defenceLeadersTypeItems));
-
+			
+			separatedListAdapter.addSection("Defense", new NFLHighlightsLeadersListAdapter(context, R.layout.nfl_highlights_leader_menu_item, defenceLeadersTypeItems));
+			
 			List<LeadersTypeItem> specialTeamLeadersTypeItems = new ArrayList<LeadersTypeItem>();
-
+			
 			LeadersTypeItem item9 = new LeadersTypeItem();
 			item9.setLeadersTypeName("Punts");
 			specialTeamLeadersTypeItems.add(item9);
-
+			
 			LeadersTypeItem item10 = new LeadersTypeItem();
 			item10.setLeadersTypeName("Punts Returns");
 			specialTeamLeadersTypeItems.add(item10);
-
+			
 			LeadersTypeItem item11 = new LeadersTypeItem();
 			item11.setLeadersTypeName("Kick Returns");
 			specialTeamLeadersTypeItems.add(item11);
-
+			
 			LeadersTypeItem item12 = new LeadersTypeItem();
 			item12.setLeadersTypeName("Filed Goals");
 			specialTeamLeadersTypeItems.add(item12);
-
-			separatedListAdapter.addSection("Special Teams",
-					new NFLHighlightsLeadersListAdapter(context,
-							R.layout.nfl_highlights_leader_menu_item,
-							specialTeamLeadersTypeItems));
-			// NFLHighlightsLeadersListAdapter adapter = new
-			// NFLHighlightsLeadersListAdapter(context,
-			// R.layout.nfl_highlights_leader_menu_item,
-			// specialTeamLeadersTypeItems);
+			
+			separatedListAdapter.addSection("Special Teams", new NFLHighlightsLeadersListAdapter(context, R.layout.nfl_highlights_leader_menu_item, specialTeamLeadersTypeItems));
+			
 			listView = (ListView) findViewById(R.id.leaders_list);
-
+			
 			listView.setAdapter(separatedListAdapter);
 			listView.setOnItemClickListener(leadersItemClickListener);
-
-		} else if (view.getLayoutId() == R.layout.popover_nfl_passing_leaders_item) {
+			
+		}else if(view.getLayoutId() == R.layout.popover_nfl_passing_leaders_item){
 			List<PassingLeaderItem> items = new ArrayList<PassingLeaderItem>();
-
+			
 			PassingLeaderItem leaderItem1 = new PassingLeaderItem();
 			leaderItem1.setLeaderName("Loe Flacco");
 			leaderItem1.setYards(221);
@@ -337,7 +347,7 @@ public class NFLHighlightsActivity extends BaseActivity implements
 			leaderTeam1.setTeamName("BAL");
 			leaderItem1.setLeaderTeam(leaderTeam1);
 			items.add(leaderItem1);
-
+			
 			PassingLeaderItem leaderItem2 = new PassingLeaderItem();
 			leaderItem2.setLeaderName("Tom Brady");
 			leaderItem2.setYards(201);
@@ -345,7 +355,7 @@ public class NFLHighlightsActivity extends BaseActivity implements
 			leaderTeam2.setTeamName("NE");
 			leaderItem2.setLeaderTeam(leaderTeam2);
 			items.add(leaderItem2);
-
+			
 			PassingLeaderItem leaderItem3 = new PassingLeaderItem();
 			leaderItem3.setLeaderName("Mat Rayana");
 			leaderItem3.setYards(181);
@@ -353,16 +363,100 @@ public class NFLHighlightsActivity extends BaseActivity implements
 			leaderTeam3.setTeamName("EAI");
 			leaderItem3.setLeaderTeam(leaderTeam3);
 			items.add(leaderItem3);
-
+					
 			listView = (ListView) findViewById(R.id.passing_leaders_list);
-			PassingLeaderListViewAdapter adapter = new PassingLeaderListViewAdapter(
-					context, R.layout.passing_leader_menu_row_layout, items);
+			PassingLeaderListViewAdapter adapter = new PassingLeaderListViewAdapter(context, R.layout.passing_leader_menu_row_layout, items);
 			listView.setAdapter(adapter);
-			// for()
+			
+		}else if(view.getLayoutId() == R.layout.popover_nfl_standing_view){
+			List<TeamItem> conferenceTeamItems = new ArrayList<TeamItem>();
+								
+			TeamItem teamItem1 = new TeamItem();
+			teamItem1.setTeamName("New England");
+			teamItem1.setLosses(0);
+			teamItem1.setWins(5);
+			teamItem1.setTeamLogo(R.drawable.bills);
+			conferenceTeamItems.add(teamItem1);
+			
+			TeamItem teamItem2 = new TeamItem();
+			teamItem2.setTeamName("Ny Jets");
+			teamItem2.setLosses(1);
+			teamItem2.setWins(4);
+			teamItem2.setTeamLogo(R.drawable.bills);
+			conferenceTeamItems.add(teamItem2);
+			
+			TeamItem teamItem3 = new TeamItem();
+			teamItem3.setTeamName("Miami");
+			teamItem3.setLosses(2);
+			teamItem3.setWins(3);
+			teamItem3.setTeamLogo(R.drawable.bills);
+			conferenceTeamItems.add(teamItem3);
+			
+			TeamItem teamItem4 = new TeamItem();
+			teamItem4.setTeamName("Buffalo");
+			teamItem4.setLosses(1);
+			teamItem4.setWins(0);
+			teamItem4.setTeamLogo(R.drawable.bills);
+			conferenceTeamItems.add(teamItem4);
+			
+			List<SectionHeaderItem> popover_nfl_standing_header = new ArrayList<SectionHeaderItem>();
+			SectionHeaderItem headerItem = new SectionHeaderItem();
+			headerItem.setHeadingText1("East Division");
+			headerItem.setHeadingText2("W");
+			headerItem.setHeadingText3("L");
+			popover_nfl_standing_header.add(headerItem);
+			
+					
+			
+			SeparatedSectionHeaderListAdapter eastHeaderListAdapter = new SeparatedSectionHeaderListAdapter(context, R.layout.popover_nfl_standing_header, popover_nfl_standing_header);
+			
+			EmptyHeaderSeparatedListAdapter separatedListAdapter = new EmptyHeaderSeparatedListAdapter(context, true);
+			
+			separatedListAdapter.addSection("0", eastHeaderListAdapter);
+			separatedListAdapter.addSection("1", new StandingTeamListViewAdapter(context, R.layout.standing_team_menu_row_layout, conferenceTeamItems));
+			
+			
+			List<SectionHeaderItem> north_popover_nfl_standing_header = new ArrayList<SectionHeaderItem>();
+			SectionHeaderItem northItem = new SectionHeaderItem();
+			northItem.setHeadingText1("North Division");
+			northItem.setHeadingText2("W");
+			northItem.setHeadingText3("L");
+			north_popover_nfl_standing_header.add(northItem);
+			SeparatedSectionHeaderListAdapter northHeaderListAdapter = new SeparatedSectionHeaderListAdapter( context, R.layout.popover_nfl_standing_header, north_popover_nfl_standing_header);
+			separatedListAdapter.addSection("7", northHeaderListAdapter);
+			separatedListAdapter.addSection("2", new StandingTeamListViewAdapter(context, R.layout.standing_team_menu_row_layout, conferenceTeamItems));
+			
+			
+			List<SectionHeaderItem> southPopover_nfl_standing_header = new ArrayList<SectionHeaderItem>();
+			SectionHeaderItem south_HeaderItem = new SectionHeaderItem();
+			south_HeaderItem.setHeadingText1("South Division");
+			south_HeaderItem.setHeadingText2("W");
+			south_HeaderItem.setHeadingText3("L");
+			southPopover_nfl_standing_header.add(south_HeaderItem);
+			SeparatedSectionHeaderListAdapter southHeaderListAdapter = new SeparatedSectionHeaderListAdapter(context, R.layout.popover_nfl_standing_header, southPopover_nfl_standing_header);
+			separatedListAdapter.addSection("8", southHeaderListAdapter);
+			separatedListAdapter.addSection("3", new StandingTeamListViewAdapter(context, R.layout.standing_team_menu_row_layout, conferenceTeamItems));
+			
+			List<SectionHeaderItem> westPopover_nfl_standing_header = new ArrayList<SectionHeaderItem>();
+			SectionHeaderItem westHeaderItem = new SectionHeaderItem();
+			westHeaderItem.setHeadingText1("West Division");
+			westHeaderItem.setHeadingText2("W");
+			westHeaderItem.setHeadingText3("L");
+			westPopover_nfl_standing_header.add(westHeaderItem);
+			SeparatedSectionHeaderListAdapter westHeaderListAdapter = new SeparatedSectionHeaderListAdapter(context, R.layout.popover_nfl_standing_header, westPopover_nfl_standing_header);
+			separatedListAdapter.addSection("9", westHeaderListAdapter);
+			separatedListAdapter.addSection("4", new StandingTeamListViewAdapter(context, R.layout.standing_team_menu_row_layout, conferenceTeamItems));
+			
+			listView = (ListView) findViewById(R.id.standing_list);
+			
+			listView.setAdapter(separatedListAdapter);
 		}
 
 	}
-
+	
+	/**
+	 * Leaders item listner
+	 */
 	private OnItemClickListener leadersItemClickListener = new OnItemClickListener() {
 
 		@Override
@@ -382,19 +476,22 @@ public class NFLHighlightsActivity extends BaseActivity implements
 					PopoverView.getFrameForView(button),
 					PopoverView.PopoverArrowDirectionUp, true);
 
+			
 		}
-
+	
 	};
 
 	@Override
 	public void popoverViewWillDismiss(PopoverView view) {
+		
 
 	}
 
 	@Override
 	public void popoverViewDidDismiss(PopoverView view) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
+	
 }
