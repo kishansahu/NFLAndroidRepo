@@ -114,7 +114,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 			public void onClick(View v) {
 				RelativeLayout rootView = (RelativeLayout) findViewById(R.id.gameRootView);
 				if (popoverView != null) {
-					popoverView.removeAllViews();
+					popoverView.dissmissPopover(false);
 				}
 				popoverView = new PopoverView(GameActivity.this,
 						R.layout.popover_game_schedule_view);
@@ -137,7 +137,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 			public void onClick(View v) {
 				RelativeLayout rootView = (RelativeLayout) findViewById(R.id.gameRootView);
 				if (popoverView != null) {
-					popoverView.removeAllViews();
+					popoverView.dissmissPopover(false);
 				}
 				popoverView = new PopoverView(GameActivity.this,
 						R.layout.popover_game_stats_view);
@@ -160,7 +160,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 			public void onClick(View v) {
 				RelativeLayout rootView = (RelativeLayout) findViewById(R.id.gameRootView);
 				if (popoverView != null) {
-					popoverView.removeAllViews();
+					popoverView.dissmissPopover(false);
 				}
 				popoverView = new PopoverView(GameActivity.this,
 						R.layout.popover_game_drives_view);
@@ -183,7 +183,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 			public void onClick(View v) {
 				RelativeLayout rootView = (RelativeLayout) findViewById(R.id.gameRootView);
 				if (popoverView != null) {
-					popoverView.removeAllViews();
+					popoverView.dissmissPopover(false);
 				}
 				popoverView = new PopoverView(GameActivity.this,
 						R.layout.popover_game_player_view);
@@ -216,8 +216,8 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 		@Override
 		public void onClick(View v) {
 
-			Toast.makeText(GameActivity.this, "Background clicked",
-					Toast.LENGTH_SHORT).show();
+			/*Toast.makeText(GameActivity.this, "Background clicked",
+					Toast.LENGTH_SHORT).show();*/
 			if (NflUtils.isScoreBannerShrinked()) {
 				makeTabInvisibleForEnlargingScoreBoard();
 				enlargeScoreBanner();
@@ -768,7 +768,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 					TextView secondTeamNameStatYardsCategoryLabel = (TextView) findViewById(R.id.secondTeamNameStatYardsCategory);
 					// secondTeamNameStatYardsCategoryLabel.setText(statSecondTeamLabel.getText());
 					secondTeamNameStatYardsCategoryLabel.setText("NE");
-					popoverView.removeAllViews();
+					popoverView.dissmissPopover(false);
 				}
 			});
 			listView.setAdapter(adapter);
@@ -860,7 +860,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 					selectedPlayerPic.setImageDrawable(popover_player_pic
 							.getDrawable());
 
-					popoverView.removeAllViews();
+					popoverView.dissmissPopover(false);
 				}
 			});
 
