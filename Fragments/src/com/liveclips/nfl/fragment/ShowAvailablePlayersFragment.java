@@ -33,7 +33,14 @@ public class ShowAvailablePlayersFragment extends Fragment {
 	AddPlayerListAdapter adapter;
 	private String nameColumnSortOrder = "none";
 	private String playerNumColumnSortOrder = "none";
-	ImageView playerNameSortArrow, playerNumSortArrow;
+	private String playerPosColumnSortOrder = "none";
+	private String playerFavColumnSortOrder = "none";
+	ImageView playerNameSortArrow, playerNumSortArrow, playerPosSortArrow,
+			playerFavSortArrow;
+	RelativeLayout playerNameinAddInFavouriteBanner,
+			playerNumSubheaderinAddInFavouriteBanner,
+			playerPosSubheaderinAddInFavouriteBanner,
+			playerFavSubheaderinAddInFavouriteBanner;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,19 +59,35 @@ public class ShowAvailablePlayersFragment extends Fragment {
 		addPlayersToFavListView = (ListView) getActivity().findViewById(
 				R.id.addPlayersToFavListView);
 		addPlayersToFavListView.setAdapter(adapter);
-		RelativeLayout playerNameinAddInFavouriteBanner = (RelativeLayout) getActivity()
+		playerNameinAddInFavouriteBanner = (RelativeLayout) getActivity()
 				.findViewById(R.id.playerNameinAddInFavouriteBanner);
 		playerNameinAddInFavouriteBanner
 				.setOnClickListener(nameColumnClickedListener);
-		
-		RelativeLayout playerNumSubheaderinAddInFavouriteBanner = (RelativeLayout) getActivity()
+
+		playerNumSubheaderinAddInFavouriteBanner = (RelativeLayout) getActivity()
 				.findViewById(R.id.playerNuminAddInFavouriteBanner);
 		playerNumSubheaderinAddInFavouriteBanner
-		.setOnClickListener(playerNumColumnClickedListener);
-		
-		 playerNameSortArrow = (ImageView) getActivity().findViewById(R.id.playerNameSortArrow);
-		 playerNumSortArrow = (ImageView) getActivity().findViewById(R.id.playerNumSortArrow);
-		
+				.setOnClickListener(playerNumColumnClickedListener);
+
+		playerPosSubheaderinAddInFavouriteBanner = (RelativeLayout) getActivity()
+				.findViewById(R.id.playerPosinAddInFavouriteBanner);
+		playerPosSubheaderinAddInFavouriteBanner
+				.setOnClickListener(playerPosColumnClickedListener);
+
+		playerFavSubheaderinAddInFavouriteBanner = (RelativeLayout) getActivity()
+				.findViewById(R.id.playerFavinAddInFavouriteBanner);
+		playerFavSubheaderinAddInFavouriteBanner
+				.setOnClickListener(playerFavColumnClickedListener);
+
+		playerNameSortArrow = (ImageView) getActivity().findViewById(
+				R.id.playerNameSortArrow);
+		playerNumSortArrow = (ImageView) getActivity().findViewById(
+				R.id.playerNumSortArrow);
+		playerPosSortArrow = (ImageView) getActivity().findViewById(
+				R.id.playerPosSortArrow);
+		playerFavSortArrow = (ImageView) getActivity().findViewById(
+				R.id.playerFavSortArrow);
+
 		Button playerMenuDoneButton = (Button) getActivity().findViewById(
 				R.id.playerAddToFavDoneButton);
 		playerMenuDoneButton.setOnClickListener(new OnClickListener() {
@@ -132,49 +155,146 @@ public class ShowAvailablePlayersFragment extends Fragment {
 
 		@Override
 		public void onClick(View v) {
-			if (nameColumnSortOrder.equalsIgnoreCase("none") || nameColumnSortOrder.equalsIgnoreCase("descending")) {
+			hideSortingIcons();
+			playerNameSortArrow.setVisibility(View.VISIBLE);
+			if (nameColumnSortOrder.equalsIgnoreCase("none")
+					|| nameColumnSortOrder.equalsIgnoreCase("descending")) {
 				// set in Ascending Order
 				Collections.sort(playersList,
 						new PlayerItem.playerNameInAscendingOrder());
 				adapter = new AddPlayerListAdapter(getActivity(), playersList);
 				addPlayersToFavListView.setAdapter(adapter);
-				playerNameSortArrow.setImageResource(R.drawable.icon_popover_arrow_up);
+				playerNameSortArrow
+						.setImageResource(R.drawable.icon_popover_arrow_up);
 				nameColumnSortOrder = "ascending";
-				
+
 			} else if (nameColumnSortOrder.equalsIgnoreCase("ascending")) {
 				// set in Descending Order
 				Collections.sort(playersList,
 						new PlayerItem.playerNameInDescendingOrder());
 				adapter = new AddPlayerListAdapter(getActivity(), playersList);
 				addPlayersToFavListView.setAdapter(adapter);
-				playerNameSortArrow.setImageResource(R.drawable.icon_popover_arrow_down);
+				playerNameSortArrow
+						.setImageResource(R.drawable.icon_popover_arrow_down);
 				nameColumnSortOrder = "descending";
 			}
 		}
 	};
-	
+
 	OnClickListener playerNumColumnClickedListener = new View.OnClickListener() {
 
 		@Override
 		public void onClick(View v) {
-			if (playerNumColumnSortOrder.equalsIgnoreCase("none") || playerNumColumnSortOrder.equalsIgnoreCase("descending")) {
+			hideSortingIcons();
+			playerNumSortArrow.setVisibility(View.VISIBLE);
+			// set player Name in alphabetical order
+			Collections.sort(playersList,
+					new PlayerItem.playerNameInAscendingOrder());
+
+			if (playerNumColumnSortOrder.equalsIgnoreCase("none")
+					|| playerNumColumnSortOrder.equalsIgnoreCase("descending")) {
 				// set in Ascending Order
 				Collections.sort(playersList,
 						new PlayerItem.playerNumInAscendingOrder());
 				adapter = new AddPlayerListAdapter(getActivity(), playersList);
 				addPlayersToFavListView.setAdapter(adapter);
-				playerNumSortArrow.setImageResource(R.drawable.icon_popover_arrow_up);
+				playerNumSortArrow
+						.setImageResource(R.drawable.icon_popover_arrow_up);
 				playerNumColumnSortOrder = "ascending";
-				
+
 			} else if (playerNumColumnSortOrder.equalsIgnoreCase("ascending")) {
 				// set in Descending Order
 				Collections.sort(playersList,
 						new PlayerItem.playerNumInDescendingOrder());
 				adapter = new AddPlayerListAdapter(getActivity(), playersList);
 				addPlayersToFavListView.setAdapter(adapter);
-				playerNumSortArrow.setImageResource(R.drawable.icon_popover_arrow_down);
+				playerNumSortArrow
+						.setImageResource(R.drawable.icon_popover_arrow_down);
 				playerNumColumnSortOrder = "descending";
 			}
+
 		}
 	};
+
+	OnClickListener playerPosColumnClickedListener = new View.OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			hideSortingIcons();
+			playerPosSortArrow.setVisibility(View.VISIBLE);
+			// set player Name in alphabetical order
+			Collections.sort(playersList,
+					new PlayerItem.playerNameInAscendingOrder());
+
+			if (playerPosColumnSortOrder.equalsIgnoreCase("none")
+					|| playerPosColumnSortOrder.equalsIgnoreCase("descending")) {
+				// set in Ascending Order
+				Collections.sort(playersList,
+						new PlayerItem.playerPosInAscendingOrder());
+				adapter = new AddPlayerListAdapter(getActivity(), playersList);
+				addPlayersToFavListView.setAdapter(adapter);
+				playerPosSortArrow
+						.setImageResource(R.drawable.icon_popover_arrow_up);
+				playerPosColumnSortOrder = "ascending";
+
+			} else if (playerPosColumnSortOrder.equalsIgnoreCase("ascending")) {
+				// set in Descending Order
+				Collections.sort(playersList,
+						new PlayerItem.playerPosInDescendingOrder());
+				adapter = new AddPlayerListAdapter(getActivity(), playersList);
+				addPlayersToFavListView.setAdapter(adapter);
+				playerPosSortArrow
+						.setImageResource(R.drawable.icon_popover_arrow_down);
+				playerPosColumnSortOrder = "descending";
+			}
+
+		}
+	};
+
+	OnClickListener playerFavColumnClickedListener = new View.OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			hideSortingIcons();
+			playerFavSortArrow.setVisibility(View.VISIBLE);
+			// set player Name in alphabetical order
+			Collections.sort(playersList,
+					new PlayerItem.playerNameInAscendingOrder());
+
+			if (playerFavColumnSortOrder.equalsIgnoreCase("descending")) {
+				// set in Ascending Order
+				Collections.sort(playersList,
+						new PlayerItem.playerFavInAscendingOrder());
+				adapter = new AddPlayerListAdapter(getActivity(), playersList);
+				addPlayersToFavListView.setAdapter(adapter);
+				playerFavSortArrow
+						.setImageResource(R.drawable.icon_popover_arrow_up);
+				playerFavColumnSortOrder = "ascending";
+
+			} else if (playerFavColumnSortOrder.equalsIgnoreCase("none")
+					|| playerFavColumnSortOrder.equalsIgnoreCase("ascending")) {
+				// set in Descending Order
+				Collections.sort(playersList,
+						new PlayerItem.playerFavInDescendingOrder());
+				adapter = new AddPlayerListAdapter(getActivity(), playersList);
+				addPlayersToFavListView.setAdapter(adapter);
+				playerFavSortArrow
+						.setImageResource(R.drawable.icon_popover_arrow_down);
+				playerFavColumnSortOrder = "descending";
+			}
+
+		}
+	};
+
+	private void hideSortingIcons() {
+		if (playerNameSortArrow.getVisibility() == View.VISIBLE) {
+			playerNameSortArrow.setVisibility(View.INVISIBLE);
+		} else if (playerNumSortArrow.getVisibility() == View.VISIBLE) {
+			playerNumSortArrow.setVisibility(View.INVISIBLE);
+		} else if (playerPosSortArrow.getVisibility() == View.VISIBLE) {
+			playerPosSortArrow.setVisibility(View.INVISIBLE);
+		} else if (playerFavSortArrow.getVisibility() == View.VISIBLE) {
+			playerFavSortArrow.setVisibility(View.INVISIBLE);
+		}
+	}
 }

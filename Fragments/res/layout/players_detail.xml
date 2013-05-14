@@ -45,7 +45,7 @@
                 android:layout_gravity="right"
                 android:layout_marginBottom="10dp"
                 android:layout_marginRight="15dp"
-                android:src="@drawable/favourite" >
+                android:src="@drawable/star_high" >
             </ImageView>
         </LinearLayout>
 

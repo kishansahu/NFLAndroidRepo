@@ -188,6 +188,29 @@ public class PlayerItem implements Comparable<PlayerItem>{
     }
     
     /*
+     * Comparator implementation to Player Item object based on playerPosition
+     */
+    public static class playerPosInAscendingOrder implements Comparator<PlayerItem> {
+
+        @Override
+        public int compare(PlayerItem o1, PlayerItem o2) {
+        	return o1.playerPosition.compareTo(o2.playerPosition);
+        }
+    }
+    
+    /*
+     * Comparator implementation to Player Item object based on playerPosition
+     */
+    public static class playerPosInDescendingOrder implements Comparator<PlayerItem> {
+
+        @Override
+        public int compare(PlayerItem o1, PlayerItem o2) {
+        	return o2.playerPosition.compareTo(o1.playerPosition);
+        }
+    }
+    
+    
+    /*
      * Comparator implementation to Player Item object based on playerNum
      */
     public static class playerNumInAscendingOrder implements Comparator<PlayerItem> {
@@ -215,6 +238,34 @@ public class PlayerItem implements Comparable<PlayerItem>{
         }
     }
 
+    /*
+     * Comparator implementation to Player Item object based on playerFav
+     */
+    public static class playerFavInAscendingOrder implements Comparator<PlayerItem> {
+
+        @Override
+        public int compare(PlayerItem o1, PlayerItem o2) {
+        	int num1 =o1.isPLayerFavouriteActive? 1 : 0;
+        	int num2 =o2.isPLayerFavouriteActive? 1 : 0;
+        	
+        	return num1 > num2 ? 1 : (num1 < num2 ? -1 : 0);
+        }
+    }
+    
+    /*
+     * Comparator implementation to Player Item object based on playerFav
+     */
+    public static class playerFavInDescendingOrder implements Comparator<PlayerItem> {
+    	
+        @Override
+        public int compare(PlayerItem o1, PlayerItem o2) {
+        	int num1 =o1.isPLayerFavouriteActive? 1 : 0;
+        	int num2 =o2.isPLayerFavouriteActive? 1 : 0;
+        	
+        	return num2 > num1 ? 1 : (num2 < num1 ? -1 : 0);
+        }
+    }
+    
 	@Override
 	public int compareTo(PlayerItem another) {
 		// TODO Auto-generated method stub
