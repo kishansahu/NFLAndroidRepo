@@ -14,6 +14,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.liveclips.nfl.R;
 import com.liveclips.nfl.fragment.AddPlayersFragment;
@@ -47,13 +48,13 @@ public class PlayersActivity extends BaseActivity {
 		 */
 
 		LinearLayout wrapper = (LinearLayout) findViewById(R.id.myPlayersContainer);
-		LinearLayout inflatedView;
+		//LinearLayout inflatedView;
 
 		if (playersName.length != 0) {
 			int i;
 			for (i = 0; i < playersName.length; i++) {
 
-				inflatedView = (LinearLayout) View.inflate(this,
+				final LinearLayout inflatedView = (LinearLayout) View.inflate(this,
 						R.layout.players_detail, null);
 				((TextView) inflatedView
 						.findViewById(R.id.myindividualPlayerName))
@@ -67,13 +68,26 @@ public class PlayersActivity extends BaseActivity {
 				((ImageView) inflatedView
 						.findViewById(R.id.myindividualPlayerPic))
 						.setImageResource(playerPic[i]);
+				ImageView myindividualPlayerFavouritePic=(ImageView) inflatedView
+						.findViewById(R.id.myindividualPlayerFavouritePic);
+				myindividualPlayerFavouritePic.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						RelativeLayout favPlayerDetailHolder = (RelativeLayout) inflatedView.findViewById(R.id.favPlayerDetailHolder);
+						favPlayerDetailHolder.setVisibility(View.GONE);
+						View favPlayerDetailHolderSeperator = (View) inflatedView.findViewById(R.id.favPlayerDetailHolderSeperator);
+						favPlayerDetailHolderSeperator.setVisibility(View.GONE);
+					}
+				});
+				
 				wrapper.addView(inflatedView);
 
 			}
 		} else {
 			ImageView allMyPlayersIcon = (ImageView) findViewById(R.id.allmyplayersIcon);
 			allMyPlayersIcon.setVisibility(View.GONE);
-			inflatedView = (LinearLayout) View.inflate(this,
+			LinearLayout inflatedView = (LinearLayout) View.inflate(this,
 					R.layout.empty_myplayers_banner, null);
 			wrapper.addView(inflatedView);
 

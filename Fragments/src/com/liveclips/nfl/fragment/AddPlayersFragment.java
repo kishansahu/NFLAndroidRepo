@@ -30,7 +30,7 @@ public class AddPlayersFragment extends Fragment {
 	String[] playersCategoriesMenuItems = { "Top Players", "By Team ",
 			"By Position", "By College" };
 
-	String[] anySearchForPlayersMenuItems = { "anuj", "Ron ", "Micheal", "amit" };
+	String[] anySearchForPlayersMenuItems = { "Tom Brady", "Rob Gronkowski", };
 	ListView findPLayerByCategoryListView;
 
 	@Override

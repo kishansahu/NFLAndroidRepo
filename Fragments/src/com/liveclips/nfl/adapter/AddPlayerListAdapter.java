@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.liveclips.nfl.R;
@@ -20,7 +21,7 @@ import com.liveclips.nfl.activity.PlayersActivity;
 import com.liveclips.nfl.model.PlayerItem;
 
 public class AddPlayerListAdapter extends BaseAdapter {
-
+	
 	Context context;
 	List<PlayerItem> playerDetailsListForFavourite;
 
@@ -115,7 +116,7 @@ public class AddPlayerListAdapter extends BaseAdapter {
 									LinearLayout wrapper = (LinearLayout) pl
 											.findViewById(R.id.myPlayersContainer);
 
-									LinearLayout inflatedView;
+									final LinearLayout inflatedView;
 									inflatedView = (LinearLayout) View.inflate(
 											context, R.layout.players_detail,
 											null);
@@ -131,6 +132,18 @@ public class AddPlayerListAdapter extends BaseAdapter {
 									((ImageView) inflatedView
 											.findViewById(R.id.myindividualPlayerPic))
 											.setImageResource(R.drawable.brad_jones);
+									ImageView myindividualPlayerFavouritePic=(ImageView) inflatedView
+											.findViewById(R.id.myindividualPlayerFavouritePic);
+									myindividualPlayerFavouritePic.setOnClickListener(new View.OnClickListener() {
+										
+										@Override
+										public void onClick(View v) {
+											RelativeLayout favPlayerDetailHolder = (RelativeLayout) inflatedView.findViewById(R.id.favPlayerDetailHolder);
+											favPlayerDetailHolder.setVisibility(View.GONE);
+											View favPlayerDetailHolderSeperator = (View) inflatedView.findViewById(R.id.favPlayerDetailHolderSeperator);
+											favPlayerDetailHolderSeperator.setVisibility(View.GONE);
+										}
+									});
 									wrapper.addView(inflatedView);
 								}
 								break;
