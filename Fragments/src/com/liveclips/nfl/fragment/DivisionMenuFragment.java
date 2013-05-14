@@ -78,17 +78,17 @@ public class DivisionMenuFragment extends Fragment{
 		
 		TeamItem teamItem1 = new TeamItem();
 		teamItem1.setTeamLogo(R.drawable.cardinals);
-		teamItem.setTeamName("Miami Dolphins");
+		teamItem1.setTeamName("Miami Dolphins");
 		conferenceItem.setTeam_2(teamItem1);
 		
 		TeamItem teamItem2 = new TeamItem();
 		teamItem2.setTeamLogo(R.drawable.jets);
-		teamItem.setTeamName("New England Patriots");
+		teamItem2.setTeamName("New England Patriots");
 		conferenceItem.setTeam_3(teamItem2);
 		
 		TeamItem teamItem3 = new TeamItem();
 		teamItem3.setTeamLogo(R.drawable.titans);
-		teamItem.setTeamName("New York Jets");
+		teamItem3.setTeamName("New York Jets");
 		conferenceItem.setTeam_4(teamItem3);
 		
 		afcConferenceItems.add(conferenceItem);
@@ -142,17 +142,17 @@ public class DivisionMenuFragment extends Fragment{
 		
 		TeamItem teamItem1 = new TeamItem();
 		teamItem1.setTeamLogo(R.drawable.cardinals);
-		teamItem.setTeamName("Miami Dolphins");
+		teamItem1.setTeamName("Miami Dolphins");
 		conferenceItem.setTeam_2(teamItem1);
 		
 		TeamItem teamItem2 = new TeamItem();
 		teamItem2.setTeamLogo(R.drawable.jets);
-		teamItem.setTeamName("New England Patriots");
+		teamItem2.setTeamName("New England Patriots");
 		conferenceItem.setTeam_3(teamItem2);
 		
 		TeamItem teamItem3 = new TeamItem();
 		teamItem3.setTeamLogo(R.drawable.titans);
-		teamItem.setTeamName("New York Jets");
+		teamItem3.setTeamName("New York Jets");
 		conferenceItem.setTeam_4(teamItem3);
 		
 		nfcConferenceItems.add(conferenceItem);
