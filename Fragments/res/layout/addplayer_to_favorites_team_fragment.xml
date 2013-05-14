@@ -72,7 +72,7 @@
         
         <RelativeLayout
             android:id="@+id/playerFavinAddInFavouriteBanner"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="30dp"
             android:layout_toRightOf="@id/playerFavinAddInFavouriteBanner"
             android:background="@drawable/border" >
@@ -81,7 +81,7 @@
                 android:id="@+id/playerFavSubheaderinAddInFavouriteBanner"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="2dp"
                 android:layout_toRightOf="@id/playerFavinAddInFavouriteBanner"
                 android:gravity="center"
                 android:text="FAV" />
@@ -160,7 +160,7 @@
                 android:id="@+id/playerPosSubheaderinAddInFavouriteBanner"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="2dp"
                 android:layout_toRightOf="@id/playerNameinAddInFavouriteBanner"
                 android:gravity="center"
                 android:text="POS" />
@@ -170,7 +170,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="2dp"
                 android:layout_toRightOf="@id/playerPosSubheaderinAddInFavouriteBanner"
                  />
         </RelativeLayout>

@@ -288,13 +288,13 @@ public class ShowAvailablePlayersFragment extends Fragment {
 
 	private void hideSortingIcons() {
 		if (playerNameSortArrow.getVisibility() == View.VISIBLE) {
-			playerNameSortArrow.setVisibility(View.INVISIBLE);
-		} else if (playerNumSortArrow.getVisibility() == View.VISIBLE) {
-			playerNumSortArrow.setVisibility(View.INVISIBLE);
-		} else if (playerPosSortArrow.getVisibility() == View.VISIBLE) {
-			playerPosSortArrow.setVisibility(View.INVISIBLE);
-		} else if (playerFavSortArrow.getVisibility() == View.VISIBLE) {
-			playerFavSortArrow.setVisibility(View.INVISIBLE);
+			playerNameSortArrow.setVisibility(View.GONE);
+		} if (playerNumSortArrow.getVisibility() == View.VISIBLE) {
+			playerNumSortArrow.setVisibility(View.GONE);
+		} if (playerPosSortArrow.getVisibility() == View.VISIBLE) {
+			playerPosSortArrow.setVisibility(View.GONE);
+		} if (playerFavSortArrow.getVisibility() == View.VISIBLE) {
+			playerFavSortArrow.setVisibility(View.GONE);
 		}
 	}
 }
