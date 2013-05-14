@@ -6,6 +6,7 @@ package com.liveclips.nfl.utils;
 import java.io.InputStream;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -16,6 +17,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
@@ -25,11 +27,17 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
+import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
+import android.widget.ViewAnimator;
+import android.widget.ViewFlipper;
 
 import com.liveclips.nfl.R;
+import com.liveclips.nfl.flip.AnimationFactory;
+import com.liveclips.nfl.flip.AnimationFactory.FlipDirection;
 
 /**
  * @author abhijitsrivastava
@@ -85,10 +93,19 @@ public class PlayCardView {
 
 		playCardLayout.setPadding(15, 15, 15, 15);
 
+		/*
 		final LayoutInflater inflator = (LayoutInflater) activity
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
+		
+		RelativeLayout parentOfPlayCard = (RelativeLayout) inflator.inflate(R.layout.play_card, null);
+		final ViewAnimator playCardViewAnimator = (ViewAnimator) parentOfPlayCard.findViewById(R.id.playCardViewFlipperId);
+		
+		final RelativeLayout playCardLayout = (RelativeLayout) playCardViewAnimator.findViewById(R.id.playCardLayoutId);
+		playCardLayout.setPadding(15, 15, 15, 15);
+		*/
 		// play card front side detail ********************
+		final LayoutInflater inflator = (LayoutInflater) activity
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		final RelativeLayout playCardFrontSide = (RelativeLayout) inflator
 				.inflate(R.layout.play_card_front_side, null);
@@ -127,6 +144,7 @@ public class PlayCardView {
 		playCardFrontSidePlaySectionLayout
 				.addView(playCardFrontSidePlaySectionImageWithPlayButtonLayout);
 
+		//playCardLayout.addView(playCardFrontSide);
 		playCardLayout.addView(playCardFrontSide);
 
 		// play card back side details ****************
@@ -177,6 +195,9 @@ public class PlayCardView {
 		
 		final HorizontalScrollView playCardsHorizontalScrollView = (HorizontalScrollView) activity.findViewById(R.id.horizontalScrollViewForVideosId);
 		final HorizontalScrollView playerCardsInsidePlayCardHorizontalScrollView = (HorizontalScrollView) playCardBackSide.findViewById(R.id.playCardBackSidePlayerCardsLayoutHorizontalScrollViewId);
+		
+		RatingBar playCardFrontSideTopLayoutRatingBar = (RatingBar) playCardFrontSide.findViewById(R.id.playCardFrontSideTopLayoutRatingBarId);
+		
 		
 		playCardsHorizontalScrollView.setOnTouchListener(new View.OnTouchListener() {
 
@@ -234,19 +255,21 @@ public class PlayCardView {
 			playCardBackSidePlayerCardLayout
 					.addView(playCardBackSidePlayerCards);
 		}
+	
+		
 
 		playCardFrontSideTopLayoutInfoButton
 				.setOnTouchListener(new OnTouchListener() {
 
 					@Override
 					public boolean onTouch(View v, MotionEvent event) {
-						Animation animation = AnimationUtils.loadAnimation(
-								context, R.anim.alpha);
-
+						Animation animation = AnimationUtils.loadAnimation(context, R.anim.alpha);
 						playCardLayout.removeAllViews();
 						playCardLayout.addView(playCardBackSide);
 						playCardLayout.startAnimation(animation);
+						
 
+						//AnimationFactory.flipTransition(playCardViewAnimator, FlipDirection.LEFT_RIGHT,playCardLayout,playCardBackSide,playCardFrontSide);
 						return false;
 					}
 				});
@@ -260,7 +283,9 @@ public class PlayCardView {
 				playCardLayout.removeAllViews();
 				playCardLayout.addView(playCardFrontSide);
 				playCardLayout.startAnimation(animation);
-
+				
+				//AnimationFactory.flipTransition(playCardViewAnimator, FlipDirection.RIGHT_LEFT,playCardLayout,playCardFrontSide,playCardBackSide);
+				
 				return false;
 			}
 		});
@@ -272,14 +297,25 @@ public class PlayCardView {
 					public void onClick(View v) {
 						playCardFrontSidePlaySectionLayout
 								.removeView(playCardFrontSidePlaySectionImageWithPlayButtonLayout);
+						
+						
 						playCardFrontSidePlaySectionVideoViewLayout = getPlayCardFrontSidePlaySectionVideoLayout();
 
-						playCardFrontSidePlaySectionLayout
-								.addView(playCardFrontSidePlaySectionVideoViewLayout);
+					
+						playCardFrontSidePlaySectionLayout.addView(playCardFrontSidePlaySectionVideoViewLayout);
 
 					}
 				});
 
+		playCardFrontSideTopLayoutRatingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+			
+			@Override
+			public void onRatingChanged(RatingBar ratingBar, float rating,
+					boolean fromUser) {
+				new AlertDialog.Builder(context).setMessage("\t\t\t\t\t\t\t\t You Rated : " + rating).setPositiveButton("OK", null).setTitle("\t\t\t\t\t\t\t Thank You For Rating").show();
+				
+			}
+		});
 		return playCardLayout;
 	}
 	
