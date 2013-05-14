@@ -27,12 +27,12 @@
         
 
         <ImageView
-            android:id="@+id/backButtonImage"
+            android:id="@+id/doneButtonImage"
             android:layout_width="160dp"
             android:layout_height="30dp" 
            	android:layout_gravity="center"
            	android:background="#000000"
-            android:src="@drawable/icon_status"/>
+            android:src="@drawable/done_button_black"/>
     </LinearLayout>
 
     <ListView

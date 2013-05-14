@@ -8,6 +8,7 @@ import java.util.List;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
@@ -196,6 +197,15 @@ PopoverViewDelegate {
 			popoverView.showPopoverFromRectInViewGroup(rootView,
 					PopoverView.getFrameForView(button),
 					PopoverView.PopoverArrowDirectionUp, true);
+			ImageView doneImageView = (ImageView) popoverView.findViewById(R.id.doneButtonImage);
+			doneImageView.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					popoverView.removeAllViews();
+					
+				}
+			});
 
 		}
 	};
@@ -220,6 +230,16 @@ PopoverViewDelegate {
 			popoverView.showPopoverFromRectInViewGroup(rootView,
 					PopoverView.getFrameForView(button),
 					PopoverView.PopoverArrowDirectionUp, true);
+			
+			ImageView doneImageView = (ImageView) popoverView.findViewById(R.id.doneButtonImage);
+			doneImageView.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					popoverView.removeAllViews();
+					
+				}
+			});
 
 		}
 	};
@@ -266,6 +286,16 @@ PopoverViewDelegate {
 			popoverView.showPopoverFromRectInViewGroup(rootView,
 					PopoverView.getFrameForView(button),
 					PopoverView.PopoverArrowDirectionUp, true);
+			
+			ImageView doneImageView = (ImageView) popoverView.findViewById(R.id.doneButtonImage);
+			doneImageView.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					popoverView.removeAllViews();
+					
+				}
+			});
 
 		}
 	};
@@ -407,6 +437,7 @@ PopoverViewDelegate {
 			listView = (ListView) findViewById(R.id.passing_leaders_list);
 			PassingLeaderListViewAdapter adapter = new PassingLeaderListViewAdapter(context, R.layout.passing_leader_menu_row_layout, items);
 			listView.setAdapter(adapter);
+			listView.setOnItemClickListener(passingLeadersItemClickListener);
 			
 		}else if(view.getLayoutId() == R.layout.popover_nfl_standing_view){
 			List<TeamItem> conferenceTeamItems = new ArrayList<TeamItem>();
@@ -490,6 +521,7 @@ PopoverViewDelegate {
 			listView = (ListView) findViewById(R.id.standing_list);
 			
 			listView.setAdapter(separatedListAdapter);
+			listView.setOnItemClickListener(standingItemClickListener);
 		}
 
 	}
@@ -515,6 +547,28 @@ PopoverViewDelegate {
 			popoverView.showPopoverFromRectInViewGroup(rootView,
 					PopoverView.getFrameForView(button),
 					PopoverView.PopoverArrowDirectionUp, true);
+			
+			ImageView backImageView = (ImageView) popoverView.findViewById(R.id.backButtonImage);
+			
+			backImageView.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					leaderOnClickListener.onClick(popoverView);
+					
+				}
+			});
+			
+			ImageView doneImageView = (ImageView) popoverView.findViewById(R.id.doneButtonImage);
+
+			doneImageView.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					popoverView.removeAllViews();
+					
+				}
+			});
 
 			
 		}
@@ -532,6 +586,30 @@ PopoverViewDelegate {
 		
 
 	}
+	
+	private OnItemClickListener passingLeadersItemClickListener = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			Intent intent = new Intent(context, PlayersActivity.class);
+			startActivity(intent);
+		
+		}
+	
+	};
+	
+	private OnItemClickListener standingItemClickListener = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			Intent intent = new Intent(context, GameActivity.class);
+			startActivity(intent);
+		
+		}
+	
+	};
 
 	
 
