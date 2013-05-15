@@ -84,7 +84,7 @@ public class PlayCardView {
 		playCardLayout.setLayoutParams(playCardLayoutParameters);
 
 		/*if (index % 2 == 0) {*/
-			playCardLayout.setBackgroundResource(R.drawable.a);
+			playCardLayout.setBackgroundResource(R.drawable.gray_background);
 	/*	} else {
 			playCardLayout
 					.setBackgroundColor(resources.getColor(R.color.green));
