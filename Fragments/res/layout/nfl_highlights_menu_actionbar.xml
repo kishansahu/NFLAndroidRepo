@@ -39,7 +39,7 @@
 
         <ImageView
             android:id="@+id/sliderView"
-            android:layout_width="40dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:src="@drawable/menuicon" >

@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -88,7 +89,9 @@ public class NFLHighlightsActivity extends BaseActivity implements
 		actionBar.setBackgroundDrawable(new ColorDrawable(0xFFFF8B1D));
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-
+		Drawable d = getResources().getDrawable(R.drawable.orange_background);
+		actionBar.setBackgroundDrawable(d);
+		
 		LinearLayout weekLinearLayout = (LinearLayout) mActionBarView
 				.findViewById(R.id.weekLayout);
 		weekLinearLayout.setOnClickListener(weekOnClickListener);

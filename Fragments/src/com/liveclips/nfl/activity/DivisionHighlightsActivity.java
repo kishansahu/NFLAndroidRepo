@@ -86,8 +86,6 @@ PopoverViewDelegate {
 		View mActionBarView = getLayoutInflater().inflate(
 				R.layout.nfl_division_menu_actionbar, null);
 		actionBar.setCustomView(mActionBarView);
-		actionBar.setBackgroundDrawable(new ColorDrawable(0xFFFF8B1D));
-		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 		
 		LinearLayout weekLinearLayout = (LinearLayout) mActionBarView

@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -102,7 +103,6 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 		View mActionBarView = getLayoutInflater().inflate(
 				R.layout.patriots_actionbar_layout, null);
 		actionBar.setCustomView(mActionBarView);
-		actionBar.setBackgroundDrawable(new ColorDrawable(0xFFFF8B1D));
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 
@@ -936,12 +936,13 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			// allPlaysTextView.setBackgroundColor(2);
-			allPlaysTextView.setBackgroundResource(R.color.white);
+			Drawable drawable =  getResources().getDrawable(R.drawable.active_border);
+			allPlaysTextView.setBackgroundDrawable(drawable);
 
-			topPlaysTextView.setBackgroundResource(R.color.orange);
+			/*topPlaysTextView.setBackgroundResource(R.color.orange);
 			topRatedTextView.setBackgroundResource(R.color.orange);
 			watchAllTextView.setBackgroundResource(R.color.orange);
-
+*/
 			Toast.makeText(GameActivity.this, "all plays button clicked",
 					Toast.LENGTH_SHORT).show();
 		}
@@ -1090,6 +1091,8 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 			marginView.setLayoutParams(new LayoutParams(20, 0));
 			playCardParentLinearLayout.addView(marginView);
 		}
+		
+		downloadImagesThreadPool.tearDown(6);
 
 	}
 

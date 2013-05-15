@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -76,6 +77,8 @@ public class BaseActivity extends Activity {
 		super.onStart();
 		ActionBar actionBar = getActionBar();
 		View mActionBarView = actionBar.getCustomView();
+		Drawable d = getResources().getDrawable(R.drawable.orange_background);
+		actionBar.setBackgroundDrawable(d);
 		fragmentMenuHeaderView = mActionBarView
 				.findViewById(R.id.fragmentMenuHeader);
 		activityMenuHeaderView = mActionBarView

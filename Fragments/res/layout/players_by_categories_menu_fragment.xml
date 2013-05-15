@@ -26,7 +26,7 @@
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/back_button"
+            android:background="@drawable/back_button_black"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:visibility="invisible" />

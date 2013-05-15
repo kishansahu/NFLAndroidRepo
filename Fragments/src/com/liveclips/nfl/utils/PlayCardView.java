@@ -83,13 +83,12 @@ public class PlayCardView {
 		playCardLayout.setId(index * 2);
 		playCardLayout.setLayoutParams(playCardLayoutParameters);
 
-		if (index % 2 == 0) {
-			playCardLayout.setBackgroundColor(resources
-					.getColor(R.color.orange));
-		} else {
+		/*if (index % 2 == 0) {*/
+			playCardLayout.setBackgroundResource(R.drawable.a);
+	/*	} else {
 			playCardLayout
 					.setBackgroundColor(resources.getColor(R.color.green));
-		}
+		}*/
 
 		playCardLayout.setPadding(15, 15, 15, 15);
 
@@ -134,10 +133,10 @@ public class PlayCardView {
 
 		ImageView playCardFrontSidePlaySectionImage = (ImageView) playCardFrontSidePlaySectionImageWithPlayButtonLayout
 				.findViewById(R.id.playCardFrontSidePlaySectionImageWithPlayButtonImageViewId);
-		/*new DownloadImageTask(playCardFrontSidePlaySectionImage)
+		new DownloadImageTask(playCardFrontSidePlaySectionImage)
 				.execute("http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg");
-*/
-		downloadImagesThreadPool.submit(playCardFrontSidePlaySectionImage, "http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg");
+
+		//downloadImagesThreadPool.submit(playCardFrontSidePlaySectionImage, "http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg");
 		playCardFrontSidePlaySectionImage.setId(index * 90000);
 		final RelativeLayout playCardFrontSidePlaySectionLayout = (RelativeLayout) playCardFrontSide
 				.findViewById(R.id.playCardFrontSidePlaySectionlayoutId);

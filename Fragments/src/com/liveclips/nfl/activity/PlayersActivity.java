@@ -8,6 +8,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -113,10 +114,10 @@ public class PlayersActivity extends BaseActivity {
 		View mActionBarView = getLayoutInflater().inflate(
 				R.layout.players_actionbar_layout, null);
 		actionBar.setCustomView(mActionBarView);
-		actionBar.setBackgroundDrawable(new ColorDrawable(0xFFFF8B1D));
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-
+		Drawable d = getResources().getDrawable(R.drawable.orange_background);
+		actionBar.setBackgroundDrawable(d);
 	}
 
 	public void showAddPlayersFragment() {

@@ -1,7 +1,5 @@
 package com.liveclips.nfl.fragment;
 
-import org.w3c.dom.ls.LSInput;
-
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -12,23 +10,22 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import com.liveclips.nfl.R;
 import com.liveclips.nfl.activity.GameActivity;
 import com.liveclips.nfl.activity.NFLHighlightsActivity;
 import com.liveclips.nfl.activity.PlayersActivity;
+import com.liveclips.nfl.adapter.TopicMenuArrayAdapter;
 
 public class TopicMenuFragment extends Fragment {
 
+	private int selectedIndex = 0;
+	
 	String[] topics = { "New England Patriots", "My Players", "NFL Highlights",
 			"Divisions", "Teams", "Game Schedule" };
 
@@ -43,28 +40,6 @@ public class TopicMenuFragment extends Fragment {
 
 	}
 
-	/*
-	 * @Override public void onCreateOptionsMenu(Menu menu, MenuInflater
-	 * inflater) { MenuItem menuItem1 = menu.add(0, 1, 0, "Live Clips");
-	 * menuItem1.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS); MenuItem
-	 * menuItem2 = menu.add(0, 1, 0, "close");
-	 * menuItem2.setIcon(R.drawable.close);
-	 * menuItem2.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS); }
-	 */
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.sliderButton:
-			// getActivity().performSliderAction();
-			return true;
-			/*
-			 * case R.id.help: showHelp(); return true;
-			 */
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
 
 	@Override
 	public void onStart() {
@@ -74,11 +49,13 @@ public class TopicMenuFragment extends Fragment {
 		listView1 = (ListView) getActivity().findViewById(
 				R.id.globalNavigationListView);
 
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-				android.R.layout.simple_list_item_1, topics);
+		/*ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+				android.R.layout.simple_list_item_1, topics);*/
 
+		TopicMenuArrayAdapter adapter = new TopicMenuArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, topics);
+		
 		listView1.setAdapter(adapter);
-
+		
 		listView1.setOnItemClickListener(listItemListener);
 
 	}
@@ -91,7 +68,7 @@ public class TopicMenuFragment extends Fragment {
 			switch (position) {
 
 			case 0:
-				// arg1.setBackgroundDrawable(new ColorDrawable(Color.CYAN));
+				arg1.setBackgroundDrawable((new ColorDrawable(Color.CYAN)));
 				startActivity(new Intent(getActivity(), GameActivity.class));
 				break;
 			case 1:
