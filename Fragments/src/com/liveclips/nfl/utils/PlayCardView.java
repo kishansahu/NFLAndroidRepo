@@ -20,7 +20,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.HorizontalScrollView;
@@ -48,6 +47,7 @@ public class PlayCardView {
 	private int index;
 	Resources resources;
 	Activity activity;
+	VideoView videoView;
 
 	static RelativeLayout playCardFrontSidePlaySectionVideoViewLayout;
 
@@ -328,18 +328,37 @@ public class PlayCardView {
 				DisplayMetrics dm = new DisplayMetrics();
 				activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
 				//RelativeLayout.LayoutParams playCardFrontSidePlaySectionLayoutParams = new RelativeLayout.LayoutParams( dm.widthPixels,dm.heightPixels);
-				//RelativeLayout view = (RelativeLayout) activity.findViewById(R.id.gameRootView);
+				RelativeLayout relativeLayout = (RelativeLayout) activity.findViewById(R.id.playCardFrontSidePlaySectionVideoLayoutId);
 				
-				VideoView videoView = (VideoView) playCardFrontSidePlaySectionVideoViewLayout.findViewById(R.id.playCardFrontSidePlaySectionVideoLayoutVideoViewId);
-				
+				RelativeLayout gameRootView = (RelativeLayout) activity.findViewById(R.id.gameRootView);
+				videoView.pause();
+				relativeLayout.removeView(videoView);
+				RelativeLayout.LayoutParams playCardLayoutParameters = new RelativeLayout.LayoutParams(
+						dm.widthPixels, dm.heightPixels);
 				Log.d("Width ::: ", "" + dm.widthPixels);
+				playCardLayoutParameters.setMargins(0, 0, 0, 0);
+				playCardLayoutParameters.leftMargin = 0;
+				videoView.setLayoutParams(playCardLayoutParameters);
 				
-				Log.d("height ::: ", "" + dm.heightPixels);
+				gameRootView.addView(videoView);
+				videoView.resume();
+				//videoView = new VideoView(context); //playCardFrontSidePlaySectionVideoViewLayout.findViewById(R.id.playCardFrontSidePlaySectionVideoLayoutVideoViewId);
+				//videoView.getParent().
 				
-				if(videoView!=null){
+				
+				
+				//params.width = dm.widthPixels;
+				
+				//params.height = dm.heightPixels;
+				
+				
+				
+				//Log.d("height ::: ", "" + dm.heightPixels);
+				
+				//if(videoView!=null){
 					
-				videoView.setLayoutParams(new LayoutParams(dm.widthPixels,dm.heightPixels));
-				}
+				
+				//}
 				//Log.d("","")
 				//RelativeLayout parent = (RelativeLayout)playCardFrontSidePlaySectionLayout.getParent();
 				//parent.removeView(playCardFrontSidePlaySectionLayout);
@@ -361,20 +380,25 @@ public class PlayCardView {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		RelativeLayout playCardFrontSidePlaySectionVideoLayout = (RelativeLayout) inflator
 				.inflate(R.layout.play_card_front_side_play_section_video, null);
-		VideoView playCardFrontSidePlaySectionVideoView = (VideoView) playCardFrontSidePlaySectionVideoLayout
-				.findViewById(R.id.playCardFrontSidePlaySectionVideoLayoutVideoViewId);
-		playCardFrontSidePlaySectionVideoView.setId(index * 390000);
+		videoView = new VideoView(context);//(VideoView) playCardFrontSidePlaySectionVideoLayout
+				//.findViewById(R.id.playCardFrontSidePlaySectionVideoLayoutVideoViewId);
+		//playCardFrontSidePlaySectionVideoView.setId(index * 390000);
 		MediaController mc = new MyMediaController(
-				playCardFrontSidePlaySectionVideoView.getContext());
+				videoView.getContext());
 
-		mc.setMediaPlayer(playCardFrontSidePlaySectionVideoView);
-		playCardFrontSidePlaySectionVideoView.setMediaController(mc);
-
-		playCardFrontSidePlaySectionVideoView.setVideoURI(Uri
+		mc.setMediaPlayer(videoView);
+		videoView.setMediaController(mc);
+		RelativeLayout.LayoutParams playCardLayoutParameters = new RelativeLayout.LayoutParams(
+				500, 400);
+		
+		
+		videoView.setLayoutParams(playCardLayoutParameters);
+		playCardFrontSidePlaySectionVideoLayout.addView(videoView);
+		videoView.setVideoURI(Uri
 				.parse("http://commonsware.com/misc/test2.3gp"));
 
 		// playCardFrontSidePlaySectionVideoView.setVideoURI(Uri.parse("http://localhost:8080/nflvideo.3gp"));
-		playCardFrontSidePlaySectionVideoView.start();
+		videoView.start();
 
 		return playCardFrontSidePlaySectionVideoLayout;
 	}
