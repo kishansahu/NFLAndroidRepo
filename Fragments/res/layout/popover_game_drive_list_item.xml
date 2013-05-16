@@ -22,9 +22,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="2dp"
             android:paddingLeft="8dp" />
-
+		
         <TextView
-            android:id="@+id/drive_detail"
+            android:id="@+id/drive_yard_covered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp" />
+        <TextView
+            android:id="@+id/drive_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="8dp" />

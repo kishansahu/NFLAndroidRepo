@@ -4,15 +4,17 @@ public class DriveItem {
 
 	public String teamShortName;
 	public String driveEvent;
-	public String driveDetail;
+	public String driveYardsCovered;
+	public String driveTime;
 	public int teamLogo;
 
 	public DriveItem(String teamShortName, String driveEvent,
-			String driveDetail, int teamLogo) {
+			 int teamLogo, String driveTime, String driveYardsCovered) {
 		super();
 		this.teamShortName = teamShortName;
 		this.driveEvent = driveEvent;
-		this.driveDetail = driveDetail;
+		this.driveTime = driveTime;
+		this.driveYardsCovered = driveYardsCovered;
 		this.teamLogo = teamLogo;
 	}
 
