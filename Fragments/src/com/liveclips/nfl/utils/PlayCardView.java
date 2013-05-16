@@ -6,7 +6,6 @@ package com.liveclips.nfl.utils;
 import java.io.InputStream;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -14,16 +13,18 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
@@ -32,12 +33,8 @@ import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
-import android.widget.ViewAnimator;
-import android.widget.ViewFlipper;
 
 import com.liveclips.nfl.R;
-import com.liveclips.nfl.flip.AnimationFactory;
-import com.liveclips.nfl.flip.AnimationFactory.FlipDirection;
 
 /**
  * @author abhijitsrivastava
@@ -133,8 +130,13 @@ public class PlayCardView {
 
 		ImageView playCardFrontSidePlaySectionImage = (ImageView) playCardFrontSidePlaySectionImageWithPlayButtonLayout
 				.findViewById(R.id.playCardFrontSidePlaySectionImageWithPlayButtonImageViewId);
-		new DownloadImageTask(playCardFrontSidePlaySectionImage)
-				.execute("http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg");
+		
+		final ImageButton videoSizeButton = (ImageButton) playCardFrontSide.findViewById(R.id.playCardFrontSideBottomLayoutImageButtonId);
+		videoSizeButton.setBackgroundResource(R.drawable.full_screen_button);
+		videoSizeButton.setVisibility(View.INVISIBLE);
+		
+		/*new DownloadImageTask(playCardFrontSidePlaySectionImage)
+				.execute("http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg");*/
 
 		//downloadImagesThreadPool.submit(playCardFrontSidePlaySectionImage, "http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg");
 		playCardFrontSidePlaySectionImage.setId(index * 90000);
@@ -302,6 +304,8 @@ public class PlayCardView {
 
 					
 						playCardFrontSidePlaySectionLayout.addView(playCardFrontSidePlaySectionVideoViewLayout);
+						videoSizeButton.setVisibility(View.VISIBLE);
+						
 
 					}
 				});
@@ -311,10 +315,42 @@ public class PlayCardView {
 			@Override
 			public void onRatingChanged(RatingBar ratingBar, float rating,
 					boolean fromUser) {
-				new AlertDialog.Builder(context).setMessage("\t\t\t\t\t\t\t\t You Rated : " + rating).setPositiveButton("OK", null).setTitle("\t\t\t\t\t\t\t Thank You For Rating").show();
+				//new AlertDialog.Builder(context).setMessage("\t\t\t\t\t\t\t\t You Rated : " + rating).setPositiveButton("OK", null).setTitle("\t\t\t\t\t\t\t Thank You For Rating").show();
+				showDialog("You Rated : " + rating);
 				
 			}
 		});
+		
+		videoSizeButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				DisplayMetrics dm = new DisplayMetrics();
+				activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+				//RelativeLayout.LayoutParams playCardFrontSidePlaySectionLayoutParams = new RelativeLayout.LayoutParams( dm.widthPixels,dm.heightPixels);
+				//RelativeLayout view = (RelativeLayout) activity.findViewById(R.id.gameRootView);
+				
+				VideoView videoView = (VideoView) playCardFrontSidePlaySectionVideoViewLayout.findViewById(R.id.playCardFrontSidePlaySectionVideoLayoutVideoViewId);
+				
+				Log.d("Width ::: ", "" + dm.widthPixels);
+				
+				Log.d("height ::: ", "" + dm.heightPixels);
+				
+				if(videoView!=null){
+					
+				videoView.setLayoutParams(new LayoutParams(dm.widthPixels,dm.heightPixels));
+				}
+				//Log.d("","")
+				//RelativeLayout parent = (RelativeLayout)playCardFrontSidePlaySectionLayout.getParent();
+				//parent.removeView(playCardFrontSidePlaySectionLayout);
+				//playCardFrontSidePlaySectionLayout.setLayoutParams(playCardFrontSidePlaySectionLayoutParams);
+				//view.addView(playCardFrontSidePlaySectionLayout);
+				
+				
+				
+			}
+		});
+		
 		return playCardLayout;
 	}
 	
@@ -386,6 +422,28 @@ public class PlayCardView {
 			super.show(0);
 		}
 
+	}
+	
+	private void showDialog(String rating)
+	{
+	    final Custom_Dialog dialog = new Custom_Dialog(activity, R.style.myCoolDialog);
+
+	    dialog.setContentView(R.layout.custom_dialog);
+	    dialog.setTitle("  Thanks For Your Rating");
+
+	    TextView text = (TextView) dialog.findViewById(R.id.customDialogTextViewId);
+	    text.setText(rating );
+	    
+	    ImageView okButton = (ImageView) dialog.findViewById(R.id.customDialogOkButtonId);
+	    okButton.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				dialog.hide();
+				return false;
+			}
+		});
+	    dialog.show();  
 	}
 	// playCardParentLinearLayout.addView(playCardLayout);
 
@@ -653,5 +711,4 @@ public class PlayCardView {
 	 * 
 	 * downloadImageTask = null;
 	 */
-
 }
