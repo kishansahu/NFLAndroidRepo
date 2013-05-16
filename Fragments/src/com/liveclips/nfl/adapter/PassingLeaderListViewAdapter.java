@@ -53,7 +53,7 @@ private Context context;
 			
 			if (convertView == null) {
 				convertView = mInflater.inflate(
-						R.layout.passing_leader_menu_row_layout, null);
+						R.layout.nfl_highlights_popover_list_row_item_passing_leader, null);
 				holder = new PassingLeaderHolder();
 				
 				holder.passingPlayeText = (TextView) convertView

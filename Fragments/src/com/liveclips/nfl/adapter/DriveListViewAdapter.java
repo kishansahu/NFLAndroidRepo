@@ -50,13 +50,8 @@ public class DriveListViewAdapter extends ArrayAdapter<DriveItem> {
 		LayoutInflater mInflater = (LayoutInflater) context
 				.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 		if (convertView == null) {
-<<<<<<< HEAD
-			convertView = mInflater
-					.inflate(R.layout.game_popover_list_row_item_drives, null);
-=======
 			convertView = mInflater.inflate(
 					R.layout.popover_game_drive_list_item, null);
->>>>>>> 53265901eb9fada9d7b99b40514e6a00e8cdc232
 			holder = new DriveViewHolder();
 			holder.teamLogo = (ImageView) convertView
 					.findViewById(R.id.team_logo);

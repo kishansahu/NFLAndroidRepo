@@ -187,7 +187,7 @@ PopoverViewDelegate {
 				popoverView.removeAllViews();
 			}
 			popoverView = new PopoverView(DivisionHighlightsActivity.this,
-					R.layout.popover_nfl_week_item);
+					R.layout.nfl_highlights_popover_view_week);
 
 			popoverView.setContentSizeForViewInPopover(new Point(320, 400));
 			popoverView.setDelegate(DivisionHighlightsActivity.this);
@@ -220,7 +220,7 @@ PopoverViewDelegate {
 				popoverView.removeAllViews();
 			}
 			popoverView = new PopoverView(DivisionHighlightsActivity.this,
-					R.layout.popover_nfl_leaders_item);
+					R.layout.nfl_highlights_popover_view_leaders);
 
 			popoverView.setContentSizeForViewInPopover(new Point(320, 400));
 			popoverView.setDelegate(DivisionHighlightsActivity.this);
@@ -276,7 +276,7 @@ PopoverViewDelegate {
 				popoverView.removeAllViews();
 			}
 			popoverView = new PopoverView(DivisionHighlightsActivity.this,
-					R.layout.popover_nfl_standing_view);
+					R.layout.nfl_highlights_popover_view_standing);
 
 			popoverView.setContentSizeForViewInPopover(new Point(320, 400));
 			popoverView.setDelegate(DivisionHighlightsActivity.this);
@@ -311,7 +311,7 @@ PopoverViewDelegate {
 	@Override
 	public void popoverViewDidShow(PopoverView view) {
 		Log.d("layoutId", String.valueOf(view.getLayoutId()));
-		if (view.getLayoutId() == R.layout.popover_nfl_week_item) {
+		if (view.getLayoutId() == R.layout.nfl_highlights_popover_view_week) {
 			Log.d("id", String.valueOf(view.getId()));
 			List<WeekItem> weekItems = new ArrayList<WeekItem>();
 			WeekItem item1 = new WeekItem();
@@ -332,12 +332,12 @@ PopoverViewDelegate {
 			
 			listView = (ListView) findViewById(R.id.week_list);
 			NFLHighlightsWeekListAdapter weekListAdapter = new NFLHighlightsWeekListAdapter(
-					context, R.layout.nfl_highlights_week_menu, weekItems);
+					context, R.layout.nfl_highlights_popover_list_row_item_week, weekItems);
 
 			listView.setAdapter(weekListAdapter);
 
 		}
-		else if(view.getLayoutId() == R.layout.popover_nfl_leaders_item){
+		else if(view.getLayoutId() == R.layout.nfl_highlights_popover_view_leaders){
 			
 			SeparatedListAdapter separatedListAdapter = new SeparatedListAdapter(context);
 			List<LeadersTypeItem> offenceLeadersTypeItems = new ArrayList<LeadersTypeItem>();
@@ -362,7 +362,7 @@ PopoverViewDelegate {
 			item5.setLeadersTypeName("Scoring");
 			offenceLeadersTypeItems.add(item5);
 			
-			separatedListAdapter.addSection("Offense", new NFLHighlightsLeadersListAdapter(context, R.layout.nfl_highlights_leader_menu_item, offenceLeadersTypeItems));
+			separatedListAdapter.addSection("Offense", new NFLHighlightsLeadersListAdapter(context, R.layout.nfl_highlights_popover_list_row_item_leader, offenceLeadersTypeItems));
 			
 			List<LeadersTypeItem> defenceLeadersTypeItems = new ArrayList<LeadersTypeItem>();
 			
@@ -378,7 +378,7 @@ PopoverViewDelegate {
 			item8.setLeadersTypeName("Tackels");
 			defenceLeadersTypeItems.add(item8);
 			
-			separatedListAdapter.addSection("Defense", new NFLHighlightsLeadersListAdapter(context, R.layout.nfl_highlights_leader_menu_item, defenceLeadersTypeItems));
+			separatedListAdapter.addSection("Defense", new NFLHighlightsLeadersListAdapter(context, R.layout.nfl_highlights_popover_list_row_item_leader, defenceLeadersTypeItems));
 			
 			List<LeadersTypeItem> specialTeamLeadersTypeItems = new ArrayList<LeadersTypeItem>();
 			
@@ -398,14 +398,14 @@ PopoverViewDelegate {
 			item12.setLeadersTypeName("Filed Goals");
 			specialTeamLeadersTypeItems.add(item12);
 			
-			separatedListAdapter.addSection("Special Teams", new NFLHighlightsLeadersListAdapter(context, R.layout.nfl_highlights_leader_menu_item, specialTeamLeadersTypeItems));
+			separatedListAdapter.addSection("Special Teams", new NFLHighlightsLeadersListAdapter(context, R.layout.nfl_highlights_popover_list_row_item_leader, specialTeamLeadersTypeItems));
 			
 			listView = (ListView) findViewById(R.id.leaders_list);
 			
 			listView.setAdapter(separatedListAdapter);
 			listView.setOnItemClickListener(leadersItemClickListener);
 			
-		}else if(view.getLayoutId() == R.layout.popover_nfl_passing_leaders_item){
+		}else if(view.getLayoutId() == R.layout.nfl_highlights_popover_view_passing_leaders){
 			List<PassingLeaderItem> items = new ArrayList<PassingLeaderItem>();
 			
 			PassingLeaderItem leaderItem1 = new PassingLeaderItem();
@@ -433,11 +433,11 @@ PopoverViewDelegate {
 			items.add(leaderItem3);
 					
 			listView = (ListView) findViewById(R.id.passing_leaders_list);
-			PassingLeaderListViewAdapter adapter = new PassingLeaderListViewAdapter(context, R.layout.passing_leader_menu_row_layout, items);
+			PassingLeaderListViewAdapter adapter = new PassingLeaderListViewAdapter(context, R.layout.nfl_highlights_popover_list_row_item_passing_leader, items);
 			listView.setAdapter(adapter);
 			listView.setOnItemClickListener(passingLeadersItemClickListener);
 			
-		}else if(view.getLayoutId() == R.layout.popover_nfl_standing_view){
+		}else if(view.getLayoutId() == R.layout.nfl_highlights_popover_view_standing){
 			List<TeamItem> conferenceTeamItems = new ArrayList<TeamItem>();
 								
 			TeamItem teamItem1 = new TeamItem();
@@ -477,7 +477,7 @@ PopoverViewDelegate {
 			
 					
 			
-			SeparatedSectionHeaderListAdapter eastHeaderListAdapter = new SeparatedSectionHeaderListAdapter(context, R.layout.popover_nfl_standing_header, popover_nfl_standing_header);
+			SeparatedSectionHeaderListAdapter eastHeaderListAdapter = new SeparatedSectionHeaderListAdapter(context, R.layout.nfl_highlights_popover_header_standing, popover_nfl_standing_header);
 			
 			EmptyHeaderSeparatedListAdapter separatedListAdapter = new EmptyHeaderSeparatedListAdapter(context, true);
 			
@@ -491,7 +491,7 @@ PopoverViewDelegate {
 			northItem.setHeadingText2("W");
 			northItem.setHeadingText3("L");
 			north_popover_nfl_standing_header.add(northItem);
-			SeparatedSectionHeaderListAdapter northHeaderListAdapter = new SeparatedSectionHeaderListAdapter( context, R.layout.popover_nfl_standing_header, north_popover_nfl_standing_header);
+			SeparatedSectionHeaderListAdapter northHeaderListAdapter = new SeparatedSectionHeaderListAdapter( context, R.layout.nfl_highlights_popover_header_standing, north_popover_nfl_standing_header);
 			separatedListAdapter.addSection("7", northHeaderListAdapter);
 			separatedListAdapter.addSection("2", new StandingTeamListViewAdapter(context, R.layout.standing_team_menu_row_layout, conferenceTeamItems));
 			
@@ -502,7 +502,7 @@ PopoverViewDelegate {
 			south_HeaderItem.setHeadingText2("W");
 			south_HeaderItem.setHeadingText3("L");
 			southPopover_nfl_standing_header.add(south_HeaderItem);
-			SeparatedSectionHeaderListAdapter southHeaderListAdapter = new SeparatedSectionHeaderListAdapter(context, R.layout.popover_nfl_standing_header, southPopover_nfl_standing_header);
+			SeparatedSectionHeaderListAdapter southHeaderListAdapter = new SeparatedSectionHeaderListAdapter(context, R.layout.nfl_highlights_popover_header_standing, southPopover_nfl_standing_header);
 			separatedListAdapter.addSection("8", southHeaderListAdapter);
 			separatedListAdapter.addSection("3", new StandingTeamListViewAdapter(context, R.layout.standing_team_menu_row_layout, conferenceTeamItems));
 			
@@ -512,7 +512,7 @@ PopoverViewDelegate {
 			westHeaderItem.setHeadingText2("W");
 			westHeaderItem.setHeadingText3("L");
 			westPopover_nfl_standing_header.add(westHeaderItem);
-			SeparatedSectionHeaderListAdapter westHeaderListAdapter = new SeparatedSectionHeaderListAdapter(context, R.layout.popover_nfl_standing_header, westPopover_nfl_standing_header);
+			SeparatedSectionHeaderListAdapter westHeaderListAdapter = new SeparatedSectionHeaderListAdapter(context, R.layout.nfl_highlights_popover_header_standing, westPopover_nfl_standing_header);
 			separatedListAdapter.addSection("9", westHeaderListAdapter);
 			separatedListAdapter.addSection("4", new StandingTeamListViewAdapter(context, R.layout.standing_team_menu_row_layout, conferenceTeamItems));
 			
@@ -537,7 +537,7 @@ PopoverViewDelegate {
 				popoverView.removeAllViews();
 			}
 			popoverView = new PopoverView(DivisionHighlightsActivity.this,
-					R.layout.popover_nfl_passing_leaders_item);
+					R.layout.nfl_highlights_popover_view_passing_leaders);
 
 			popoverView.setContentSizeForViewInPopover(new Point(320, 400));
 			popoverView.setDelegate(DivisionHighlightsActivity.this);

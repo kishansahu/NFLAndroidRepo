@@ -9,6 +9,19 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical" >
 
+        <TextView
+            android:id="@+id/week_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:paddingLeft="8dp" />
+
+        <TextView
+            android:id="@+id/versus_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp" />
+
         <ImageView
             android:id="@+id/team_logo"
             android:layout_width="wrap_content"
@@ -17,28 +30,16 @@
             android:paddingLeft="8dp" />
 
         <TextView
-            android:id="@+id/team_shortname"
+            android:id="@+id/team_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="2dp"
-            android:paddingLeft="8dp" />
-		
-        <TextView
-            android:id="@+id/drive_yard_covered"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="8dp" />
-        <TextView
-            android:id="@+id/drive_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:paddingLeft="8dp" />
 
         <TextView
-            android:id="@+id/drive_event"
+            android:id="@+id/team_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
             android:paddingLeft="8dp" />
     </TableRow>
 

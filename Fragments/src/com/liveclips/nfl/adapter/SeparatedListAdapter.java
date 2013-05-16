@@ -20,24 +20,24 @@ public class SeparatedListAdapter extends BaseAdapter {
 
 	public SeparatedListAdapter(Context context) {
 		headers = new ArrayAdapter<Object>(context,
-				R.layout.popover_section_header);
+				R.layout.common_popover_header_section);
 	}
 	
 	
 	public SeparatedListAdapter(Context context, boolean header) {
 		if (!header) {
 			headers = new ArrayAdapter<Object>(context,
-					R.layout.popover_section_empty_header);
+					R.layout.common_popover_header_empty_section);
 		} else {
 			headers = new ArrayAdapter<Object>(context,
-					R.layout.popover_section_header);
+					R.layout.common_popover_header_section);
 		}
 
 	}
 
 	public SeparatedListAdapter(Context context, String standingHeaders) {
 		headers = new ArrayAdapter<Object>(context,
-				R.layout.popover_nfl_standing_header);
+				R.layout.nfl_highlights_popover_header_standing);
 	}
 	
 	public void addSection(String section, Adapter adapter) {

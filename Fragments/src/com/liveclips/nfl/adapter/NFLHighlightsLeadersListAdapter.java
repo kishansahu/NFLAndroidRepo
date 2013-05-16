@@ -53,7 +53,7 @@ private Context context;
 			
 			if (convertView == null) {
 				convertView = mInflater.inflate(
-						R.layout.nfl_highlights_leader_menu_item, null);
+						R.layout.nfl_highlights_popover_list_row_item_leader, null);
 				holder = new LeadersTypeViewHolder();
 				
 				holder.leadersText = (TextView) convertView

@@ -110,7 +110,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 
 		ActionBar actionBar = getActionBar();
 		View mActionBarView = getLayoutInflater().inflate(
-				R.layout.patriots_actionbar_layout, null);
+				R.layout.game_actionbar, null);
 		actionBar.setCustomView(mActionBarView);
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -126,7 +126,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 					popoverView.dissmissPopover(false);
 				}
 				popoverView = new PopoverView(GameActivity.this,
-						R.layout.popover_game_schedule_view);
+						R.layout.game_popover_view_schedule);
 
 				popoverView.setContentSizeForViewInPopover(new Point(320, 400));
 				popoverView.setDelegate(GameActivity.this);
@@ -149,7 +149,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 					popoverView.dissmissPopover(false);
 				}
 				popoverView = new PopoverView(GameActivity.this,
-						R.layout.popover_game_stats_view);
+						R.layout.game_popover_view_stats);
 
 				popoverView.setContentSizeForViewInPopover(new Point(320, 400));
 				popoverView.setDelegate(GameActivity.this);
@@ -172,7 +172,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 					popoverView.dissmissPopover(false);
 				}
 				popoverView = new PopoverView(GameActivity.this,
-						R.layout.popover_game_drives_view);
+						R.layout.game_popover_view_drives);
 
 				popoverView.setContentSizeForViewInPopover(new Point(320, 400));
 				popoverView.setDelegate(GameActivity.this);
@@ -195,7 +195,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 					popoverView.dissmissPopover(false);
 				}
 				popoverView = new PopoverView(GameActivity.this,
-						R.layout.popover_game_player_view);
+						R.layout.game_popover_view_player);
 
 				popoverView.setContentSizeForViewInPopover(new Point(320, 400));
 				popoverView.setDelegate(GameActivity.this);
@@ -528,7 +528,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 	public void popoverViewDidShow(PopoverView view) {
 
 		Log.d("layoutId", String.valueOf(view.getLayoutId()));
-		if (view.getLayoutId() == R.layout.popover_game_schedule_view) {
+		if (view.getLayoutId() == R.layout.game_popover_view_schedule) {
 			Log.d("id", String.valueOf(view.getId()));
 			List<ScheduleItem> rowItems = new ArrayList<ScheduleItem>();
 			String[] teamNames = { "Titans", "Cardinals", "Ravens", "Bills",
@@ -552,7 +552,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 			}
 			listView = (ListView) findViewById(R.id.game_schedule_list);
 			ScheduleListViewAdapter adapter = new ScheduleListViewAdapter(this,
-					R.layout.popover_game_schedule_list_item, rowItems);
+					R.layout.game_popover_list_row_item_schedule, rowItems);
 			listView.setAdapter(adapter);
 
 			/*
@@ -562,7 +562,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 			 * listView.setAdapter(adapter);
 			 */
 
-		} else if (view.getLayoutId() == R.layout.popover_game_drives_view) {
+		} else if (view.getLayoutId() == R.layout.game_popover_view_drives) {
 
 			List<DriveItem> rowItemsForQ1 = new ArrayList<DriveItem>();
 			List<DriveItem> rowItemsForQ2 = new ArrayList<DriveItem>();
@@ -687,7 +687,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 
 		}
 
-		else if (view.getLayoutId() == R.layout.popover_game_stats_view) {
+		else if (view.getLayoutId() == R.layout.game_popover_view_stats) {
 			TextView statFirstTeamLabel = (TextView) findViewById(R.id.statFirstTeam);
 			statFirstTeamLabel.setText("Packers");
 
@@ -734,10 +734,10 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 			SeparatedListAdapter adapter = new SeparatedListAdapter(this);
 			adapter.addSection("Team Plays",
 					new StatsListViewAdapter(this,
-							R.layout.popover_game_stats_list_item,
+							R.layout.game_popover_list_row_item_stats,
 							rowItemsForTeamStats));
 			adapter.addSection("Key Plays", new StatsListViewAdapter(this,
-					R.layout.popover_game_stats_list_item, rowItemsForKeyPlays));
+					R.layout.game_popover_list_row_item_stats, rowItemsForKeyPlays));
 			listView = (ListView) findViewById(R.id.game_stats_list);
 			listView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -807,7 +807,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 
 		}
 
-		else if (view.getLayoutId() == R.layout.popover_game_player_view) {
+		else if (view.getLayoutId() == R.layout.game_popover_view_player) {
 
 			// Offensive players for team1
 
@@ -817,10 +817,10 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 			adapter.addSection(
 					"OFFENSE",
 					new PlayerListViewAdapter(this,
-							R.layout.popover_game_player_list_item, getPlayers(
+							R.layout.game_popover_list_row__item_player, getPlayers(
 									"team1", "offensive")));
 			adapter.addSection("DEFENSE", new PlayerListViewAdapter(
-					GameActivity.this, R.layout.popover_game_player_list_item,
+					GameActivity.this, R.layout.game_popover_list_row__item_player,
 					getPlayers("team1", "defensive")));
 
 			listView = (ListView) findViewById(R.id.game_player_list);
@@ -902,11 +902,11 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 					adapter.removeAllSections();
 					adapter.addSection("OFFENSE",
 							new PlayerListViewAdapter(GameActivity.this,
-									R.layout.popover_game_player_list_item,
+									R.layout.game_popover_list_row__item_player,
 									getPlayers("team1", "offensive")));
 					adapter.addSection("DEFENSE",
 							new PlayerListViewAdapter(GameActivity.this,
-									R.layout.popover_game_player_list_item,
+									R.layout.game_popover_list_row__item_player,
 									getPlayers("team1", "defensive")));
 					adapter.notifyDataSetChanged();
 					listView.setSelection(0);
@@ -927,11 +927,11 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 					adapter.removeAllSections();
 					adapter.addSection("OFFENSE",
 							new PlayerListViewAdapter(GameActivity.this,
-									R.layout.popover_game_player_list_item,
+									R.layout.game_popover_list_row__item_player,
 									getPlayers("team2", "offensive")));
 					adapter.addSection("DEFENSE",
 							new PlayerListViewAdapter(GameActivity.this,
-									R.layout.popover_game_player_list_item,
+									R.layout.game_popover_list_row__item_player,
 									getPlayers("team2", "defensive")));
 					adapter.notifyDataSetChanged();
 					listView.setSelection(0);

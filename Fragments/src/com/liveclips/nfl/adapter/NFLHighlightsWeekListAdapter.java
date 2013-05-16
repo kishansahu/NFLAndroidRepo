@@ -51,7 +51,7 @@ public class NFLHighlightsWeekListAdapter extends ArrayAdapter<WeekItem>{
 			
 			if (convertView == null) {
 				convertView = mInflater.inflate(
-						R.layout.nfl_highlights_week_menu, null);
+						R.layout.nfl_highlights_popover_list_row_item_week, null);
 				holder = new WeekHolder();
 				
 				holder.weekTextView = (TextView) convertView
