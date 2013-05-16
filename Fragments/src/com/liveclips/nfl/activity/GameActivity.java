@@ -17,11 +17,13 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -70,6 +72,8 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 	View fragmentMenuHeaderView;
 	View activityMenuHeaderView;
 	int playCardVideoId = 0;
+	LinearLayout statTab, playerTab, drivesTab,matchScoreBoardTabContainer;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +86,12 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 		topPlaysTextView = (TextView) findViewById(R.id.topPlaysId);
 		topRatedTextView = (TextView) findViewById(R.id.topRatedId);
 		watchAllTextView = (TextView) findViewById(R.id.watchAllId);
-
+		statTab = (LinearLayout) findViewById(R.id.statTab);
+		playerTab = (LinearLayout) findViewById(R.id.playerTab);
+		drivesTab = (LinearLayout) findViewById(R.id.drivesTab);
+		
+		
+		matchScoreBoardTabContainer = (LinearLayout) findViewById(R.id.matchScoreBoardTabContainer);
 		allPlaysTextView.setOnClickListener(allPlaysClickListener);
 		topPlaysTextView.setOnClickListener(topPlaysCilckListener);
 		topRatedTextView.setOnClickListener(topRatedClickListener);
@@ -216,16 +225,14 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 		@Override
 		public void onClick(View v) {
 
-			/*Toast.makeText(GameActivity.this, "Background clicked",
-					Toast.LENGTH_SHORT).show();*/
 			if (NflUtils.isScoreBannerShrinked()) {
-				makeTabInvisibleForEnlargingScoreBoard();
 				enlargeScoreBanner();
 			}
 		}
 	};
 
 	public void enlargeScoreBanner() {
+		matchScoreBoardTabContainer.setVisibility(View.INVISIBLE);
 		RelativeLayout matchScoreBoardBackground = (RelativeLayout) findViewById(R.id.matchScoreBoardBackground);
 		matchScoreBoardBackground
 				.setLayoutParams(new RelativeLayout.LayoutParams(
@@ -302,10 +309,10 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 		LinearLayout secondTeamDescriptionContainer = (LinearLayout) findViewById(R.id.secondTeamDescriptionContainer);
 		secondTeamDescriptionContainer.setLayoutParams(relParams);
 		NflUtils.setScoreBannerShrinked(false);
-		NflUtils.stubActivatedName = "";
 	}
 
 	public void shrinkScoreBanner() {
+		matchScoreBoardTabContainer.setVisibility(View.VISIBLE);
 		RelativeLayout matchScoreBoardBackground = (RelativeLayout) findViewById(R.id.matchScoreBoardBackground);
 		matchScoreBoardBackground.getLayoutParams().width = NflUtils
 				.convertDensityPixelToPixel(context, 470);
@@ -573,14 +580,25 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 					"FIELD GOAL", "FUMBLE" };
 			String[] driveEventsForQ4 = { "LIVE", "TOUCHDOWN", "PUNT", "PUNT" };
 
-			String[] driveDetailsForQ1 = { "53 YDS 8:32", "52 YDS,8:55",
-					"31 YDS,2:46", "22 YDS 1:32" };
-			String[] driveDetailsForQ2 = { "53 YDS 8:32", "52 YDS,8:55",
-					"31 YDS,2:46", "22 YDS 1:32" };
-			String[] driveDetailsForQ3 = { "75 YDS 9:55", "28 YDS,3:26",
-					"18 YDS,1:15", "82 YDS 7:11", "56 YDS,5:41" };
-			String[] driveDetailsForQ4 = { "53 YDS 8:32", "52 YDS,8:55",
-					"31 YDS,2:46", "22 YDS 1:32" };
+			String[] driveYardsForQ1 = { "53 YDS", "52 YDS",
+					"31 YDS", "22 YDS" };
+			String[] driveTimeForQ1 = { "8:32", "8:55",
+					"2:46", "1:32" };
+			String[] driveYardsForQ2 = { "53 YDS", "52 YDS",
+					"31 YDS", "22 YDS" };
+			String[] driveTimeForQ2 = { "8:32", "8:55",
+					"2:46", "1:32" };
+			
+			String[] driveYardsForQ3 = { "53 YDS", "52 YDS",
+					"31 YDS", "22 YDS", "52 YDS" };
+			String[] driveTimeForQ3 = { "8:32", "8:55",
+					"2:46", "1:32", "1:32" };
+			
+			String[] driveYardsForQ4 = { "53 YDS", "52 YDS",
+					"31 YDS", "22 YDS", "52 YDS" };
+			String[] driveTimeForQ4 = { "8:32", "8:55",
+					"2:46", "1:32", "1:32" };
+			
 
 			int[] teamLogoForQ1 = { R.drawable.patriots, R.drawable.packers,
 					R.drawable.patriots, R.drawable.packers, };
@@ -593,29 +611,25 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 
 			for (int i = 0; i < teamShortNamesForQ1.length; i++) {
 				DriveItem item = new DriveItem(teamShortNamesForQ1[i],
-						driveEventsForQ1[i], driveDetailsForQ1[i],
-						teamLogoForQ1[i]);
+						driveEventsForQ1[i], teamLogoForQ1[i], driveTimeForQ1[i], driveYardsForQ1[i] );
 
 				rowItemsForQ1.add(item);
 			}
 			for (int i = 0; i < teamShortNamesForQ2.length; i++) {
-				DriveItem item = new DriveItem(teamShortNamesForQ2[i],
-						driveEventsForQ2[i], driveDetailsForQ2[i],
-						teamLogoForQ2[i]);
+				DriveItem item =new DriveItem(teamShortNamesForQ2[i],
+						driveEventsForQ2[i], teamLogoForQ2[i], driveTimeForQ2[i], driveYardsForQ2[i] );
 
 				rowItemsForQ2.add(item);
 			}
 			for (int i = 0; i < teamShortNamesForQ3.length; i++) {
 				DriveItem item = new DriveItem(teamShortNamesForQ3[i],
-						driveEventsForQ3[i], driveDetailsForQ3[i],
-						teamLogoForQ3[i]);
+						driveEventsForQ3[i], teamLogoForQ3[i], driveTimeForQ3[i], driveYardsForQ3[i] );
 
 				rowItemsForQ3.add(item);
 			}
 			for (int i = 0; i < teamShortNamesForQ4.length; i++) {
 				DriveItem item = new DriveItem(teamShortNamesForQ4[i],
-						driveEventsForQ4[i], driveDetailsForQ4[i],
-						teamLogoForQ4[i]);
+						driveEventsForQ4[i], teamLogoForQ4[i], driveTimeForQ4[i], driveYardsForQ4[i] );
 
 				rowItemsForQ4.add(item);
 			}
@@ -635,13 +649,38 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
-					// Toast.makeText(this, "text", Toast.LENGTH_LONG).show();
-					Log.d("lineno", String.valueOf(arg2));
-					TextView txt = (TextView) (arg1
-							.findViewById(R.id.team_shortname));
+					if (!NflUtils.isScoreBannerShrinked()) {
+						shrinkScoreBanner();
+					}
+					/**
+					 * Show Drives banner
+					 */
+					
+					matchScoreBoardTabContainer.setVisibility(View.VISIBLE);
+					matchScoreBoardTabContainer.removeAllViews();
+					final LinearLayout inflatedView = (LinearLayout) View.inflate(context, R.layout.team_drives_match_scoreboard, null);
+					matchScoreBoardTabContainer.addView(inflatedView);
+					TextView driveYardCovered = (TextView) (arg1
+							.findViewById(R.id.drive_yard_covered));
+					TextView driveTime = (TextView) (arg1
+							.findViewById(R.id.drive_time));
+					//showYardsCoveredInDrives(String startingYards, String driveYardCovered, View arg1){
+					TextView driveYardCoveredIndicator = (TextView) (findViewById(R.id.yards_covered_drive_indicator));
+					TextView driveScoreLabel = (TextView) (findViewById(R.id.drive_score_label));
+					driveScoreLabel.setText("X" + " Plays, " + driveYardCovered.getText().toString()+", "+ driveTime.getText().toString());
+					int driveYardCoveredIndicatorWidth= Integer.parseInt(driveYardCovered.getText().toString().replaceAll( "[^\\d]", "" ));
+					int driveYardCoveredIndicatorWidthInDp= NflUtils.convertDensityPixelToPixel(context,driveYardCoveredIndicatorWidth );
+					LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+							LayoutParams.WRAP_CONTENT,
+							LayoutParams.WRAP_CONTENT);
+					params.rightMargin= NflUtils.convertDensityPixelToPixel(context, 31);
+					params.width= ((driveYardCoveredIndicatorWidth * 3) -3);
+					driveYardCoveredIndicator.setLayoutParams(params);
+					
+					
+					
 
-					Log.d("lineno", txt.getText().toString());
-
+					popoverView.dissmissPopover(false);
 				}
 			});
 			listView.setAdapter(adapter);
@@ -705,23 +744,16 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
-					// Toast.makeText(this, "text", Toast.LENGTH_LONG).show();
-					Log.d("lineno", String.valueOf(arg2));
 
 					if (!NflUtils.isScoreBannerShrinked()) {
 						shrinkScoreBanner();
 					}
-					if (!NflUtils.stubActivatedName.equalsIgnoreCase("statTab")
-							&& (NflUtils.stubActivatedName != null)) {
-						LinearLayout statTab = (LinearLayout) findViewById(R.id.statTab);
-						statTab.setVisibility(View.VISIBLE);
-						NflUtils.stubActivatedName = "statTab";
-
-						LinearLayout otherTab = (LinearLayout) findViewById(R.id.playerTab);
-						otherTab.setVisibility(View.INVISIBLE);
-					}
-					// NflUtils.stubActivatedName =
-					// "teamstatsyardsMatchScoreboardStub";
+					
+					final LinearLayout inflatedView = (LinearLayout) View.inflate(context, R.layout.teamstatsyards_match_scoreboard, null);
+					matchScoreBoardTabContainer.setVisibility(View.VISIBLE);
+					matchScoreBoardTabContainer.removeAllViews();
+					matchScoreBoardTabContainer.addView(inflatedView);
+					
 					TextView statType = (TextView) (arg1
 							.findViewById(R.id.stat_type));
 
@@ -802,16 +834,11 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 					if (!NflUtils.isScoreBannerShrinked()) {
 						shrinkScoreBanner();
 					}
-					if (!NflUtils.stubActivatedName
-							.equalsIgnoreCase("playerTab")
-							&& (NflUtils.stubActivatedName != null)) {
-						LinearLayout playerTab = (LinearLayout) findViewById(R.id.playerTab);
-						playerTab.setVisibility(View.VISIBLE);
-						NflUtils.stubActivatedName = "playerTab";
-						LinearLayout otherTab = (LinearLayout) findViewById(R.id.statTab);
-						otherTab.setVisibility(View.INVISIBLE);
-					}
-
+					matchScoreBoardTabContainer.setVisibility(View.VISIBLE);
+					matchScoreBoardTabContainer.removeAllViews();
+					final LinearLayout inflatedView = (LinearLayout) View.inflate(context, R.layout.team_player_match_scoreboard, null);
+					matchScoreBoardTabContainer.addView(inflatedView);
+					
 					TextView popoverPlayerName = (TextView) (arg1
 							.findViewById(R.id.popover_player_name));
 
@@ -936,13 +963,15 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			// allPlaysTextView.setBackgroundColor(2);
-			Drawable drawable =  getResources().getDrawable(R.drawable.active_border);
+			Drawable drawable = getResources().getDrawable(
+					R.drawable.active_border);
 			allPlaysTextView.setBackgroundDrawable(drawable);
 
-			/*topPlaysTextView.setBackgroundResource(R.color.orange);
-			topRatedTextView.setBackgroundResource(R.color.orange);
-			watchAllTextView.setBackgroundResource(R.color.orange);
-*/
+			/*
+			 * topPlaysTextView.setBackgroundResource(R.color.orange);
+			 * topRatedTextView.setBackgroundResource(R.color.orange);
+			 * watchAllTextView.setBackgroundResource(R.color.orange);
+			 */
 			Toast.makeText(GameActivity.this, "all plays button clicked",
 					Toast.LENGTH_SHORT).show();
 		}
@@ -1091,7 +1120,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 			marginView.setLayoutParams(new LayoutParams(20, 0));
 			playCardParentLinearLayout.addView(marginView);
 		}
-		
+
 		downloadImagesThreadPool.tearDown(6);
 
 	}
@@ -1130,15 +1159,4 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 			bmImage.setImageBitmap(result);
 		}
 	}
-
-	public void makeTabInvisibleForEnlargingScoreBoard() {
-		LinearLayout playerDetailsTab = (LinearLayout) findViewById(R.id.playerTab);
-		LinearLayout statisticsDetailsTab = (LinearLayout) findViewById(R.id.statTab);
-		if (playerDetailsTab.getVisibility() == View.VISIBLE) {
-			playerDetailsTab.setVisibility(View.INVISIBLE);
-		} else if (statisticsDetailsTab.getVisibility() == View.VISIBLE) {
-			statisticsDetailsTab.setVisibility(View.INVISIBLE);
-		}
-	}
-
 }

@@ -86,7 +86,7 @@ public class GameScheduleFragment extends Fragment {
 				.findViewById(R.id.gameScheduleList);
 		SeparatedListAdapter adapter = new SeparatedListAdapter(getActivity());
 		adapter.addSection("WEEK5", new GameScheduleListViewAdaptor(
-				getActivity(), R.layout.popover_game_player_list_item,
+				getActivity(), R.layout.game_popover_list_row__item_player,
 				getGameScheduleForWeek5()));
 		listView.setOnItemClickListener(listItemListener);
 		listView.setAdapter(adapter);

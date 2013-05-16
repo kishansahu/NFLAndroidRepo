@@ -92,15 +92,15 @@ PopoverViewDelegate {
 				.findViewById(R.id.weekLayout);
 		weekLinearLayout.setOnClickListener(weekOnClickListener);
 
-		LinearLayout leaderLinearLayout = (LinearLayout) mActionBarView
+		TextView leaderLinearLayout = (TextView) mActionBarView
 				.findViewById(R.id.leadersLayout);
 		leaderLinearLayout.setOnClickListener(leaderOnClickListener);
 
-		LinearLayout milestonesLinearLayout = (LinearLayout) mActionBarView
+		TextView milestonesLinearLayout = (TextView) mActionBarView
 				.findViewById(R.id.milestonesLayout);
 		milestonesLinearLayout.setOnClickListener(milestonesOnClickListener);
 
-		LinearLayout standingLinearLayout = (LinearLayout) mActionBarView
+		TextView standingLinearLayout = (TextView) mActionBarView
 				.findViewById(R.id.standingLayout);
 		standingLinearLayout.setOnClickListener(standingOnClickListener);
 		

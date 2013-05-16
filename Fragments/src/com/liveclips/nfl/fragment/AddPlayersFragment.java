@@ -1,5 +1,6 @@
 package com.liveclips.nfl.fragment;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -17,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.liveclips.nfl.R;
@@ -42,14 +44,28 @@ public class AddPlayersFragment extends Fragment {
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-		currentActivity = getActivity();
-		findPLayerByCategoryListView = (ListView) getActivity().findViewById(
-				R.id.findPLayerByCategoryListView);
-
-		Button playerMenuDoneButton = (Button) getActivity().findViewById(
-				R.id.playerMenuDone);
+	public void onActivityCreated(Bundle savedInstanceState) {
+		final View newfragMenuHeader = getActivity().getLayoutInflater()
+				.inflate(R.layout.addplayer_menu_actionbar_header, null);
+		ActionBar actionBar = getActivity().getActionBar();
+		final RelativeLayout actionBarLayout = (RelativeLayout) actionBar
+				.getCustomView();
+		final RelativeLayout activityHeaderLayout = (RelativeLayout) getActivity()
+				.findViewById(R.id.activityMenuHeader);
+		activityHeaderLayout.setVisibility(View.INVISIBLE);
+		final RelativeLayout fragMenuHeader = (RelativeLayout) actionBarLayout
+				.findViewById(R.id.fragmentMenuHeader);
+		if (fragMenuHeader != null) {
+			actionBarLayout.removeView(fragMenuHeader);
+		}
+		RelativeLayout commonfragMenuHeader = (RelativeLayout) actionBarLayout
+				.findViewById(R.id.commonFragmentMenuHeader);
+		if (commonfragMenuHeader != null) {
+			commonfragMenuHeader.setVisibility(View.INVISIBLE);
+		}
+		actionBarLayout.addView(newfragMenuHeader, 300, 52);
+		Button playerMenuDoneButton = (Button) actionBarLayout
+				.findViewById(R.id.playerMenuDone);
 		playerMenuDoneButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -61,8 +77,26 @@ public class AddPlayersFragment extends Fragment {
 						.findFragmentById(R.id.menuFragment);
 				ft.hide(frg);
 				ft.commit();
+				actionBarLayout.removeView(newfragMenuHeader);
+				View sliderView = activityHeaderLayout
+						.findViewById(R.id.sliderView);
+				if (sliderView.getVisibility() != View.VISIBLE)
+					sliderView.setVisibility(View.VISIBLE);
+				activityHeaderLayout.setVisibility(View.VISIBLE);
+				/*View commonfragMenuHeader = getActivity().getLayoutInflater()
+						.inflate(R.layout.common_fragment_menu_header, null);*/
+				//actionBarLayout.addView(commonfragMenuHeader, 300, 52);
 			}
 		});
+		super.onActivityCreated(savedInstanceState);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		currentActivity = getActivity();
+		findPLayerByCategoryListView = (ListView) getActivity().findViewById(
+				R.id.findPLayerByCategoryListView);
 
 		adapterForCategoryList = new ArrayAdapter<String>(getActivity(),
 				android.R.layout.simple_list_item_1, playersCategoriesMenuItems);
@@ -106,6 +140,9 @@ public class AddPlayersFragment extends Fragment {
 				}
 			}
 		});
+
+		ActionBar actionBar = currentActivity.getActionBar();
+		View customView = actionBar.getCustomView();
 
 	}
 

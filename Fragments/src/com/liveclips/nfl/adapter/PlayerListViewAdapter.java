@@ -53,7 +53,7 @@ public class PlayerListViewAdapter extends ArrayAdapter<PlayerItem> {
 				.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 		if (convertView == null) {
 			convertView = mInflater.inflate(
-					R.layout.popover_game_player_list_item, null);
+					R.layout.game_popover_list_row__item_player, null);
 			holder = new PlayerViewHolder();
 			holder.playerImage = (ImageView) convertView
 					.findViewById(R.id.popover_player_pic);

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -19,5 +19,10 @@
         <!-- <item name="android:windowActionBar">false</item>
         <item name="android:windowTitleSize">0dp</item> -->
     </style>
-
+	
+    <style name="myCoolDialog" parent="android:Theme.Dialog"> 
+         <item name="android:windowBackground">@drawable/blue</item>
+          <item name="android:colorForeground">#f0f0</item>
+    </style> 
+    
 </resources>

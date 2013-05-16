@@ -6,7 +6,6 @@ package com.liveclips.nfl.utils;
 import java.io.InputStream;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -14,16 +13,17 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
@@ -32,12 +32,8 @@ import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
-import android.widget.ViewAnimator;
-import android.widget.ViewFlipper;
 
 import com.liveclips.nfl.R;
-import com.liveclips.nfl.flip.AnimationFactory;
-import com.liveclips.nfl.flip.AnimationFactory.FlipDirection;
 
 /**
  * @author abhijitsrivastava
@@ -51,6 +47,7 @@ public class PlayCardView {
 	private int index;
 	Resources resources;
 	Activity activity;
+	VideoView videoView;
 
 	static RelativeLayout playCardFrontSidePlaySectionVideoViewLayout;
 
@@ -84,7 +81,7 @@ public class PlayCardView {
 		playCardLayout.setLayoutParams(playCardLayoutParameters);
 
 		/*if (index % 2 == 0) {*/
-			playCardLayout.setBackgroundResource(R.drawable.a);
+			playCardLayout.setBackgroundResource(R.drawable.gray_background);
 	/*	} else {
 			playCardLayout
 					.setBackgroundColor(resources.getColor(R.color.green));
@@ -133,8 +130,13 @@ public class PlayCardView {
 
 		ImageView playCardFrontSidePlaySectionImage = (ImageView) playCardFrontSidePlaySectionImageWithPlayButtonLayout
 				.findViewById(R.id.playCardFrontSidePlaySectionImageWithPlayButtonImageViewId);
-		new DownloadImageTask(playCardFrontSidePlaySectionImage)
-				.execute("http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg");
+		
+		final ImageButton videoSizeButton = (ImageButton) playCardFrontSide.findViewById(R.id.playCardFrontSideBottomLayoutImageButtonId);
+		videoSizeButton.setBackgroundResource(R.drawable.full_screen_button);
+		videoSizeButton.setVisibility(View.INVISIBLE);
+		
+		/*new DownloadImageTask(playCardFrontSidePlaySectionImage)
+				.execute("http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg");*/
 
 		//downloadImagesThreadPool.submit(playCardFrontSidePlaySectionImage, "http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg");
 		playCardFrontSidePlaySectionImage.setId(index * 90000);
@@ -302,6 +304,8 @@ public class PlayCardView {
 
 					
 						playCardFrontSidePlaySectionLayout.addView(playCardFrontSidePlaySectionVideoViewLayout);
+						videoSizeButton.setVisibility(View.VISIBLE);
+						
 
 					}
 				});
@@ -311,10 +315,61 @@ public class PlayCardView {
 			@Override
 			public void onRatingChanged(RatingBar ratingBar, float rating,
 					boolean fromUser) {
-				new AlertDialog.Builder(context).setMessage("\t\t\t\t\t\t\t\t You Rated : " + rating).setPositiveButton("OK", null).setTitle("\t\t\t\t\t\t\t Thank You For Rating").show();
+				//new AlertDialog.Builder(context).setMessage("\t\t\t\t\t\t\t\t You Rated : " + rating).setPositiveButton("OK", null).setTitle("\t\t\t\t\t\t\t Thank You For Rating").show();
+				showDialog("You Rated : " + rating);
 				
 			}
 		});
+		
+		videoSizeButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				DisplayMetrics dm = new DisplayMetrics();
+				activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+				//RelativeLayout.LayoutParams playCardFrontSidePlaySectionLayoutParams = new RelativeLayout.LayoutParams( dm.widthPixels,dm.heightPixels);
+				RelativeLayout relativeLayout = (RelativeLayout) activity.findViewById(R.id.playCardFrontSidePlaySectionVideoLayoutId);
+				
+				RelativeLayout gameRootView = (RelativeLayout) activity.findViewById(R.id.gameRootView);
+				videoView.pause();
+				relativeLayout.removeView(videoView);
+				RelativeLayout.LayoutParams playCardLayoutParameters = new RelativeLayout.LayoutParams(
+						dm.widthPixels, dm.heightPixels);
+				Log.d("Width ::: ", "" + dm.widthPixels);
+				playCardLayoutParameters.setMargins(0, 0, 0, 0);
+				playCardLayoutParameters.leftMargin = 0;
+				videoView.setLayoutParams(playCardLayoutParameters);
+				
+				gameRootView.addView(videoView);
+				videoView.resume();
+				//videoView = new VideoView(context); //playCardFrontSidePlaySectionVideoViewLayout.findViewById(R.id.playCardFrontSidePlaySectionVideoLayoutVideoViewId);
+				//videoView.getParent().
+				
+				
+				
+				//params.width = dm.widthPixels;
+				
+				//params.height = dm.heightPixels;
+				
+				
+				
+				//Log.d("height ::: ", "" + dm.heightPixels);
+				
+				//if(videoView!=null){
+					
+				
+				//}
+				//Log.d("","")
+				//RelativeLayout parent = (RelativeLayout)playCardFrontSidePlaySectionLayout.getParent();
+				//parent.removeView(playCardFrontSidePlaySectionLayout);
+				//playCardFrontSidePlaySectionLayout.setLayoutParams(playCardFrontSidePlaySectionLayoutParams);
+				//view.addView(playCardFrontSidePlaySectionLayout);
+				
+				
+				
+			}
+		});
+		
 		return playCardLayout;
 	}
 	
@@ -325,20 +380,25 @@ public class PlayCardView {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		RelativeLayout playCardFrontSidePlaySectionVideoLayout = (RelativeLayout) inflator
 				.inflate(R.layout.play_card_front_side_play_section_video, null);
-		VideoView playCardFrontSidePlaySectionVideoView = (VideoView) playCardFrontSidePlaySectionVideoLayout
-				.findViewById(R.id.playCardFrontSidePlaySectionVideoLayoutVideoViewId);
-		playCardFrontSidePlaySectionVideoView.setId(index * 390000);
+		videoView = new VideoView(context);//(VideoView) playCardFrontSidePlaySectionVideoLayout
+				//.findViewById(R.id.playCardFrontSidePlaySectionVideoLayoutVideoViewId);
+		//playCardFrontSidePlaySectionVideoView.setId(index * 390000);
 		MediaController mc = new MyMediaController(
-				playCardFrontSidePlaySectionVideoView.getContext());
+				videoView.getContext());
 
-		mc.setMediaPlayer(playCardFrontSidePlaySectionVideoView);
-		playCardFrontSidePlaySectionVideoView.setMediaController(mc);
-
-		playCardFrontSidePlaySectionVideoView.setVideoURI(Uri
+		mc.setMediaPlayer(videoView);
+		videoView.setMediaController(mc);
+		RelativeLayout.LayoutParams playCardLayoutParameters = new RelativeLayout.LayoutParams(
+				500, 400);
+		
+		
+		videoView.setLayoutParams(playCardLayoutParameters);
+		playCardFrontSidePlaySectionVideoLayout.addView(videoView);
+		videoView.setVideoURI(Uri
 				.parse("http://commonsware.com/misc/test2.3gp"));
 
 		// playCardFrontSidePlaySectionVideoView.setVideoURI(Uri.parse("http://localhost:8080/nflvideo.3gp"));
-		playCardFrontSidePlaySectionVideoView.start();
+		videoView.start();
 
 		return playCardFrontSidePlaySectionVideoLayout;
 	}
@@ -386,6 +446,28 @@ public class PlayCardView {
 			super.show(0);
 		}
 
+	}
+	
+	private void showDialog(String rating)
+	{
+	    final Custom_Dialog dialog = new Custom_Dialog(activity, R.style.myCoolDialog);
+
+	    dialog.setContentView(R.layout.custom_dialog);
+	    dialog.setTitle("  Thanks For Your Rating");
+
+	    TextView text = (TextView) dialog.findViewById(R.id.customDialogTextViewId);
+	    text.setText(rating );
+	    
+	    ImageView okButton = (ImageView) dialog.findViewById(R.id.customDialogOkButtonId);
+	    okButton.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				dialog.hide();
+				return false;
+			}
+		});
+	    dialog.show();  
 	}
 	// playCardParentLinearLayout.addView(playCardLayout);
 
@@ -653,5 +735,4 @@ public class PlayCardView {
 	 * 
 	 * downloadImageTask = null;
 	 */
-
 }

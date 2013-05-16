@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -51,6 +52,65 @@ public class ShowAvailablePlayersFragment extends Fragment {
 	}
 
 	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		final View newfragMenuHeader = getActivity().getLayoutInflater().inflate(
+				R.layout.show_available_player_actionbar_header, null);
+		ActionBar actionBar = getActivity().getActionBar();
+		final RelativeLayout actionBarLayout = (RelativeLayout) actionBar
+				.getCustomView();
+		final RelativeLayout activityHeaderLayout = (RelativeLayout) getActivity()
+				.findViewById(R.id.activityMenuHeader);
+		RelativeLayout fragMenuHeader = (RelativeLayout) actionBarLayout
+				.findViewById(R.id.fragmentMenuHeader);
+		actionBarLayout.removeView(fragMenuHeader);
+		actionBarLayout.addView(newfragMenuHeader, 300, 52);
+		Button playerMenuDoneButton = (Button) actionBarLayout.findViewById(
+				R.id.playerAddToFavDoneButton);
+		playerMenuDoneButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				FragmentManager fragmentManager = getActivity()
+						.getFragmentManager();
+				FragmentTransaction ft = fragmentManager.beginTransaction();
+				Fragment frg = fragmentManager
+						.findFragmentById(R.id.menuFragment);
+				ft.hide(frg);
+				ft.commit();
+				actionBarLayout.removeView(newfragMenuHeader);
+				View sliderView = activityHeaderLayout
+						.findViewById(R.id.sliderView);
+				if (sliderView.getVisibility() != View.VISIBLE)
+					sliderView.setVisibility(View.VISIBLE);
+				activityHeaderLayout.setVisibility(View.VISIBLE);
+				View commonfragMenuHeader = getActivity().getLayoutInflater()
+						.inflate(R.layout.common_fragment_menu_header, null);
+				actionBarLayout.addView(commonfragMenuHeader, 300, 52);
+			}
+		});
+
+		Button backToPlayerCategoryFragmentButton = (Button) actionBarLayout
+				.findViewById(R.id.backToPlayerCategoryFragment);
+		backToPlayerCategoryFragmentButton
+				.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						FragmentManager fragmentManager = getFragmentManager();
+						FragmentTransaction ft = fragmentManager
+								.beginTransaction();
+						Fragment addPlayerSelectedCategoryMenuFragment = new AddPlayerSelectedCategoryMenuFragment();
+						ft.replace(R.id.menuFragment,
+								addPlayerSelectedCategoryMenuFragment);
+						ft.commit();
+
+					}
+				});
+
+		super.onActivityCreated(savedInstanceState);
+	}
+
+	@Override
 	public void onStart() {
 		super.onStart();
 		playerForAddition = getPlayersForAddition("teamName");
@@ -88,40 +148,32 @@ public class ShowAvailablePlayersFragment extends Fragment {
 		playerFavSortArrow = (ImageView) getActivity().findViewById(
 				R.id.playerFavSortArrow);
 
-		Button playerMenuDoneButton = (Button) getActivity().findViewById(
-				R.id.playerAddToFavDoneButton);
-		playerMenuDoneButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				FragmentManager fragmentManager = getActivity()
-						.getFragmentManager();
-				FragmentTransaction ft = fragmentManager.beginTransaction();
-				Fragment frg = fragmentManager
-						.findFragmentById(R.id.menuFragment);
-				ft.hide(frg);
-				ft.commit();
-			}
-		});
-
-		Button backToPlayerCategoryFragmentButton = (Button) getActivity()
-				.findViewById(R.id.backToPlayerCategoryFragment);
-		backToPlayerCategoryFragmentButton
-				.setOnClickListener(new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						FragmentManager fragmentManager = getFragmentManager();
-						FragmentTransaction ft = fragmentManager
-								.beginTransaction();
-						Fragment addPlayerSelectedCategoryMenuFragment = new AddPlayerSelectedCategoryMenuFragment();
-						ft.replace(R.id.menuFragment,
-								addPlayerSelectedCategoryMenuFragment);
-						ft.commit();
-
-					}
-				});
-
+		/*
+		 * Button playerMenuDoneButton = (Button) getActivity().findViewById(
+		 * R.id.playerAddToFavDoneButton);
+		 * playerMenuDoneButton.setOnClickListener(new OnClickListener() {
+		 * 
+		 * @Override public void onClick(View v) { FragmentManager
+		 * fragmentManager = getActivity() .getFragmentManager();
+		 * FragmentTransaction ft = fragmentManager.beginTransaction(); Fragment
+		 * frg = fragmentManager .findFragmentById(R.id.menuFragment);
+		 * ft.hide(frg); ft.commit(); } });
+		 * 
+		 * Button backToPlayerCategoryFragmentButton = (Button) getActivity()
+		 * .findViewById(R.id.backToPlayerCategoryFragment);
+		 * backToPlayerCategoryFragmentButton .setOnClickListener(new
+		 * View.OnClickListener() {
+		 * 
+		 * @Override public void onClick(View v) { FragmentManager
+		 * fragmentManager = getFragmentManager(); FragmentTransaction ft =
+		 * fragmentManager .beginTransaction(); Fragment
+		 * addPlayerSelectedCategoryMenuFragment = new
+		 * AddPlayerSelectedCategoryMenuFragment();
+		 * ft.replace(R.id.menuFragment, addPlayerSelectedCategoryMenuFragment);
+		 * ft.commit();
+		 * 
+		 * } });
+		 */
 	}
 
 	public List<PlayerItem> getPlayersForAddition(String teamName) {
@@ -289,11 +341,14 @@ public class ShowAvailablePlayersFragment extends Fragment {
 	private void hideSortingIcons() {
 		if (playerNameSortArrow.getVisibility() == View.VISIBLE) {
 			playerNameSortArrow.setVisibility(View.GONE);
-		} if (playerNumSortArrow.getVisibility() == View.VISIBLE) {
+		}
+		if (playerNumSortArrow.getVisibility() == View.VISIBLE) {
 			playerNumSortArrow.setVisibility(View.GONE);
-		} if (playerPosSortArrow.getVisibility() == View.VISIBLE) {
+		}
+		if (playerPosSortArrow.getVisibility() == View.VISIBLE) {
 			playerPosSortArrow.setVisibility(View.GONE);
-		} if (playerFavSortArrow.getVisibility() == View.VISIBLE) {
+		}
+		if (playerFavSortArrow.getVisibility() == View.VISIBLE) {
 			playerFavSortArrow.setVisibility(View.GONE);
 		}
 	}

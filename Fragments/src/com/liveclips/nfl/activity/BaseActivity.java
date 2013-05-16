@@ -31,6 +31,7 @@ public class BaseActivity extends Activity {
 
 		fragmentTransaction.replace(R.id.menuFragment, mainMenuFragment);
 		fragmentTransaction.commit();
+		fragmentMenuHeaderView = getActionBar().getCustomView().findViewById(R.id.commonFragmentMenuHeader);
 		TextView menuTitle = (TextView) fragmentMenuHeaderView
 				.findViewById(R.id.menuTitle);
 		menuTitle.setText("Menu");
@@ -80,7 +81,8 @@ public class BaseActivity extends Activity {
 		Drawable d = getResources().getDrawable(R.drawable.orange_background);
 		actionBar.setBackgroundDrawable(d);
 		fragmentMenuHeaderView = mActionBarView
-				.findViewById(R.id.fragmentMenuHeader);
+				.findViewById(R.id.commonFragmentMenuHeader);
+		System.out.println(fragmentMenuHeaderView);
 		activityMenuHeaderView = mActionBarView
 				.findViewById(R.id.activityMenuHeader);
 		sliderView = mActionBarView.findViewById(R.id.sliderView);

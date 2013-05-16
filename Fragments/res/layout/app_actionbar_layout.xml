@@ -38,8 +38,8 @@
 
     <ImageView
         android:id="@+id/sliderView"
-        android:layout_width="40dp"
-        android:layout_height="match_parent"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:layout_toRightOf="@+id/fragmentMenuHeaderForAppStart"
         android:layout_centerVertical="true"
         android:src="@drawable/menuicon"

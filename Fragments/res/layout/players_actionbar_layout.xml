@@ -5,10 +5,11 @@
     android:orientation="horizontal" >
 
     <RelativeLayout
-        android:id="@+id/fragmentMenuHeader"
+        android:id="@+id/commonFragmentMenuHeader"
         android:layout_width="300dp"
         android:layout_height="fill_parent" 
-        android:visibility="invisible">
+        android:visibility="invisible"
+        android:tag="commonFragmentMenuHeader">
 
         <TextView
             android:id="@+id/menuTitle"
@@ -50,8 +51,8 @@
 
         <ImageView
             android:id="@+id/sliderView"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
             android:layout_centerVertical="true"
             android:src="@drawable/menuicon" >
         </ImageView>
