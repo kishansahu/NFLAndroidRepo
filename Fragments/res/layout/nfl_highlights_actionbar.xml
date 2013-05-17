@@ -5,7 +5,7 @@
     android:orientation="horizontal" >
 
     <RelativeLayout
-        android:id="@+id/fragmentMenuHeader"
+        android:id="@+id/commonFragmentMenuHeader"
         android:layout_width="300dp"
         android:layout_height="fill_parent"
         android:visibility="invisible" >

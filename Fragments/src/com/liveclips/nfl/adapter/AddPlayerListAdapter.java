@@ -55,7 +55,7 @@ public class AddPlayerListAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		if (view == null) {
 			LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-			view = inflater.inflate(R.layout.addplayer_details_fragment, arg2,
+			view = inflater.inflate(R.layout.players_fragment_list_row_item_details, arg2,
 					false);
 			PlayerItem PI = playerDetailsListForFavourite.get(arg0);
 			int playerFav = PI.getPlayerFavourite();
@@ -118,7 +118,7 @@ public class AddPlayerListAdapter extends BaseAdapter {
 
 									final LinearLayout inflatedView;
 									inflatedView = (LinearLayout) View.inflate(
-											context, R.layout.players_detail,
+											context, R.layout.common_players_detail,
 											null);
 
 									((TextView) inflatedView

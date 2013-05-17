@@ -300,22 +300,20 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="20dp"
                     android:layout_gravity="right"
                     android:orientation="horizontal" >
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:src="@drawable/icon_popover_arrow_left" />
+                        android:layout_height="match_parent"
+                        android:src="@drawable/left_triangle" /> 
 
                     <TextView
                         android:id="@+id/yards_covered_drive_indicator"
                         android:layout_width="25dp"
-                        android:layout_height="12dp"
-                        android:layout_gravity="center_vertical"
-                        android:background="@color/blue" >
-                    </TextView>
+                        android:layout_height="20dp"
+                        />
                 </LinearLayout>
             </FrameLayout>
 

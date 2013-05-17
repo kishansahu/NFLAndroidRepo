@@ -39,14 +39,14 @@ public class AddPlayersFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle saveInstantState) {
 
-		return inflater.inflate(R.layout.players_by_categories_menu_fragment,
+		return inflater.inflate(R.layout.players_fragment_view_by_categories,
 				container, false);
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		final View newfragMenuHeader = getActivity().getLayoutInflater()
-				.inflate(R.layout.addplayer_menu_actionbar_header, null);
+				.inflate(R.layout.players_fragment_actionbar_header_find_player, null);
 		ActionBar actionBar = getActivity().getActionBar();
 		final RelativeLayout actionBarLayout = (RelativeLayout) actionBar
 				.getCustomView();

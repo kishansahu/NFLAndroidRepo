@@ -57,7 +57,7 @@ public class DivisionsListViewAdapter  extends ArrayAdapter<DivisionsItem>{
 			
 			if (convertView == null) {
 				convertView = mInflater.inflate(
-						R.layout.division_menu_row_layout, null);
+						R.layout.division_fragment_list_row_item_header, null);
 				holder = new DivisionViewHolder();
 				
 				holder.divisionText = (TextView) convertView

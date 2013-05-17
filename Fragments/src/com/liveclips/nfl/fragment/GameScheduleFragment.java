@@ -81,7 +81,7 @@ public class GameScheduleFragment extends Fragment {
 		Log.d("gameschedule", "gameschedulfragment");
 
 		View gameScheduleView = inflater.inflate(
-				R.layout.game_schedule_fragment, container, false);
+				R.layout.game_schedule_fragment_view, container, false);
 		ListView listView = (ListView) gameScheduleView
 				.findViewById(R.id.gameScheduleList);
 		SeparatedListAdapter adapter = new SeparatedListAdapter(getActivity());

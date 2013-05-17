@@ -78,7 +78,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_game);
+		setContentView(R.layout.game_activity);
 
 		context = this;
 
@@ -636,13 +636,13 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 
 			SeparatedListAdapter adapter = new SeparatedListAdapter(this);
 			adapter.addSection("4TH QUARTER", new DriveListViewAdapter(this,
-					R.layout.popover_game_drive_list_item, rowItemsForQ4));
+					R.layout.game_popover_list_row_item_drives, rowItemsForQ4));
 			adapter.addSection("3TH QUARTER", new DriveListViewAdapter(this,
-					R.layout.popover_game_drive_list_item, rowItemsForQ3));
+					R.layout.game_popover_list_row_item_drives, rowItemsForQ3));
 			adapter.addSection("2TH QUARTER", new DriveListViewAdapter(this,
-					R.layout.popover_game_drive_list_item, rowItemsForQ2));
+					R.layout.game_popover_list_row_item_drives, rowItemsForQ2));
 			adapter.addSection("1TH QUARTER", new DriveListViewAdapter(this,
-					R.layout.popover_game_drive_list_item, rowItemsForQ1));
+					R.layout.game_popover_list_row_item_drives, rowItemsForQ1));
 			listView = (ListView) findViewById(R.id.game_drive_list);
 			listView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -666,20 +666,18 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 							.findViewById(R.id.drive_time));
 					//showYardsCoveredInDrives(String startingYards, String driveYardCovered, View arg1){
 					TextView driveYardCoveredIndicator = (TextView) (findViewById(R.id.yards_covered_drive_indicator));
-					TextView driveScoreLabel = (TextView) (findViewById(R.id.drive_score_label));
-					driveScoreLabel.setText("X" + " Plays, " + driveYardCovered.getText().toString()+", "+ driveTime.getText().toString());
-					int driveYardCoveredIndicatorWidth= Integer.parseInt(driveYardCovered.getText().toString().replaceAll( "[^\\d]", "" ));
-					int driveYardCoveredIndicatorWidthInDp= NflUtils.convertDensityPixelToPixel(context,driveYardCoveredIndicatorWidth );
-					LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-							LayoutParams.WRAP_CONTENT,
-							LayoutParams.WRAP_CONTENT);
-					params.rightMargin= NflUtils.convertDensityPixelToPixel(context, 31);
-					params.width= ((driveYardCoveredIndicatorWidth * 3) -3);
-					driveYardCoveredIndicator.setLayoutParams(params);
-					
-					
-					
-
+				     TextView driveScoreLabel = (TextView) (findViewById(R.id.drive_score_label));
+				     driveScoreLabel.setText("X" + " Plays, " + driveYardCovered.getText().toString()+", "+ driveTime.getText().toString());
+				     int driveYardCoveredIndicatorWidth= Integer.parseInt(driveYardCovered.getText().toString().replaceAll( "[^\\d]", "" ));
+				     int driveYardCoveredIndicatorWidthInDp= NflUtils.convertDensityPixelToPixel(context,driveYardCoveredIndicatorWidth );
+				     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+				       LayoutParams.WRAP_CONTENT,
+				       LayoutParams.WRAP_CONTENT);
+				     params.rightMargin= NflUtils.convertDensityPixelToPixel(context, 31);
+				     params.width= ((driveYardCoveredIndicatorWidth * 3) -10);
+				     params.height= NflUtils.convertDensityPixelToPixel(context, 20);
+				     driveYardCoveredIndicator.setLayoutParams(params);
+				     driveYardCoveredIndicator.setBackgroundColor(0xFF2d81a6);
 					popoverView.dissmissPopover(false);
 				}
 			});
@@ -749,7 +747,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 						shrinkScoreBanner();
 					}
 					
-					final LinearLayout inflatedView = (LinearLayout) View.inflate(context, R.layout.teamstatsyards_match_scoreboard, null);
+					final LinearLayout inflatedView = (LinearLayout) View.inflate(context, R.layout.game_activity_statsyards_match_scoreboard, null);
 					matchScoreBoardTabContainer.setVisibility(View.VISIBLE);
 					matchScoreBoardTabContainer.removeAllViews();
 					matchScoreBoardTabContainer.addView(inflatedView);
@@ -836,7 +834,7 @@ public class GameActivity extends BaseActivity implements PopoverViewDelegate {
 					}
 					matchScoreBoardTabContainer.setVisibility(View.VISIBLE);
 					matchScoreBoardTabContainer.removeAllViews();
-					final LinearLayout inflatedView = (LinearLayout) View.inflate(context, R.layout.team_player_match_scoreboard, null);
+					final LinearLayout inflatedView = (LinearLayout) View.inflate(context, R.layout.game_activity_team_player_match_scoreboard, null);
 					matchScoreBoardTabContainer.addView(inflatedView);
 					
 					TextView popoverPlayerName = (TextView) (arg1

@@ -64,7 +64,7 @@ public class DivisionMenuFragment extends Fragment{
 		Log.d("Fragment 1", "onCreateView");
 		setTestData();
 		
-		return inflater.inflate(R.layout.division_menu, container, false);
+		return inflater.inflate(R.layout.division_fragment_view, container, false);
 	}
 
 	private void setTestData() {
@@ -197,13 +197,13 @@ public class DivisionMenuFragment extends Fragment{
 		
 		objects.add(divisionHeader);
 		
-		adapter.addSection("1", new DivisionHeaderAdapter(getActivity(), R.layout.division_menu_header_layout, objects));
+		adapter.addSection("1", new DivisionHeaderAdapter(getActivity(), R.layout.division_fragment_header, objects));
 		
-		adapter.addSection("2", new DivisionsListViewAdapter(getActivity(), R.layout.division_menu_row_layout, divisionItems));
+		adapter.addSection("2", new DivisionsListViewAdapter(getActivity(), R.layout.division_fragment_list_row_item_header, divisionItems));
 		
 		adapter.addSection("3", new ConferenceListViewAdapter(getActivity(), R.layout.conference_menu_row_layout, afcConferenceItems));
 		
-		adapter.addSection("4", new DivisionsListViewAdapter(getActivity(), R.layout.division_menu_row_layout, divisionItems1));
+		adapter.addSection("4", new DivisionsListViewAdapter(getActivity(), R.layout.division_fragment_list_row_item_header, divisionItems1));
 		
 		adapter.addSection("5", new ConferenceListViewAdapter(getActivity(), R.layout.conference_menu_row_layout, nfcConferenceItems));
 		

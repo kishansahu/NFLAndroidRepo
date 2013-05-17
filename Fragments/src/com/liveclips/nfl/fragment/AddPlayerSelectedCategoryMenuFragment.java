@@ -32,7 +32,7 @@ public class AddPlayerSelectedCategoryMenuFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle saveInstantState) {
-		return inflater.inflate(R.layout.players_by_categories_menu_fragment,
+		return inflater.inflate(R.layout.players_fragment_view_by_categories,
 				container, false);
 
 	}
@@ -42,7 +42,7 @@ public class AddPlayerSelectedCategoryMenuFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		View activityHeaderView = getActivity().getLayoutInflater().inflate(
-				R.layout.addplayer_selected_category_actionbar_header, null);
+				R.layout.players_fragment_actionbar_header_selected_category, null);
 		ActionBar actionBar = getActivity().getActionBar();
 		RelativeLayout actionBarLayout = (RelativeLayout) actionBar.getCustomView();
 		RelativeLayout fragMenuHeader = (RelativeLayout)actionBarLayout.findViewById(R.id.fragmentMenuHeader);
@@ -109,10 +109,10 @@ public class AddPlayerSelectedCategoryMenuFragment extends Fragment {
 
 		SeparatedListAdapter adapter = new SeparatedListAdapter(getActivity());
 		adapter.addSection("AFC EAST", new PlayerListViewAdapter(getActivity(),
-				R.layout.addplayer_by_team_fragment,
+				R.layout.players_fragment_list_row_item_addplayer,
 				getPlayersByTeam("AFC EAST")));
 		adapter.addSection("AFC NORTH", new PlayerListViewAdapter(
-				getActivity(), R.layout.addplayer_by_team_fragment,
+				getActivity(), R.layout.players_fragment_list_row_item_addplayer,
 				getPlayersByTeam("AFC NORTH")));
 
 		findPLayerByCategoryListView = (ListView) getActivity().findViewById(

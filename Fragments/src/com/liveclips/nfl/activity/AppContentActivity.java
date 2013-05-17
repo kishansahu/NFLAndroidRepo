@@ -51,7 +51,7 @@ public class AppContentActivity extends Activity {
 		super.onStart();
 		ActionBar actionBar = getActionBar();
 		View mActionBarView = getLayoutInflater().inflate(
-				R.layout.app_actionbar_layout, null);
+				R.layout.main_actionbar, null);
 		actionBar.setCustomView(mActionBarView);
 		Drawable d = getResources().getDrawable(R.drawable.orange_background);
 		actionBar.setBackgroundDrawable(d);

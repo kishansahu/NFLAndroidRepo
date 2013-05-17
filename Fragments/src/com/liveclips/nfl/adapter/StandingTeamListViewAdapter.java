@@ -55,7 +55,7 @@ private Context context;
 			
 			if (convertView == null) {
 				convertView = mInflater.inflate(
-						R.layout.standing_team_menu_row_layout, null);
+						R.layout.common_division_nfl_highlight_list_row_item_standing, null);
 				holder = new TeamItemViewHolder();
 				
 				holder.teamName = (TextView) convertView

@@ -47,14 +47,14 @@ public class ShowAvailablePlayersFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle saveInstantState) {
 
-		return inflater.inflate(R.layout.addplayer_to_favorites_team_fragment,
+		return inflater.inflate(R.layout.players_fragment_view_favorites_team_player,
 				container, false);
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		final View newfragMenuHeader = getActivity().getLayoutInflater().inflate(
-				R.layout.show_available_player_actionbar_header, null);
+				R.layout.players_fragment_actionbar_header_show_available_players, null);
 		ActionBar actionBar = getActivity().getActionBar();
 		final RelativeLayout actionBarLayout = (RelativeLayout) actionBar
 				.getCustomView();

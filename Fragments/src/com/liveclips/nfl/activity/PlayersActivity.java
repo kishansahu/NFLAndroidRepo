@@ -34,7 +34,7 @@ public class PlayersActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_players);
+		setContentView(R.layout.players_activity);
 		fragmentManager = getFragmentManager();
 		playCards();
 
@@ -56,7 +56,7 @@ public class PlayersActivity extends BaseActivity {
 			for (i = 0; i < playersName.length; i++) {
 
 				final LinearLayout inflatedView = (LinearLayout) View.inflate(this,
-						R.layout.players_detail, null);
+						R.layout.common_players_detail, null);
 				((TextView) inflatedView
 						.findViewById(R.id.myindividualPlayerName))
 						.setText(playersName[i]);
@@ -89,7 +89,7 @@ public class PlayersActivity extends BaseActivity {
 			ImageView allMyPlayersIcon = (ImageView) findViewById(R.id.allmyplayersIcon);
 			allMyPlayersIcon.setVisibility(View.GONE);
 			LinearLayout inflatedView = (LinearLayout) View.inflate(this,
-					R.layout.empty_myplayers_banner, null);
+					R.layout.players_activity_empty_myplayers_banner, null);
 			wrapper.addView(inflatedView);
 
 		}
@@ -112,7 +112,7 @@ public class PlayersActivity extends BaseActivity {
 		
 		ActionBar actionBar = getActionBar();
 		View mActionBarView = getLayoutInflater().inflate(
-				R.layout.players_actionbar_layout, null);
+				R.layout.players_actionbar, null);
 		actionBar.setCustomView(mActionBarView);
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);

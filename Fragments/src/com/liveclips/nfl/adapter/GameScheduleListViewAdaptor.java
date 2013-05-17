@@ -46,7 +46,7 @@ public class GameScheduleListViewAdaptor extends ArrayAdapter<GameSchedule> {
 		LayoutInflater mInflater = (LayoutInflater) context
 				.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.game_schedule_list_item,
+			convertView = mInflater.inflate(R.layout.game_schedule_fragment_list_row_item,
 					null);
 			holder = new GameScheduleViewHolder();
 			holder.firstTeamLogo = (ImageView) convertView
