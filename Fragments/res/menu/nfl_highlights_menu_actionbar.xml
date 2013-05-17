@@ -6,7 +6,7 @@
         android:id="@+id/nfl_highlights"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:actionLayout="@layout/spinner_layout"
+        android:actionLayout="@layout/app_widget_spinner_layout"
         android:entries="@array/nfl_highLights_items"
         android:menuCategory="system"
         android:orderInCategory="3"

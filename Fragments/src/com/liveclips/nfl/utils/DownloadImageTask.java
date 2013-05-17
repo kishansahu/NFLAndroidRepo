@@ -52,7 +52,7 @@ public class DownloadImageTask implements Callable<Boolean> {
             mIcon11 = BitmapFactory.decodeStream(in);
         } catch (Exception e) {
             Log.e("Error", e.getMessage());
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         
         return onPostExecute(mIcon11);

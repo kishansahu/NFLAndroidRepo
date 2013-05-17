@@ -131,4 +131,13 @@ import android.widget.ImageView;
 		public boolean isPoolExecutionComplete() {
 			return totalTaskCount.get() == 0;
 		}
+		public void tearDown(int lenth){
+			for(int index =0; index < lenth; index++){
+				poll();
+			}
+			executorService = null;
+			completionService = null;
+			completionQueue = null;
+			
+		}
 	}

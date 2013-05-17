@@ -49,7 +49,7 @@ public class StatsListViewAdapter  extends ArrayAdapter<StatsItem> {
 				.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 		if (convertView == null) {
 			convertView = mInflater
-					.inflate(R.layout.popover_game_stats_list_item, null);
+					.inflate(R.layout.game_popover_list_row_item_stats, null);
 			holder = new StatsViewHolder();
 			holder.statType = (TextView) convertView
 					.findViewById(R.id.stat_type);

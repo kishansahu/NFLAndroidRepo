@@ -4,8 +4,8 @@ import android.content.Context;
 
 public class NflUtils {
 	
-	public static boolean isScoreBannerShrinked = false; 
-	public static String stubActivatedName ="";
+	public static boolean isScoreBannerShrinked; 
+		
 	public static boolean isScoreBannerShrinked() {
 		return isScoreBannerShrinked;
 	}

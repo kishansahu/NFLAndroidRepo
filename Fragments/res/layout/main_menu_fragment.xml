@@ -15,7 +15,7 @@
     </View>
 
  <!--    <TextView
-        android:id="@+id/menuHeader"
+        android:id="@+id/fragmentMenuHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Menu"
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
  		android:layout_alignParentRight="true"  
-        android:layout_alignRight="@+id/menuHeader"
+        android:layout_alignRight="@+id/fragmentMenuHeader"
         android:src="@drawable/close"
         android:visibility="invisible" >
 
@@ -38,7 +38,7 @@
         android:id="@+id/globalNavigationListView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/menuHeader"
+        android:layout_below="@+id/fragmentMenuHeader"
         android:focusable="true"
          />
 

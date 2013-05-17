@@ -3,6 +3,7 @@ package com.liveclips.nfl.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -16,6 +17,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.liveclips.nfl.R;
@@ -30,20 +32,51 @@ public class AddPlayerSelectedCategoryMenuFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle saveInstantState) {
-		return inflater.inflate(R.layout.players_by_categories_menu_fragment,
+		return inflater.inflate(R.layout.players_fragment_view_by_categories,
 				container, false);
 
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		return super.onOptionsItemSelected(item);
-	}
 
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		View activityHeaderView = getActivity().getLayoutInflater().inflate(
+				R.layout.players_fragment_actionbar_header_selected_category, null);
+		ActionBar actionBar = getActivity().getActionBar();
+		RelativeLayout actionBarLayout = (RelativeLayout) actionBar.getCustomView();
+		RelativeLayout fragMenuHeader = (RelativeLayout)actionBarLayout.findViewById(R.id.fragmentMenuHeader);
+		actionBarLayout.removeView(fragMenuHeader);
+		actionBarLayout.addView(activityHeaderView, 300, 52);
+		final Button backToPlayerFragmentButton = (Button) activityHeaderView
+				.findViewById(R.id.backToPlayerFragment);
+		backToPlayerFragmentButton.setVisibility(View.VISIBLE);
+		backToPlayerFragmentButton
+				.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						FragmentManager fragmentManager = getFragmentManager();
+						FragmentTransaction ft = fragmentManager
+								.beginTransaction();
+
+						AddPlayersFragment addPlayersFragment = new AddPlayersFragment();
+						ft.replace(R.id.menuFragment, addPlayersFragment);
+						ft.commit();
+
+					}
+				});
+		super.onActivityCreated(savedInstanceState);
+	}
+	
+	
 	@Override
 	public void onStart() {
 
-		Button backToPlayerFragmentButton = (Button) getActivity()
+		/*final TextView playerMenuTitle = (TextView) getActivity().findViewById(
+				R.id.playerMenuTitle);
+		playerMenuTitle.setText("By Team");*/
+		/*final Button backToPlayerFragmentButton = (Button) getActivity()
 				.findViewById(R.id.backToPlayerFragment);
 		backToPlayerFragmentButton.setVisibility(View.VISIBLE);
 		backToPlayerFragmentButton
@@ -64,24 +97,22 @@ public class AddPlayerSelectedCategoryMenuFragment extends Fragment {
 
 		Button playerMenuDoneButton = (Button) getActivity().findViewById(
 				R.id.playerMenuDone);
-		playerMenuDoneButton.setVisibility(View.INVISIBLE);
+		playerMenuDoneButton.setVisibility(View.INVISIBLE);*/
 
 		EditText searchBarPlayerByCategory = (EditText) getActivity()
 				.findViewById(R.id.searchBarPlayerByCategory);
 		searchBarPlayerByCategory.setVisibility(View.GONE);
 
-		TextView playerMenuTitle = (TextView) getActivity().findViewById(
-				R.id.playerMenuTitle);
-		playerMenuTitle.setText("By Team");
+		
 
 		super.onStart();
 
 		SeparatedListAdapter adapter = new SeparatedListAdapter(getActivity());
 		adapter.addSection("AFC EAST", new PlayerListViewAdapter(getActivity(),
-				R.layout.addplayer_by_team_fragment,
+				R.layout.players_fragment_list_row_item_addplayer,
 				getPlayersByTeam("AFC EAST")));
 		adapter.addSection("AFC NORTH", new PlayerListViewAdapter(
-				getActivity(), R.layout.addplayer_by_team_fragment,
+				getActivity(), R.layout.players_fragment_list_row_item_addplayer,
 				getPlayersByTeam("AFC NORTH")));
 
 		findPLayerByCategoryListView = (ListView) getActivity().findViewById(

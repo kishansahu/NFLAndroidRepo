@@ -52,7 +52,7 @@ public class DivisionHeaderAdapter extends ArrayAdapter<DivisionHeader> {
 			
 			if (convertView == null) {
 				convertView = mInflater.inflate(
-						R.layout.division_menu_header_layout, null);
+						R.layout.division_fragment_header, null);
 				holder = new DivisionHeaderHolder();
 				
 				holder.divisionHeaderTextView = (TextView) convertView

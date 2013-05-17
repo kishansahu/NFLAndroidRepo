@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 import com.liveclips.nfl.R;
 import com.liveclips.nfl.fragment.MainMenuFragment;
 import com.liveclips.nfl.fragment.TopicMenuFragment;
+import com.liveclips.nfl.session.ApplicationSession;
 
 public class AppContentActivity extends Activity {
 
@@ -36,6 +39,8 @@ public class AppContentActivity extends Activity {
 		fragmentManager = getFragmentManager();
 		ft = fragmentManager.beginTransaction();
 		mainMenuFragment = new MainMenuFragment();
+		((ApplicationSession) AppContentActivity.this.getApplication())
+				.setMainMenuFragment(mainMenuFragment);
 		ft.add(R.id.menuFragment, mainMenuFragment);
 		ft.commit();
 
@@ -46,9 +51,10 @@ public class AppContentActivity extends Activity {
 		super.onStart();
 		ActionBar actionBar = getActionBar();
 		View mActionBarView = getLayoutInflater().inflate(
-				R.layout.app_actionbar_layout, null);
+				R.layout.main_actionbar, null);
 		actionBar.setCustomView(mActionBarView);
-		actionBar.setBackgroundDrawable(new ColorDrawable(0xFFFF8B1D));
+		Drawable d = getResources().getDrawable(R.drawable.orange_background);
+		actionBar.setBackgroundDrawable(d);
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 
@@ -61,7 +67,7 @@ public class AppContentActivity extends Activity {
 		closeBtnImageView.setOnClickListener(closeButtonListener);
 		sliderBtnImageView = (ImageView) findViewById(R.id.sliderView);
 		sliderBtnImageView.setOnClickListener(sliderButtonListener);
-		//TopicMenuFragment.selectedIndex = -1;
+		// TopicMenuFragment.selectedIndex = -1;
 	}
 
 	private OnClickListener closeButtonListener = new OnClickListener() {
@@ -78,8 +84,8 @@ public class AppContentActivity extends Activity {
 			 */
 			View view = findViewById(R.id.menuFragment);
 			view.setVisibility(View.INVISIBLE);
-			View menuHeader = findViewById(R.id.menuHeaderForAppStart);
-			menuHeader.setVisibility(View.GONE);
+			View fragmentMenuHeader = findViewById(R.id.fragmentMenuHeaderForAppStart);
+			fragmentMenuHeader.setVisibility(View.GONE);
 			View sliderView = findViewById(R.id.sliderView);
 			sliderView.setVisibility(View.VISIBLE);
 
@@ -93,9 +99,9 @@ public class AppContentActivity extends Activity {
 		public void onClick(View v) {
 			Log.d("closeclcik", "closeclickonamainmenu");
 
-			View menuHeader = findViewById(R.id.menuHeaderForAppStart);
-			if (menuHeader.getVisibility() == View.VISIBLE) {
-				menuHeader.setVisibility(View.GONE);
+			View fragmentMenuHeader = findViewById(R.id.fragmentMenuHeaderForAppStart);
+			if (fragmentMenuHeader.getVisibility() == View.VISIBLE) {
+				fragmentMenuHeader.setVisibility(View.GONE);
 				View sliderView = findViewById(R.id.sliderView);
 				sliderView.setVisibility(View.VISIBLE);
 				View view = findViewById(R.id.menuFragment);
@@ -103,12 +109,16 @@ public class AppContentActivity extends Activity {
 			} else {
 				FragmentManager fragmentManager = getFragmentManager();
 				FragmentTransaction ft = fragmentManager.beginTransaction();
-				Fragment mainMenuFragment = new MainMenuFragment();
+
+				ApplicationSession session = ((ApplicationSession) AppContentActivity.this
+						.getApplication());
+				Fragment mainMenuFragment = session.getMainMenuFragment();
+
 				ft.replace(R.id.menuFragment, mainMenuFragment);
 				ft.commit();
 				TextView menuTitle = (TextView) findViewById(R.id.menuTitle);
 				menuTitle.setText("Menu");
-				menuHeader.setVisibility(View.VISIBLE);
+				fragmentMenuHeader.setVisibility(View.VISIBLE);
 				closeBtnImageView.setVisibility(View.INVISIBLE);
 				View view = findViewById(R.id.menuFragment);
 				view.setVisibility(View.VISIBLE);

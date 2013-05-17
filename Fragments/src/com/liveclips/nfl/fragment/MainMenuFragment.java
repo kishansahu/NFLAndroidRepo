@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.liveclips.nfl.R;
 import com.liveclips.nfl.activity.AppContentActivity;
 import com.liveclips.nfl.activity.GameActivity;
+import com.liveclips.nfl.session.ApplicationSession;
 
 public class MainMenuFragment extends Fragment {
 
@@ -66,7 +67,15 @@ public class MainMenuFragment extends Fragment {
 			if (selectedtextView.getText().equals("LiveClips")) {
 				FragmentManager fragmentManager = getFragmentManager();
 				FragmentTransaction ft = fragmentManager.beginTransaction();
-				Fragment mainMenuFragment = new TopicMenuFragment();
+				Fragment mainMenuFragment = (TopicMenuFragment) ((ApplicationSession) getActivity()
+						.getApplication()).getTopicMenuFragment();
+				
+				//if (mainMenuFragment == null) {
+					mainMenuFragment = new TopicMenuFragment();
+					//((ApplicationSession) getActivity().getApplication())
+					//		.setMainMenuFragment(mainMenuFragment);
+				//}
+
 				ft.replace(R.id.menuFragment, mainMenuFragment);
 
 				ft.commit();
@@ -74,6 +83,7 @@ public class MainMenuFragment extends Fragment {
 						R.id.menuTitle);
 				menuTitle.setText(selectedtextView.getText());
 				ImageView closeBtnImageView = (ImageView) getActivity()
+						.getActionBar().getCustomView()
 						.findViewById(R.id.closeButtonHeader);
 				closeBtnImageView.setVisibility(View.VISIBLE);
 				View sliderView = getActivity().findViewById(R.id.sliderView);

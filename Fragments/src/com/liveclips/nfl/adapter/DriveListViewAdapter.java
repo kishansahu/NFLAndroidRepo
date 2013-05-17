@@ -36,52 +36,41 @@ public class DriveListViewAdapter extends ArrayAdapter<DriveItem> {
 	private class DriveViewHolder {
 		TextView teamShortName;
 		TextView driveEvent;
-		TextView driveDetail;
+		TextView driveTime;
+		TextView driveYardsCovered;
 		ImageView teamLogo;
 		// ImageView imageView;
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
-		
+
 		DriveViewHolder holder = null;
 		DriveItem rowItem = getItem(position);
 
 		LayoutInflater mInflater = (LayoutInflater) context
 				.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 		if (convertView == null) {
-			convertView = mInflater
-					.inflate(R.layout.popover_game_drive_list_item, null);
+			convertView = mInflater.inflate(
+					R.layout.game_popover_list_row_item_drives, null);
 			holder = new DriveViewHolder();
 			holder.teamLogo = (ImageView) convertView
 					.findViewById(R.id.team_logo);
 			holder.teamShortName = (TextView) convertView
 					.findViewById(R.id.team_shortname);
-			holder.driveDetail = (TextView) convertView
-					.findViewById(R.id.drive_detail);
+			holder.driveTime = (TextView) convertView
+					.findViewById(R.id.drive_time);
+			holder.driveYardsCovered = (TextView) convertView
+					.findViewById(R.id.drive_yard_covered);
 			holder.driveEvent = (TextView) convertView
 					.findViewById(R.id.drive_event);
 
 			convertView.setTag(holder);
 		} else
 			holder = (DriveViewHolder) convertView.getTag();
-
-		/*
-		 * holder.textviewCousreTitle.setText(rowItem.getCourseTitle()); //int p
-		 * = (Integer.parseInt(rowItem.getTotalCompleteLesson())*100)/(2);
-		 * holder.progressBarModuleLevel.setProgress(20);
-		 * //holder.progressBarModuleLevel.setProgress(100);
-		 * 
-		 * holder.textviewModuleStatus.setText(rowItem.getTotalCompleteLesson()
-		 * + "/" + rowItem.getTotalLesson() + " lesson");
-		 * 
-		 * holder.textviewModuleAverage.setText(rowItem.getModuleAverage() +
-		 * ""); holder.textviewStartDate.setText(rowItem.getStartDate());
-		 * holder.textviewEndDate.setText(rowItem.getEndDate());
-		 */
-
 		holder.teamLogo.setImageResource(rowItem.teamLogo);
 		holder.teamShortName.setText(rowItem.teamShortName);
-		holder.driveDetail.setText(rowItem.driveDetail);
+		holder.driveYardsCovered.setText(rowItem.driveYardsCovered);
+		holder.driveTime.setText(rowItem.driveTime);
 		holder.driveEvent.setText(rowItem.driveEvent);
 
 		return convertView;

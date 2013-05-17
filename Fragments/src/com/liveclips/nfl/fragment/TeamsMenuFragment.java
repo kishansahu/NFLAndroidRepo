@@ -32,7 +32,7 @@ public class TeamsMenuFragment extends Fragment {
 			Bundle saveInstantState) {
 		Log.d("Fragment 1", "onCreateView");
 
-		currentView= inflater.inflate(R.layout.team_menu_fragement, container, false);
+		currentView= inflater.inflate(R.layout.team_fragment_view, container, false);
 		setContent();
 		return currentView;
 		

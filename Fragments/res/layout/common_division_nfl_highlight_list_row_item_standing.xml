@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TableRow
+        android:id="@+id/standingsTableRow"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center_vertical" >
+        
+        <ImageView
+            android:id="@+id/team_logo"
+            android:layout_width="80dp"
+            android:layout_height="35dp"></ImageView>
+
+        <TextView
+            android:id="@+id/team_name"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="5dp"
+            android:textStyle="bold"/>
+        
+        <TextView
+            android:id="@+id/match_wins"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="5dp"
+            android:textStyle="bold"/>
+        
+        <TextView
+            android:id="@+id/match_losses"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="5dp"
+            android:textStyle="bold"/>
+		
+         <ImageView
+            android:id="@+id/disclouser"
+            android:layout_width="60dp"
+            android:layout_height="35dp"></ImageView>
+        
+            
+    </TableRow>
+
+</TableLayout>

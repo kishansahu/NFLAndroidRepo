@@ -64,7 +64,7 @@ public class DivisionMenuFragment extends Fragment{
 		Log.d("Fragment 1", "onCreateView");
 		setTestData();
 		
-		return inflater.inflate(R.layout.division_menu, container, false);
+		return inflater.inflate(R.layout.division_fragment_view, container, false);
 	}
 
 	private void setTestData() {
@@ -78,17 +78,17 @@ public class DivisionMenuFragment extends Fragment{
 		
 		TeamItem teamItem1 = new TeamItem();
 		teamItem1.setTeamLogo(R.drawable.cardinals);
-		teamItem.setTeamName("Miami Dolphins");
+		teamItem1.setTeamName("Miami Dolphins");
 		conferenceItem.setTeam_2(teamItem1);
 		
 		TeamItem teamItem2 = new TeamItem();
 		teamItem2.setTeamLogo(R.drawable.jets);
-		teamItem.setTeamName("New England Patriots");
+		teamItem2.setTeamName("New England Patriots");
 		conferenceItem.setTeam_3(teamItem2);
 		
 		TeamItem teamItem3 = new TeamItem();
 		teamItem3.setTeamLogo(R.drawable.titans);
-		teamItem.setTeamName("New York Jets");
+		teamItem3.setTeamName("New York Jets");
 		conferenceItem.setTeam_4(teamItem3);
 		
 		afcConferenceItems.add(conferenceItem);
@@ -142,17 +142,17 @@ public class DivisionMenuFragment extends Fragment{
 		
 		TeamItem teamItem1 = new TeamItem();
 		teamItem1.setTeamLogo(R.drawable.cardinals);
-		teamItem.setTeamName("Miami Dolphins");
+		teamItem1.setTeamName("Miami Dolphins");
 		conferenceItem.setTeam_2(teamItem1);
 		
 		TeamItem teamItem2 = new TeamItem();
 		teamItem2.setTeamLogo(R.drawable.jets);
-		teamItem.setTeamName("New England Patriots");
+		teamItem2.setTeamName("New England Patriots");
 		conferenceItem.setTeam_3(teamItem2);
 		
 		TeamItem teamItem3 = new TeamItem();
 		teamItem3.setTeamLogo(R.drawable.titans);
-		teamItem.setTeamName("New York Jets");
+		teamItem3.setTeamName("New York Jets");
 		conferenceItem.setTeam_4(teamItem3);
 		
 		nfcConferenceItems.add(conferenceItem);
@@ -197,13 +197,13 @@ public class DivisionMenuFragment extends Fragment{
 		
 		objects.add(divisionHeader);
 		
-		adapter.addSection("1", new DivisionHeaderAdapter(getActivity(), R.layout.division_menu_header_layout, objects));
+		adapter.addSection("1", new DivisionHeaderAdapter(getActivity(), R.layout.division_fragment_header, objects));
 		
-		adapter.addSection("2", new DivisionsListViewAdapter(getActivity(), R.layout.division_menu_row_layout, divisionItems));
+		adapter.addSection("2", new DivisionsListViewAdapter(getActivity(), R.layout.division_fragment_list_row_item_header, divisionItems));
 		
 		adapter.addSection("3", new ConferenceListViewAdapter(getActivity(), R.layout.conference_menu_row_layout, afcConferenceItems));
 		
-		adapter.addSection("4", new DivisionsListViewAdapter(getActivity(), R.layout.division_menu_row_layout, divisionItems1));
+		adapter.addSection("4", new DivisionsListViewAdapter(getActivity(), R.layout.division_fragment_list_row_item_header, divisionItems1));
 		
 		adapter.addSection("5", new ConferenceListViewAdapter(getActivity(), R.layout.conference_menu_row_layout, nfcConferenceItems));
 		
@@ -259,7 +259,7 @@ public class DivisionMenuFragment extends Fragment{
 			TextView team_Name2 = (TextView) view.findViewById(R.id.team_2_name);
 			TeamItem teamItem2 = new TeamItem();
 			//teamItem2.setDrawable(team_2.getDrawable());
-			teamItem2.setTeamLogo(team_2.getImageAlpha());
+			//teamItem2.setTeamLogo(team_2.getImageAlpha());
 			teamItem2.setTeamName((String) team_Name2.getText());
 			conferenceItem.setTeam_2(teamItem2);
 			
@@ -267,7 +267,7 @@ public class DivisionMenuFragment extends Fragment{
 			TextView team_Name3 = (TextView) view.findViewById(R.id.team_3_name);
 			TeamItem teamItem3 = new TeamItem();
 			//teamItem3.setDrawable(team_3.getDrawable());
-			teamItem3.setTeamLogo(team_3.getImageAlpha());
+			//teamItem3.setTeamLogo(team_3.getImageAlpha());
 			teamItem3.setTeamName((String) team_Name3.getText());
 			conferenceItem.setTeam_3(teamItem3);
 			
@@ -275,7 +275,7 @@ public class DivisionMenuFragment extends Fragment{
 			TextView team_Name4 = (TextView) view.findViewById(R.id.team_4_name);
 			TeamItem teamItem4 = new TeamItem();
 			//teamItem4.setDrawable(team_4.getDrawable());
-			teamItem4.setTeamLogo(team_4.getImageAlpha());
+			//teamItem4.setTeamLogo(team_4.getImageAlpha());
 			teamItem4.setTeamName((String) team_Name4.getText());
 			conferenceItem.setTeam_4(teamItem4);
 			//ConferenceHolder ConferenceHolder = (ConferenceHolder)arg1;

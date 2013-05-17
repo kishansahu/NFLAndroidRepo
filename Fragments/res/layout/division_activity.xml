@@ -1,0 +1,209 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:id="@+id/divisionhighlightsRootView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:id="@+id/matchScoreBoardBackground"
+            android:layout_width="fill_parent"
+            android:layout_height="160dp"
+            android:background="@drawable/scorecard_background" >
+
+            <!-- Conference info -->
+
+            <ImageView
+                android:id="@+id/conference_logo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/bills" />
+
+            <TextView
+                android:id="@+id/conference_name"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="48dp"
+                android:text="Top Rated1" >
+            </TextView>
+
+            <!-- team 1 info -->
+
+            <ImageView
+                android:id="@+id/team_1_logo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="450dp"
+                android:layout_marginTop="28dp"
+                android:src="@drawable/bills" />
+
+            <TextView
+                android:id="@+id/team_1_name"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="500dp"
+                android:layout_marginTop="28dp"
+                android:text="Top Rated2" >
+            </TextView>
+
+            <!-- team 2 info -->
+
+            <ImageView
+                android:id="@+id/team_2_logo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="700dp"
+                android:layout_marginTop="28dp"
+                android:src="@drawable/cardinals" />
+
+            <TextView
+                android:id="@+id/team_2_name"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="750dp"
+                android:layout_marginTop="28dp"
+                android:text="Top Rated3" >
+            </TextView>
+
+            <!-- team 3 info -->
+
+            <ImageView
+                android:id="@+id/team_3_logo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="450dp"
+                android:layout_marginTop="68dp"
+                android:src="@drawable/ravens" />
+
+            <TextView
+                android:id="@+id/team_3_name"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="500dp"
+                android:layout_marginTop="68dp"
+                android:text="Top Rated4" >
+            </TextView>
+            <!-- team 4 info -->
+
+            <ImageView
+                android:id="@+id/team_4_logo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="700dp"
+                android:layout_marginTop="68dp"
+                android:src="@drawable/titans" />
+
+            <TextView
+                android:id="@+id/team_4_name"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="750dp"
+                android:layout_marginTop="68dp"
+                android:text="Top Rated5" >
+            </TextView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/filterBoardBackground"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="160dp" >
+
+            <TextView
+                android:id="@+id/topPlaysId"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:background="@drawable/border"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="ALL Plays" />
+
+            <TextView
+                android:id="@+id/topPlaysId"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:background="@drawable/border"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="Top Plays" />
+
+            <TextView
+                android:id="@+id/topRatedId"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_toRightOf="@id/topPlaysId"
+                android:background="@drawable/border"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="Top Rated" />
+
+            <TextView
+                android:id="@+id/watchAllId"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_toRightOf="@id/topRatedId"
+                android:background="@drawable/border"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="62 Plays \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 Watch All"
+                android:textAlignment="viewEnd" />
+        </RelativeLayout>
+
+         <RelativeLayout
+            android:id="@+id/combinedLayoutForSelectedCategoryAndPlayCardsId"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="200dp"
+            android:background="@drawable/nfl_field" >
+
+            <RelativeLayout
+                android:id="@+id/selectedCategoryLayoutId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:alpha=".5"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/selectedCategoryTextViewId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
+            </RelativeLayout>
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollViewForVideosId"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_below="@id/selectedCategoryLayoutId" >
+
+                <LinearLayout
+                    android:id="@+id/parentLayoutOfPlayCardsId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:scrollbarAlwaysDrawHorizontalTrack="true" >
+                </LinearLayout>
+            </HorizontalScrollView>
+        </RelativeLayout>
+        <FrameLayout
+            android:id="@+id/menuFragment"
+            android:layout_width="300dp"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
+</merge>

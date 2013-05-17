@@ -49,7 +49,7 @@ public class AddPlayersFavouritList extends ArrayAdapter<PlayerItem> {
 				.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 		if (convertView == null) {
 			convertView = mInflater.inflate(
-					R.layout.addplayer_details_fragment, null);
+					R.layout.players_fragment_list_row_item_details, null);
 			holder = new PlayerViewHolder();
 			holder.playerFavourite = (ImageView) convertView
 					.findViewById(R.id.addplayerFavInFragmentList);

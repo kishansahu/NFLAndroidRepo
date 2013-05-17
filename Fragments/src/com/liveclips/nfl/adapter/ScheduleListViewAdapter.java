@@ -55,7 +55,7 @@ public class ScheduleListViewAdapter extends ArrayAdapter<ScheduleItem> {
 				.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 		if (convertView == null) {
 			convertView = mInflater.inflate(
-					R.layout.popover_game_schedule_list_item, null);
+					R.layout.game_popover_list_row_item_schedule, null);
 			holder = new ScheduleViewHolder();
 			holder.weekText = (TextView) convertView
 					.findViewById(R.id.week_text);

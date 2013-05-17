@@ -34,7 +34,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@id/playCardFrontSideTopLayoutInfoButtonId"
-            android:layout_marginRight="30dp" />
+            android:layout_marginRight="30dp"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -59,6 +59,14 @@
              android:textSize="14sp"
             android:textStyle="bold" >
         </TextView>
+        
+        <ImageButton 
+            android:id="@+id/playCardFrontSideBottomLayoutImageButtonId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:contentDescription="@string/contentDescription"/>
     </RelativeLayout>
 
 </RelativeLayout>
