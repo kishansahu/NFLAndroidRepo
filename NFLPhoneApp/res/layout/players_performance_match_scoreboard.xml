@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="100dp"
+    android:background="@drawable/scorecard_background_small" >
+
+    <ImageView
+        android:id="@+id/selectedPlayerPic"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="5dp"
+        android:contentDescription="Player Image"
+        android:gravity="center_vertical"
+         >
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/selectedPlayerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_toRightOf="@id/selectedPlayerPic"
+        android:text="Tom Bradsssty"
+        android:textColor="@color/black"
+        android:textSize="@dimen/popup_header_text_size"
+        android:textStyle="bold" >
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/selectedPlayerDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/selectedPlayerName"
+        android:layout_toRightOf="@+id/selectedPlayerPic"
+        android:text="Tom Bradssy"
+        android:textColor="@color/black"
+        android:textSize="@dimen/popup_listitem_text_size" >
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/gameIdentifier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/selectedPlayerDetails"
+        android:layout_toRightOf="@id/selectedPlayerPic"
+        android:text="Tom Brady"
+        android:textColor="@color/black"
+        android:textSize="@dimen/popup_listitem_text_size" >
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/selectedPlayerGameDetailsIndexFirst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/selectedPlayerDetails"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/gameIdentifier"
+        android:text="Tom Brady"
+        android:textColor="@color/black"
+        android:textSize="@dimen/popup_listitem_text_size" >
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/selectedPlayerGameDetailsIndexSecond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/selectedPlayerDetails"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/selectedPlayerGameDetailsIndexFirst"
+        android:text="Tom Brady"
+        android:textColor="@color/black"
+        android:textSize="@dimen/popup_listitem_text_size" >
+
+    </TextView>
+    
+    <TextView
+        android:id="@+id/selectedPlayerGameDetailsIndexThird"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/selectedPlayerDetails"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/selectedPlayerGameDetailsIndexSecond"
+        android:text="Tom Brady"
+        android:textColor="@color/black"
+        android:textSize="@dimen/popup_listitem_text_size" >
+
+    </TextView>
+
+            <TextView
+                android:id="@+id/selectedPlayerGameDetailsIndexFour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:textColor="@color/black"
+               android:layout_marginLeft="5dp"
+               android:layout_below="@id/selectedPlayerDetails"
+               android:layout_toRightOf="@id/selectedPlayerGameDetailsIndexThird"
+                android:text="1 INT"
+                android:textSize="@dimen/popup_listitem_text_size" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/selectedPlayerTeamPic"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/patriots" />
+
+    </LinearLayout>
+
+</RelativeLayout>

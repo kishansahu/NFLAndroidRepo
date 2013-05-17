@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal" >
+
+    
+
+        <ImageView
+            android:id="@+id/team_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:paddingLeft="3dp" />
+
+        <TextView
+            android:id="@+id/team_shortname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/popup_listitem_text_size" />
+
+        <TextView
+            android:id="@+id/drive_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+               android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/popup_listitem_text_size" />
+
+        <TextView
+            android:id="@+id/drive_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:gravity="center"
+               android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/popup_listitem_text_size" />
+
+</LinearLayout>

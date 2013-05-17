@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#585858"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_header_selector" >
+
+        <Button
+            android:id="@+id/team_menu_fragement_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            
+            android:text="Back" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"
+            android:text="Teams"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+       >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+              android:background="#A4A4A4"
+               android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="AFC EAST" />
+
+            <Button
+                android:id="@+id/team_menu_fragement_buffalo_bills"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/team_menu_button_background"
+                android:drawableLeft="@drawable/bills"
+                android:gravity="left|center_vertical"
+                android:text="Buffalo Bills" />
+
+            <Button
+                android:id="@+id/team_menu_fragement_miami_dolphins"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/team_menu_button_background"
+                android:drawableLeft="@drawable/miami"
+                android:gravity="left|center_vertical"
+                android:text="Miami Dolphins" />
+
+            <Button
+                android:id="@+id/team_menu_fragement_new_england_partriots"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/team_menu_button_background"
+                android:drawableLeft="@drawable/patriots"
+                android:gravity="left|center_vertical"
+                android:text="New England Partriots" />
+
+            <Button
+                android:id="@+id/team_menu_fragement_new_york_jets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/team_menu_button_background"
+                android:drawableLeft="@drawable/jets"
+                android:gravity="left|center_vertical"
+                android:text="New York Jets" />
+
+            <TextView
+                android:id="@+id/TextView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                 android:textAppearance="?android:attr/textAppearanceMedium" 
+                android:layout_marginTop="1dp"
+                 android:gravity="left|center_vertical"
+                android:background="#A4A4A4"
+                android:text="AFC NORTH" />
+
+            <Button
+                android:id="@+id/team_menu_fragement_batimore_ravens"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/team_menu_button_background"
+                android:drawableLeft="@drawable/ravens"
+                android:gravity="left|center_vertical"
+                android:text="Batimore Ravens" />
+
+            <Button
+                android:id="@+id/team_menu_fragement_cincinnati_bengals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/team_menu_button_background"
+                android:drawableLeft="@drawable/cincinnatibengals"
+                android:gravity="left|center_vertical"
+                android:text="Cincinnati Bengals" />
+
+            <Button
+                android:id="@+id/team_menu_fragement_clevelend_browns"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/team_menu_button_background"
+                android:drawableLeft="@drawable/clevelendbrowns"
+                android:gravity="left|center_vertical"
+                android:text="Clevelend Browns" />
+
+            <Button
+                android:id="@+id/team_menu_fragement_pittsburgh_steelers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/team_menu_button_background"
+                android:drawableLeft="@drawable/pittsburghsteelers"
+                android:gravity="left|center_vertical"
+                android:text="Pittsburgh Steelers" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                   android:background="#A4A4A4"
+             
+                android:text="AFC SOUTH"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Button
+                android:id="@+id/team_menu_fragement_houston_texans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/team_menu_button_background"
+                android:drawableLeft="@drawable/rams"
+                android:gravity="left|center_vertical"
+                android:text="Houston Texans" />
+
+            <Button
+                android:id="@+id/team_menu_fragement_indianapolis_colts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/team_menu_button_background"
+                android:drawableLeft="@drawable/indianapoliscolts"
+                android:gravity="left|center_vertical"
+                android:text="Indianapolis Colts" />
+
+            <Button
+                android:id="@+id/team_menu_fragement_jacksonville_jaguars"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/team_menu_button_background"
+                android:drawableLeft="@drawable/jacksonvillejaguars"
+                android:gravity="left|center_vertical"
+                android:text="Jacksonville Jaguars" />
+
+            <Button
+                android:id="@+id/team_menu_fragement_tennessee_titans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/team_menu_button_background"
+                android:drawableLeft="@drawable/titans"
+                android:gravity="left|center_vertical"
+                android:text="Tennessee Titans" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                   android:background="#A4A4A4"
+              
+                android:text="AFC WEST"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Button
+                android:id="@+id/team_menu_fragement_denver_broncos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/team_menu_button_background"
+                android:drawableLeft="@drawable/denverbroncos"
+                android:gravity="left|center_vertical"
+                android:text="Denver Broncos" />
+
+            <Button
+                android:id="@+id/team_menu_fragement_Kansas_city_chicfs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/team_menu_button_background"
+                android:drawableLeft="@drawable/kansascitychicfs"
+                android:gravity="left|center_vertical"
+                android:text="Kansas City Chicfs" />
+
+            <Button
+                android:id="@+id/team_menu_fragement_others_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/team_menu_button_background"
+                android:drawableLeft="@drawable/kansascitychicfs"
+                android:gravity="left|center_vertical"
+                android:text="Others 1" />
+
+            <Button
+                android:id="@+id/team_menu_fragement_others_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/team_menu_button_background"
+                android:drawableLeft="@drawable/kansascitychicfs"
+                android:gravity="left|center_vertical"
+                android:text="Others 2" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

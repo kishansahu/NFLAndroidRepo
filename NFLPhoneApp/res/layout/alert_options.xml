@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:mySwitch="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FCA11B" >
+
+        <TextView
+            android:id="@+id/alert_options_header_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:text="GB at NE Alerts: Low"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/black"
+            android:textSize="@dimen/popup_header_text_size" />
+
+        <Button
+            android:id="@+id/alert_option_cancel"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/alert_cancel" />
+
+    </LinearLayout>
+<ScrollView 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none"
+    >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="#00FF00"
+                android:text="  Basic"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/popup_header_text_size"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:orientation="vertical" >
+
+                <SeekBar
+                    android:id="@+id/alert_options_seekBar_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
+                    android:indeterminate="false"
+                    android:max="3"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/seek_bar"
+                    android:thumb="@drawable/thumbler_small" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:weightSum="4"
+                    android:paddingRight="10dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:text="OFF"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/popup_listitem_text_size" />
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="LOW"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/popup_listitem_text_size" />
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="MEDIUM"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/popup_listitem_text_size" />
+
+                    <TextView
+                        android:id="@+id/textView7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="HIGH"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/popup_listitem_text_size" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/alert_options_seekBar_main_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="  5-10 Alerts per game"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="#00FF00"
+                android:text="  Advance"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/popup_header_text_size"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:text="All Plays"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/popup_subheader_text_size"
+                    android:textStyle="bold" />
+
+   <ToggleButton
+       android:id="@+id/alert_options_togglebutton_allplays"
+       android:layout_width="70dp"
+       android:layout_height="20dp"
+       android:layout_margin="5dp"
+       android:background="@drawable/bgtoggle"
+       android:button="@null"
+       android:textOff=""
+       android:textOn="" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:text="Top Plays"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/popup_subheader_text_size"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+        android:id="@+id/alert_options_togglebutton_topplays"
+      android:layout_width="70dp"
+       android:layout_height="20dp"
+       android:layout_margin="5dp"
+        android:background="@drawable/bgtoggle"
+        android:button="@null"
+        android:textOff=""
+        android:textOn="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:text="Scoring Plays"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/popup_subheader_text_size"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+        android:id="@+id/alert_options_togglebutton_scoringplays"
+    android:layout_width="70dp"
+       android:layout_height="20dp"
+       android:layout_margin="5dp"
+        android:background="@drawable/bgtoggle"
+        android:button="@null"
+        android:textOff=""
+        android:textOn="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:text="Turnovers"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/popup_subheader_text_size"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+        android:id="@+id/alert_options_togglebutton_turnovers"
+       android:layout_width="70dp"
+       android:layout_height="20dp"
+       android:layout_margin="5dp"
+        android:background="@drawable/bgtoggle"
+        android:button="@null"
+        android:textOff=""
+        android:textOn="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:text="Red Zone Plays"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/popup_subheader_text_size"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+        android:id="@+id/alert_options_togglebutton_redzoneplays"
+      android:layout_width="70dp"
+       android:layout_height="20dp"
+       android:layout_margin="5dp"
+        android:background="@drawable/bgtoggle"
+        android:button="@null"
+        android:textOff=""
+        android:textOn="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:weightSum="3" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3" >
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:paddingLeft="5dp"
+                        android:text="Passing Plays"
+                        android:layout_gravity="center_vertical"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/popup_subheader_text_size"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/alert_options_seekBar_passing_play"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="2"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/seek_bar"
+                        android:thumb="@drawable/thumbler_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="3"
+                    android:background="@color/white" >
+
+                    <View
+                        android:id="@+id/view1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/textView9"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="> 20 YDS"
+                            android:layout_weight="1"
+                            
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/popup_listitem_text_size" />
+
+                        <TextView
+                            android:id="@+id/textView10"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="> 10 YDS"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/popup_listitem_text_size" />
+
+                        <TextView
+                            android:id="@+id/textView11"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text="All"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/popup_listitem_text_size" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="3"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:weightSum="3" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3" >
+
+                        <TextView
+                            android:id="@+id/TextView01"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="2"
+                            android:paddingLeft="5dp"
+                            android:text="Rushing Plays"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/popup_subheader_text_size"
+                            android:textStyle="bold" />
+
+                        <SeekBar
+                            android:id="@+id/alert_options_seekBar_rushing_play"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:indeterminate="false"
+                            android:max="2"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:progress="0"
+                            android:progressDrawable="@drawable/seek_bar"
+                            android:thumb="@drawable/thumbler_small" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="3"
+                        android:background="@color/white" >
+
+                        <View
+                            android:id="@+id/View01"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1" >
+
+                            <TextView
+                                android:id="@+id/TextView04"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="> 10 YDS"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/popup_listitem_text_size" />
+
+                            <TextView
+                                android:id="@+id/TextView03"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="> 5 YDS"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/popup_listitem_text_size" />
+
+                            <TextView
+                                android:id="@+id/TextView02"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="All"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/popup_listitem_text_size" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:text="Play of the Game (Top Rated)"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/popup_subheader_text_size"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+        android:id="@+id/alert_options_togglebutton_playofgame"
+        android:layout_width="70dp"
+       android:layout_height="20dp"
+       android:layout_margin="5dp"
+        android:background="@drawable/bgtoggle"
+        android:button="@null"
+        android:textOff=""
+        android:textOn="" />
+            </LinearLayout>
+        </LinearLayout>
+
+</ScrollView>
+
+</LinearLayout>

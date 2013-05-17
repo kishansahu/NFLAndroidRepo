@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lv2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/main_header_selector" >
+
+        <Button
+            android:id="@+id/videoclip_menu_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/menuicon" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/videoclip_menu_back"
+            android:layout_alignBottom="@+id/videoclip_menu_back"
+            android:layout_centerHorizontal="true"
+            android:text="LiveClips"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+       
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/lv1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/videoclip_menu_new_england_patriots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/team_menu_button_background"
+            android:drawableLeft="@drawable/patriots"
+            android:gravity="left|center_vertical"
+            android:text="New England Patriots"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/black" />
+
+        <Button
+            android:id="@+id/videoclip_menu_my_player"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/team_menu_button_background"
+            android:drawableLeft="@drawable/def_icon"
+            android:gravity="left|center_vertical"
+            android:text="My Player"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/black" />
+
+        <Button
+            android:id="@+id/videoclip_menu_nfl_highlights"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/team_menu_button_background"
+            android:drawableLeft="@drawable/def_icon"
+            android:gravity="left|center_vertical"
+            android:text="NFL Highlights"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/black" />
+
+        <Button
+            android:id="@+id/videoclip_menu_divison"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/team_menu_button_background"
+            android:drawableLeft="@drawable/def_icon"
+            android:drawableRight="@drawable/arrow_right"
+            android:gravity="left|center_vertical"
+            android:text="Divison"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/black" />
+
+        <Button
+            android:id="@+id/videoclip_menu_teams"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/team_menu_button_background"
+            android:drawableLeft="@drawable/def_icon"
+            android:drawableRight="@drawable/arrow_right"
+            android:gravity="left|center_vertical"
+            android:text="Teams"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/black" />
+
+        <Button
+            android:id="@+id/videoclip_menu_game_schedule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/team_menu_button_background"
+            android:drawableLeft="@drawable/def_icon"
+            android:drawableRight="@drawable/arrow_right"
+            android:gravity="left|center_vertical"
+            android:text="Game Schedule"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/black" />
+    </LinearLayout>
+
+</LinearLayout>
