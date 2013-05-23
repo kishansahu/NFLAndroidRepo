@@ -72,22 +72,22 @@ public class DivisionMenuFragment extends Fragment{
 		ConferenceItem conferenceItem = new ConferenceItem();
 		conferenceItem.setConferenceName("AFC East");
 		TeamItem teamItem = new TeamItem();
-		teamItem.setTeamLogo(R.drawable.bills);
+		teamItem.setTeamLogo(R.drawable.buf);
 		teamItem.setTeamName("Buffalo Bills");
 		conferenceItem.setTeam_1(teamItem);
 		
 		TeamItem teamItem1 = new TeamItem();
-		teamItem1.setTeamLogo(R.drawable.cardinals);
+		teamItem1.setTeamLogo(R.drawable.arz);
 		teamItem1.setTeamName("Miami Dolphins");
 		conferenceItem.setTeam_2(teamItem1);
 		
 		TeamItem teamItem2 = new TeamItem();
-		teamItem2.setTeamLogo(R.drawable.jets);
+		teamItem2.setTeamLogo(R.drawable.nyj);
 		teamItem2.setTeamName("New England Patriots");
 		conferenceItem.setTeam_3(teamItem2);
 		
 		TeamItem teamItem3 = new TeamItem();
-		teamItem3.setTeamLogo(R.drawable.titans);
+		teamItem3.setTeamLogo(R.drawable.ten);
 		teamItem3.setTeamName("New York Jets");
 		conferenceItem.setTeam_4(teamItem3);
 		
@@ -136,22 +136,22 @@ public class DivisionMenuFragment extends Fragment{
 		ConferenceItem conferenceItem = new ConferenceItem();
 		conferenceItem.setConferenceName("AFC East");
 		TeamItem teamItem = new TeamItem();
-		teamItem.setTeamLogo(R.drawable.bills);
+		teamItem.setTeamLogo(R.drawable.buf);
 		teamItem.setTeamName("Buffalo Bills");
 		conferenceItem.setTeam_1(teamItem);
 		
 		TeamItem teamItem1 = new TeamItem();
-		teamItem1.setTeamLogo(R.drawable.cardinals);
+		teamItem1.setTeamLogo(R.drawable.arz);
 		teamItem1.setTeamName("Miami Dolphins");
 		conferenceItem.setTeam_2(teamItem1);
 		
 		TeamItem teamItem2 = new TeamItem();
-		teamItem2.setTeamLogo(R.drawable.jets);
+		teamItem2.setTeamLogo(R.drawable.nyj);
 		teamItem2.setTeamName("New England Patriots");
 		conferenceItem.setTeam_3(teamItem2);
 		
 		TeamItem teamItem3 = new TeamItem();
-		teamItem3.setTeamLogo(R.drawable.titans);
+		teamItem3.setTeamLogo(R.drawable.ten);
 		teamItem3.setTeamName("New York Jets");
 		conferenceItem.setTeam_4(teamItem3);
 		

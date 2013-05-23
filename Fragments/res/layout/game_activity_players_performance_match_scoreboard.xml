@@ -15,15 +15,15 @@
         android:id="@+id/selectedplayerMatchBanner"
         android:layout_width="fill_parent"
         android:layout_height="160dp"
-        android:layout_marginLeft="15dp" >
+        android:layout_marginLeft="1dp" >
 
         <ImageView
             android:id="@+id/selectedPlayerPic"
-            android:layout_width="75dp"
-            android:layout_height="100dp"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_alignParentTop="true"
-            android:src="@drawable/rob_gronkowski" >
+             >
         </ImageView>
 
         <LinearLayout
@@ -37,7 +37,7 @@
                 android:layout_width="180dp"
                 android:layout_height="102dp"
                 android:alpha=".5"
-                android:src="@drawable/patriots_medium" >
+                android:src="@drawable/ne" >
             </ImageView>
 
             <ImageView
@@ -63,8 +63,6 @@
                 android:id="@+id/selectedPlayerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/patriots_medium"
-                android:text="Graham Harrell"
                 android:textSize="24dp"
                 android:textStyle="bold" >
             </TextView>
@@ -74,8 +72,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:src="@drawable/patriots_medium"
-                android:text="#6 | QB"
                 android:textSize="18dp"
                 android:textStyle="bold" >
             </TextView>
@@ -101,37 +97,33 @@
 
             <TextView
                 android:id="@+id/selectedPlayerGameDetailsIndexFirst"
-                android:layout_width="130dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="20/29"
                 android:textSize="18dp" >
             </TextView>
 
             <TextView
                 android:id="@+id/selectedPlayerGameDetailsIndexSecond"
-                android:layout_width="130dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="329 YDS"
                 android:textSize="18dp" >
             </TextView>
 
             <TextView
                 android:id="@+id/selectedPlayerGameDetailsIndexThird"
-                android:layout_width="130dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="2 TD"
                 android:textSize="18dp" >
             </TextView>
 
             <TextView
                 android:id="@+id/selectedPlayerGameDetailsIndexFour"
-                android:layout_width="130dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="1 INT"
                 android:textSize="18dp" >
             </TextView>
         </LinearLayout>

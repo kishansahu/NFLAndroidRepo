@@ -12,21 +12,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.liveclips.nfl.R;
+import com.liveclips.nfl.imageutils.ImageLoader;
 import com.liveclips.nfl.model.PlayerItem;
 
 public class PlayerListViewAdapter extends ArrayAdapter<PlayerItem> {
 
 	Context context;
 	List<PlayerItem> items;
+	ImageLoader imgLoader;
 
 	public PlayerListViewAdapter(Context context, int resourceId,
 			List<PlayerItem> items) {
 		super(context, resourceId, items);
 		this.context = context;
 		this.items = items;
-
+		 imgLoader = new ImageLoader(context);
 	}
-
+	
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -55,8 +57,17 @@ public class PlayerListViewAdapter extends ArrayAdapter<PlayerItem> {
 			convertView = mInflater.inflate(
 					R.layout.game_popover_list_row__item_player, null);
 			holder = new PlayerViewHolder();
-			holder.playerImage = (ImageView) convertView
-					.findViewById(R.id.popover_player_pic);
+			
+			
+			ImageView playerImage = ((ImageView) convertView
+					.findViewById(R.id.popover_player_pic));
+			imgLoader.DisplayImage(rowItem.playerImage, playerImage);
+			
+			
+			/*holder.playerImage = (ImageView) convertView
+					.findViewById(R.id.popover_player_pic);*/
+			
+			
 			holder.playerName = (TextView) convertView
 					.findViewById(R.id.popover_player_name);
 			holder.playerDetails = (TextView) convertView
@@ -74,7 +85,13 @@ public class PlayerListViewAdapter extends ArrayAdapter<PlayerItem> {
 		} else
 			holder = (PlayerViewHolder) convertView.getTag();
 
-		holder.playerImage.setImageResource(rowItem.playerImage);
+		ImageView playerImage = ((ImageView) convertView
+				.findViewById(R.id.popover_player_pic));
+		imgLoader.DisplayImage(rowItem.playerImage, playerImage);
+		
+		
+		
+		//holder.playerImage.setImageResource(rowItem.playerImage);
 		holder.playerName.setText(rowItem.playerName);
 		holder.playerDetails.setText(rowItem.playerDetails);
 		holder.playerData1.setText(rowItem.playerdata1);

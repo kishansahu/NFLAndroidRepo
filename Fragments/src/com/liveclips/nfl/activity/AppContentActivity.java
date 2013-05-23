@@ -53,7 +53,7 @@ public class AppContentActivity extends Activity {
 		View mActionBarView = getLayoutInflater().inflate(
 				R.layout.main_actionbar, null);
 		actionBar.setCustomView(mActionBarView);
-		Drawable d = getResources().getDrawable(R.drawable.orange_background);
+		Drawable d = getResources().getDrawable(R.drawable.orange_gradient_background);
 		actionBar.setBackgroundDrawable(d);
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);

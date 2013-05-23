@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.liveclips.nfl.R;
 import com.liveclips.nfl.fragment.AddPlayersFragment;
+import com.liveclips.nfl.imageutils.ImageLoader;
 import com.liveclips.nfl.utils.DownloadImagesThreadPool;
 import com.liveclips.nfl.utils.PlayCardView;
 
@@ -30,11 +31,14 @@ public class PlayersActivity extends BaseActivity {
 	Fragment mainMenuFragment;
 	Fragment addPlayersFragment;
 	FragmentTransaction ft;
+	ImageLoader imgLoader;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.players_activity);
+		imgLoader = new ImageLoader(this);
+
 		fragmentManager = getFragmentManager();
 		playCards();
 
@@ -42,21 +46,23 @@ public class PlayersActivity extends BaseActivity {
 		String[] playersDetails = { "#12 | QB", "#87 | TE" };
 		String[] playerGameDetails = { "20 / 29, 268 YDS,2 TD, 1 INT",
 				"5 REC, 56 YDS, 2 TD" };
-		int[] playerPic = { R.drawable.tom_brady, R.drawable.rob_gronkowski };
+		String[] playerPicUrl = {
+				"http://172.16.3.210:8081/nfl-images/nfl_players_images/00-0000108.png",
+				"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13229.png&w=350&h=254" };
 
 		/**
 		 * include a xml multiple time in a parent xml
 		 */
 
 		LinearLayout wrapper = (LinearLayout) findViewById(R.id.myPlayersContainer);
-		//LinearLayout inflatedView;
+		// LinearLayout inflatedView;
 
 		if (playersName.length != 0) {
 			int i;
 			for (i = 0; i < playersName.length; i++) {
 
-				final LinearLayout inflatedView = (LinearLayout) View.inflate(this,
-						R.layout.common_players_detail, null);
+				final LinearLayout inflatedView = (LinearLayout) View.inflate(
+						this, R.layout.common_players_detail, null);
 				((TextView) inflatedView
 						.findViewById(R.id.myindividualPlayerName))
 						.setText(playersName[i]);
@@ -66,22 +72,26 @@ public class PlayersActivity extends BaseActivity {
 				((TextView) inflatedView
 						.findViewById(R.id.myindividualPlayerGameDetails))
 						.setText(playerGameDetails[i]);
-				((ImageView) inflatedView
-						.findViewById(R.id.myindividualPlayerPic))
-						.setImageResource(playerPic[i]);
-				ImageView myindividualPlayerFavouritePic=(ImageView) inflatedView
+				ImageView playerImage = ((ImageView) inflatedView
+						.findViewById(R.id.myindividualPlayerPic));
+				imgLoader.DisplayImage(playerPicUrl[i], playerImage);
+				ImageView myindividualPlayerFavouritePic = (ImageView) inflatedView
 						.findViewById(R.id.myindividualPlayerFavouritePic);
-				myindividualPlayerFavouritePic.setOnClickListener(new View.OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						RelativeLayout favPlayerDetailHolder = (RelativeLayout) inflatedView.findViewById(R.id.favPlayerDetailHolder);
-						favPlayerDetailHolder.setVisibility(View.GONE);
-						View favPlayerDetailHolderSeperator = (View) inflatedView.findViewById(R.id.favPlayerDetailHolderSeperator);
-						favPlayerDetailHolderSeperator.setVisibility(View.GONE);
-					}
-				});
-				
+				myindividualPlayerFavouritePic
+						.setOnClickListener(new View.OnClickListener() {
+
+							@Override
+							public void onClick(View v) {
+								RelativeLayout favPlayerDetailHolder = (RelativeLayout) inflatedView
+										.findViewById(R.id.favPlayerDetailHolder);
+								favPlayerDetailHolder.setVisibility(View.GONE);
+								View favPlayerDetailHolderSeperator = (View) inflatedView
+										.findViewById(R.id.favPlayerDetailHolderSeperator);
+								favPlayerDetailHolderSeperator
+										.setVisibility(View.GONE);
+							}
+						});
+
 				wrapper.addView(inflatedView);
 
 			}
@@ -109,14 +119,14 @@ public class PlayersActivity extends BaseActivity {
 	}
 
 	protected void createCustomActionBar() {
-		
+
 		ActionBar actionBar = getActionBar();
 		View mActionBarView = getLayoutInflater().inflate(
 				R.layout.players_actionbar, null);
 		actionBar.setCustomView(mActionBarView);
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-		Drawable d = getResources().getDrawable(R.drawable.orange_background);
+		Drawable d = getResources().getDrawable(R.drawable.orange_gradient_background);
 		actionBar.setBackgroundDrawable(d);
 	}
 

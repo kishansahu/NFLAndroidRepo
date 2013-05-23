@@ -78,7 +78,7 @@ public class BaseActivity extends Activity {
 		super.onStart();
 		ActionBar actionBar = getActionBar();
 		View mActionBarView = actionBar.getCustomView();
-		Drawable d = getResources().getDrawable(R.drawable.orange_background);
+		Drawable d = getResources().getDrawable(R.drawable.orange_gradient_background);
 		actionBar.setBackgroundDrawable(d);
 		fragmentMenuHeaderView = mActionBarView
 				.findViewById(R.id.commonFragmentMenuHeader);
