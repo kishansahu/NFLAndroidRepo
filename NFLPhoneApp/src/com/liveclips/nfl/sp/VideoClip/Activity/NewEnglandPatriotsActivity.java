@@ -3,10 +3,6 @@ package com.liveclips.nfl.sp.VideoClip.Activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,19 +11,12 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.liveclips.nfl.sp.AddPlayersActivity;
-import com.liveclips.nfl.sp.AlertOption;
 import com.liveclips.nfl.sp.R;
-import com.liveclips.nfl.sp.R.anim;
-import com.liveclips.nfl.sp.R.drawable;
-import com.liveclips.nfl.sp.R.id;
-import com.liveclips.nfl.sp.R.layout;
 import com.liveclips.nfl.sp.adapter.DriveListViewAdapter;
 import com.liveclips.nfl.sp.adapter.PlayerListViewAdapter;
 import com.liveclips.nfl.sp.adapter.ScheduleListViewAdapter;
@@ -39,26 +28,18 @@ import com.liveclips.nfl.sp.model.ScheduleItem;
 import com.liveclips.nfl.sp.model.StatsItem;
 import com.liveclips.nfl.sp.popup.QuickAction;
 
-public class NewEnglandPatriotsActivity extends Activity{
-	
-	LinearLayout scoreboard;
-	private Button back,
-	/*schedule,drives,stats,players,*/
-	alertoption;
-	private Context context;
-	private LayoutInflater mInflater; 
-	private View container;
-	private ListView listView;
+public class NewEnglandPatriotsActivity extends BaseActivity{
+
 	private Button  team1BtnPlayers;
 	private Button team2BtnPlayers ;
-	private QuickAction quickAction;
-	private Intent i;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		context=this;
 		setContentView(R.layout.activity_game);
-		setContent();
-		setScoreBoard();	
+		setContent("New England Patriots");
+		setBanner();
 		setPopupMenu();
 	
 		for (int i = 0; i < 5; i++) {
@@ -67,56 +48,8 @@ public class NewEnglandPatriotsActivity extends Activity{
 		  
 		
 	}
-	
-	private void setContent() {
-		context=this;
-		mInflater=getLayoutInflater();
-	back=(Button)findViewById(R.id.activity_game_back)	;
-	back.setOnClickListener(listener);
-	alertoption=(Button)findViewById(R.id.alert_control);
-	alertoption.setOnClickListener(listener);
-		
-	}
-	private void setPopupMenu() {
-		scoreboard=(LinearLayout)findViewById(R.id.popup_tab_layout);
-		scoreboard.removeAllViews();
-		container=mInflater.inflate(R.layout.new_england_patriots_popup_menubar, null);
-		Button schedule = (Button)container.findViewById(R.id.activity_game_schedule);
-		schedule.setOnClickListener(listener);
-		Button drives = (Button)container.findViewById(R.id.activity_game_drive);
-		drives.setOnClickListener(listener);
-		Button stats = (Button)container.findViewById(R.id.activity_game_stats);
-		stats.setOnClickListener(listener);
-		Button players = (Button)container.findViewById(R.id.activity_game_players);
-		players.setOnClickListener(listener);
-		
-		scoreboard.addView(container);
-		Log.d("count", ""+scoreboard.getChildCount());
-		
-	}
-	private void setScoreBoard() {
-		scoreboard=(LinearLayout)findViewById(R.id.score_board_layout);
-		scoreboard.removeAllViews();
-		
-		scoreboard.addView(mInflater.inflate(R.layout.score_board, null));
-		Log.d("count", ""+scoreboard.getChildCount());
-		
-	}
-	private void setVideoList() {
-		scoreboard=(LinearLayout)findViewById(R.id.video_list_container);
-		//scoreboard.removeAllViews();
-		LayoutInflater inflater = getLayoutInflater();
-		scoreboard.addView(inflater.inflate(R.layout.video_list_item, null));
-		Log.d("count", ""+scoreboard.getChildCount());
-		
-	}
-	private void addFevoratePlayer() {
-		scoreboard=(LinearLayout)findViewById(R.id.my_player_player_detail);
-		//scoreboard.removeAllViews();
-		
-		scoreboard.addView(mInflater.inflate(R.layout.common_players_detail, null));
-	}
-	 private OnClickListener listener=new OnClickListener() {
+
+	private OnClickListener listener=new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -124,18 +57,8 @@ public class NewEnglandPatriotsActivity extends Activity{
 				// TODO Auto-generated method stub
 				switch (v.getId()) {
 				
-				case R.id.alert_control:
-				
-					
-				Intent i2 = new Intent(context,AlertOption.class);
-				startActivity(i2);
-				overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
-				//overridePendingTransition( R.anim.slide_in_up, R.anim.slide_in_up );
-				break;
-				case R.id.activity_game_back:
-					onBackPressed();
-					break;
-		case R.id.activity_game_schedule:
+			
+	     	case R.id.activity_game_schedule:
 			
 			List<ScheduleItem> rowItems = new ArrayList<ScheduleItem>();
 			String[] teamNames = { "Titans", "Cardinals", "Ravens", "Bills",
@@ -355,8 +278,8 @@ public class NewEnglandPatriotsActivity extends Activity{
 					TextView statScore2 = (TextView) (arg1
 							.findViewById(R.id.statScore2));
 					
-					scoreboard=(LinearLayout)findViewById(R.id.score_board_layout);
-					scoreboard.removeAllViews();
+					linearLayout=(LinearLayout)findViewById(R.id.score_board_layout);
+					linearLayout.removeAllViews();
 					container=mInflater.inflate(R.layout.teamstatsyards_match_scoreboard, null);
 				
 					
@@ -375,7 +298,7 @@ public class NewEnglandPatriotsActivity extends Activity{
 					
 					TextView secondTeamStatYardsWidthLabel = (TextView) container.findViewById(R.id.secondTeamStatYardsWidth);
 					secondTeamStatYardsWidthLabel.setWidth(Integer.parseInt(statScore2.getText().toString()));
-					scoreboard.addView(container);
+					linearLayout.addView(container);
 					quickAction.dismiss();
 					
 			}
@@ -409,8 +332,8 @@ public class NewEnglandPatriotsActivity extends Activity{
 				public void onItemClick(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
 					
-					scoreboard=(LinearLayout)findViewById(R.id.score_board_layout);
-					scoreboard.removeAllViews();
+					linearLayout=(LinearLayout)findViewById(R.id.score_board_layout);
+					linearLayout.removeAllViews();
 					container=mInflater.inflate(R.layout.players_performance_match_scoreboard, null);
 					
 					
@@ -458,7 +381,7 @@ public class NewEnglandPatriotsActivity extends Activity{
 							container.findViewById(R.id.selectedPlayerPic);
 					selectedPlayerGameDetailsImage.setImageDrawable(playerImage.getDrawable());
 					
-					scoreboard.addView(container);
+					linearLayout.addView(container);
 					quickAction.dismiss();
 				}
 			});
@@ -655,6 +578,42 @@ public class NewEnglandPatriotsActivity extends Activity{
 				playerList = defensivePlayerList;
 			}
 			return playerList;
+		}
+
+		@Override
+		protected void setVideoList() {
+			// TODO Auto-generated method stub
+			linearLayout=(LinearLayout)findViewById(R.id.video_list_container);
+			//scoreboard.removeAllViews();
+			LayoutInflater inflater = getLayoutInflater();
+			linearLayout.addView(inflater.inflate(R.layout.video_list_item, null));
+		}
+
+		@Override
+		protected void setPopupMenu() {
+			// TODO Auto-generated method stub
+			linearLayout=(LinearLayout)findViewById(R.id.popup_tab_layout);
+			linearLayout.removeAllViews();
+			container=mInflater.inflate(R.layout.new_england_patriots_popup_menubar, null);
+			Button schedule = (Button)container.findViewById(R.id.activity_game_schedule);
+			schedule.setOnClickListener(listener);
+			Button drives = (Button)container.findViewById(R.id.activity_game_drive);
+			drives.setOnClickListener(listener);
+			Button stats = (Button)container.findViewById(R.id.activity_game_stats);
+			stats.setOnClickListener(listener);
+			Button players = (Button)container.findViewById(R.id.activity_game_players);
+			players.setOnClickListener(listener);
+			
+			linearLayout.addView(container);
+		}
+
+		@Override
+		protected void setBanner() {
+			// TODO Auto-generated method stub
+			linearLayout=(LinearLayout)findViewById(R.id.video_list_container);
+			//scoreboard.removeAllViews();
+			LayoutInflater inflater = getLayoutInflater();
+			linearLayout.addView(inflater.inflate(R.layout.video_list_item, null));
 		}
 		
 		

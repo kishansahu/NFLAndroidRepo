@@ -41,7 +41,7 @@ public abstract class BaseActivity extends Activity{
 	}
 	
 	protected void setContent(String title) {
-	context=this;
+	
 	mInflater=getLayoutInflater();
 	
 	Button back=(Button)findViewById(R.id.activity_game_back)	;
