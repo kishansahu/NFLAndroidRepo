@@ -7,7 +7,7 @@
     android:background="#585858"
     android:scrollbars="none" >
 
-    <LinearLayout
+    <!-- <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#A4A4A4" >
@@ -28,7 +28,7 @@
             android:text="Teams"
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
-
+ -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
