@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:weightSum="20" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="10"
+        android:layout_weight="2" >
+
+        <TextView
+            android:id="@+id/passing_player_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="2"
+            android:gravity="left"
+            android:text="jjjj"
+            android:textColor="@color/black"
+            android:textSize="@dimen/popup_listitem_text_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/passing_team_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:text="jjjj"
+            android:textColor="@color/black"
+            android:textSize="@dimen/popup_listitem_text_size" />
+
+        <TextView
+            android:id="@+id/passing_yards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+              android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:text="jjjj"
+            android:textColor="@color/black"
+            android:textSize="@dimen/popup_listitem_text_size" />
+
+    </LinearLayout>
+
+        <ImageView
+            android:id="@+id/disclosure_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="18"
+            android:src="@drawable/arrow_right" />
+  
+</LinearLayout>

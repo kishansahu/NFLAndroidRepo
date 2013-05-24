@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/header_selector"
+     android:layout_marginTop="2dp"
+    android:orientation="horizontal"
+    android:weightSum="4" >
+
+    <Button
+        android:id="@+id/activity_game_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/icon_schedule"
+        android:text="SCHEDULE"
+        android:textSize="10dp" />
+
+    <Button
+        android:id="@+id/activity_game_drive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/icon_drives"
+        android:text="DRIVES"
+        android:textSize="10dp" />
+
+    <Button
+        android:id="@+id/activity_game_stats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/icon_status"
+        android:text="STATS"
+        android:textSize="10dp" />
+
+    <Button
+        android:id="@+id/activity_game_players"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/icon_players"
+        android:text="PLAYERS"
+        android:textSize="10dp" />
+
+</LinearLayout>

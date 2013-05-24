@@ -34,13 +34,15 @@
     <LinearLayout
         android:id="@+id/lv1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
         android:orientation="vertical" >
 
         <Button
             android:id="@+id/videoclip_menu_new_england_patriots"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             android:background="@drawable/team_menu_button_background"
             android:drawableLeft="@drawable/patriots"
             android:gravity="left|center_vertical"
@@ -48,16 +50,11 @@
             android:textSize="15dp"
             android:textStyle="bold" />
 
-        <View
-            android:id="@+id/view1"
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@color/black" />
-
         <Button
             android:id="@+id/videoclip_menu_my_player"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             android:background="@drawable/team_menu_button_background"
             android:drawableLeft="@drawable/def_icon"
             android:gravity="left|center_vertical"
@@ -65,16 +62,11 @@
             android:textSize="15dp"
             android:textStyle="bold" />
 
-        <View
-            android:id="@+id/view1"
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@color/black" />
-
         <Button
             android:id="@+id/videoclip_menu_nfl_highlights"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             android:background="@drawable/team_menu_button_background"
             android:drawableLeft="@drawable/def_icon"
             android:gravity="left|center_vertical"
@@ -82,16 +74,11 @@
             android:textSize="15dp"
             android:textStyle="bold" />
 
-        <View
-            android:id="@+id/view1"
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@color/black" />
-
         <Button
             android:id="@+id/videoclip_menu_divison"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             android:background="@drawable/team_menu_button_background"
             android:drawableLeft="@drawable/def_icon"
             android:drawableRight="@drawable/arrow_right"
@@ -100,16 +87,11 @@
             android:textSize="15dp"
             android:textStyle="bold" />
 
-        <View
-            android:id="@+id/view1"
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@color/black" />
-
         <Button
             android:id="@+id/videoclip_menu_teams"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             android:background="@drawable/team_menu_button_background"
             android:drawableLeft="@drawable/def_icon"
             android:drawableRight="@drawable/arrow_right"
@@ -118,16 +100,12 @@
             android:textSize="15dp"
             android:textStyle="bold" />
 
-        <View
-            android:id="@+id/view1"
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@color/black" />
-
         <Button
             android:id="@+id/videoclip_menu_game_schedule"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="1dp"
             android:background="@drawable/team_menu_button_background"
             android:drawableLeft="@drawable/def_icon"
             android:drawableRight="@drawable/arrow_right"
@@ -136,11 +114,6 @@
             android:textSize="15dp"
             android:textStyle="bold" />
 
-        <View
-            android:id="@+id/view1"
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@color/black" />
     </LinearLayout>
 
 </LinearLayout>

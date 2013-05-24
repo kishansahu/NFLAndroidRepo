@@ -47,23 +47,8 @@
 		<item name="@android:windowEnterAnimation">@anim/pump_bottom</item>
 		<item name="@android:windowExitAnimation">@anim/disappear</item>
 	</style>
-	  <style name="SwitchText">
-    <item name="android:paddingLeft">8px</item>
-    <item name="android:paddingBottom">8px</item>
-    <item name="android:textColor">#FFeeFFee</item>
-    <item name="android:textSize">24dip</item>
-    <item name="android:shadowColor">#BB000000</item>
-    <item name="android:shadowDx">1</item>
-    <item name="android:shadowDy">1</item>
-    <item name="android:shadowRadius">1</item>
-  </style>
+	 
 
- <style name="AppTheme" parent="android:Theme.Light" />
-        <style name="StarRatingBar" parent="@android:style/Widget.RatingBar">
-        <item name="android:progressDrawable">@drawable/star_rating_bar_full</item>
-        <item name="android:minHeight">48dip</item>
-        <item name="android:maxHeight">48dip</item>
-    </style>
  
 
 	

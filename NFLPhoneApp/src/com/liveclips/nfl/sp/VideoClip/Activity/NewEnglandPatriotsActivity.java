@@ -1,4 +1,4 @@
-package com.liveclips.nfl.sp;
+package com.liveclips.nfl.sp.VideoClip.Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +15,19 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.liveclips.nfl.sp.AddPlayersActivity;
+import com.liveclips.nfl.sp.AlertOption;
+import com.liveclips.nfl.sp.R;
+import com.liveclips.nfl.sp.R.anim;
+import com.liveclips.nfl.sp.R.drawable;
+import com.liveclips.nfl.sp.R.id;
+import com.liveclips.nfl.sp.R.layout;
 import com.liveclips.nfl.sp.adapter.DriveListViewAdapter;
 import com.liveclips.nfl.sp.adapter.PlayerListViewAdapter;
 import com.liveclips.nfl.sp.adapter.ScheduleListViewAdapter;
@@ -31,23 +39,27 @@ import com.liveclips.nfl.sp.model.ScheduleItem;
 import com.liveclips.nfl.sp.model.StatsItem;
 import com.liveclips.nfl.sp.popup.QuickAction;
 
-public class GameActivity extends Activity{
+public class NewEnglandPatriotsActivity extends Activity{
 	
 	LinearLayout scoreboard;
-	private Button back,schedule,drives,stats,players,alertoption;
+	private Button back,
+	/*schedule,drives,stats,players,*/
+	alertoption;
 	private Context context;
 	private LayoutInflater mInflater; 
-	View container;
-	ListView listView;
-	Button  team1BtnPlayers;
-	Button team2BtnPlayers ;
-	 QuickAction quickAction;
+	private View container;
+	private ListView listView;
+	private Button  team1BtnPlayers;
+	private Button team2BtnPlayers ;
+	private QuickAction quickAction;
+	private Intent i;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 		setContent();
-		setScoreBoard();
+		setScoreBoard();	
+		setPopupMenu();
 	
 		for (int i = 0; i < 5; i++) {
 			setVideoList();
@@ -61,16 +73,25 @@ public class GameActivity extends Activity{
 		mInflater=getLayoutInflater();
 	back=(Button)findViewById(R.id.activity_game_back)	;
 	back.setOnClickListener(listener);
-	schedule=(Button)findViewById(R.id.activity_game_schedule);
-	schedule.setOnClickListener(listener);
-	drives=(Button)findViewById(R.id.activity_game_drive);
-	drives.setOnClickListener(listener);
-	stats=(Button)findViewById(R.id.activity_game_stats);
-	stats.setOnClickListener(listener);
-	players=(Button)findViewById(R.id.activity_game_players);
-	players.setOnClickListener(listener);
 	alertoption=(Button)findViewById(R.id.alert_control);
 	alertoption.setOnClickListener(listener);
+		
+	}
+	private void setPopupMenu() {
+		scoreboard=(LinearLayout)findViewById(R.id.popup_tab_layout);
+		scoreboard.removeAllViews();
+		container=mInflater.inflate(R.layout.new_england_patriots_popup_menubar, null);
+		Button schedule = (Button)container.findViewById(R.id.activity_game_schedule);
+		schedule.setOnClickListener(listener);
+		Button drives = (Button)container.findViewById(R.id.activity_game_drive);
+		drives.setOnClickListener(listener);
+		Button stats = (Button)container.findViewById(R.id.activity_game_stats);
+		stats.setOnClickListener(listener);
+		Button players = (Button)container.findViewById(R.id.activity_game_players);
+		players.setOnClickListener(listener);
+		
+		scoreboard.addView(container);
+		Log.d("count", ""+scoreboard.getChildCount());
 		
 	}
 	private void setScoreBoard() {
@@ -88,6 +109,12 @@ public class GameActivity extends Activity{
 		scoreboard.addView(inflater.inflate(R.layout.video_list_item, null));
 		Log.d("count", ""+scoreboard.getChildCount());
 		
+	}
+	private void addFevoratePlayer() {
+		scoreboard=(LinearLayout)findViewById(R.id.my_player_player_detail);
+		//scoreboard.removeAllViews();
+		
+		scoreboard.addView(mInflater.inflate(R.layout.common_players_detail, null));
 	}
 	 private OnClickListener listener=new OnClickListener() {
 			
@@ -370,7 +397,7 @@ public class GameActivity extends Activity{
 							R.layout.popover_game_player_list_item, getPlayers(
 									"team1", "offensive")));
 			adapter1.addSection("DEFENSE", new PlayerListViewAdapter(
-					GameActivity.this, R.layout.popover_game_player_list_item,
+					NewEnglandPatriotsActivity.this, R.layout.popover_game_player_list_item,
 					getPlayers("team1", "defensive")));
 
 			listView = (ListView) container.findViewById(R.id.game_player_list);
@@ -629,4 +656,6 @@ public class GameActivity extends Activity{
 			}
 			return playerList;
 		}
+		
+		
 }

@@ -32,16 +32,16 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/activity_game_tab_layout"
+        android:id="@+id/popup_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/activity_game_header_layout"
-        android:layout_marginTop="2dp"
-        android:background="@drawable/header_selector"
-        android:weightSum="4" >
+       
+        android:orientation="vertical" >
 
-        <Button
+    <!--     <Button
             android:id="@+id/activity_game_schedule"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/icon_players"
             android:text="PLAYERS"
-            android:textSize="10dp" />
+            android:textSize="10dp" /> -->
     </LinearLayout>
 
     <ScrollView
@@ -92,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/view1"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/activity_game_tab_layout"
+        android:layout_below="@+id/popup_tab_layout"
         android:background="@color/white"
         android:scrollbars="none" >
 
@@ -102,19 +102,30 @@
             android:orientation="vertical" >
 
             <LinearLayout
-                android:id="@+id/score_board_layout"
+                android:id="@+id/score_board_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
                 android:orientation="vertical" >
+
+                 <LinearLayout
+                     android:id="@+id/score_board_layout"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="1dp"
+                     android:orientation="vertical" >
+
             </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/field_yard_layout"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
+                android:layout_marginTop="1dp"
                 android:background="#FFF700" >
 
                 <ImageView
+                    android:id="@+id/imageView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -407,8 +418,10 @@
                         android:textSize="8dp" />
                 </LinearLayout>
             </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/play_rating_catagary_container"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="1dp"

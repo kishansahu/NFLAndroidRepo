@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/leadersScrollView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:weightSum="3" >
+
+        <ImageView
+            android:id="@+id/nfl_highlights_popover_view_passing_leaders_backButtonImage"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/back_button" />
+        
+        <TextView
+            android:id="@+id/passing_leaders_text"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Passing Leaders"
+            android:textColor="@color/black"
+            android:textSize="@dimen/popup_header_text_size"
+            android:textStyle="bold" >
+
+        </TextView>
+
+        <ImageView
+            android:id="@+id/doneButtonImage"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:src="@drawable/done_button_black" />
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="#C0C0C0"
+        android:orientation="horizontal"
+        android:weightSum="20" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:layout_weight="2" >
+
+            <TextView
+                android:id="@+id/statFirstTeam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="2"
+                android:gravity="left"
+                android:text="WEEK 5"
+                android:textColor="@color/black"
+                android:textSize="@dimen/popup_subheader_text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/statSecondTeam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:text="Team"
+                android:textColor="@color/black"
+                android:textSize="@dimen/popup_subheader_text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/statSecondTeam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:text="Yds"
+                android:textColor="@color/black"
+                android:textSize="@dimen/popup_subheader_text_size"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="18" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/passing_leaders_list"
+        android:layout_width="200dp"
+        android:layout_height="250dp" />
+
+</LinearLayout>

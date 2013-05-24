@@ -1,7 +1,11 @@
 
-package com.liveclips.nfl.sp;
+package com.liveclips.nfl.sp.Activity;
 
 
+
+import com.liveclips.nfl.sp.R;
+import com.liveclips.nfl.sp.R.id;
+import com.liveclips.nfl.sp.R.layout;
 
 import android.app.Activity;
 import android.content.Context;

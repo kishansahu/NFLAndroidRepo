@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/header_selector"
+     android:layout_marginTop="2dp"
+    android:orientation="horizontal"
+    android:weightSum="3" >
+
+    <Button
+        android:id="@+id/divisions_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/five"
+        android:text="WEEK"
+        android:textSize="10dp" />
+
+    <Button
+        android:id="@+id/divisions_leaders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/icon_drives"
+        android:text="LEADERS"
+        android:textSize="10dp" />
+
+    
+
+    <Button
+        android:id="@+id/divisions_standing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/icon_status"
+        android:text="STANDINGS"
+        android:textSize="10dp" />
+
+</LinearLayout>
