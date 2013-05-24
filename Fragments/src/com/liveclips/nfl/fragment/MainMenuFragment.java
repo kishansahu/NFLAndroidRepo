@@ -39,7 +39,7 @@ public class MainMenuFragment extends Fragment {
 			Bundle saveInstantState) {
 		Log.d("Fragment 1", "onCreateView");
 
-		return inflater.inflate(R.layout.main_menu_fragment, container, false);
+		return inflater.inflate(R.layout.main_fragment_view, container, false);
 	}
 
 	@Override
@@ -77,8 +77,9 @@ public class MainMenuFragment extends Fragment {
 				//}
 
 				ft.replace(R.id.menuFragment, mainMenuFragment);
-
+			
 				ft.commit();
+				
 				TextView menuTitle = (TextView) getActivity().findViewById(
 						R.id.menuTitle);
 				menuTitle.setText(selectedtextView.getText());

@@ -135,8 +135,8 @@ public class PlayCardView {
 		videoSizeButton.setBackgroundResource(R.drawable.full_screen_button);
 		videoSizeButton.setVisibility(View.INVISIBLE);
 		
-		/*new DownloadImageTask(playCardFrontSidePlaySectionImage)
-				.execute("http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg");*/
+		new DownloadImageTask(playCardFrontSidePlaySectionImage)
+				.execute("http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg");
 
 		//downloadImagesThreadPool.submit(playCardFrontSidePlaySectionImage, "http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg");
 		playCardFrontSidePlaySectionImage.setId(index * 90000);

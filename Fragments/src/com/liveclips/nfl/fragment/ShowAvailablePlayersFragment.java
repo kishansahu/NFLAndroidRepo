@@ -97,12 +97,13 @@ public class ShowAvailablePlayersFragment extends Fragment {
 					@Override
 					public void onClick(View v) {
 						FragmentManager fragmentManager = getFragmentManager();
-						FragmentTransaction ft = fragmentManager
+						fragmentManager.popBackStack();
+						/*FragmentTransaction ft = fragmentManager
 								.beginTransaction();
 						Fragment addPlayerSelectedCategoryMenuFragment = new AddPlayerSelectedCategoryMenuFragment();
 						ft.replace(R.id.menuFragment,
 								addPlayerSelectedCategoryMenuFragment);
-						ft.commit();
+						ft.commit();*/
 
 					}
 				});

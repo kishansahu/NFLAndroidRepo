@@ -36,7 +36,7 @@ public class TopicMenuFragment extends Fragment {
 			Bundle saveInstantState) {
 		Log.d("Fragment 1", "onCreateView");
 
-		return inflater.inflate(R.layout.main_menu_fragment, container, false);
+		return inflater.inflate(R.layout.main_fragment_view, container, false);
 
 	}
 
@@ -99,12 +99,12 @@ public class TopicMenuFragment extends Fragment {
 
 				break;
 			case 5:
-
+				
 				fragmentManager = getFragmentManager();
 				ft = fragmentManager.beginTransaction();
 				Fragment gameScheduleFragment = new GameScheduleFragment();
 				ft.replace(R.id.menuFragment, gameScheduleFragment);
-
+				
 				ft.commit();
 
 				break;

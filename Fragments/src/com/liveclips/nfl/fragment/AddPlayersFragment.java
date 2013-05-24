@@ -161,6 +161,7 @@ public class AddPlayersFragment extends Fragment {
 			FragmentTransaction ft = fragmentManager.beginTransaction();
 			Fragment addPlayerSelectedCategoryMenuFragment = new AddPlayerSelectedCategoryMenuFragment();
 			ft.replace(R.id.menuFragment, addPlayerSelectedCategoryMenuFragment);
+			ft.addToBackStack(null);
 			ft.commit();
 		}
 

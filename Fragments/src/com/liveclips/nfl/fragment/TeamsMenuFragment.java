@@ -1,5 +1,6 @@
 package com.liveclips.nfl.fragment;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.liveclips.nfl.R;
 import com.liveclips.nfl.activity.GameActivity;
@@ -38,9 +40,61 @@ public class TeamsMenuFragment extends Fragment {
 		
 	}
 
+	public void onActivityCreated(Bundle savedInstanceState) {
+		
+		super.onActivityCreated(savedInstanceState);
+		final View newfragMenuHeader = getActivity().getLayoutInflater().inflate(
+				R.layout.teams_fragment_actionbar_header_show_teams, null);
+		ActionBar actionBar = getActivity().getActionBar();
+		
+		final RelativeLayout actionBarLayout = (RelativeLayout) actionBar
+				.getCustomView();
+		
+		final RelativeLayout activityHeaderLayout = (RelativeLayout) getActivity()
+				.findViewById(R.id.activityMenuHeader);
+	
+		RelativeLayout commonfragMenuHeader = (RelativeLayout) actionBarLayout
+				.findViewById(R.id.commonFragmentMenuHeader);
+
+		if (commonfragMenuHeader != null) {
+			commonfragMenuHeader.setVisibility(View.INVISIBLE);
+		}
+
+		RelativeLayout fragMenuHeader = (RelativeLayout) actionBarLayout
+				.findViewById(R.id.fragmentMenuHeader);
+		actionBarLayout.removeView(fragMenuHeader);
+
+		actionBarLayout.addView(newfragMenuHeader, 300, 52);
+		
+		Button back=(Button)actionBarLayout.findViewById(R.id.backToMainScreen);
+		back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				FragmentManager fragmentManager = getActivity()
+						.getFragmentManager();
+				FragmentTransaction ft = fragmentManager.beginTransaction();
+				Fragment frg = fragmentManager
+						.findFragmentById(R.id.menuFragment);
+				ft.hide(frg);
+				ft.commit();
+				actionBarLayout.removeView(newfragMenuHeader);
+				View sliderView = activityHeaderLayout
+						.findViewById(R.id.sliderView);
+				if (sliderView.getVisibility() != View.VISIBLE)
+					sliderView.setVisibility(View.VISIBLE);
+				activityHeaderLayout.setVisibility(View.VISIBLE);
+				View commonfragMenuHeader = getActivity().getLayoutInflater()
+						.inflate(R.layout.common_fragment_menu_header, null);
+				actionBarLayout.addView(commonfragMenuHeader, 300, 52);
+				
+			}
+		});
+		
+	}
+	
 	private void setContent() {
-		Button back=(Button)currentView.findViewById(R.id.team_menu_fragement_back);
-		back.setOnClickListener(listner);
+		
 		        buffaloBills=(Button)currentView.findViewById(R.id.team_menu_fragement_buffalo_bills);
 		        buffaloBills.setOnClickListener(listner);
 		        miamiDolphins=(Button)currentView.findViewById(R.id.team_menu_fragement_miami_dolphins);
@@ -60,13 +114,13 @@ public class TeamsMenuFragment extends Fragment {
 				pittsburghSteelers.setOnClickListener(listner);
 				
 				houstonTexans=(Button)currentView.findViewById(R.id.team_menu_fragement_houston_texans);
-				back.setOnClickListener(listner);
+				
 				indianapolisColts=(Button)currentView.findViewById(R.id.team_menu_fragement_indianapolis_colts);
-				back.setOnClickListener(listner);
+			
 				jacksonvilleJaguars=(Button)currentView.findViewById(R.id.team_menu_fragement_jacksonville_jaguars);
-				back.setOnClickListener(listner);
+				
 				tennesseeTitans=(Button)currentView.findViewById(R.id.team_menu_fragement_tennessee_titans);
-				back.setOnClickListener(listner);
+				
 				
 			    denverBroncos=(Button)currentView.findViewById(R.id.team_menu_fragement_denver_broncos);
 			    denverBroncos.setOnClickListener(listner);
@@ -84,12 +138,12 @@ public class TeamsMenuFragment extends Fragment {
 			FragmentManager fragmentManager = getFragmentManager();
 			FragmentTransaction ft = fragmentManager.beginTransaction();
 			switch (v.getId()) {
-			case R.id.team_menu_fragement_back:
+			/*case R.id.team_menu_fragement_back:
 				Fragment teamMenuFragment = new TopicMenuFragment();
-				ft.replace(R.id.menuFragment, teamMenuFragment);
-
+				Fragment fragment = fragmentManager.findFragmentById(R.id.menuFragment);
+				ft.hide(fragment);
 				ft.commit();
-				break;
+				break;*/
 				
            case R.id.team_menu_fragement_buffalo_bills:
         	   Intent intent1=new Intent(getActivity(), GameActivity.class);
