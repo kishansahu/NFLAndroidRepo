@@ -10,7 +10,7 @@
         android:layout_alignParentLeft="true"
         android:contentDescription="Team Logo"
         android:layout_centerVertical="true"
-        android:src="@drawable/bengal" />
+         />
 
     <TextView
         android:id="@+id/addplayerTeamNameInFragmentList"
@@ -18,7 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/addplayerTeamLogoInFragmentList"
-        android:text="dfdgdg dfgd"  
         android:textStyle="bold" />
 
 </RelativeLayout>

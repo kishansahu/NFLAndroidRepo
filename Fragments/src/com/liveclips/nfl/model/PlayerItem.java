@@ -2,6 +2,7 @@ package com.liveclips.nfl.model;
 import java.util.Comparator;
 
 import android.R.integer;
+import android.graphics.Bitmap;
 
 public class PlayerItem implements Comparable<PlayerItem>{
 	public String playerdata1;
@@ -10,7 +11,7 @@ public class PlayerItem implements Comparable<PlayerItem>{
 	public String playerdata4;
 	public String playerName;
 	public String playerDetails;
-	public int playerImage;
+	public String playerImage;
 	public String teamName;
 	public int teamLogo;
 	public String playerNumber;
@@ -67,13 +68,7 @@ public class PlayerItem implements Comparable<PlayerItem>{
 		this.playerDetails = playerDetails;
 	}
 
-	public int getPlayerImage() {
-		return playerImage;
-	}
-
-	public void setPlayerImage(int playerImage) {
-		this.playerImage = playerImage;
-	}
+	
 
 	public String getPlayerdata1() {
 		return playerdata1;
@@ -135,7 +130,7 @@ public class PlayerItem implements Comparable<PlayerItem>{
 
 	}
 	
-	public PlayerItem(String playerName, String playerDetails, int playerImage,
+	public PlayerItem(String playerName, String playerDetails, String playerImage,
 			String playerdata1, String playerdata2, String playerdata3,
 			String playerdata4) {
 		super();
@@ -148,6 +143,14 @@ public class PlayerItem implements Comparable<PlayerItem>{
 		this.playerdata4 = playerdata4;
 	}
 	
+	public String getPlayerImage() {
+		return playerImage;
+	}
+
+	public void setPlayerImage(String playerImage) {
+		this.playerImage = playerImage;
+	}
+
 	public PlayerItem(int playerFavourite,String playerName,
 			String playerNumber, String playerPosition, boolean isPlayerFavouriteActive) {
 		super();

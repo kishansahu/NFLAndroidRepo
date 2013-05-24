@@ -35,7 +35,7 @@ public class AppContentActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.main_activity);
 		fragmentManager = getFragmentManager();
 		ft = fragmentManager.beginTransaction();
 		mainMenuFragment = new MainMenuFragment();
@@ -53,7 +53,7 @@ public class AppContentActivity extends Activity {
 		View mActionBarView = getLayoutInflater().inflate(
 				R.layout.main_actionbar, null);
 		actionBar.setCustomView(mActionBarView);
-		Drawable d = getResources().getDrawable(R.drawable.orange_background);
+		Drawable d = getResources().getDrawable(R.drawable.orange_gradient_background);
 		actionBar.setBackgroundDrawable(d);
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -84,7 +84,7 @@ public class AppContentActivity extends Activity {
 			 */
 			View view = findViewById(R.id.menuFragment);
 			view.setVisibility(View.INVISIBLE);
-			View fragmentMenuHeader = findViewById(R.id.fragmentMenuHeaderForAppStart);
+			View fragmentMenuHeader = findViewById(R.id.commonFragmentMenuHeader);
 			fragmentMenuHeader.setVisibility(View.GONE);
 			View sliderView = findViewById(R.id.sliderView);
 			sliderView.setVisibility(View.VISIBLE);
@@ -99,7 +99,7 @@ public class AppContentActivity extends Activity {
 		public void onClick(View v) {
 			Log.d("closeclcik", "closeclickonamainmenu");
 
-			View fragmentMenuHeader = findViewById(R.id.fragmentMenuHeaderForAppStart);
+			View fragmentMenuHeader = findViewById(R.id.commonFragmentMenuHeader);
 			if (fragmentMenuHeader.getVisibility() == View.VISIBLE) {
 				fragmentMenuHeader.setVisibility(View.GONE);
 				View sliderView = findViewById(R.id.sliderView);

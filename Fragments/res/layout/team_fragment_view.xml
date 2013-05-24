@@ -3,21 +3,20 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="300dp"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#585858"
+    android:orientation="vertical"
     android:scrollbars="none" >
 
-    <LinearLayout
+    <!-- <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#A4A4A4" >
 
         <Button
             android:id="@+id/team_menu_fragement_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            
-            android:text="Back" />
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:background="@drawable/back_button_black" />
 
         <TextView
             android:id="@+id/textView1"
@@ -28,12 +27,11 @@
             android:text="Teams"
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
-
+ -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
-       >
+        android:scrollbars="none" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,9 +42,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-              android:background="#A4A4A4"
-               android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="AFC EAST" />
+                android:background="#A4A4A4"
+                android:text="AFC EAST"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Button
                 android:id="@+id/team_menu_fragement_buffalo_bills"
@@ -54,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/team_menu_button_background"
-                android:drawableLeft="@drawable/bills"
+                android:drawableLeft="@drawable/buf"
                 android:gravity="left|center_vertical"
                 android:text="Buffalo Bills" />
 
@@ -64,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/team_menu_button_background"
-                android:drawableLeft="@drawable/miami"
+                android:drawableLeft="@drawable/mia"
                 android:gravity="left|center_vertical"
                 android:text="Miami Dolphins" />
 
@@ -74,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/team_menu_button_background"
-                android:drawableLeft="@drawable/patriots"
+                android:drawableLeft="@drawable/ne"
                 android:gravity="left|center_vertical"
                 android:text="New England Partriots" />
 
@@ -84,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/team_menu_button_background"
-                android:drawableLeft="@drawable/jets"
+                android:drawableLeft="@drawable/nyj"
                 android:gravity="left|center_vertical"
                 android:text="New York Jets" />
 
@@ -92,11 +90,11 @@
                 android:id="@+id/TextView1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                 android:textAppearance="?android:attr/textAppearanceMedium" 
                 android:layout_marginTop="1dp"
-                 android:gravity="left|center_vertical"
                 android:background="#A4A4A4"
-                android:text="AFC NORTH" />
+                android:gravity="left|center_vertical"
+                android:text="AFC NORTH"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Button
                 android:id="@+id/team_menu_fragement_batimore_ravens"
@@ -104,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/team_menu_button_background"
-                android:drawableLeft="@drawable/ravens"
+                android:drawableLeft="@drawable/blt"
                 android:gravity="left|center_vertical"
                 android:text="Batimore Ravens" />
 
@@ -114,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/team_menu_button_background"
-                android:drawableLeft="@drawable/cincinnatibengals"
+                android:drawableLeft="@drawable/cin"
                 android:gravity="left|center_vertical"
                 android:text="Cincinnati Bengals" />
 
@@ -124,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/team_menu_button_background"
-                android:drawableLeft="@drawable/clevelendbrowns"
+                android:drawableLeft="@drawable/cle"
                 android:gravity="left|center_vertical"
                 android:text="Clevelend Browns" />
 
@@ -134,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/team_menu_button_background"
-                android:drawableLeft="@drawable/pittsburghsteelers"
+                android:drawableLeft="@drawable/pit"
                 android:gravity="left|center_vertical"
                 android:text="Pittsburgh Steelers" />
 
@@ -143,8 +141,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-                   android:background="#A4A4A4"
-             
+                android:background="#A4A4A4"
                 android:text="AFC SOUTH"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -154,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/team_menu_button_background"
-                android:drawableLeft="@drawable/rams"
+                android:drawableLeft="@drawable/sl"
                 android:gravity="left|center_vertical"
                 android:text="Houston Texans" />
 
@@ -164,7 +161,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/team_menu_button_background"
-                android:drawableLeft="@drawable/indianapoliscolts"
+                android:drawableLeft="@drawable/ind"
                 android:gravity="left|center_vertical"
                 android:text="Indianapolis Colts" />
 
@@ -174,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/team_menu_button_background"
-                android:drawableLeft="@drawable/jacksonvillejaguars"
+                android:drawableLeft="@drawable/jac"
                 android:gravity="left|center_vertical"
                 android:text="Jacksonville Jaguars" />
 
@@ -184,7 +181,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/team_menu_button_background"
-                android:drawableLeft="@drawable/titans"
+                android:drawableLeft="@drawable/ten"
                 android:gravity="left|center_vertical"
                 android:text="Tennessee Titans" />
 
@@ -193,8 +190,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-                   android:background="#A4A4A4"
-              
+                android:background="#A4A4A4"
                 android:text="AFC WEST"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -204,7 +200,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/team_menu_button_background"
-                android:drawableLeft="@drawable/denverbroncos"
+                android:drawableLeft="@drawable/den"
                 android:gravity="left|center_vertical"
                 android:text="Denver Broncos" />
 
@@ -214,7 +210,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/team_menu_button_background"
-                android:drawableLeft="@drawable/kansascitychicfs"
+                android:drawableLeft="@drawable/kc"
                 android:gravity="left|center_vertical"
                 android:text="Kansas City Chicfs" />
 
@@ -224,7 +220,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/team_menu_button_background"
-                android:drawableLeft="@drawable/kansascitychicfs"
+                android:drawableLeft="@drawable/kc"
                 android:gravity="left|center_vertical"
                 android:text="Others 1" />
 
@@ -234,12 +230,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/team_menu_button_background"
-                android:drawableLeft="@drawable/kansascitychicfs"
+                android:drawableLeft="@drawable/kc"
                 android:gravity="left|center_vertical"
                 android:text="Others 2" />
-
         </LinearLayout>
-
     </ScrollView>
 
 </LinearLayout>

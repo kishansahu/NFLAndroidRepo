@@ -23,7 +23,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="50dp"
-                android:src="@drawable/bills" />
+                android:src="@drawable/buf" />
 
             <TextView
                 android:id="@+id/conference_name"
@@ -42,7 +42,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="450dp"
                 android:layout_marginTop="28dp"
-                android:src="@drawable/bills" />
+                android:src="@drawable/buf" />
 
             <TextView
                 android:id="@+id/team_1_name"
@@ -61,7 +61,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="700dp"
                 android:layout_marginTop="28dp"
-                android:src="@drawable/cardinals" />
+                android:src="@drawable/arz" />
 
             <TextView
                 android:id="@+id/team_2_name"
@@ -80,7 +80,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="450dp"
                 android:layout_marginTop="68dp"
-                android:src="@drawable/ravens" />
+                android:src="@drawable/blt" />
 
             <TextView
                 android:id="@+id/team_3_name"
@@ -98,7 +98,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="700dp"
                 android:layout_marginTop="68dp"
-                android:src="@drawable/titans" />
+                android:src="@drawable/ten" />
 
             <TextView
                 android:id="@+id/team_4_name"

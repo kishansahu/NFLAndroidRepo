@@ -3,7 +3,10 @@ package com.liveclips.nfl.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.ActionBar;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.liveclips.nfl.R;
@@ -28,11 +33,11 @@ public class GameScheduleFragment extends Fragment {
 
 		String firstTeamNames[] = { "SD", "SEA", "ALT", "GB", "IND" };
 		String secondTeamNames[] = { "NYG", "JAC", "HOU", "NE", "TEN" };
-		int firstTeamImageNames[] = { R.drawable.bills, R.drawable.seahawks,
-				R.drawable.ravens, R.drawable.packers, R.drawable.rams };
-		int secondTeamImageNames[] = { R.drawable.titans,
-				R.drawable.gore_team_logo, R.drawable.cardinals,
-				R.drawable.patriots, R.drawable.jets };
+		int firstTeamImageNames[] = { R.drawable.buf, R.drawable.sea,
+				R.drawable.blt, R.drawable.gb, R.drawable.sl };
+		int secondTeamImageNames[] = { R.drawable.ten,
+				R.drawable.sf, R.drawable.arz,
+				R.drawable.ne, R.drawable.nyj };
 		int firstTeamScores[] = { 3, 34, 24, 21, 14 };
 		int secondTeamsScores[] = { 28, 3, 24, 14, 14 };
 		boolean isGameInFuture[] = { true, true, true, true, true };
@@ -62,16 +67,19 @@ public class GameScheduleFragment extends Fragment {
 		@Override
 		public void onItemClick(AdapterView<?> adapterView, View view,
 				int lineNo, long arg3) {
-			TextView firstTeamNameTextView = (TextView) view
-					.findViewById(R.id.first_team_shortname);
-			TextView secondTeamNameTextView = (TextView) view
-					.findViewById(R.id.second_team_shortname);
-			String firstTeamName = (String) firstTeamNameTextView.getText();
-			String secondTeamName = (String) secondTeamNameTextView.getText();
-			Intent intent = new Intent(getActivity(), GameActivity.class);
-			intent.putExtra("firstTeamName", firstTeamName);
-			intent.putExtra("secondTeamName", secondTeamName);
-			startActivity(intent);
+//			TextView firstTeamNameTextView = (TextView) view
+//					.findViewById(R.id.first_team_shortname);
+//			TextView secondTeamNameTextView = (TextView) view
+//					.findViewById(R.id.second_team_shortname);
+//			String firstTeamName = (String) firstTeamNameTextView.getText();
+//			String secondTeamName = (String) secondTeamNameTextView.getText();
+//			Intent intent = new Intent(getActivity(), GameActivity.class);
+//			intent.putExtra("firstTeamName", firstTeamName);
+//			intent.putExtra("secondTeamName", secondTeamName);
+//			startActivity(intent);
+			
+			FragmentManager fm = getActivity().getFragmentManager();
+			fm.popBackStack();
 		}
 	};
 
@@ -93,4 +101,59 @@ public class GameScheduleFragment extends Fragment {
 		return gameScheduleView;
 	}
 
+	
+public void onActivityCreated(Bundle savedInstanceState) {
+		
+		super.onActivityCreated(savedInstanceState);
+		final View newfragMenuHeader = getActivity().getLayoutInflater().inflate(
+				R.layout.game_schedule_fragment_actionbar_header_schedule_by_weeks, null);
+		ActionBar actionBar = getActivity().getActionBar();
+		
+		final RelativeLayout actionBarLayout = (RelativeLayout) actionBar
+				.getCustomView();
+		
+		final RelativeLayout activityHeaderLayout = (RelativeLayout) getActivity()
+				.findViewById(R.id.activityMenuHeader);
+	
+		RelativeLayout commonfragMenuHeader = (RelativeLayout) actionBarLayout
+				.findViewById(R.id.commonFragmentMenuHeader);
+
+		if (commonfragMenuHeader != null) {
+			commonfragMenuHeader.setVisibility(View.INVISIBLE);
+		}
+
+		RelativeLayout fragMenuHeader = (RelativeLayout) actionBarLayout
+				.findViewById(R.id.fragmentMenuHeader);
+		actionBarLayout.removeView(fragMenuHeader);
+
+		actionBarLayout.addView(newfragMenuHeader, 300, 52);
+		
+		Button back=(Button)actionBarLayout.findViewById(R.id.backToMainScreen);
+		back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				FragmentManager fragmentManager = getActivity()
+						.getFragmentManager();
+				FragmentTransaction ft = fragmentManager.beginTransaction();
+				Fragment frg = fragmentManager
+						.findFragmentById(R.id.menuFragment);
+				ft.hide(frg);
+				ft.commit();
+				actionBarLayout.removeView(newfragMenuHeader);
+				View sliderView = activityHeaderLayout
+						.findViewById(R.id.sliderView);
+				if (sliderView.getVisibility() != View.VISIBLE)
+					sliderView.setVisibility(View.VISIBLE);
+				activityHeaderLayout.setVisibility(View.VISIBLE);
+				View commonfragMenuHeader = getActivity().getLayoutInflater()
+						.inflate(R.layout.common_fragment_menu_header, null);
+				actionBarLayout.addView(commonfragMenuHeader, 300, 52);
+				
+			}
+		});
+		
+	}
+	
+	
 }

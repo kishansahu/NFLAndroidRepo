@@ -444,28 +444,28 @@ PopoverViewDelegate {
 			teamItem1.setTeamName("New England");
 			teamItem1.setLosses(0);
 			teamItem1.setWins(5);
-			teamItem1.setTeamLogo(R.drawable.bills);
+			teamItem1.setTeamLogo(R.drawable.buf);
 			conferenceTeamItems.add(teamItem1);
 			
 			TeamItem teamItem2 = new TeamItem();
 			teamItem2.setTeamName("Ny Jets");
 			teamItem2.setLosses(1);
 			teamItem2.setWins(4);
-			teamItem2.setTeamLogo(R.drawable.bills);
+			teamItem2.setTeamLogo(R.drawable.buf);
 			conferenceTeamItems.add(teamItem2);
 			
 			TeamItem teamItem3 = new TeamItem();
 			teamItem3.setTeamName("Miami");
 			teamItem3.setLosses(2);
 			teamItem3.setWins(3);
-			teamItem3.setTeamLogo(R.drawable.bills);
+			teamItem3.setTeamLogo(R.drawable.buf);
 			conferenceTeamItems.add(teamItem3);
 			
 			TeamItem teamItem4 = new TeamItem();
 			teamItem4.setTeamName("Buffalo");
 			teamItem4.setLosses(1);
 			teamItem4.setWins(0);
-			teamItem4.setTeamLogo(R.drawable.bills);
+			teamItem4.setTeamLogo(R.drawable.buf);
 			conferenceTeamItems.add(teamItem4);
 			
 			List<SectionHeaderItem> popover_nfl_standing_header = new ArrayList<SectionHeaderItem>();
