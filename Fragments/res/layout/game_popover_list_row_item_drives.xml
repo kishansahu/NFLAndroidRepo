@@ -7,39 +7,38 @@
         android:id="@+id/tableRow1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:gravity="center_vertical" >
 
         <ImageView
             android:id="@+id/team_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:paddingLeft="8dp" />
+            android:layout_width="70dp"
+            android:layout_height="@dimen/list_bar_image_icon_default_height"
+            android:paddingLeft="5dp" />
 
         <TextView
             android:id="@+id/team_shortname"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:paddingLeft="8dp" />
-  
+            android:paddingLeft="10dp" />
+
         <TextView
             android:id="@+id/drive_yard_covered"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:paddingLeft="8dp" />
+            android:paddingLeft="2dp" />
+
         <TextView
             android:id="@+id/drive_time"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:paddingLeft="8dp" />
+            android:paddingLeft="2dp" />
 
         <TextView
             android:id="@+id/drive_event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:paddingLeft="8dp" />
+            android:layout_marginLeft="2dp"/>
     </TableRow>
 
 </TableLayout>

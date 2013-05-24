@@ -152,15 +152,15 @@ public class AddPlayerSelectedCategoryMenuFragment extends Fragment {
 			String playerNamesForTeam1[] = { "Buffalo Bills", "Miami Dolphins",
 					"New England Patriots", "New York Jets", };
 
-			int playerImagesForTeam1[] = { R.drawable.bills,
-					R.drawable.miami_dolphins, R.drawable.patriots,
-					R.drawable.jets };
+			int playerImagesForTeam1[] = { R.drawable.buf,
+					R.drawable.mia, R.drawable.ne,
+					R.drawable.nyj };
 
 			PlayerItem item;
 
 			for (int i = 0; i < playerNamesForTeam1.length; i++) {
 				item = new PlayerItem();
-				item.setPlayerImage(playerImagesForTeam1[i]);
+				//item.setPlayerImage(playerImagesForTeam1[i]);
 				item.setPlayerName(playerNamesForTeam1[i]);
 				playerList.add(item);
 			}
@@ -171,14 +171,14 @@ public class AddPlayerSelectedCategoryMenuFragment extends Fragment {
 					"Cincinnati Bengals", "Cleveland Browns",
 					"Pittsburgh Steelers" };
 
-			int playerImagesForTeam1[] = { R.drawable.ravens,
-					R.drawable.bengal, R.drawable.browns, R.drawable.pittsburgh };
+			int playerImagesForTeam1[] = { R.drawable.blt,
+					R.drawable.cin, R.drawable.cle, R.drawable.pit };
 
 			PlayerItem item;
 
 			for (int i = 0; i < playerNamesForTeam1.length; i++) {
 				item = new PlayerItem();
-				item.setPlayerImage(playerImagesForTeam1[i]);
+			//	item.setPlayerImage(playerImagesForTeam1[i]);
 				item.setPlayerName(playerNamesForTeam1[i]);
 				playerList.add(item);
 			}

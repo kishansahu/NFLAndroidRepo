@@ -18,7 +18,7 @@
             android:layout_height="30dp" 
            	android:layout_gravity="center"
            	android:background="#000000"
-            android:src="@drawable/back_button"/>
+            android:src="@drawable/back_button_black"/>
         
         <TextView
             android:id="@+id/passing_leaders_text"
@@ -31,8 +31,6 @@
             android:textStyle="bold"
              android:textAlignment="center" >
         </TextView>
-
-        
 
         <ImageView
             android:id="@+id/doneButtonImage"

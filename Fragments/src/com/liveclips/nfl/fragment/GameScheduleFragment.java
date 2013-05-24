@@ -33,11 +33,11 @@ public class GameScheduleFragment extends Fragment {
 
 		String firstTeamNames[] = { "SD", "SEA", "ALT", "GB", "IND" };
 		String secondTeamNames[] = { "NYG", "JAC", "HOU", "NE", "TEN" };
-		int firstTeamImageNames[] = { R.drawable.bills, R.drawable.seahawks,
-				R.drawable.ravens, R.drawable.packers, R.drawable.rams };
-		int secondTeamImageNames[] = { R.drawable.titans,
-				R.drawable.gore_team_logo, R.drawable.cardinals,
-				R.drawable.patriots, R.drawable.jets };
+		int firstTeamImageNames[] = { R.drawable.buf, R.drawable.sea,
+				R.drawable.blt, R.drawable.gb, R.drawable.sl };
+		int secondTeamImageNames[] = { R.drawable.ten,
+				R.drawable.sf, R.drawable.arz,
+				R.drawable.ne, R.drawable.nyj };
 		int firstTeamScores[] = { 3, 34, 24, 21, 14 };
 		int secondTeamsScores[] = { 28, 3, 24, 14, 14 };
 		boolean isGameInFuture[] = { true, true, true, true, true };
