@@ -3,17 +3,10 @@
  */
 package com.liveclips.nfl.utils;
 
-import java.io.InputStream;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -26,7 +19,6 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.RelativeLayout;
@@ -34,6 +26,8 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.liveclips.nfl.R;
+import com.liveclips.nfl.imageutils.ImageLoader;
+import com.liveclips.nfl.widget.MyMediaController;
 
 /**
  * @author abhijitsrivastava
@@ -66,7 +60,8 @@ public class PlayCardView {
 		this.playCardBottomDetail = playCardBottomDetail;
 	}
 
-	public RelativeLayout getPlayCard(DownloadImagesThreadPool downloadImagesThreadPool ) {
+	public RelativeLayout getPlayCard(
+			DownloadImagesThreadPool downloadImagesThreadPool) {
 
 		// Creating a new RelativeLayout
 		final RelativeLayout playCardLayout = new RelativeLayout(context);
@@ -76,29 +71,32 @@ public class PlayCardView {
 				500, 400);
 		playCardLayoutParameters.addRule(RelativeLayout.CENTER_IN_PARENT);
 		playCardLayoutParameters.setMargins(20, 10, 20, 10);
-	
+
 		playCardLayout.setId(index * 2);
 		playCardLayout.setLayoutParams(playCardLayoutParameters);
 
-		/*if (index % 2 == 0) {*/
-			playCardLayout.setBackgroundResource(R.drawable.gray_background);
-	/*	} else {
-			playCardLayout
-					.setBackgroundColor(resources.getColor(R.color.green));
-		}*/
+		/* if (index % 2 == 0) { */
+		playCardLayout.setBackgroundResource(R.drawable.gray_background);
+		/*
+		 * } else { playCardLayout
+		 * .setBackgroundColor(resources.getColor(R.color.green)); }
+		 */
 
 		playCardLayout.setPadding(15, 15, 15, 15);
 
 		/*
-		final LayoutInflater inflator = (LayoutInflater) activity
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		
-		RelativeLayout parentOfPlayCard = (RelativeLayout) inflator.inflate(R.layout.play_card, null);
-		final ViewAnimator playCardViewAnimator = (ViewAnimator) parentOfPlayCard.findViewById(R.id.playCardViewFlipperId);
-		
-		final RelativeLayout playCardLayout = (RelativeLayout) playCardViewAnimator.findViewById(R.id.playCardLayoutId);
-		playCardLayout.setPadding(15, 15, 15, 15);
-		*/
+		 * final LayoutInflater inflator = (LayoutInflater) activity
+		 * .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		 * 
+		 * RelativeLayout parentOfPlayCard = (RelativeLayout)
+		 * inflator.inflate(R.layout.play_card, null); final ViewAnimator
+		 * playCardViewAnimator = (ViewAnimator)
+		 * parentOfPlayCard.findViewById(R.id.playCardViewFlipperId);
+		 * 
+		 * final RelativeLayout playCardLayout = (RelativeLayout)
+		 * playCardViewAnimator.findViewById(R.id.playCardLayoutId);
+		 * playCardLayout.setPadding(15, 15, 15, 15);
+		 */
 		// play card front side detail ********************
 		final LayoutInflater inflator = (LayoutInflater) activity
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -130,22 +128,33 @@ public class PlayCardView {
 
 		ImageView playCardFrontSidePlaySectionImage = (ImageView) playCardFrontSidePlaySectionImageWithPlayButtonLayout
 				.findViewById(R.id.playCardFrontSidePlaySectionImageWithPlayButtonImageViewId);
-		
-		final ImageButton videoSizeButton = (ImageButton) playCardFrontSide.findViewById(R.id.playCardFrontSideBottomLayoutImageButtonId);
+
+		final ImageButton videoSizeButton = (ImageButton) playCardFrontSide
+				.findViewById(R.id.playCardFrontSideBottomLayoutImageButtonId);
 		videoSizeButton.setBackgroundResource(R.drawable.full_screen_button);
 		videoSizeButton.setVisibility(View.INVISIBLE);
-		
-		new DownloadImageTask(playCardFrontSidePlaySectionImage)
-				.execute("http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg");
 
-		//downloadImagesThreadPool.submit(playCardFrontSidePlaySectionImage, "http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg");
+		/*
+		 * new DownloadImageTask(playCardFrontSidePlaySectionImage) .execute(
+		 * "http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg"
+		 * );
+		 */
+
+		// downloadImagesThreadPool.submit(playCardFrontSidePlaySectionImage,
+		// "http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg");
+
+		new ImageLoader(activity)
+				.DisplayImage(
+						"http://si.wsj.net/public/resources/images/NA-BU548_NFL_G_20130111183225.jpg",
+						playCardFrontSidePlaySectionImage);
+
 		playCardFrontSidePlaySectionImage.setId(index * 90000);
 		final RelativeLayout playCardFrontSidePlaySectionLayout = (RelativeLayout) playCardFrontSide
 				.findViewById(R.id.playCardFrontSidePlaySectionlayoutId);
 		playCardFrontSidePlaySectionLayout
 				.addView(playCardFrontSidePlaySectionImageWithPlayButtonLayout);
 
-		//playCardLayout.addView(playCardFrontSide);
+		// playCardLayout.addView(playCardFrontSide);
 		playCardLayout.addView(playCardFrontSide);
 
 		// play card back side details ****************
@@ -193,32 +202,37 @@ public class PlayCardView {
 
 		LinearLayout playCardBackSidePlayerCardLayout = (LinearLayout) playCardBackSide
 				.findViewById(R.id.playCardBackSidePlayerCardsLayoutHorizontalScrollViewLinearLayoutId);
-		
-		final HorizontalScrollView playCardsHorizontalScrollView = (HorizontalScrollView) activity.findViewById(R.id.horizontalScrollViewForVideosId);
-		final HorizontalScrollView playerCardsInsidePlayCardHorizontalScrollView = (HorizontalScrollView) playCardBackSide.findViewById(R.id.playCardBackSidePlayerCardsLayoutHorizontalScrollViewId);
-		
-		RatingBar playCardFrontSideTopLayoutRatingBar = (RatingBar) playCardFrontSide.findViewById(R.id.playCardFrontSideTopLayoutRatingBarId);
-		
-		
-		playCardsHorizontalScrollView.setOnTouchListener(new View.OnTouchListener() {
 
-            public boolean onTouch(View v, MotionEvent event) {
-                Log.v("playCardView","PARENT TOUCH");
-                playerCardsInsidePlayCardHorizontalScrollView.requestDisallowInterceptTouchEvent(false);
-                return false;
-            }
-        });
-		playerCardsInsidePlayCardHorizontalScrollView.setOnTouchListener(new View.OnTouchListener() {
+		final HorizontalScrollView playCardsHorizontalScrollView = (HorizontalScrollView) activity
+				.findViewById(R.id.horizontalScrollViewForVideosId);
+		final HorizontalScrollView playerCardsInsidePlayCardHorizontalScrollView = (HorizontalScrollView) playCardBackSide
+				.findViewById(R.id.playCardBackSidePlayerCardsLayoutHorizontalScrollViewId);
 
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                 Log.v("playCardView","CHILD TOUCH");
-                 //  Disallow the touch request for parent scroll on touch of child view
-                 playCardsHorizontalScrollView.requestDisallowInterceptTouchEvent(true);
-                return false;
-            }
-        });
-		
+		RatingBar playCardFrontSideTopLayoutRatingBar = (RatingBar) playCardFrontSide
+				.findViewById(R.id.playCardFrontSideTopLayoutRatingBarId);
+
+		playCardsHorizontalScrollView
+				.setOnTouchListener(new View.OnTouchListener() {
+
+					public boolean onTouch(View v, MotionEvent event) {
+						Log.v("playCardView", "PARENT TOUCH");
+						playerCardsInsidePlayCardHorizontalScrollView
+								.requestDisallowInterceptTouchEvent(false);
+						return false;
+					}
+				});
+		playerCardsInsidePlayCardHorizontalScrollView
+				.setOnTouchListener(new View.OnTouchListener() {
+
+					public boolean onTouch(View v, MotionEvent event) {
+						Log.v("playCardView", "CHILD TOUCH");
+						// Disallow the touch request for parent scroll on touch
+						// of child view
+						playCardsHorizontalScrollView
+								.requestDisallowInterceptTouchEvent(true);
+						return false;
+					}
+				});
 
 		int playerPic[] = { R.drawable.tom_brady, R.drawable.stevan_ridley,
 				R.drawable.wes_welker, R.drawable.rob_gronkowski,
@@ -256,21 +270,20 @@ public class PlayCardView {
 			playCardBackSidePlayerCardLayout
 					.addView(playCardBackSidePlayerCards);
 		}
-	
-		
 
 		playCardFrontSideTopLayoutInfoButton
 				.setOnTouchListener(new OnTouchListener() {
 
 					@Override
 					public boolean onTouch(View v, MotionEvent event) {
-						Animation animation = AnimationUtils.loadAnimation(context, R.anim.alpha);
+						Animation animation = AnimationUtils.loadAnimation(
+								context, R.anim.alpha);
 						playCardLayout.removeAllViews();
 						playCardLayout.addView(playCardBackSide);
 						playCardLayout.startAnimation(animation);
-						
 
-						//AnimationFactory.flipTransition(playCardViewAnimator, FlipDirection.LEFT_RIGHT,playCardLayout,playCardBackSide,playCardFrontSide);
+						// AnimationFactory.flipTransition(playCardViewAnimator,
+						// FlipDirection.LEFT_RIGHT,playCardLayout,playCardBackSide,playCardFrontSide);
 						return false;
 					}
 				});
@@ -284,190 +297,193 @@ public class PlayCardView {
 				playCardLayout.removeAllViews();
 				playCardLayout.addView(playCardFrontSide);
 				playCardLayout.startAnimation(animation);
-				
-				//AnimationFactory.flipTransition(playCardViewAnimator, FlipDirection.RIGHT_LEFT,playCardLayout,playCardFrontSide,playCardBackSide);
-				
+
+				// AnimationFactory.flipTransition(playCardViewAnimator,
+				// FlipDirection.RIGHT_LEFT,playCardLayout,playCardFrontSide,playCardBackSide);
+
 				return false;
 			}
 		});
-		
 
-		playCardFrontSidePlaySectionPlayButton.setOnClickListener(new OnClickListener() {
+		playCardFrontSidePlaySectionPlayButton
+				.setOnClickListener(new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
 						playCardFrontSidePlaySectionLayout
 								.removeView(playCardFrontSidePlaySectionImageWithPlayButtonLayout);
-						
-						
-						playCardFrontSidePlaySectionVideoViewLayout = getPlayCardFrontSidePlaySectionVideoLayout();
 
-					
-						playCardFrontSidePlaySectionLayout.addView(playCardFrontSidePlaySectionVideoViewLayout);
-						videoSizeButton.setVisibility(View.VISIBLE);
-						
+						// playCardFrontSidePlaySectionVideoViewLayout =
+						// getPlayCardFrontSidePlaySectionVideoLayout();
+
+						// playCardFrontSidePlaySectionLayout.addView(playCardFrontSidePlaySectionVideoViewLayout);
+						playCardFrontSidePlaySectionLayout
+								.addView(getPlayCardFrontSidePlaySectionVideoLayout());
+
+						// videoSizeButton.setVisibility(View.VISIBLE);
 
 					}
 				});
 
-		playCardFrontSideTopLayoutRatingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
-			
-			@Override
-			public void onRatingChanged(RatingBar ratingBar, float rating,
-					boolean fromUser) {
-				//new AlertDialog.Builder(context).setMessage("\t\t\t\t\t\t\t\t You Rated : " + rating).setPositiveButton("OK", null).setTitle("\t\t\t\t\t\t\t Thank You For Rating").show();
-				showDialog("You Rated : " + rating);
-				
-			}
-		});
-		
-		videoSizeButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				DisplayMetrics dm = new DisplayMetrics();
-				activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-				//RelativeLayout.LayoutParams playCardFrontSidePlaySectionLayoutParams = new RelativeLayout.LayoutParams( dm.widthPixels,dm.heightPixels);
-				RelativeLayout relativeLayout = (RelativeLayout) activity.findViewById(R.id.playCardFrontSidePlaySectionVideoLayoutId);
-				
-				RelativeLayout gameRootView = (RelativeLayout) activity.findViewById(R.id.gameRootView);
-				videoView.pause();
-				relativeLayout.removeView(videoView);
-				RelativeLayout.LayoutParams playCardLayoutParameters = new RelativeLayout.LayoutParams(
-						dm.widthPixels, dm.heightPixels);
-				Log.d("Width ::: ", "" + dm.widthPixels);
-				playCardLayoutParameters.setMargins(0, 0, 0, 0);
-				playCardLayoutParameters.leftMargin = 0;
-				videoView.setLayoutParams(playCardLayoutParameters);
-				
-				gameRootView.addView(videoView);
-				videoView.resume();
-				//videoView = new VideoView(context); //playCardFrontSidePlaySectionVideoViewLayout.findViewById(R.id.playCardFrontSidePlaySectionVideoLayoutVideoViewId);
-				//videoView.getParent().
-				
-				
-				
-				//params.width = dm.widthPixels;
-				
-				//params.height = dm.heightPixels;
-				
-				
-				
-				//Log.d("height ::: ", "" + dm.heightPixels);
-				
-				//if(videoView!=null){
-					
-				
-				//}
-				//Log.d("","")
-				//RelativeLayout parent = (RelativeLayout)playCardFrontSidePlaySectionLayout.getParent();
-				//parent.removeView(playCardFrontSidePlaySectionLayout);
-				//playCardFrontSidePlaySectionLayout.setLayoutParams(playCardFrontSidePlaySectionLayoutParams);
-				//view.addView(playCardFrontSidePlaySectionLayout);
-				
-				
-				
-			}
-		});
-		
+		playCardFrontSideTopLayoutRatingBar
+				.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+
+					@Override
+					public void onRatingChanged(RatingBar ratingBar,
+							float rating, boolean fromUser) {
+						// new
+						// AlertDialog.Builder(context).setMessage("\t\t\t\t\t\t\t\t You Rated : "
+						// + rating).setPositiveButton("OK",
+						// null).setTitle("\t\t\t\t\t\t\t Thank You For Rating").show();
+						showDialog("You Rated : " + rating);
+
+					}
+				});
+
+		/*
+		 * videoSizeButton.setOnClickListener(new OnClickListener() {
+		 * 
+		 * @Override public void onClick(View v) {
+		 * 
+		 * 
+		 * 
+		 * /*DisplayMetrics dm = new DisplayMetrics();
+		 * activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		 * //RelativeLayout.LayoutParams
+		 * playCardFrontSidePlaySectionLayoutParams = new
+		 * RelativeLayout.LayoutParams( dm.widthPixels,dm.heightPixels);
+		 * RelativeLayout relativeLayout = (RelativeLayout)
+		 * activity.findViewById
+		 * (R.id.playCardFrontSidePlaySectionVideoLayoutId);
+		 * 
+		 * RelativeLayout gameRootView = (RelativeLayout)
+		 * activity.findViewById(R.id.gameRootView); videoView.pause();
+		 * relativeLayout.removeView(videoView); RelativeLayout.LayoutParams
+		 * playCardLayoutParameters = new RelativeLayout.LayoutParams(
+		 * dm.widthPixels, dm.heightPixels);
+		 * playCardLayoutParameters.addRule(RelativeLayout.CENTER_IN_PARENT);
+		 * Log.d("Width ::: ", "" + dm.widthPixels);
+		 * //playCardLayoutParameters.setMargins(0, 0, 0, 0);
+		 * playCardLayoutParameters.leftMargin = 0;
+		 * videoView.setLayoutParams(playCardLayoutParameters);
+		 * 
+		 * gameRootView.addView(videoView); videoView.resume();
+		 * videoView.start(); //videoView = new VideoView(context);
+		 * //playCardFrontSidePlaySectionVideoViewLayout
+		 * .findViewById(R.id.playCardFrontSidePlaySectionVideoLayoutVideoViewId
+		 * ); //videoView.getParent().
+		 * 
+		 * 
+		 * 
+		 * //params.width = dm.widthPixels;
+		 * 
+		 * //params.height = dm.heightPixels;
+		 * 
+		 * 
+		 * 
+		 * //Log.d("height ::: ", "" + dm.heightPixels);
+		 * 
+		 * //if(videoView!=null){
+		 * 
+		 * 
+		 * //} //Log.d("","") //RelativeLayout parent =
+		 * (RelativeLayout)playCardFrontSidePlaySectionLayout.getParent();
+		 * //parent.removeView(playCardFrontSidePlaySectionLayout);
+		 * //playCardFrontSidePlaySectionLayout
+		 * .setLayoutParams(playCardFrontSidePlaySectionLayoutParams);
+		 * //view.addView(playCardFrontSidePlaySectionLayout);
+		 * 
+		 * 
+		 * 
+		 * } });
+		 */
+
 		return playCardLayout;
 	}
-	
-	
 
 	protected RelativeLayout getPlayCardFrontSidePlaySectionVideoLayout() {
 		final LayoutInflater inflator = (LayoutInflater) activity
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		
 		RelativeLayout playCardFrontSidePlaySectionVideoLayout = (RelativeLayout) inflator
 				.inflate(R.layout.play_card_front_side_play_section_video, null);
-		videoView = new VideoView(context);//(VideoView) playCardFrontSidePlaySectionVideoLayout
-				//.findViewById(R.id.playCardFrontSidePlaySectionVideoLayoutVideoViewId);
-		//playCardFrontSidePlaySectionVideoView.setId(index * 390000);
-		MediaController mc = new MyMediaController(
-				videoView.getContext());
+		
+		videoView = new VideoView(context);
+		
+		// (VideoView) playCardFrontSidePlaySectionVideoLayout
+		// .findViewById(R.id.playCardFrontSidePlaySectionVideoLayoutVideoViewId);
+		// playCardFrontSidePlaySectionVideoView.setId(index * 390000);
 
-		mc.setMediaPlayer(videoView);
-		videoView.setMediaController(mc);
 		RelativeLayout.LayoutParams playCardLayoutParameters = new RelativeLayout.LayoutParams(
-				500, 400);
-		
-		
+				RelativeLayout.LayoutParams.MATCH_PARENT, 250);
+
 		videoView.setLayoutParams(playCardLayoutParameters);
 		playCardFrontSidePlaySectionVideoLayout.addView(videoView);
 		videoView.setVideoURI(Uri
-				.parse("http://commonsware.com/misc/test2.3gp"));
+				.parse("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"));
 
-		// playCardFrontSidePlaySectionVideoView.setVideoURI(Uri.parse("http://localhost:8080/nflvideo.3gp"));
+		MyMediaController mc = new MyMediaController(videoView.getContext(),
+				activity, videoView);
+		mc.setMediaPlayer(videoView);
+		videoView.setMediaController(mc);
+
+		mc.setAnchorView(videoView);
 		videoView.start();
-
 		return playCardFrontSidePlaySectionVideoLayout;
+
+		/*
+		 * videoView.setVideoURI(Uri
+		 * .parse("http://commonsware.com/misc/test2.3gp"));
+		 */
+		// ImageView imageView = new ImageView(context);
+		// imageView.setImageResource(R.drawable.media_player_full_screen_to_inline_video_button);
+
+		// SurfaceView surfaceView = new SurfaceView(context);
+		// mc.setAnchorView(imageView);
+		// playCardFrontSidePlaySectionVideoView.setVideoURI(Uri.parse("http://localhost:8080/nflvideo.3gp"));
+
+		// return playCardFrontSidePlaySectionVideoLayout;
+		// VideoPlayer videoPlayer =new VideoPlayer(activity);
 	}
 
-	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-		ImageView bmImage;
+	/*
+	 * private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+	 * ImageView bmImage;
+	 * 
+	 * public DownloadImageTask(ImageView bmImage) { this.bmImage = bmImage; }
+	 * 
+	 * protected Bitmap doInBackground(String... urls) { String urldisplay =
+	 * urls[0]; Bitmap mIcon11 = null; try { InputStream in = new
+	 * java.net.URL(urldisplay).openStream(); mIcon11 =
+	 * BitmapFactory.decodeStream(in); } catch (Exception e) { Log.e("Error",
+	 * e.getMessage()); e.printStackTrace(); } return mIcon11; }
+	 * 
+	 * protected void onPostExecute(Bitmap result) {
+	 * bmImage.setImageBitmap(result); } }
+	 */
 
-		public DownloadImageTask(ImageView bmImage) {
-			this.bmImage = bmImage;
-		}
+	private void showDialog(String rating) {
+		final Custom_Dialog dialog = new Custom_Dialog(activity,
+				R.style.myCoolDialog);
 
-		protected Bitmap doInBackground(String... urls) {
-			String urldisplay = urls[0];
-			Bitmap mIcon11 = null;
-			try {
-				InputStream in = new java.net.URL(urldisplay).openStream();
-				mIcon11 = BitmapFactory.decodeStream(in);
-			} catch (Exception e) {
-				Log.e("Error", e.getMessage());
-				e.printStackTrace();
-			}
-			return mIcon11;
-		}
+		dialog.setContentView(R.layout.custom_dialog);
+		dialog.setTitle("  Thanks For Your Rating");
 
-		protected void onPostExecute(Bitmap result) {
-			bmImage.setImageBitmap(result);
-		}
-	}
+		TextView text = (TextView) dialog
+				.findViewById(R.id.customDialogTextViewId);
+		text.setText(rating);
 
-	public class MyMediaController extends MediaController {
-		public MyMediaController(Context context, AttributeSet attrs) {
-			super(context, attrs);
-		}
+		ImageView okButton = (ImageView) dialog
+				.findViewById(R.id.customDialogOkButtonId);
+		okButton.setOnTouchListener(new OnTouchListener() {
 
-		public MyMediaController(Context context, boolean useFastForward) {
-			super(context, useFastForward);
-		}
-
-		public MyMediaController(Context context) {
-			super(context);
-		}
-
-		@Override
-		public void show(int timeout) {
-			super.show(0);
-		}
-
-	}
-	
-	private void showDialog(String rating)
-	{
-	    final Custom_Dialog dialog = new Custom_Dialog(activity, R.style.myCoolDialog);
-
-	    dialog.setContentView(R.layout.custom_dialog);
-	    dialog.setTitle("  Thanks For Your Rating");
-
-	    TextView text = (TextView) dialog.findViewById(R.id.customDialogTextViewId);
-	    text.setText(rating );
-	    
-	    ImageView okButton = (ImageView) dialog.findViewById(R.id.customDialogOkButtonId);
-	    okButton.setOnTouchListener(new OnTouchListener() {
-			
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				dialog.hide();
 				return false;
 			}
 		});
-	    dialog.show();  
+		dialog.show();
 	}
 	// playCardParentLinearLayout.addView(playCardLayout);
 
